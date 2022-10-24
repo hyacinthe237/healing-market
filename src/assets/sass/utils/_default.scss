@@ -1,0 +1,273 @@
+* { margin: 0; padding: 0 }
+a { text-decoration: none; color: $linkColour }
+
+@font-face {
+    font-family: "Poppins Bold";
+    src: url("~@/assets/fonts/poppins/Poppins-ExtraBold.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Poppins Light";
+    src: url("~@/assets/fonts/poppins/Poppins-Light.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Poppins Regular";
+    src: url("~@/assets/fonts/poppins/Poppins-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins Regular', sans-serif;
+    background-color: $body-bg;
+    font-size: 18px;
+    color: $titleColour;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+  color: $brand-dark;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-title {
+    font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+    color: #e8955f;
+    font-weight: 900;
+    font-size: 34px;
+    text-align: left;
+    line-height: 1.1em;
+
+    span {
+        color: $brand-primary;
+    }
+}
+
+button {
+    color: white;
+    background-color: #890000;
+    border-radius: 50px;
+    z-index: 9999;
+    border: none;
+    padding: 20px;
+    max-height: 70px;
+    white-space: nowrap
+}
+
+p {
+    font-size: 25px;
+    color: $brand-darker;
+    // padding: 20px;
+}
+
+h1,h2,h3,h4, h5 { margin: 0 }
+// h1 { font-size: 3em }
+h2 { font-size: 2.4em }
+h3 { font-size: 2em }
+h4 { font-size: 1.4em }
+h5 { font-size: 1.1em }
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bold { font-weight: bold }
+.mb-20 { margin-bottom: 20px; }
+.elevated { box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.2) }
+.w-100 { width: 100px }
+.w-150 { width: 150px }
+.w-200 { width: 200px }
+.w-250 { width: 250px }
+.w-300 { width: 300px }
+.fw-300 { font-weight: 300 }
+.fw-500 { font-weight: 500 }
+.fw-600 { font-weight: 600 }
+.pointer { cursor: pointer }
+.text-right { text-align: right }
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.capitalize { text-transform: capitalize }
+._error-message { font-size: 14px; color: red; }
+.circle {
+    color: $brand-primary;
+    background-color: $brand-dark;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 20px;
+    }
+}
+
+.grey { color: $brand-grey }
+.teal { color: $brand-teal }
+.dark { color: $brand-dark }
+.red { color: $brand-danger }
+.wise { color: $brand-wise }
+.primary { color: $brand-primary }
+.secondary { color: $brand-secondary }
+.underline { text-decoration: underline; }
+
+.bg-month { background-color: $brand-primary }
+.bg-quarter { background-color: $brand-secondary }
+.bg-semester { background-color: $brand-success }
+.bg-annual { background-color: $brand-info }
+.bg-unlimited { background-color: $brand-warning }
+.bg-white { background-color: white }
+
+.btn-teal { background-color: $brand-teal; color: white }
+.btn-dark { background-color: $brand-dark; color: white }
+.btn-wise { background-color: $brand-wise; color: white }
+.btn-blue { background-color: $brand-presumi; color: white }
+.btn-secondary { background-color: $brand-secondary; color: white }
+.btn-grey { background-color: #e4e9f2; color: $formColor }
+.btn-greyer { background-color: $brand-greyer; color: white }
+.btn-red { background-color: $brand-red; color: white }
+.btn:focus { outline: none }
+.btn, .btn-md {
+    border-radius: 3px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.pointer { cursor: pointer; }
+
+.btn-default {
+    border: 2px solid $brand-primary;
+
+    &:hover,
+    &:focus {
+        background-color: $brand-wise;
+        border: 2px solid $brand-wise-dark;
+        color: white;
+    }
+}
+
+.btn-teal {
+    &:hover, &:focus {
+        color: white;
+    }
+}
+
+.btn-lg {
+    border-radius: 3px;
+    font-size: 16px;
+
+    &:hover,
+    &:focus { color: white }
+    i { font-size: 1.2em; margin-right: 5px }
+}
+
+.btn-rounded,
+.rounded { border-radius: 500px }
+
+.pagination-lg {
+    > li {
+        &:last-child {
+            > a,
+            > span {
+                border-bottom-right-radius: 3px;
+                border-top-right-radius: 3px;
+            }
+        }
+
+        &:first-child {
+            > a,
+            > span {
+                border-bottom-left-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+        }
+    }
+}
+
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    color: $fontColour;
+}
+
+.content-profile-photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .photo {
+      border-radius: 100px;
+      height: 100px;
+      width: 100px;
+      border: 2px solid $brand-primary;
+      color: $brand-primary;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: 30px;
+      }
+    }
+
+    img {
+      border-radius: 100px;
+      height: 100px;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: 30px;
+      }
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h1 {
+        font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+        color: $brand-dark;
+        font-weight: 700;
+        font-size: 2.4em;
+        text-transform:capitalize;
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+        color: $brand-dark;
+        font-weight: 700;
+        font-size: 1.6em;
+        text-transform: capitalize;
+        text-align: center;
+    }
+}

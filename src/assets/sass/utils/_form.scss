@@ -1,0 +1,312 @@
+::placeholder,
+:-ms-input-placeholder,
+::-webkit-input-placeholder,
+::-moz-placeholder,
+::-ms-input-placeholder {
+    color: #495c80;
+}
+
+@media (max-width: 560px) {
+  ._form {
+     width: 100%;
+     // max-width: 100%;
+
+     .form-group {
+       .button { display: block; }
+
+       .content {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           font-size: 18px;
+
+           button { display: none; }
+        }
+
+        // input {
+        //   max-width: 263px;
+        // }
+     }
+  }
+}
+
+._form {
+    width: 100%;
+
+    button {
+        color: white;
+        background-color: #890000;
+        border-radius: 50px;
+        z-index: 9999;
+        border: none;
+        padding: 20px;
+        max-height: 70px;
+        white-space: nowrap
+    }
+
+    .content-profile-photo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .photo {
+          border-radius: 100px;
+          height: 100px;
+          width: 100px;
+          border: 2px solid $brand-primary;
+          color: $brand-primary;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          i {
+            font-size: 30px;
+          }
+
+          img {
+              border-radius: 90px;
+              height: 90px;
+              width: 90px;
+          }
+        }
+    }
+
+    label {
+        font-size: 15px;
+        font-weight: 600;
+        text-align: left;
+
+        &.css-input {
+            font-weight: 500;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+
+        input, select {
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin:0;
+            font-size: 24px;
+            min-height: 50px;
+
+            &:focus {
+              border: none;
+            }
+        }
+        .button { display: none; }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-radius: 100px;
+            border: 1px solid white;
+            padding-left: 20px;
+            min-height: 50px;
+            background-color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+
+            // &.pl-100 {  }
+            &.bs {
+              box-shadow: 0 10px 48px rgba(255, 2, 2, 0.1), 0 1px 1px rgba(247, 183, 183, 0.61);
+            }
+
+            .flex-50 {
+                flex: 50%;
+                text-align: right;
+            }
+
+            .flex-70 {
+                flex: 70%;
+                text-align: right;
+            }
+
+            .flex-100 {
+                flex: 100%;
+                text-align: right;
+            }
+
+            &.center {
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .w-20 { width: 20%; }
+
+            .surfix {
+                color: $brand-teal;
+
+                &.dark { color: $brand-dark }
+            }
+
+            input, select {
+                border: none;
+                padding:0;
+                margin:0;
+                font-size: 24px;
+                font-weight: bold;
+                height: 70px;
+                padding-left: 20px;
+
+                &:focus {
+                    border: none;
+                    background-color: transparent
+                }
+                &.no-white { background-color: transparent }
+            }
+            .check {
+                color: $brand-primary;
+            }
+
+            a {
+                text-decoration: underline;
+                padding-left: 10px;
+                border-left: 1px solid $brand-teal;
+            }
+        }
+
+        .has-error {
+            color: $brand-danger;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .textarea {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            background-color: white;
+            border: 1px solid $brand-dark;
+            box-shadow: none;
+            color: $brand-dark;
+            font-size: 14px;
+
+            &.textarea {
+                border-radius: 20px;
+            }
+
+            &.input {
+                border-radius: 100px;
+            }
+
+            &:focus {
+                border: 2px solid $brand-dark;
+            }
+
+            &.form-control-lg { font-size: 16px; }
+        }
+    }
+
+    .search-input {
+        margin:0;
+        padding:0;
+
+        .search-query {
+            margin-bottom: 0;
+            text-align: left;
+
+            &.round {
+                -webkit-border-radius: 500px;
+                -moz-border-radius: 500px;
+                border-radius: 500px;
+            }
+        }
+    }
+
+    select.form-control {
+        border-radius: 0;
+        -webkit-appearance: none;
+        line-height: 20px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-position: right 50%;
+        background-repeat: no-repeat;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+        padding: .5em;
+        padding-right: 1.5em
+    }
+
+    /* enable absolute positioning */
+    .inner-addon {
+        position: relative;
+    }
+
+    /* style icon */
+    .inner-addon .feather {
+        position: absolute;
+        padding: 12px;
+        pointer-events: none;
+        font-size: 20px;
+        color: $brand-primary;
+    }
+
+    /* align icon */
+    .left-addon .feather  { left:  0px;}
+    .right-addon .feather { right: 0px;}
+
+    /* add padding  */
+    .left-addon input  { padding-left:  40px; }
+    .right-addon input { padding-right: 40px; }
+
+    .left-addon select  { padding-left:  40px; }
+    .right-addon select { padding-right: 40px; }
+
+    .input-group {
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        // border: 2px solid $brand-primary;
+        padding: 10px;
+        width: 100%;
+        height: 50px;
+        border-radius: 100px;
+
+        .has-error {
+            color: $brand-danger;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-control {
+            background-color: transparent;
+            // border: none;
+            box-shadow: none;
+            color: $brand-dark;
+            font-size: 14px;
+            justify-content: flex-start;
+            padding:0px;
+            margin-top: -10px;
+
+            &.no-border-right { border-right: none; }
+            &.no-border-left { border-left: none; }
+
+            &.dark { color: $brand-dark; }
+
+            &.form-control-lg { font-size: 14px; }
+        }
+
+        .input-group-append {
+            margin-top: -10px;
+            .input-group-text {
+                background-color: transparent;
+                color: $brand-dark;
+                border: none;
+                justify-content: flex-end;
+                padding:0px;
+                margin:0px;
+
+                &.teal { color: $brand-teal; }
+            }
+        }
+    }
+}

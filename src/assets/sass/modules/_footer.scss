@@ -1,0 +1,190 @@
+.download-app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.hab-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .hab-footer-top {
+        width: 100%;
+        min-height: 300px;
+        background-color: #000000;
+        color: #ffffff;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        .title {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 900;
+            font-weight: bold;
+        }
+
+        .line {
+            width: 40px;
+            border-radius: 20px;
+            border: 2px solid #890000;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .hab-website {
+            .img {
+                img {
+                    width: 300px;
+                }
+            }
+
+            .footer-form {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                font-size: 14px;
+                margin-top: 20px;
+                box-shadow: 0 10px 48px rgba(248, 171, 3, 0.1), 0 1px 1px rgba(248, 171, 3, 0.1);
+
+                &.small {
+                    input {
+                        border-radius: 50px;
+                        height: 30px;
+                        padding-left: 25px;
+                    }
+    
+                    button {
+                        color: white;
+                        background-color: #890000;
+                        border-radius: 50px;
+                        z-index: 9999;
+                        border: none;
+                        padding: 10px;
+                        margin-left: -30px;
+                    }
+                }
+
+                &.big {
+                    input {
+                        border-radius: 50px;
+                        min-height: 50px;
+                        padding-left: 25px;
+                    }
+    
+                    button {
+                        color: white;
+                        background-color: #890000;
+                        border-radius: 50px;
+                        z-index: 9999;
+                        border: none;
+                        padding: 10px;
+                        margin-left: -20px;
+                    }
+                }
+            }
+        }
+
+        .hab-useful-links {
+            .links {
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+
+                .link {
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .hab-follow-us {
+            .social-links {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                margin-top: 20px;
+
+                .social {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    height: 50px;
+                    width: 50px;
+                    background-color: #890000;
+                    color: #000000;
+                    padding: 10px;
+                    border-radius: 50px;
+                    margin-right: 10px;
+                    cursor: pointer;
+
+                    i-feather {
+                        color:#000000;
+                        font-size: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+    .hab-footer-bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        background-color: #ff0000;
+        color: #ffffff;
+        padding: 20px;
+
+        .uppercase {
+            text-transform: uppercase;
+            padding-right: 10px;
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .hab-footer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    
+        .hab-footer-top {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+    
+            .hab-website {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hab-useful-links {
+                margin-top: 20px;
+            }
+    
+            .hab-follow-us {
+                margin-top: 20px;
+            }
+        }
+
+        .hab-footer-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+  }
+

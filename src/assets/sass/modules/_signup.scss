@@ -1,0 +1,180 @@
+
+.signup-page {
+    width: 100%;
+    height: 100vh;
+    font-size: 16px;
+    color: $dark;
+
+    .header {
+        background-color: $dark;
+        width: 100%;
+        height: 200px;
+        border-bottom: 5px solid $secondary;
+        border-radius: 0px 0px 100px 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .profile-cover {
+            position: relative;
+            min-height: 120px;
+
+            .overlay-text {
+                position: absolute;
+                left: 0;
+                right: 0;
+                text-align: center;
+                bottom: 40px;
+            }
+        }
+
+        img {
+            width: 200px;
+            color: white;
+        }
+
+        .overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0,0,0,0.5);
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: $dark;
+
+        .head {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+
+            .message-big {
+                font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+                color: $brand-darker;
+                font-weight: 900;
+                font-size: 34px;
+                text-align: left;
+                line-height: 1.1em;
+
+                span {
+                    color: $brand-primary;
+                }
+            }
+
+            .message-small {
+
+            }
+        }
+
+        ._main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+
+            .gauche {
+                border-right: 1px solid $brand-teal;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+
+                .btn-list {
+                    width: 250px;
+                    color:white;
+                    padding: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    background-color: $primary;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    span {
+                      font-weight: bold;
+                    }
+
+                    div {
+                        background-color: $brand-darker;
+                        padding: 5px;
+                        border-radius: 5px;
+                        width: 24px;
+                        height: 24px;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+
+                        i {
+                          font-size: 14px;
+                        }
+                    }
+                }
+
+                .list-box {
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #F4F3F3;
+                    margin-top: 10px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    width: 100%;
+
+                    .list-item {
+                        .selected {
+                            width: 100%;
+                            background-color: #FBD1D1;
+                            padding: 5px;
+                            border-radius: 5px;
+
+                            i {
+                              color: $secondary;
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            .droite {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+        }
+
+        .link {
+            margin-top: 40px;
+            font-size: 18px;
+
+            span {
+                color: $primary;
+            }
+        }
+    }
+
+    .signup-form {
+        width:100%;
+        max-width: 400px;
+        background-color: white;
+        padding: 20px;
+        margin: 20px auto;
+        @include border-radius(4px);
+        @include box-shadow();
+    }
+
+}

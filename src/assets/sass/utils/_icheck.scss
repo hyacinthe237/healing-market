@@ -32,10 +32,11 @@
 .css-checkbox input + span {
     width: 20px;
     height: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: transparent;
+    border: 2px solid $brand-teal;
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
+    border-radius: 5px;
 }
 .css-checkbox input + span:after {
     top: 0;
@@ -46,7 +47,7 @@
     font-size: 23px;
     color: #fff;
     line-height: 18px;
-    content: "\f3ff";
+    // content: "\f3ff";
     text-align: center;
 }
 .css-checkbox:hover input + span {

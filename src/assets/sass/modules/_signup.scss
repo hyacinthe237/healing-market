@@ -5,10 +5,15 @@
     font-size: 16px;
     color: $dark;
 
-    .header {
-        background-color: $dark;
+    .profile-top {
         width: 100%;
-        height: 200px;
+        height: 300px;
+        position: relative;
+        background-color: transparent;
+        background-size: 800px 600px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-bottom: solid 0.25px $teal;
         border-bottom: 5px solid $secondary;
         border-radius: 0px 0px 100px 100px;
         display: flex;
@@ -16,30 +21,41 @@
         justify-content: center;
         align-items: center;
 
-        .profile-cover {
-            position: relative;
-            min-height: 120px;
-
-            .overlay-text {
-                position: absolute;
-                left: 0;
-                right: 0;
-                text-align: center;
-                bottom: 40px;
-            }
-        }
-
         img {
             width: 200px;
             color: white;
         }
 
         .overlay {
-            position: fixed;
-            display: none;
+            background-color: rgba(0, 0, 0, 0.9);
             width: 100%;
-            height: 200px;
-            background-color: rgba(0,0,0,0.5);
+            height: 300px;
+            position: relative;
+            border-radius: 0px 0px 100px 100px;
+        }
+
+        .profile-top-container {
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            z-index: 2;
+            padding: 10px;
+            position: absolute;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            max-height: 250px;
+            margin: 0 auto;
+            background-size: cover;
+            background-position: center;
+
+            img {
+                width: 200px;
+            }
         }
     }
 
@@ -49,6 +65,51 @@
         justify-content: center;
         align-items: center;
         color: $dark;
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+
+            button {
+                color: white;
+                background-color: $dark;
+                border-radius: 10px;
+                z-index: 9999;
+                border: none;
+                padding: 10px;
+                min-width: 200px;
+                font-size: 14px;
+
+                &.app-store {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    color: white;
+                    margin-right: 10px;
+                    text-align: left;
+                    font-size: 14px;
+
+                    img {
+                        width: 40px;
+                        padding-right: 10px;
+                    }
+                }
+                &.play-store {
+                    color: white;
+                    margin-right: 10px;
+                    text-align: left;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    font-size: 14px;
+
+                    img {
+                        width: 40px;
+                        padding-right: 10px;
+                    }
+                }
+            }
+        }
 
         .head {
             display: flex;
@@ -64,6 +125,7 @@
                 font-size: 34px;
                 text-align: left;
                 line-height: 1.1em;
+                text-align: center;
 
                 span {
                     color: $brand-primary;
@@ -80,10 +142,9 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-top: 40px;
+            margin-top: 20px;
 
             .gauche {
-                border-right: 1px solid $brand-teal;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -130,6 +191,7 @@
                     padding: 10px;
                     border-radius: 10px;
                     width: 100%;
+                    max-width: 250px;
 
                     .list-item {
                         .selected {
@@ -147,19 +209,42 @@
                     }
                 }
             }
-
+            .vertical-line {
+                height: 250px;
+                border-right: 1px solid $brand-teal;
+            }
             .droite {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 padding: 20px;
+                max-width: 300px;
+
+                img {
+                    width: 100px;
+                }
+
+                p {
+                    font-family: 'Poppins Bold', sans-serif;
+                    line-height: 1.1em;
+                    text-align: center;
+                }
+
+                .action {
+                    color: $secondary;
+                    border-radius: 10px;
+                    padding: 10px;
+                    border: 2px solid $brand-teal;
+                    cursor: pointer;
+                }
             }
         }
 
         .link {
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 18px;
+            margin-bottom: 60px;
 
             span {
                 color: $primary;
@@ -169,12 +254,50 @@
 
     .signup-form {
         width:100%;
-        max-width: 400px;
-        background-color: white;
-        padding: 20px;
-        margin: 20px auto;
-        @include border-radius(4px);
-        @include box-shadow();
+        max-width: 300px;
+
+        .form-control {
+            background-color: #eee;
+            border: 1px solid $brand-teal;
+            box-shadow: none;
+            color: $brand-dark;
+            font-size: 14px;
+
+            &:focus {
+                border: 2px solid $brand-teal;
+            }
+
+            &.form-control-lg { font-size: 16px; }
+        }
+
+        .button {
+            display: flex;
+            flex-direction: row;
+            border-radius: 10px;
+
+            .text {
+                text-align: center;
+                flex: 80%;
+                background-color: $secondary;
+                color: white;
+                padding: 10px;
+                border-radius: 10px 0px 0px 10px;
+            }
+
+            .icon {
+                background-color: #FBC9C9;
+                width: 100px;
+                border-radius: 0px 10px 10px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                i {
+                    font-size: 20px;
+                    color: white;
+                }
+            }
+        }
     }
 
 }

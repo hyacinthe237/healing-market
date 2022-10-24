@@ -168,7 +168,7 @@
                     <div class="spacer"></div>
                     <div class="col-sm-12 text-center">
                         <i>It takes just a minute</i>
-                        <button>Sign up now</button>
+                        <button @click="go('signup-welcome')">Sign up now</button>
                     </div>
                 </div>
             </div>

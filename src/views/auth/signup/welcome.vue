@@ -1,5 +1,5 @@
 <template lang="html">
-    <section class="signup-page">
+    <section class="welcome-page">
         <div class="profile-top" :style="`background-image:url(${background})`">
             <div class="overlay"></div>
             <div class="profile-top-container">

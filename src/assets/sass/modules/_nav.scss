@@ -125,6 +125,7 @@
 
 .site-header__end {
     margin-right: 30px;
+    cursor: pointer;
     a {
       background-color: $primary;
       height: 42px;
@@ -132,6 +133,10 @@
       color: white;
       padding: 8px;
       text-decoration: none;
+
+      span {
+        color:white;
+      }
 
       i { display: none; }
     }

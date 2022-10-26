@@ -7,15 +7,14 @@
 
     .profile-top {
         width: 100%;
-        height: 300px;
+        height: 200px;
         position: relative;
         background-color: transparent;
         background-size: 800px 600px;
         background-repeat: no-repeat;
         background-position: center;
         border-bottom: solid 0.25px $teal;
-        border-bottom: 5px solid $secondary;
-        border-radius: 0px 0px 100px 100px;
+        border-bottom: 5px solid $primary;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -29,9 +28,9 @@
         .overlay {
             background-color: rgba(0, 0, 0, 0.9);
             width: 100%;
-            height: 300px;
+            height: 200px;
             position: relative;
-            border-radius: 0px 0px 100px 100px;
+            // border-radius: 0px 0px 100px 100px;
         }
 
         .profile-top-container {
@@ -48,7 +47,7 @@
         .profile-photo {
             width: 100%;
             height: 100%;
-            max-height: 250px;
+            max-height: 200px;
             margin: 0 auto;
             background-size: cover;
             background-position: center;
@@ -124,7 +123,7 @@
                 font-weight: 900;
                 font-size: 34px;
                 text-align: left;
-                line-height: 1.1em;
+                line-height: 1.2em;
                 text-align: center;
 
                 span {
@@ -201,7 +200,7 @@
                             border-radius: 5px;
 
                             i {
-                              color: $secondary;
+                              color: $primary;
                             }
                         }
 
@@ -210,7 +209,7 @@
                 }
             }
             .vertical-line {
-                height: 250px;
+                height: 350px;
                 border-right: 1px solid $brand-teal;
             }
             .droite {
@@ -232,7 +231,7 @@
                 }
 
                 .action {
-                    color: $secondary;
+                    color: $primary;
                     border-radius: 10px;
                     padding: 10px;
                     border: 2px solid $brand-teal;
@@ -242,9 +241,9 @@
         }
 
         .link {
-            margin-top: 20px;
+            margin-top: 60px;
             font-size: 18px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
 
             span {
                 color: $primary;
@@ -259,6 +258,7 @@
         .forgot {
           font-size: 12px;
           text-align: right;
+          color: rgb(137,0,0);
         }
 
         .form-control {
@@ -283,14 +283,14 @@
             .text {
                 text-align: center;
                 flex: 80%;
-                background-color: $secondary;
+                background-color: $primary;
                 color: white;
                 padding: 10px;
                 border-radius: 10px 0px 0px 10px;
             }
 
             .icon {
-                background-color: #FBC9C9;
+                background-color: rgba(137,0,0,0.7);
                 width: 100px;
                 border-radius: 0px 10px 10px 0px;
                 display: flex;

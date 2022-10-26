@@ -126,6 +126,7 @@
 .site-header__end {
     margin-right: 30px;
     cursor: pointer;
+
     a {
       background-color: $primary;
       height: 42px;
@@ -145,11 +146,10 @@
   .site-header__end {
       margin-right: 30px;
       a {
-        color: $primary;
         background-color: transparent;
 
         span { display: none; }
-        i { display: block; font-size: 21px; margin-right: 5px; }
+        i { display: block; font-size: 21px; margin-right: 5px; color: $primary;}
       }
   }
 

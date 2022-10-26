@@ -3,39 +3,40 @@
 	overflow: hidden;
 	min-height: 120px;
 	font-size: 13px;
+	padding: 20px;
 }
 
 .carousel .carousel-item .testimonial-wrapper {
-	padding-top: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    background-color: white;
-	border-radius: 3px;
-    box-shadow: inset 0 10px 2em rgba(30, 107, 174, 0.1), 0 0 2em rgba(255, 248, 254, 0.61);
+		padding-top: 40px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	  padding-bottom: 20px;
+	  background-color: white;
+		border-radius: 3px;
+	  // box-shadow: inset 0 10px 2em rgba(30, 107, 174, 0.1), 0 0 2em rgba(255, 248, 254, 0.61);
 }
 
 .carousel .testimonial {
 	color: $brand-teal;
 	position: relative;
 	margin-bottom: 15px;
-    font-size: 18px;
+  font-size: 18px;
 }
 .carousel .overview {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .carousel .overview .name {
 	text-transform: capitalize;
 	color: #000;
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .carousel .overview .rond {
 	width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    background-color: #ecf2fe;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #ecf2fe;
 }
 .carousel .carousel-indicators {
 	bottom: -70px;
@@ -54,12 +55,17 @@
 	margin: 1px 2px;
 	box-sizing: border-box;
 }
-.carousel-indicators li {	
+.carousel-indicators li {
 	background: #e2e2e2;
 	border: 4px solid #fff;
 }
 .carousel-indicators li.active {
 	color: #fff;
-	background: #e8955f;
+	background: $primary;
+}
 
+@media(max-width: 560px) {
+	.carousel .carousel-item .testimonial-wrapper {
+		margin-bottom: 20px;
+	}
 }

@@ -106,7 +106,9 @@ h5 { font-size: 1.1em }
       font-size: 20px;
     }
 }
-
+.bs {
+	box-shadow: 0 10px 48px rgba(137, 0, 0, 0.1), 0 1px 1px rgba(137, 0, 0, 0.61);
+}
 .grey { color: $brand-grey }
 .teal { color: $brand-teal }
 .dark { color: $brand-dark }

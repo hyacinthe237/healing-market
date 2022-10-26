@@ -8,8 +8,8 @@
       </div>
       <div class="content">
           <div class="head mt-40">
-              <div class="message-big">Sign in your account</div>
-              <div class="message-small mt-10">Welcome to <span class="bold">NOGADA 360</span></div>
+              <div class="message-big">Sign In</div>
+              <!-- <div class="message-small mt-10">Welcome to <span class="bold">NOGADA 360</span></div> -->
           </div>
 
           <form class="_form signup-form mt-20">

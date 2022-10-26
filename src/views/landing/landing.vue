@@ -194,7 +194,7 @@
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
                                                 <div class="media">
                                                     <div class="media-body">
@@ -207,7 +207,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
                                                 <div class="media">
                                                     <div class="media-body">
@@ -224,7 +224,7 @@
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
                                                 <div class="media">
                                                     <div class="media-body">
@@ -237,7 +237,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
                                                 <div class="media">
                                                     <div class="media-body">
@@ -254,7 +254,7 @@
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
                                                 <div class="media">
                                                     <div class="media-body">
@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="testimonial-wrapper">
+                                            <div class="testimonial-wrapper bs">
                                                 <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
                                                 <div class="media">
                                                     <div class="media-body">

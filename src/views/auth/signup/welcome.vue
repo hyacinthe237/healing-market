@@ -11,13 +11,13 @@
             </div>
         </div>
         <div class="content">
-            <div class="head">
+            <div class="head mt-20">
                 <div class="message-big" v-show="showForm">Put in mail so we can verify<br> you have been added by<br> your manager</div>
                 <div class="message-big" v-show="!showForm">Become more <br><span>efficient</span> today</div>
                 <div class="message-small mt-10" v-show="!showForm">How will you want to use <span class="bold">NOGADA 360</span>?</div>
             </div>
 
-            <form class="_form signup-form mt-20" v-show="showForm">
+            <form class="_form signup-form mt-60" v-show="showForm">
                 <div class="form-group">
                     <input type="text" name="email" placeholder="Email address" class="form-control">
                 </div>
@@ -74,6 +74,11 @@
                             </label>
                         </div>
                     </div>
+                    <form class="_form signup-form mt-20" v-show="showList">
+                        <div class="button pointer">
+                            <div class="text">Continue</div>
+                        </div>
+                    </form>
                 </div>
                 <div class="vertical-line"></div>
                 <div class="droite">
@@ -86,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
+            <div class="link mt-40">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
     </section>
 </template>

@@ -6,31 +6,6 @@
     color: #495c80;
 }
 
-@media (max-width: 560px) {
-  ._form {
-     width: 100%;
-     // max-width: 100%;
-
-     .form-group {
-       .button { display: block; }
-
-       .content {
-           display: flex;
-           flex-direction: column;
-           justify-content: center;
-           align-items: center;
-           font-size: 18px;
-
-           button { display: none; }
-        }
-
-        // input {
-        //   max-width: 263px;
-        // }
-     }
-  }
-}
-
 ._form {
     width: 100%;
 
@@ -99,7 +74,9 @@
               border: none;
             }
         }
-        .button { display: none; }
+        @media (min-width: $mobile-breakpoint) {
+            .button { display: none; }
+        }
 
         .content {
             display: flex;
@@ -309,4 +286,28 @@
             }
         }
     }
+}
+@media (max-width: 560px) {
+  ._form {
+     width: 100%;
+     // max-width: 100%;
+
+     .form-group {
+       .button { display: block; }
+
+       .content {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           font-size: 18px;
+
+           button { display: none; }
+        }
+
+        // input {
+        //   max-width: 263px;
+        // }
+     }
+  }
 }

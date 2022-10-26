@@ -5,11 +5,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="title"><span>All in one</span> solution <br> to track
-                            and manage your <br><span>security</span> services</div>
+                        <div class="title"><span>All in one</span> solution to <br> track
+                            and manage <br> your <span>security</span> <br> services</div>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
 
-                        <form action="" class="_form mt-20">
+                        <form action="#" class="_form mt-20">
                             <div class="form-group mt-20">
                                 <div class="content bs">
                                     <input type="email"
@@ -17,16 +17,16 @@
                                         placeholder="Email address"
                                         class="form-control form-control-lg dark no-white"
                                     >
-                                    <button>Start free trial version</button>
+                                    <button @click="n('signup-welcome')">Start free trial version</button>
                                 </div>
                                 <div class="text-center button mt-20">
-                                    <button class="btn btn-block btn-primary">Start free trial version</button>
+                                    <button class="btn btn-block btn-primary" @click="n('signup-welcome')">Start free trial version</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-sm-6">
-                        <div class="img">
+                        <div class="img-hero">
                             <img :src="logoHeaderSection" alt="">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="spacer"></div>
                     <div class="col-sm-6">
-                        <div class="img">
+                        <div class="img mg">
                             <img :src="logoManagement" alt="">
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                     <div class="spacer"></div>
                     <div class="col-sm-12 text-center">
                         <i>It takes just a minute</i>
-                        <button @click="n('signup-welcome')">Sign up now</button>
+                        <button class="btn btn-primary" @click="n('signup-welcome')">Sign up now</button>
                     </div>
                 </div>
             </div>

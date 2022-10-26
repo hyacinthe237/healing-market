@@ -1,64 +1,42 @@
 <template lang="html">
-    <section class="signin-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 m-auto">
+  <section class="signup-page">
+      <div class="profile-top" :style="`background-image:url(${background})`">
+          <div class="overlay"></div>
+          <div class="profile-top-container">
+              <div class="profile-photo"><img :src="logo" /></div>
+          </div>
+      </div>
+      <div class="content">
+          <div class="head mt-40">
+              <div class="message-big">Sign in your account</div>
+              <div class="message-small mt-10">Welcome to <span class="bold">NOGADA 360</span></div>
+          </div>
 
-                    <div class="login-form">
-                        <div class="logo-name text-center">IzySearch</div>
-                        <!-- <div class="title text-center" v-translate>Sign in</div> -->
+          <form class="_form signup-form mt-20">
+              <div class="form-group">
+                  <input type="text" name="email" placeholder="Email address" class="form-control">
+              </div>
+              <div class="form-group mt-20">
+                  <input type="passwword" name="password" placeholder="********" class="form-control">
+              </div>
+              <div class="forgot pointer" @click="n('password-forgot')">Password forgot ?</div>
+              <div class="button mt-20 pointer">
+                  <div class="text">Sign In</div>
+                  <div class="icon"><i class="feather icon-log-in"></i></div>
+              </div>
+          </form>
 
-                         <form class="_form mt-20" @submit.prevent="signin()" id="signinForm">
-                            <div class="form-group">
-                                <div class="inner-addon left-addon">
-                                    <i class="glyphicon feather icon-user"></i>
-
-                                    <input type="username"
-                                        name="username"
-                                        :placeholder="t('Username')"
-                                        class="form-control form-control-lg input-white"
-                                        v-model="ghost.username"
-                                        v-validate="'required|min:6'"
-                                    >
-                                    <span class="has-error">{{ errors.first('username') }}</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="inner-addon left-addon">
-                                    <i class="glyphicon feather icon-lock"></i>
-
-                                    <input type="password"
-                                        name="password"
-                                        :placeholder="t('Password')"
-                                        :data-vv-as="t('Password')"
-                                        v-validate="'required|min:6'"
-                                        v-model="ghost.password"
-                                        class="form-control form-control-lg input-white"
-                                    >
-                                    <span class="has-error">{{ errors.first('password') }}</span>
-                                </div>
-                            </div>
-
-                            <div class="mt-20">
-                                <izy-btn :loading="isLoading" :size="'lg'" block>
-                                    <i class="feather icon-arrow-right pull-right"></i>
-                                    {{ t('Sign in') }}
-                                </izy-btn>
-                            </div>
-                       </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+          <div class="link">You don't have an account? <span>Sign Up</span></div>
+      </div>
+  </section>
 </template>
 
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
 import _ from 'lodash'
+import logo from '@/assets/img/vertical.png'
+import background from '@/assets/img/background.png'
 
 export default {
     name: 'Signin',
@@ -67,7 +45,8 @@ export default {
         ghost: {
             username: '',
             password: ''
-        }
+        },
+        logo, background
     }),
 
     computed: {

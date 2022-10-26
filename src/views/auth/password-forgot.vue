@@ -1,50 +1,41 @@
 <template lang="html">
-    <section class="signin-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 m-auto">
+  <section class="signup-page">
+      <div class="profile-top" :style="`background-image:url(${background})`">
+          <div class="overlay"></div>
+          <div class="profile-top-container">
+              <div class="profile-photo"><img :src="logo" /></div>
+          </div>
+      </div>
+      <div class="content">
+          <div class="head mt-40">
+              <div class="message-big">Forgot password</div>
+          </div>
 
-                    <div class="login-form">
-                        <div class="logo-name text-center" v-translate>Forgot password</div>
+          <form class="_form signup-form mt-20">
+              <div class="form-group">
+                  <input type="text" name="email" placeholder="Email address" class="form-control">
+              </div>
+              <div class="button mt-20 pointer">
+                  <div class="text">Sign In</div>
+                  <div class="icon"><i class="feather icon-log-in"></i></div>
+              </div>
+          </form>
 
-                         <form class="_form mt-20" @submit.prevent="send()">
-                            <div class="form-group">
-                                <div class="inner-addon left-addon">
-                                    <i class="glyphicon feather icon-user"></i>
-
-                                    <input type="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        class="form-control form-control-lg input-white"
-                                        v-model="ghost.email"
-                                        v-validate="'required|email'"
-                                    >
-                                    <span class="has-error">{{ errors.first('email') }}</span>
-                                </div>
-                            </div>
-
-                            <div class="mt-20">
-                                <izy-btn :loading="isLoading" :size="'lg'" block>
-                                    <i class="feather icon-arrow-right pull-right"></i>
-                                    {{ t('Send email') }}
-                                </izy-btn>
-                            </div>
-
-                            <div class="links">
-                                <router-link :to="{ name: 'signin', params: {} }">{{ t('Sign in') }}</router-link>
-                            </div>
-                       </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+          <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
+      </div>
+  </section>
 </template>
 
 <script>
+import logo from '@/assets/img/vertical.png'
+import background from '@/assets/img/background.png'
+
 export default {
     name: 'ForgotPassword',
+
+    data: () => ({
+        logo, background
+    }),
 
     methods: {
         /**

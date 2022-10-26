@@ -20,7 +20,7 @@
               </nav>
             </div>
             <div class="site-header__end pointer">
-              <a href="#"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
+              <a @click="n('signin')" class="pointer"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
             </div>
           </div>
       </div>

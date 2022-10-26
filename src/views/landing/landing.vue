@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="img">
-                            <img :src="logoPartners" alt="">
+                            <img :src="logoScheduling" alt="">
                         </div>
                     </div>
                 </div>

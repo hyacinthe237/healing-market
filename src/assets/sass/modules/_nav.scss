@@ -84,6 +84,7 @@
   &:hover, &:focus {
       color: $primary;
   }
+
 }
 
 @media (max-width: 560px) {
@@ -108,7 +109,7 @@
       display: block;
       position: absolute;
       right: 1rem;
-      top: 1.3rem;
+      top: 2.1rem;
       border: none;
       background-color: transparent;
       cursor: pointer;
@@ -132,9 +133,7 @@
       padding: 8px;
       text-decoration: none;
 
-      i {
-        font-size: 21px;
-      }
+      i { display: none; }
     }
 }
 @media (max-width: $mobile-breakpoint) {
@@ -143,12 +142,9 @@
       a {
         color: $primary;
         background-color: transparent;
-        // padding: 10px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
 
         span { display: none; }
+        i { display: block; font-size: 21px; margin-right: 5px; }
       }
   }
 

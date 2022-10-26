@@ -256,6 +256,11 @@
         width:100%;
         max-width: 300px;
 
+        .forgot {
+          font-size: 12px;
+          text-align: right;
+        }
+
         .form-control {
             background-color: #eee;
             border: 1px solid $brand-teal;
@@ -300,4 +305,76 @@
         }
     }
 
+}
+
+@media(max-width: 560px) {
+  .signup-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                color: white;
+                background-color: $dark;
+                border-radius: 10px;
+                z-index: 9999;
+                border: none;
+                padding: 10px;
+                min-width: 200px;
+                font-size: 14px;
+
+                &.play-store {
+                  margin-bottom: 20px;
+                }
+            }
+        }
+
+        .head {
+            display: flex;
+            flex-direction: column;
+
+            .message-big {
+                font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+                color: $brand-darker;
+                font-weight: 900;
+                font-size: 20px;
+                text-align: left;
+                line-height: 1.1em;
+                text-align: center;
+
+                span {
+                    color: $brand-primary;
+                }
+            }
+
+            .message-small {
+
+            }
+        }
+
+        ._main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+
+            .vertical-line {
+                display: none;
+            }
+        }
+
+        .link {
+            font-size: 14px;
+        }
+    }
+  }
 }

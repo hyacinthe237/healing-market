@@ -26,7 +26,7 @@
                     <div class="icon"><i class="feather icon-chevron-right"></i></div>
                 </div>
             </form>
-            <div class="bold msg mt-60" v-show="showForm">Or, download the NOGADA 360 mobile apps</div>
+            <div class="bold msg mt-60 text-center" v-show="showForm">Or, download the NOGADA 360 mobile apps</div>
             <div class="buttons mt-20" v-show="showForm">
                 <button class="play-store">
                     <img :src="logoGoogle" alt="">
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="link">Already have an account? <span>Sign In</span></div>
+            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
     </section>
 </template>

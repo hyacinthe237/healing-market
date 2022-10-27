@@ -22,6 +22,11 @@ a { text-decoration: none; color: $linkColour }
     font-style: normal;
 }
 
+html, body {
+  height: 100%;
+  // margin: 0;
+}
+
 body {
     margin: 0;
     font-family: 'Poppins Regular', sans-serif;

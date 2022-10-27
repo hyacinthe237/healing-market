@@ -2,7 +2,6 @@
     <section class="signup-page">
         <div class="g-page" :style="`background-image:url(${background})`">
             <div class="overlay">
-
                 <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
             </div>
             <div class="profile-top-container">
@@ -14,10 +13,20 @@
             </div>
         </div>
         <div class="d-page">
+            <div class="profile-top" :style="`background-image:url(${background})`">
+                <div class="overlay"></div>
+                <div class="profile-top-container">
+                    <div
+                        class="profile-photo"
+                    >
+                      <img :src="logo" />
+                    </div>
+                </div>
+            </div>
              <div class="dhead mt-20">
                 <div class="step-title">step 1 of 4</div>
                 <div class="progress"><div class="step-1"></div></div>
-                <div class="message-big">Hi, We're <br>NOGODA 360</div>
+                <div class="message-big">Hi, We're <br> NOGODA 360</div>
             </div>
 
             <form class="_form s-form mt-20">
@@ -34,6 +43,8 @@
                     </div>
                 </div>
             </form>
+
+            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
     </section>
 </template>

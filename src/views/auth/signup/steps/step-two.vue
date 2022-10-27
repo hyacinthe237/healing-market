@@ -14,6 +14,16 @@
             </div>
         </div>
         <div class="d-page">
+            <div class="profile-top" :style="`background-image:url(${background})`">
+                <div class="overlay"></div>
+                <div class="profile-top-container">
+                    <div
+                        class="profile-photo"
+                    >
+                      <img :src="logo" />
+                    </div>
+                </div>
+            </div>
              <div class="dhead mt-20">
                 <div class="step-title">step 2 of 4</div>
                 <div class="progress"><div class="step-2"></div></div>
@@ -25,17 +35,17 @@
                     <label>What brings you to NOGADA 360 ?</label>
                     <div class="small">Pick what you need now. You can also do more later.</div>
                     <div class="needs">
-                        <div class="need">
+                        <div :class="['need', need == 'Scheduling'?'selected':'']" @click="selectedNeed('Scheduling')">
                           <i class="feather icon-plus"></i>
                           <span>Scheduling</span>
                         </div>
 
-                        <div class="need">
+                        <div :class="['need', need == 'Time Tracking'?'selected':'']" @click="selectedNeed('Time Tracking')">
                           <i class="feather icon-plus"></i>
                           <span>Time Tracking</span>
                         </div>
 
-                        <div class="need">
+                        <div :class="['need', need == 'Payroll'?'selected':'']" @click="selectedNeed('Payroll')">
                           <i class="feather icon-plus"></i>
                           <span>Payroll</span>
                         </div>
@@ -49,6 +59,8 @@
                     </div>
                 </div>
             </form>
+
+            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
     </section>
 </template>
@@ -70,7 +82,8 @@ export default {
         showForm: false,
         selected: [],
         items: [],
-        background, logoUsers,logoApple,logoGoogle
+        background, logoUsers,logoApple,logoGoogle,
+        need: ''
     }),
 
     mounted () {
@@ -87,6 +100,10 @@ export default {
 
         displayForm () {
             this.showForm = !this.showForm
+        },
+
+        selectedNeed (value) {
+            this.need = value
         },
 
         initItems () {

@@ -71,12 +71,17 @@
     .d-page {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        // justify-content: center;
+        // align-items: center;
         color: $dark;
         padding-left: 80px;
         padding-right: 80px;
         padding-top: 40px;
+        min-height: 100vh;
+
+        .profile-top { display: none; }
+
+        .link {display: none; }
 
         .dhead {
             display: flex;
@@ -113,10 +118,6 @@
         .s-form {
             width:100%;
             margin-bottom: 20px;
-            // 699938560 contador
-            // 675500768 Franck
-            // 699479452 Mme Franck
-            // 656538106 Mme Cécile
 
             .forgot {
               font-size: 12px;
@@ -161,6 +162,12 @@
                 border-radius: 5px;
                 border: 2px dotted #B0B5B9;
                 margin-right: 10px;
+
+                &.selected {
+                  background-color: $primary;
+                  color: white;
+                  border: 2px dotted $primary;
+                }
               }
             }
 
@@ -289,21 +296,15 @@
     }
 }
 
-@media(max-width: 560px) {
-  .signup-page {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 .full-page {
     width: 100%;
     height: auto;
     position: relative;
     background-color: transparent;
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    min-height: 100vh;
 
     .full-form {
       width: 30%;
@@ -431,4 +432,210 @@
         text-align: center;
         transform: translate(-50%, -50%);
     }
+}
+
+@media(max-width: 560px) {
+  .signup-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .g-page { display: none; }
+    .d-page {
+      display: flex;
+      padding: 0px;
+
+      .link {
+          display: block;
+          margin-top: 40px;
+          font-size: 18px;
+          margin-bottom: 20px;
+          text-align: center;
+
+          span {
+              color: $primary;
+          }
+      }
+
+      .profile-top {
+          width: 100%;
+          height: 200px;
+          position: relative;
+          background-color: transparent;
+          background-size: 800px 600px;
+          background-repeat: no-repeat;
+          background-position: center;
+          border-bottom: solid 0.25px $teal;
+          border-bottom: 5px solid $primary;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          img {
+              width: 200px;
+              color: white;
+          }
+
+          .overlay {
+              background-color: rgba(0, 0, 0, 0.9);
+              width: 100%;
+              height: 200px;
+              position: relative;
+              // border-radius: 0px 0px 100px 100px;
+          }
+
+          .profile-top-container {
+              top: 50%;
+              left: 50%;
+              width: 90%;
+              z-index: 2;
+              padding: 10px;
+              position: absolute;
+              text-align: center;
+              transform: translate(-50%, -50%);
+          }
+
+          .profile-photo {
+              width: 100%;
+              height: 100%;
+              max-height: 200px;
+              margin: 0 auto;
+              background-size: cover;
+              background-position: center;
+
+              img {
+                  width: 200px;
+              }
+          }
+      }
+
+      .dhead {
+          display: flex;
+          flex-direction: column;
+          margin-top: 60px;
+
+          .step-title { text-transform: uppercase; }
+
+          .progress {
+              width: 150px;
+              background-color: #eee;
+              height: 10px;
+              border-radius: 3px;
+
+              .step-1 { background-color: $primary; width: 25%; }
+              .step-2 { background-color: $primary; width: 50%; }
+              .step-3 { background-color: $primary; width: 75%; }
+              .step-4 { background-color: $primary; width: 100%; }
+          }
+
+          .message-big {
+              font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+              color: $brand-darker;
+              font-weight: 900;
+              font-size: 20px;
+              line-height: 1.2em;
+              margin-top: 40px;
+              margin-bottom: 40px;
+
+              span {
+                  color: $brand-primary;
+              }
+              br { display: none; }
+          }
+      }
+
+      .s-form {
+          width:100%;
+
+          .needs {
+            .need {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+
+          .workers {
+            display: flex;
+            flex-direction: row;
+            background-color: #F4F9FD;
+            border-radius: 5px;
+            width: 100%;
+
+            .worker {
+              background-color: #F4F9FD;
+              color: #B0B5B9;
+              padding: 10px;
+              border: 0.5px solid #B0B5B9;
+              width: 20%;
+              cursor: pointer;
+              text-align: center;
+
+              &:first-child {
+                border-radius: 5px 0px 0px 5px;
+              }
+              &:nth-child(5) {
+                border-radius: 0px 5px 5px 0px;
+              }
+
+              &.selected {
+                background-color: $primary;
+                color:white;
+                border: 1px solid $primary;
+              }
+            }
+          }
+      }
+    }
+  }
+
+  .full-page {
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+
+    .full-form {
+      width: 100%;
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 20px;
+      color: white;
+
+      .top {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 20px;
+
+          .step-title { text-transform: uppercase; text-align: left;}
+
+          .progress {
+              width: 150px;
+              background-color: #eee;
+              height: 10px;
+              border-radius: 3px;
+
+              .step-1 { background-color: $primary; width: 25%; }
+              .step-2 { background-color: $primary; width: 50%; }
+              .step-3 { background-color: $primary; width: 75%; }
+              .step-4 { background-color: $primary; width: 100%; }
+          }
+
+          .message-big {
+              font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+              color: white;
+              font-weight: 900;
+              font-size: 20px;
+              line-height: 1.2em;
+              margin-top: 20px;
+              text-align: left;
+
+              span {
+                  color: $brand-primary;
+              }
+          }
+      }
+    }
+  }
 }

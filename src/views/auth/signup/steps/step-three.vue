@@ -14,6 +14,16 @@
             </div>
         </div>
         <div class="d-page">
+            <div class="profile-top" :style="`background-image:url(${background})`">
+                <div class="overlay"></div>
+                <div class="profile-top-container">
+                    <div
+                        class="profile-photo"
+                    >
+                      <img :src="logo" />
+                    </div>
+                </div>
+            </div>
              <div class="dhead mt-20">
                 <div class="step-title">step 3 of 4</div>
                 <div class="progress"><div class="step-3"></div></div>
@@ -84,6 +94,8 @@
                     </div>
                 </div>
             </form>
+
+            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
     </section>
 </template>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Dashboard from '@/views/organizations/organization'
+import Dashboard from '@/views/organizations/organization'
 // import File from '@/views/files/file'
 import Home from '@/views/home/home'
 // import Users from '@/views/users/users'
@@ -49,7 +49,7 @@ export default new Router({
 
         // { path: '/search', name: 'search', component: Search, beforeEnter: Guard.auth  },
         //
-        // { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.auth  },
+        { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.guest  },
         // { path: '/dashboard/connectors', name: 'connectors-dash', component: Connectors, beforeEnter: Guard.auth  },
         // { path: '/dashboard/connectors/:id', name: 'connector-dash', component: Connector, beforeEnter: Guard.auth  },
         // { path: '/dashboard/logs', name: 'logs-dash', component: Logs, beforeEnter: Guard.auth  },

@@ -10,7 +10,7 @@
 }
 
 #sidebar-wrapper {
-    z-index: 1000;
+    // z-index: 1000;
     position: fixed;
     left: $sidebar-width;
     width: 0;
@@ -90,7 +90,7 @@
                     left:0;
                     height: 6px;
                     border-radius: 50px;
-                    
+
                     &.step-1 { width: 1%; background-color: $brand-secondary;}
                     &.step-2 { width: 2%; background-color: $brand-secondary;}
                     &.step-3 { width: 3%; background-color: $brand-secondary;}
@@ -232,6 +232,11 @@
 
         &.brand {
             font-family: Averta, Avenir, sans-serif;
+            padding: 10px;
+
+            img {
+              width: 170px;
+            }
 
             a {
                 font-size: 18px;

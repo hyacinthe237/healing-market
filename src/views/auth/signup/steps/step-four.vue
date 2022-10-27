@@ -9,7 +9,7 @@
             </div>
 
             <input type="text" name="email" v-model="ghost.email" placeholder="Email address" class="form-control">
-            <input type="password" name="password" v-model="ghost.password" placeholder="Password" class="form-control">
+            <input type="password" name="password" v-model="ghost.password" placeholder="Password" class="password form-control">
             <input type="text" name="phone" v-model="ghost.phone" placeholder="Phone number" class="form-control">
             <div class="txt">By clicking continue you agree to our Terms of Service, Privacy Policy and User Agreement.</div>
             <div class="bttn pointer">

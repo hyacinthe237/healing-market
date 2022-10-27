@@ -15,7 +15,7 @@
         </div>
         <div class="d-page">
              <div class="dhead mt-20">
-                <div class="step-title">step 2 of 4</div>
+                <div class="step-title">step 3 of 4</div>
                 <div class="progress"><div class="step-3"></div></div>
                 <div class="message-big">Yacuintha, tel us about <br> your business</div>
             </div>
@@ -76,10 +76,10 @@
                         <input type="checkbox" name="more_locations" class="checkbox" checked>
                     </div>
                 </div>
-                <div class="bottom-form mt-20">
+                <div class="bottom-form mt-20" @click="n('signup-step-four')">
                     <div class="notyet"></div>
                     <div class="button pointer">
-                        <div class="text">Continue</div>
+                        <div class="text">One last step</div>
                         <div class="icon"><i class="feather icon-chevron-right"></i></div>
                     </div>
                 </div>

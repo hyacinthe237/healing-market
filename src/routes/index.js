@@ -25,6 +25,7 @@ import SignUpWelcome from '@/views/auth/signup/welcome'
 import SignUpStepOne from '@/views/auth/signup/steps/step-one'
 import SignUpStepTwo from '@/views/auth/signup/steps/step-two'
 import SignUpStepThree from '@/views/auth/signup/steps/step-three'
+import SignUpStepFour from '@/views/auth/signup/steps/step-four'
 
 import Guard from '@/services/middleware'
 import AuthSignin from '@/views/auth/signin'
@@ -43,6 +44,7 @@ export default new Router({
         { path: '/signup/step/one', name: 'signup-step-one', component: SignUpStepOne, beforeEnter: Guard.guest  },
         { path: '/signup/step/two', name: 'signup-step-two', component: SignUpStepTwo, beforeEnter: Guard.guest  },
         { path: '/signup/step/three', name: 'signup-step-three', component: SignUpStepThree, beforeEnter: Guard.guest  },
+        { path: '/signup/step/four', name: 'signup-step-four', component: SignUpStepFour, beforeEnter: Guard.guest  },
         { path: '/password-forgot', name: 'password-forgot', component: AuthPasswordForgot, beforeEnter: Guard.guest  },
 
         // { path: '/search', name: 'search', component: Search, beforeEnter: Guard.auth  },

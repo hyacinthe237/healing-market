@@ -26,7 +26,7 @@
               </div>
           </form>
 
-          <div class="link">You don't have an account? <span>Sign Up</span></div>
+          <div class="link">You don't have an account? <span @click="n('signup-step-one')" class="pointer">Sign Up</span></div>
       </div>
   </section>
 </template>

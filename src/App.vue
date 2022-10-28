@@ -1,17 +1,17 @@
 <template>
     <div id="app">
-        <Header />
-        <div id="wrapper" class="toggled">
-            <Sidebar />
+        <div id="wrapper" :class="[token ? 'toggled' : 'notoggled']">
+            <Header v-if="token" />
+            <Sidebar v-if="token" />
 
             <div id="page-content-wrapper">
-                <div class="toggle-container">
+                <div class="toggle-container" v-if="token">
                     <a @click="toggled()" id="menu-toggle"  v-if="isToggled">
-                        <i class="feather icon-align-justify"></i>
+                        <i class="feather icon-chevron-right"></i>
                     </a>
 
                     <a @click="closeToggle()" v-else>
-                        <i class="feather icon-align-justify"></i>
+                        <i class="feather icon-chevron-left"></i>
                     </a>
                 </div>
 
@@ -24,13 +24,13 @@
             <OfflineFooter></OfflineFooter>
         </div>
 
-        <!-- <div v-else>
+        <!--<div class="unconnected" v-else>
             <vue-page-transition name="fade">
                 <router-view />
             </vue-page-transition>
         </div>
 
-        <LoadingModal /> -->
+        <LoadingModal />-->
     </div>
 </template>
 
@@ -38,7 +38,7 @@
 import AuthService from '@/services/auth'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import Header from '@/components/commons/header/header'
-import LoadingModal from '@/components/commons/loaders/modal'
+// import LoadingModal from '@/components/commons/loaders/modal'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import _ from 'lodash'
@@ -50,7 +50,7 @@ export default {
         interval: null
     }),
 
-    components: { Sidebar, LoadingModal, Header },
+    components: { Sidebar, Header },
 
     created () {
         this.$translate.setLang('french')
@@ -65,6 +65,14 @@ export default {
     computed: {
         isToggled () {
             return this.$store.state.toggleIcon
+        },
+
+        token () {
+            return this.$auth.getToken()
+        },
+
+        auth () {
+            return !_.isEmpty(AuthService.getUser()) ? AuthService.getUser().account : null
         },
     },
 

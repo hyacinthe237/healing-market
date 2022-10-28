@@ -69,6 +69,7 @@ export default {
 
         token () {
             return this.$auth.getToken()
+            // return '8e4e3b90-4593-11ed-a70c-9786182f617f'
         },
 
         auth () {

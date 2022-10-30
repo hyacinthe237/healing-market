@@ -2,9 +2,33 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li>
-                <router-link :to="{ name: 'dashboard' }">
-                    <i class="feather icon-layers"></i>
-                    {{ t('Dashboard') }}
+                <router-link :to="{ name: 'dashboard' }" :class="[current == 'dashboard' ? 'active' : '']">
+                    <i class="ion-md-grid"></i>
+                    {{ 'Dashboard' }}
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'schedule' }" :class="[current == 'timesheets' ? 'active' : '']">
+                    <i class="ion-md-calendar"></i>
+                    {{ t('Schedule') }}
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'timesheets' }" :class="[current == 'timesheets' ? 'active' : '']">
+                    <i class="ion-md-timer"></i>
+                    {{ t('Timesheets') }}
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'team' }" :class="[current == 'team' ? 'active' : '']">
+                    <i class="ion-md-people"></i>
+                    {{ t('Team') }}
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'settings' }" :class="[current == 'settings' ? 'active' : '']">
+                    <i class="ion-md-settings"></i>
+                    {{ t('Settings') }}
                 </router-link>
             </li>
         </ul>
@@ -20,7 +44,11 @@ export default {
         root: {
             type: Object,
             default: () => {}
-        }
+        },
+        current: {
+            type: String,
+            default: 'dashboard'
+        },
     },
 
     data: () => ({

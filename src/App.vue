@@ -1,10 +1,10 @@
 <template>
     <div id="app">
+        <Header v-if="token" />
         <div id="wrapper" :class="[token ? 'toggled' : 'notoggled']">
-            <Header v-if="token" />
-            <Sidebar v-if="token" />
+            <Sidebar v-if="token" :current="root_name" />
 
-            <div id="page-content-wrapper">
+            <div id="page-content-wrapper" :class="[token ? '' : 'notoggled']">
                 <div class="toggle-container" v-if="token">
                     <a @click="toggled()" id="menu-toggle"  v-if="isToggled">
                         <i class="feather icon-chevron-right"></i>
@@ -57,7 +57,6 @@ export default {
     },
 
     mounted () {
-
     },
 
     watch: { },
@@ -75,6 +74,8 @@ export default {
         auth () {
             return !_.isEmpty(AuthService.getUser()) ? AuthService.getUser().account : null
         },
+
+        root_name () { return this.$route.name }
     },
 
     methods: {

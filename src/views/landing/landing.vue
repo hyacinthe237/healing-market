@@ -1,7 +1,7 @@
 <template lang="html">
     <div>
         <Navbar></Navbar>
-        <section class="section-home">
+        <section class="section-home mt-20S">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
@@ -20,7 +20,7 @@
                                     <button @click="n('signup-welcome')">Start free trial version</button>
                                 </div>
                                 <div class="text-center button mt-20">
-                                    <button class="btn btn-block btn-primary" @click="n('signup-welcome')">Start free trial version</button>
+                                    <button class="btn btn-primary" @click="n('signup-welcome')">Start free trial version</button>
                                 </div>
                             </div>
                         </form>

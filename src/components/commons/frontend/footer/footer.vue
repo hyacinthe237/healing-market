@@ -16,7 +16,7 @@
                             <button>Start free trial version</button>
                         </div>
                         <div class="text-center button mt-20">
-                            <button class="btn btn-block btn-primary">Start free trial version</button>
+                            <button class="btn btn-primary">Start free trial version</button>
                         </div>
                     </div>
                 </form>

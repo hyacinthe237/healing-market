@@ -122,7 +122,9 @@ h5 { font-size: 1.1em }
 .primary { color: $brand-primary }
 .secondary { color: $brand-secondary }
 .underline { text-decoration: underline; }
-
+.mt--20 { margin-top: -20px; }
+.mt--40 { margin-top: -40px; }
+.mt--60 { margin-top: -60px; }
 .bg-month { background-color: $brand-primary }
 .bg-quarter { background-color: $brand-secondary }
 .bg-semester { background-color: $brand-success }

@@ -54,8 +54,8 @@
                 <div class="bottom-form" @click="n('signup-step-three')">
                     <div class="notyet">Not sure yet</div>
                     <div class="button mt-20 pointer">
-                        <div class="text step123">Continue</div>
-                        <div class="icon step123"><i class="feather icon-chevron-right"></i></div>
+                        <div class="text">Continue</div>
+                        <div class="icon"><i class="feather icon-chevron-right"></i></div>
                     </div>
                 </div>
             </form>

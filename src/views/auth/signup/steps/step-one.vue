@@ -33,13 +33,16 @@
                 <div class="form-group">
                     <label>What's your name?</label>
                     <input type="text" name="name" placeholder="e.g. Art Paul" class="form-control mt-20">
-                    <div class="small">Try everything free for 14 days. No credit card required. Basic plan is free forever.</div>
+                    <div class="check-form">
+                        <div class="smaller">Try everything free for 14 days. No credit card required. Basic plan is free forever.</div>
+                        <input type="checkbox" name="is_free" class="checkbox" checked>
+                    </div>
                 </div>
                 <div class="bottom-form" @click="n('signup-step-two')">
                     <div class="notyet"></div>
                     <div class="button mt-20 pointer">
-                        <div class="text step123">Get Started</div>
-                        <div class="icon step123"><i class="feather icon-chevron-right"></i></div>
+                        <div class="text">Get Started</div>
+                        <div class="icon"><i class="feather icon-chevron-right"></i></div>
                     </div>
                 </div>
             </form>

@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <input type="text" name="email" placeholder="Email address" class="form-control">
                 </div>
-                <div class="button mt-20 pointer" @click="n('signup-step-one')">
+                <div class="button mt-20 pointer">
                     <div class="text">Continue</div>
                     <div class="icon"><i class="feather icon-chevron-right"></i></div>
                 </div>
@@ -74,7 +74,7 @@
                             </label>
                         </div>
                     </div>
-                    <form class="_form signup-form mt-20" v-show="showList">
+                    <form class="_form signup-form mt-20" v-show="showList" @click="n('signup-step-one')">
                         <div class="button pointer">
                             <div class="text">Continue</div>
                         </div>

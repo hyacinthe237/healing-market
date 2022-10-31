@@ -35,8 +35,8 @@
                     <label>What's your business called?</label>
                     <input type="text" name="name" v-model="ghost.business_name" placeholder="Business name" class="form-control">
                     <div class="litle-form" v-if="ghost.business_name!=''">
-                        <div class="small">We use your business zip code to set your overtime and break policies - so you don't have to</div>
-                        <input type="text" name="zip_code" v-model="ghost.zip_code" placeholder="Zip Code" class="petit">
+                        <div class="smaller">We use your business zip code to set your overtime and break policies - so you don't have to</div>
+                        <input type="text" name="zip_code" v-model="ghost.zip_code" placeholder="Zip Code" style="max-height:35px;">
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,7 +45,6 @@
                         <option value="">Select an option</option>
                         <option value="coffee">Coffee</option>
                     </select>
-                    <!-- <div class="small">Try everything free for 14 days. No credit card required. Basic plan is free forever.</div> -->
                 </div>
                 <div class="form-group">
                     <label>How many people work there ?</label>
@@ -82,7 +81,7 @@
                         </div>
                     </div>
                     <div class="check-form">
-                        <div class="small">This business has many locations</div>
+                        <div class="smaller">This business has many locations</div>
                         <input type="checkbox" name="more_locations" class="checkbox" checked>
                     </div>
                 </div>

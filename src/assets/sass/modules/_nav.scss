@@ -24,6 +24,13 @@
   ul {
     list-style: none;
   }
+
+  #sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: -10%;
+      background-color: white;
+  }
 }
 
 .site-header__wrapper {

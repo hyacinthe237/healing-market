@@ -1,7 +1,7 @@
 <template lang="html">
     <div>
         <Navbar></Navbar>
-        <section class="section-home mt-20S">
+        <section class="section-home mt-10">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </section>
-        <section class="section-home">
+        <section class="section-home mt--40">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -100,7 +100,7 @@
             </div>
         </section>
 
-        <div class="spacer-big"></div>
+        <div class="spacer"></div>
 
         <section class="section-home bg-red">
             <div class="container">
@@ -282,6 +282,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

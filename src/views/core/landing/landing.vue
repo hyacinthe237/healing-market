@@ -311,7 +311,6 @@
             </div>
         </section>
 
-
         <Footer></Footer>
     </div>
 </template>

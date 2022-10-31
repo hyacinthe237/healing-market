@@ -7,9 +7,6 @@
     &.toggled {
       padding-left: $sidebar-width;
     }
-    &.notoggled {
-      padding-left: 0;
-    }
 }
 
 #sidebar-wrapper {
@@ -366,18 +363,4 @@
         position: relative;
         margin-right: 0;
     }
-}
-
-@media (max-width: 560px) {
-  #wrapper {
-      &.notoggled {
-        padding-left: 0;
-        margin-top: -350px;
-      }
-  }
-
-  #page-content-wrapper.notoggled {
-      width: 100%;
-      margin-left: -20px;
-  }
 }

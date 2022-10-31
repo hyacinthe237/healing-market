@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header v-if="token" />
+        <!-- <Header v-if="token" />
         <div id="wrapper" :class="[token ? 'toggled' : 'notoggled']">
             <Sidebar v-if="token" :current="root_name" />
 
@@ -13,16 +13,16 @@
                     <a @click="closeToggle()" v-else>
                         <i class="feather icon-chevron-left"></i>
                     </a>
-                </div>
+                </div> -->
 
                 <vue-page-transition name="fade">
                     <router-view />
                 </vue-page-transition>
 
-            </div>
+            <!-- </div>
 
             <OfflineFooter></OfflineFooter>
-        </div>
+        </div> -->
 
         <!--<div class="unconnected" v-else>
             <vue-page-transition name="fade">
@@ -36,8 +36,8 @@
 
 <script>
 import AuthService from '@/services/auth'
-import Sidebar from '@/components/commons/sidebar/sidebar'
-import Header from '@/components/commons/header/header'
+// import Sidebar from '@/components/commons/sidebar/sidebar'
+// import Header from '@/components/commons/header/header'
 // import LoadingModal from '@/components/commons/loaders/modal'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
@@ -50,7 +50,7 @@ export default {
         interval: null
     }),
 
-    components: { Sidebar, Header },
+    // components: { Sidebar, Header },
 
     created () {
         this.$translate.setLang('french')

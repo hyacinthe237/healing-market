@@ -1,5 +1,6 @@
 <template lang="html">
 <!-- Header Start -->
+  <VueScrollFixedNavbar>
     <header class="site-header">
       <div class="container">
           <div class="wrapper site-header__wrapper">
@@ -25,6 +26,7 @@
           </div>
       </div>
     </header>
+  </VueScrollFixedNavbar>
 </template>
 
 <script>

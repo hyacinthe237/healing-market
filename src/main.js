@@ -15,6 +15,7 @@ import VuePageTransition from 'vue-page-transition'
 import Multiselect from 'vue-multiselect'
 import RadialProgressBar from 'vue-radial-progress'
 import VueParticlesBg from "particles-bg-vue"
+import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -67,6 +68,7 @@ Vue.locales({ french })
 Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
 Vue.use(VueParticlesBg)
+Vue.use(VueScrollFixedNavbar)
 Vue.use(VeeValidate, { locale: 'fr', dictionary: { fr: messagesFr } })
 
 Vue.config.productionTip = false

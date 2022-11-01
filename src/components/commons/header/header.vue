@@ -7,7 +7,7 @@
                   </div>
 
                   <div class="col-sm-6">
-                      <div class="buttons text-right">
+                      <!-- <div class="buttons text-right">
                           <button class="btn btn-secondary mr-2">
                               <i class="feather icon-bell"></i>
                           </button>
@@ -19,7 +19,7 @@
                           <button class="btn btn-danger">
                               <i class="feather icon-trash-2"></i>
                           </button>
-                      </div>
+                      </div> -->
                   </div>
               </div>
           </div>

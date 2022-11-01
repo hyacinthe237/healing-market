@@ -20,13 +20,13 @@
                   <input type="passwword" name="password" placeholder="********" class="form-control">
               </div>
               <div class="forgot pointer" @click="n('password-forgot')">Password forgot ?</div>
-              <div class="button mt-20 pointer">
+              <div class="button mt-20 pointer" @click="n('dashboard')">
                   <div class="text">Sign In</div>
                   <div class="icon"><i class="feather icon-log-in"></i></div>
               </div>
           </form>
 
-          <div class="link">You don't have an account? <span @click="n('signup-step-one')" class="pointer">Sign Up</span></div>
+          <div class="link mt-10">You don't have an account? <span @click="n('signup-step-one')" class="pointer">Sign Up</span></div>
       </div>
   </section>
 </template>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Guard from '@/services/middleware'
-import Dashboard from '@/views/organizations/organization'
+import Dashboard from '@/views/dashboard/dashboard'
 import NotFound from '@/views/core/errors/notfound'
 import CoreBody from '@/views/core/body'
 import SignUpWelcome from '@/views/core/auth/signup/welcome'
@@ -9,8 +9,8 @@ import SignUpStepOne from '@/views/core/auth/signup/steps/step-one'
 import SignUpStepTwo from '@/views/core/auth/signup/steps/step-two'
 import SignUpStepThree from '@/views/core/auth/signup/steps/step-three'
 import SignUpStepFour from '@/views/core/auth/signup/steps/step-four'
-import AuthSignin from '@/views/auth/signin'
-import AuthPasswordForgot from '@/views/auth/password-forgot'
+import AuthSignin from '@/views/core/auth/signin'
+import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
 Vue.use(Router)
 

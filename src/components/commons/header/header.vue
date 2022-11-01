@@ -3,16 +3,13 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-sm-6">
+                    <a href="#" class="dashboard-brand"><img :src="logo" alt=""></a>
                   </div>
 
                   <div class="col-sm-6">
                       <div class="buttons text-right">
-                          <button class="btn btn-dark mr-2">
-                              <i class="feather icon-arrow-left"></i> {{ t('Back') }}
-                          </button>
-
                           <button class="btn btn-secondary mr-2">
-                              <i class="feather icon-edit"></i>
+                              <i class="feather icon-bell"></i>
                           </button>
 
                           <button class="btn btn-warning mr-2">

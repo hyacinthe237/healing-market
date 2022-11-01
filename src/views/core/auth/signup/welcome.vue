@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <input type="text" name="email" placeholder="Email address" class="form-control">
                 </div>
-                <div class="button mt-20 pointer">
+                <div class="button mt-20 pointer" @click="n('dashboard')">
                     <div class="text">Continue</div>
                     <div class="icon"><i class="feather icon-chevron-right"></i></div>
                 </div>

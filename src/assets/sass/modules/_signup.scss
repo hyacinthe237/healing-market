@@ -474,8 +474,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
 
     .g-page { display: none; }
     .d-page {
@@ -484,10 +482,10 @@
 
       .link {
           display: block;
-          margin-top: 40px;
           font-size: 18px;
-          margin-bottom: 20px;
           text-align: center;
+          padding-left: 20px;
+          padding-right: 20px;
 
           span {
               color: $primary;
@@ -496,7 +494,7 @@
 
       .profile-top {
           width: 100%;
-          height: 200px;
+          height: 120px;
           position: relative;
           background-color: transparent;
           background-size: 800px 600px;
@@ -510,14 +508,14 @@
           align-items: center;
 
           img {
-              width: 200px;
+              width: 120px;
               color: white;
           }
 
           .overlay {
               background-color: rgba(0, 0, 0, 0.9);
               width: 100%;
-              height: 200px;
+              height: 120px;
               position: relative;
               // border-radius: 0px 0px 100px 100px;
           }
@@ -536,13 +534,13 @@
           .profile-photo {
               width: 100%;
               height: 100%;
-              max-height: 200px;
+              max-height: 120px;
               margin: 0 auto;
               background-size: cover;
               background-position: center;
 
               img {
-                  width: 200px;
+                  width: 120px;
               }
           }
       }
@@ -550,7 +548,9 @@
       .dhead {
           display: flex;
           flex-direction: column;
-          margin-top: 60px;
+          margin-top: 40px;
+          padding-left: 20px;
+          padding-right: 20px;
 
           .step-title { text-transform: uppercase; }
 
@@ -584,6 +584,8 @@
 
       .s-form {
           width:100%;
+          padding-left: 20px;
+          padding-right: 20px;
 
           .needs {
             .need {
@@ -643,7 +645,7 @@
       .form-control {
         background-color: rgba(99,109,126,0.8);
         color: #fff;
-        margin-bottom: 10px;
+        margin-bottom: 3px;
         font-size: 14px;
 
         &:focus {

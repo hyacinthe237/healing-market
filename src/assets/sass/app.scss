@@ -39,21 +39,10 @@
 @include fontWeight;
 @include fontSizes;
 
-@import "modules/auth";
 @import "modules/welcome";
 @import "modules/signup";
 @import "modules/footer";
-@import "modules/sidebar";
-@import "modules/header";
-@import "modules/dashboard";
-@import "modules/main";
-@import "modules/home";
-@import "modules/metadata";
-@import "modules/log";
-@import "modules/indexer";
-@import "modules/search";
-@import "modules/settings";
-@import "modules/viewers";
+// @import "modules/sidebar";
 @import "modules/landing";
 @import "modules/nav";
 @import "modules/testimonials";

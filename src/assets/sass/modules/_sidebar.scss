@@ -201,7 +201,10 @@
         margin-bottom: 10px;
         a {
             padding: 15px;
-            display: block;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
             text-decoration: none;
             color: $dark;
             font-size: 20px;
@@ -210,13 +213,13 @@
             cursor: pointer;
 
             i {
-                margin-right: 15px;
                 font-size: 30px;
                 color: $dark;
+                padding-right: 20px;
             }
 
             span {
-                float: right;
+
             }
 
             &.active {
@@ -362,5 +365,60 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    #wrapper {
+        padding-left: 50px;
+        &.toggled {
+            padding-left: 0;
+        }
+    }
+    #sidebar-wrapper {
+        width: 50px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 50px;
+    }
+    #page-content-wrapper {
+        position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 50px;
+    }
+
+    .sidebar-nav {
+        position: absolute;
+        width: 50px;
+        padding-bottom: 10px;
+        font-family: 'Poppins Regular', sans-serif;
+        padding: 10px;
+
+        > li {
+            margin-bottom: 10px;
+            a {
+                padding: 10px;
+                font-size: 14px;
+                text-transform: capitalize;
+                font-weight: 500;
+                cursor: pointer;
+
+                i {
+                    font-size: 14px;
+                    color: $dark;
+                }
+
+                span { display: none; }
+            }
+
+
+            &.active {
+                a {
+                    color: $brand-presumi;
+                }
+            }
+        }
     }
 }

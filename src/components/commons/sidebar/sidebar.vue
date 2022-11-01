@@ -4,31 +4,31 @@
             <li>
                 <router-link :to="{ name: 'dashboard' }" :class="[current == 'dashboard' ? 'active' : '']">
                     <i class="ion-md-grid"></i>
-                    {{ 'Dashboard' }}
+                    <span>{{ 'Dashboard' }}</span>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'schedule' }" :class="[current == 'timesheets' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
-                    {{ t('Schedule') }}
+                    <span>{{ t('Schedule') }}</span>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'timesheets' }" :class="[current == 'timesheets' ? 'active' : '']">
                     <i class="ion-md-timer"></i>
-                    {{ t('Timesheets') }}
+                    <span>{{ t('Timesheets') }}</span>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'team' }" :class="[current == 'team' ? 'active' : '']">
                     <i class="ion-md-people"></i>
-                    {{ t('Team') }}
+                    <span>{{ t('Team') }}</span>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'settings' }" :class="[current == 'settings' ? 'active' : '']">
                     <i class="ion-md-settings"></i>
-                    {{ t('Settings') }}
+                    <span>{{ t('Settings') }}</span>
                 </router-link>
             </li>
         </ul>

@@ -256,6 +256,7 @@
               flex-direction: row;
               justify-content: space-between;
               align-items: center;
+              white-space: nowrap;
 
               .notyet {
                   color: #B0B5B9;
@@ -389,10 +390,11 @@
           line-height: 20px;
           -webkit-appearance: none;
           -moz-appearance: none;
-          background-position: right 50%;
+          // background-position: right 50%;
+          background-position: 98% 50%;
           background-repeat: no-repeat;
           background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1leWUiPjxwYXRoIGQ9Ik0xIDEyczQtOCAxMS04IDExIDggMTEgOC00IDgtMTEgOC0xMS04LTExLTh6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+);
-          padding-right: 1.5em;
+          padding-right: 20px;
       }
 
       .top {
@@ -637,6 +639,17 @@
       border-radius: 10px;
       padding: 20px;
       color: white;
+
+      .form-control {
+        background-color: rgba(99,109,126,0.8);
+        color: #fff;
+        margin-bottom: 10px;
+        font-size: 14px;
+
+        &:focus {
+          border: 1px solid $brand-teal;
+        }
+      }
 
       .top {
           display: flex;

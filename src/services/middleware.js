@@ -6,6 +6,6 @@ export default {
     },
 
     auth (to, from, next) {
-        next(authenticator.check() ? true : '/landing')
+        next(authenticator.check() ? true : '/')
     }
 }

@@ -30,7 +30,7 @@
                 <div class="message-big">Welcome Yacuintha!</div>
             </div>
 
-            <form class="_form s-form mt-20">
+            <form class="_form s-form mt-10">
                 <div class="form-group">
                     <label>What brings you to NOGADA 360 ?</label>
                     <div class="small">Pick what you need now. You can also do more later.</div>

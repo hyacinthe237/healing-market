@@ -29,7 +29,7 @@
                 <div class="message-big">Hi, We're <br> NOGODA 360</div>
             </div>
 
-            <form class="_form s-form mt-20">
+            <form class="_form s-form mt-10">
                 <div class="form-group">
                     <label>What's your name?</label>
                     <input type="text" name="name" placeholder="e.g. Art Paul" class="form-control mt-20">

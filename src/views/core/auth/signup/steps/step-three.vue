@@ -30,7 +30,7 @@
                 <div class="message-big">Yacuintha, tel us about <br> your business</div>
             </div>
 
-            <form class="_form s-form mt-20">
+            <form class="_form s-form mt-10">
                 <div class="form-group">
                     <label>What's your business called?</label>
                     <input type="text" name="name" v-model="ghost.business_name" placeholder="Business name" class="form-control">

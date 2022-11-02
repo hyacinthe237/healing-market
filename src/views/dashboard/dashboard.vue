@@ -2,7 +2,7 @@
   <div class="">
       <Header />
     <div id="wrapper">
-        <Sidebar />
+        <Sidebar :current="'dashboard'" />
 
         <div id="page-content-wrapper">
             <div class="dashboard">

@@ -8,7 +8,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'schedule' }" :class="[current == 'timesheets' ? 'active' : '']">
+                <router-link :to="{ name: 'schedule' }" :class="[current == 'schedule' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
                     <span>{{ t('Schedule') }}</span>
                 </router-link>

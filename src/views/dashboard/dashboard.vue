@@ -56,9 +56,19 @@
                       </div>
 
                       <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                          <div class="row">
-                              completed tab
+                        <div class="upcoming-box">
+                          <div class="upcoming-item">
+                            <div class="hour">5 pm</div>
+                            <div class="avatar">AH</div>
+                            <div class="content">
+                              <div class="name">
+                                Abanda Hyacinthe
+                                <div class="time">Starts in 1hr 32m / 4:45 pm - 9:45 am</div>
+                              </div>
+                              <div class="more"><i class="feather icon-more-vertical"></i></div>
+                            </div>
                           </div>
+                        </div>
                       </div>
                   </div>
               </div>

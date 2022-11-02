@@ -239,11 +239,11 @@ h5 { font-size: 1.1em }
 }
 
 @media (max-width: 560px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    // body {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    // }
 
     h1 {
         font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;

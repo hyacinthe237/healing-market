@@ -1,0 +1,211 @@
+.schedule {
+  padding: 20px;
+  width: 100%;
+
+  .filter-box {display: none;}
+
+  .header-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 50px;
+    width: 100%;
+
+    .schedule-spacer { width: 25%; }
+    .filter { display: none; }
+
+    .actions-gauche {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      .gauche, .droite {
+        // max-width: 10%;
+        background-color: #F4F9FC;
+        color: $dark;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #F4F9FC;
+        margin-right: 10px;
+
+        i {
+          color: $dark;
+          font-size: 18px;
+        }
+      }
+
+      .date {
+        color: $dark;
+        white-space: nowrap;
+        max-width: 20%;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+    }
+
+    select {
+      background-color: #F4F9FC;
+      color: $dark;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #F4F9FC;
+      margin-right: 10px;
+    }
+
+    .btns {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .action {
+        background-color: #F4F9FC;
+        color: $dark;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #F4F9FC;
+        margin-right: 10px;
+
+        i {
+          color: $dark;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .schedule {
+    display: flex;
+    flex-direction: column;
+
+    .filter-box {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #F4F9FC;
+      border: 1px solid #F4F9FC;
+      border-radius: 10px;
+      padding: 10px;
+
+      .actions-haut {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        .gauche {
+          i {
+            color: $dark;
+            font-size: 18px;
+          }
+        }
+        .droite {
+          i {
+            color: $dark;
+            font-size: 18px;
+          }
+        }
+
+        .date {
+          color: $dark;
+          white-space: nowrap;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+
+      select {
+        background-color: #F4F9FC;
+        color: $dark;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #F4F9FC;
+        margin-right: 10px;
+      }
+
+      .btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .action {
+          background-color: #F4F9FC;
+          color: $dark;
+          padding: 10px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid #F4F9FC;
+          margin-right: 10px;
+
+          i {
+            color: $dark;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+
+    .header-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      max-height: 50px;
+      width: 100%;
+
+      .schedule-spacer { display: none;}
+
+      .actions-gauche { display: none;}
+
+      .select {display: none;}
+
+      .btns {display: none; }
+
+      .filter {
+        background-color: #F4F9FC;
+        color: $dark;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #F4F9FC;
+
+        i {
+          color: $dark;
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}

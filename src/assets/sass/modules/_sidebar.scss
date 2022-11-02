@@ -14,7 +14,7 @@
     position: fixed;
     left: $sidebar-width;
     width: 0;
-    height: 100%;
+    min-height: 100vh;
     margin-left: -$sidebar-width;
     overflow-y: auto;
     background: $sidebarBackgroundColour;

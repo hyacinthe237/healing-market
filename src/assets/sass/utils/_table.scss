@@ -22,18 +22,45 @@ table {
 .table {
     margin: 0;
 
-    th {
-        border-top: none;
+    thead {
+      width: 100%;
+      max-height: 30px;
+      tr {
+        width: 100%;
+        height: 30px;
+        background-color: $first;
+        padding: 5px;
+        font-size: 12px;
+        color: $brand-teal;
+
+        th {
+            border-top: none;
+
+            &.w10 { width: 10%; }
+            &.w20 { width: 20%; }
+            &.w30 { width: 30%; }
+        }
+      }
     }
 
-    th.w10 { width: 10%; }
-    th.w20 { width: 20%; }
-    th.w70 { width: 70%; }
+    tbody {
+      tr {
+        border-bottom: 1px solid $first;
+        height: 30px;
+        font-size: 12px;
+        width: 100%;
+        max-height: 100%;
 
-    td {
-        color: $primaryFontColour;
+        td {
+            color: $primaryFontColour;
 
-        i { font-size: 18px }
+            i { font-size: 18px }
+
+            &.w10 { width: 10%; }
+            &.w20 { width: 20%; }
+            &.w30 { width: 30%; }
+        }
+      }
     }
 
     td.w10 {width: 10%; }
@@ -110,4 +137,55 @@ table {
         .left-addon select  { padding-left:  35px; }
         .right-addon select { padding-right: 35px; }
     }
+}
+
+@media (max-width: 560px) {
+  .table {
+      margin: 0;
+
+      thead {
+        width: 100%;
+        max-height: 20px;
+
+        tr {
+          width: 100%;
+          height: 20px;
+          background-color: $first;
+          padding: 5px;
+          font-size: 14px;
+          color: $brand-teal;
+
+          th {
+              border-top: none;
+              &.w10 { width: 10%; }
+              &.w20 { width: 20%; }
+              &.w30 { width: 30%; }
+              &.no-column {display: none;}
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $first;
+          height: 20px;
+          font-size: 14px;
+          width: 100%;
+          max-height: 100%;
+
+          td {
+              color: $primaryFontColour;
+
+              i { font-size: 14px }
+
+              &.w10 { width: 10%; }
+              &.w20 { width: 20%; }
+              &.w30 { width: 30%; }
+              &.no-column {display: none;}
+          }
+        }
+      }
+
+
+  }
 }

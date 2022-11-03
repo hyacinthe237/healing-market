@@ -5,75 +5,155 @@
         <Sidebar :current="'team'" />
 
         <div id="page-content-wrapper">
-            <div class="dashboard">
-              <div class="cards">
-
-                <div class="card">
-                  <div class="gauche">
-                    <div class="number">45</div>
-                    <div class="name">Team members</div>
-                  </div>
-                  <div class="droite"><i class="feather icon-users"></i></div>
-                </div>
-
-                <div class="card">
-                  <div class="gauche">
-                    <div class="number">45</div>
-                    <div class="name">Clocked in</div>
-                  </div>
-                  <div class="droite"><i class="feather icon-user"></i></div>
+          <div class="team">
+            <div class="header-box">
+              <div class="title">
+                <span>Team (3)</span>
+                <div class="_show">
+                  <label><input type="checkbox"> Show Terminated</label>
                 </div>
               </div>
+              <div class="reste">
+                <input type="text" placeholder="Enter name">
+                <select name="date">
+                  <option>Select...</option>
+                </select>
+                <select name="date">
+                  <option>By Access Level</option>
+                </select>
+                <select name="date">
+                  <option>By Status</option>
+                </select>
+                <div class="btns">
+                  <div class="action"><i class="ion-ios-print"></i></div>
+                  <div class="action"><i class="ion-md-cloud-download"></i></div>
+                </div>
 
-              <div>
-                  <div class="_tabs mt-20">
-                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                          <a class="nav-item nav-link" id="nav-upcoming-tab"
-                              data-toggle="tab" href="#nav-upcoming" role="tab"
-                              aria-controls="nav-upcoming">Now & Upcoming (1)</a>
-
-                          <a class="nav-item nav-link" id="nav-completed-tab"
-                              data-toggle="tab" href="#nav-completed" role="tab"
-                              aria-controls="nav-completed">Completed (0)</a>
-                      </div>
-                  </div>
-
-                  <div class="tab-content" id="nav-tabContent">
-                      <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                          <div class="upcoming-box">
-                            <div class="upcoming-item">
-                              <div class="hour">5 pm</div>
-                              <div class="avatar">AH</div>
-                              <div class="content">
-                                <div class="name">
-                                  Abanda Hyacinthe
-                                  <div class="time">Starts in 1hr 32m / 4:45 pm - 9:45 am</div>
-                                </div>
-                                <div class="more"><i class="feather icon-more-vertical"></i></div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <div class="upcoming-box">
-                          <div class="upcoming-item">
-                            <div class="hour">5 pm</div>
-                            <div class="avatar">AH</div>
-                            <div class="content">
-                              <div class="name">
-                                Abanda Hyacinthe
-                                <div class="time">Starts in 1hr 32m / 4:45 pm - 9:45 am</div>
-                              </div>
-                              <div class="more"><i class="feather icon-more-vertical"></i></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
+                <div class="lg-btns">
+                  <div class="lg-btn-outline">Bulk Action</div>
+                  <div class="lg-btn-primary">Add Team Member</div>
+                </div>
               </div>
-
+              <div class="filter" @click="displayFilter()"><i class="feather icon-more-vertical"></i></div>
             </div>
+
+            <div class="filter-box" v-if="showFilter">
+              <div class="reste">
+                <input type="text" placeholder="Enter name">
+                <select name="date">
+                  <option>Select...</option>
+                </select>
+                <select name="date">
+                  <option>By Access Level</option>
+                </select>
+                <select name="date">
+                  <option>By Status</option>
+                </select>
+                <div class="btns">
+                  <div class="action"><i class="ion-ios-print"></i></div>
+                  <div class="action"><i class="ion-md-cloud-download"></i></div>
+                </div>
+
+                <div class="lg-btns">
+                  <div class="lg-btn-outline">Bulk Action</div>
+                  <div class="lg-btn-primary">Add Team Member</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- List Box code -->
+            <div class="list-box">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th class="w30">Name</th>
+                          <th class="w20 no-column">Position</th>
+                          <th class="w20 no-column">Account status</th>
+                          <th class="w20 no-column">Availability</th>
+                          <th class="w10"></th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      <tr>
+                          <td class="w30">
+                            <div class="name">
+                              <div class="avatar">AH</div>
+                              Abanda Hyacinthe
+                            </div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="position"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="status"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="availability"></div>
+                          </td>
+                          <td class="w10">
+                            <div class="actions pointer">
+                              <div class="icons">
+                                <i class="feather icon-edit-2"></i>
+                                <i class="feather icon-more-vertical"></i>
+                              </div>
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="w30">
+                            <div class="name">
+                              <div class="avatar">AH</div>
+                              Abanda Hyacinthe
+                            </div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="position"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="status"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="availability"></div>
+                          </td>
+                          <td class="w10">
+                            <div class="actions pointer">
+                              <div class="icons">
+                                <i class="feather icon-edit-2"></i>
+                                <i class="feather icon-more-vertical"></i>
+                              </div>
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="w30">
+                            <div class="name">
+                              <div class="avatar">AH</div>
+                              Abanda Hyacinthe
+                            </div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="position"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="status"></div>
+                          </td>
+                          <td class="w20 no-column">
+                            <div class="availability"></div>
+                          </td>
+                          <td class="w10">
+                            <div class="actions pointer">
+                              <div class="icons">
+                                <i class="feather icon-edit-2"></i>
+                                <i class="feather icon-more-vertical"></i>
+                              </div>
+                            </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
         </div>
     </div>
   </div>
@@ -82,11 +162,11 @@
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
-import _ from 'lodash'
 
 export default {
     data: () => ({
-        payload: {}
+        payload: {},
+        showFilter: false
     }),
 
     components: { Header, Sidebar },
@@ -97,6 +177,10 @@ export default {
 
     mounted () { },
 
-    methods: { }
+    methods: {
+      displayFilter () {
+        this.showFilter = !this.showFilter
+      }
+    }
 }
 </script>

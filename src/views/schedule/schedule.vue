@@ -59,7 +59,7 @@
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
-import moment from 'moment'
+// import moment from 'moment'
 
 export default {
     data: () => ({

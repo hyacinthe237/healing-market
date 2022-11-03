@@ -1,0 +1,406 @@
+.team {
+  padding: 20px;
+  width: 100%;
+
+  .filter-box {display: none;}
+
+  .header-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 50px;
+    width: 100%;
+
+    .filter { display: none; }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 20%;
+      color: $dark;
+
+      span {
+        font-size: 20px;
+        font-weight: 900;
+        font-family: 'Poppins ExtraBold', sans-serif;
+      }
+
+      ._show {
+        color: $brand-teal;
+        font-size: 14px;
+        white-space: nowrap;
+
+        input[type="checkbox"] {
+          background: #F4F9FC;
+        }
+      }
+    }
+
+    .reste {
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      input[type="text"] {
+        background-color: $first;
+        border-radius: 5px;
+        color: $dark;
+        padding-left: 10px;
+        // max-width: 10%;
+        height: 30px;
+        font-size: 12px;
+        margin-right: 5px;
+        border: 1px solid $first;
+
+        &:focus {
+          border: 1px solid $first;
+        }
+      }
+
+      select {
+        background-color: $first;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid $first;
+        height: 30px;
+        font-size: 12px;
+        margin-right: 5px;
+        color: #495c80;
+      }
+
+      .btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .action {
+          background-color: $first;
+          color: #88A6BF;
+          padding: 5px;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid #F4F9FC;
+          margin-right: 5px;
+
+          i {
+            color: #88A6BF;
+            font-size: 15px;
+          }
+        }
+      }
+
+      .lg-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        .lg-btn-outline {
+          color: #88A6BF;
+          padding: 5px;
+          display: flex;
+          height: 30px;
+          font-size: 12px;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid #88A6BF;
+          margin-right: 5px;
+          white-space: nowrap;
+        }
+
+        .lg-btn-primary {
+          background-color: $primary;
+          color: white;
+          padding: 5px;
+          display: flex;
+          height: 30px;
+          font-size: 12px;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid $primary;
+          margin-right: 5px;
+          white-space: nowrap;
+        }
+      }
+    }
+
+  }
+
+  .list-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .name {
+      white-space: nowrap;
+      color: $dark;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+
+      .avatar {
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #bababa;
+        color: $primary;
+        font-weight: bold;
+        font-size: 15px;
+        padding: 5px;
+        margin-right: 10px;
+        text-transform: uppercase;
+      }
+    }
+
+    .position {
+      white-space: nowrap;
+      color: $dark;
+    }
+
+    .status {
+      white-space: nowrap;
+      color: $dark;
+    }
+
+    .availability {
+      white-space: nowrap;
+      color: $dark;
+    }
+
+    .actions {
+      white-space: nowrap;
+      color: $primary;
+      text-align:right;
+
+      .icons {
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        i {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .team {
+    display: flex;
+    flex-direction: column;
+
+    .filter-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      background-color: #F4F9FC;
+      border: 1px solid #F4F9FC;
+      border-radius: 10px;
+      padding: 10px;
+
+      .reste {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+
+        input[type="text"] {
+          background-color: $first;
+          border-radius: 5px;
+          color: $dark;
+          padding-left: 10px;
+          width: 70%;
+          height: 30px;
+          font-size: 12px;
+          margin-right: 5px;
+          border: 1px solid $first;
+          margin-bottom: 10px;
+
+          &:focus {
+            border: 1px solid $first;
+          }
+        }
+
+        select {
+          background-color: $first;
+          padding: 5px;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid $first;
+          height: 30px;
+          font-size: 12px;
+          margin-right: 5px;
+          color: #495c80;
+          margin-bottom: 10px;
+        }
+
+        .btns {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-bottom: 10px;
+
+          .action {
+            background-color: $first;
+            color: #88A6BF;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #F4F9FC;
+            margin-right: 5px;
+
+            i {
+              color: #88A6BF;
+              font-size: 15px;
+            }
+          }
+        }
+
+        .lg-btns {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+
+          .lg-btn-outline {
+            width: 40%;
+            color: #88A6BF;
+            padding: 5px;
+            display: flex;
+            height: 30px;
+            font-size: 12px;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #88A6BF;
+            margin-right: 5px;
+            white-space: nowrap;
+          }
+
+          .lg-btn-primary {
+            width: 60%;
+            background-color: $primary;
+            color: white;
+            padding: 5px;
+            display: flex;
+            height: 30px;
+            font-size: 12px;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid $primary;
+            margin-right: 5px;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    .header-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-height: 50px;
+      width: 100%;
+
+      .filter {
+        color: #88A6BF;
+        // color: $dark;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #F4F9FC;
+
+        i {
+          color: #88A6BF;
+          font-size: 25px;
+        }
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        width: 70%;
+        color: $dark;
+
+        span {
+          font-size: 20px;
+          font-weight: 900;
+          font-family: 'Poppins ExtraBold', sans-serif;
+        }
+
+        ._show {
+          color: $brand-teal;
+          font-size: 14px;
+          white-space: nowrap;
+
+          input[type="checkbox"] {
+            background: #F4F9FC;
+          }
+        }
+      }
+
+      .reste {
+        display: none;
+
+        select {
+          display: none;
+        }
+
+        .btns {
+          display: none;
+        }
+
+        .lg-btns {
+          display: none;
+        }
+      }
+
+    }
+  }
+}

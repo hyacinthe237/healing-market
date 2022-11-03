@@ -82,7 +82,6 @@
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
-import _ from 'lodash'
 
 export default {
     data: () => ({

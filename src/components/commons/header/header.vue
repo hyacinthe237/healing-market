@@ -1,28 +1,22 @@
 <template lang="html">
       <section class="_header">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-sm-6">
-                    <a href="#" class="dashboard-brand"><img :src="logo" alt=""></a>
-                  </div>
-
-                  <div class="col-sm-6">
-                      <!-- <div class="buttons text-right">
-                          <button class="btn btn-secondary mr-2">
-                              <i class="feather icon-bell"></i>
-                          </button>
-
-                          <button class="btn btn-warning mr-2">
-                              <i class="feather icon-settings"></i>
-                          </button>
-
-                          <button class="btn btn-danger">
-                              <i class="feather icon-trash-2"></i>
-                          </button>
-                      </div> -->
-                  </div>
-              </div>
+        <div class="dashboard-brand">
+          <a href="#"><img :src="logo" alt=""></a>
+        </div>
+        <div class="_droite">
+          <div class="notify"><i class="feather icon-bell"></i></div>
+          <div class="avatar"></div>
+          <div class="dropdown dropleft">
+            <div class="profil-name dropdown-toggle" type="button" id="dropdownProfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span>Abanda Hyacinthe</span>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownProfil">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </div>
+        </div>
       </section>
 </template>
 

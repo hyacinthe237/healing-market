@@ -4,49 +4,143 @@
     padding: 20px 20px;
     border-bottom: 1px solid #e8ecf3;
     color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 60px;
 
     .dashboard-brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
       img {
-          width: 170px;
+          width: 150px;
           height: auto;
       }
     }
-    @media (max-width: $mobile-breakpoint) {
-      .dashboard-brand {
-        img {
-            width: 100px;
-            height: auto;
+
+    ._droite {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        .notify {
+          background-color: transparent;
+          margin-right: 10px;
+          i {
+            font-size: 30px;
+          }
         }
-      }
-    }
 
-    .title {
-        color: $titleColour;
-        font-size: 1.1em;
-        font-weight: bold;
-        i { margin-left: 10px; font-size: 22px }
-    }
+        .avatar {
+          background-color: #f1f1f1;
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+          border: 1px solid #f1f1f1;
+          padding: 5px;
+        }
 
-    ._header-auth {
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: -9px;
-    }
+        .dropdown {
+          margin-left: 10px;
 
-    ._header-location {
-        font-size: 13px;
+          .profil-name {
+            span {
+              font-size: 14px;
+            }
+          }
+
+          .dropdown-menu {
+            width: auto;
+            font-size: 12px;
+            border: none;
+            padding-top: 0px;
+            padding-bottom: 0px;
+
+            .dropdown-menu-item {
+              font-size: 12px;
+
+              &:hover {
+                background-color: $primary;
+                color: white;
+              }
+            }
+          }
+        }
     }
 }
 
+@media (max-width: $mobile-breakpoint) {
+  ._header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
 
-._subheader {
-    padding: 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e8ecf3;
+    .dashboard-brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
 
-    label {
-        color: $titleColour;
-        font-size: 14px;
-        font-weight: 500;
+      img {
+          width: 100px;
+          height: auto;
+      }
     }
+
+    ._droite {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        .notify {
+          background-color: transparent;
+          margin-right: 5px;
+          i {
+            font-size: 20px;
+          }
+        }
+
+        .avatar {
+          background-color: #f1f1f1;
+          width: 20px;
+          height: 20px;
+          border-radius: 20px;
+          border: 1px solid #f1f1f1;
+          padding: 5px;
+        }
+
+        .dropdown {
+          margin-left: 5px;
+
+          .profil-name {
+            span {display: none; }
+          }
+
+          .dropdown-menu {
+            width: auto;
+            font-size: 10px;
+            border: none;
+            padding-top: 0px;
+            padding-bottom: 0px;
+
+            .dropdown-menu-item {
+              font-size: 10px;
+
+              &:hover {
+                background-color: $primary;
+                color: white;
+              }
+            }
+          }
+        }
+    }
+  }
 }

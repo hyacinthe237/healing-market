@@ -52,11 +52,10 @@
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
-                </div>
-
-                <div class="lg-btns">
-                  <div class="lg-btn-outline">Bulk Action</div>
-                  <div class="lg-btn-primary">Add Team Member</div>
+                  <div class="lg-btns">
+                    <div class="lg-btn-outline">Bulk Action</div>
+                    <div class="lg-btn-primary">Add Team Member</div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -32,16 +32,11 @@
 
             <div class="filter-box" v-if="showFilter">
               <div class="reste">
-                <div class="haut">
-                    <div class="filter-table"><i class="ion-ios-tool"></i> filter table</div>
-                    <div class="actions">
-                      <div class="action"><i class="ion-ios-print"></i></div>
-                      <div class="action"><i class="ion-md-cloud-download"></i></div>
-                    </div>
-                </div>
                 <div class="lg-btns">
+                  <div class="lg-btn-outline">filter table</div>
                   <div class="lg-btn-outline">View Totals</div>
                   <div class="lg-btn-outline"><i class="feather icon-plus"></i> Card</div>
+                  <div class="lg-btn-outline"><i class="ion-ios-print"></i></div>
                   <div class="lg-btn-primary">Download</div>
                 </div>
               </div>

@@ -50,6 +50,56 @@
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
                 </div>
               </div>
+
+              <div class="_table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="th-40">All employees (20)</th>
+                      <th class="th-12">
+                        <div class="date">
+                          <div class="week-day"></div>
+                          <div class="day"></div>
+                        </div>
+                      </th>
+                      <th class="th-12">
+                        <div class="date">
+                          <div class="week-day"></div>
+                          <div class="day"></div>
+                        </div>
+                      </th>
+                      <th class="th-12">
+                        <div class="date">
+                          <div class="week-day"></div>
+                          <div class="day"></div>
+                        </div>
+                      </th>
+                      <th class="th-12">
+                        <div class="date">
+                          <div class="week-day"></div>
+                          <div class="day"></div>
+                        </div>
+                      </th>
+                      <th class="th-12">
+                        <div class="date">
+                          <div class="week-day"></div>
+                          <div class="day"></div>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="th-40"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
         </div>
     </div>

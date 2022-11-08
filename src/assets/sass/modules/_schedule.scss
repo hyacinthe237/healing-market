@@ -1,5 +1,4 @@
 .schedule {
-  padding: 20px;
   width: 100%;
 
   .filter-box {display: none;}
@@ -9,6 +8,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    padding: 20px;
     max-height: 50px;
     width: 100%;
 
@@ -86,6 +86,49 @@
         i {
           color: $dark;
           font-size: 30px;
+        }
+      }
+    }
+  }
+
+  ._table {
+    width: 100%;
+    margin-top: 20px;
+
+    .add {
+      padding: 10px;
+      background-color: rgba(137,0,0,0.2);
+      color: $primary;
+    }
+
+    table {
+      width: 100%;
+
+      thead {
+
+        tr {
+          border: 1px solid #eee;
+          th {
+            color: $dark;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px;
+            &.th-40 {width: 40%;}
+            &.th-12 {width: 12%;}
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-bottom: 1px solid #eee;
+          td {
+            color: $dark;
+            text-align: center;
+            padding: 5px;
+
+            &.th-40 {width: 40%;}
+            &.th-12 {width: 12%;}
+          }
         }
       }
     }

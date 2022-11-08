@@ -31,23 +31,17 @@
             </div>
 
             <div class="filter-box" v-if="showFilter">
-              <div class="title">
-                <select name="last">
-                  <option value="">Last 7 days: Fri Oct 28 - Fri Nov 4</option>
-                </select>
+              <div class="reste">
+                <div class="haut">
+                    <div class="filter-table"><i class="ion-ios-tool"></i> filter table</div>
+                    <div class="actions">
+                      <div class="action"><i class="ion-ios-print"></i></div>
+                      <div class="action"><i class="ion-md-cloud-download"></i></div>
+                    </div>
+                </div>
                 <div class="lg-btns">
                   <div class="lg-btn-outline">View Totals</div>
-                </div>
-              </div>
-              <div class="reste">
-                <div class="filter-table"><i class="feather icon-tool"></i> filter table</div>
-                <div class="btns">
-                  <div class="action"><i class="ion-ios-print"></i></div>
-                  <div class="action"><i class="ion-md-cloud-download"></i></div>
-                </div>
-
-                <div class="lg-btns">
-                  <div class="lg-btn-outline">Add Time Card</div>
+                  <div class="lg-btn-outline"><i class="feather icon-plus"></i> Card</div>
                   <div class="lg-btn-primary">Download</div>
                 </div>
               </div>
@@ -55,13 +49,13 @@
 
             <!-- List Box code -->
             <div class="grey-box">
-              <div class="grey-head">
-                <i class="feather icon-chevron-down"></i>
-                <i class="feather icon-chevron-up"></i>
+              <div class="grey-head pointer" @click="displayFilterGrey()">
+                <i class="feather icon-chevron-up" v-show="showFilterGrey"></i>
+                <i class="feather icon-chevron-down" v-show="!showFilterGrey"></i>
                 Filter Timesheets
               </div>
 
-              <div class="inputs">
+              <div class="inputs" v-if="showFilterGrey">
                 <div class="input">
                   <div class="label">Filter By</div>
                   <select>
@@ -93,6 +87,36 @@
               </div>
             </div>
           </div>
+
+          <div class="_table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Role<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Wage<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Time Card<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Issues<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Scheduled<i class="feather icon-chevron-down"></i></th>
+                  <th class="no-column">Actual vs. Scheduled<i class="feather icon-chevron-down"></i></th>
+                  <th>Total Paid <i class="feather icon-chevron-down"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td class="no-column"></td>
+                  <td class="no-column"></td>
+                  <td class="no-column"></td>
+                  <td class="no-column"></td>
+                  <td class="no-column"></td>
+                  <td class="no-column"></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="add"><i class="feather icon-plus-circle"></i> Add an Employee</div>
+          </div>
         </div>
     </div>
   </div>
@@ -106,7 +130,8 @@ import moment from 'moment'
 export default {
     data: () => ({
         payload: {},
-        showFilter: false
+        showFilter: false,
+        showFilterGrey: false,
     }),
 
     components: { Header, Sidebar },
@@ -127,7 +152,8 @@ export default {
     },
 
     methods: {
-      displayFilter () { this.showFilter = !this.showFilter }
+      displayFilter () { this.showFilter = !this.showFilter },
+      displayFilterGrey () { this.showFilterGrey = !this.showFilterGrey }
     }
 }
 </script>

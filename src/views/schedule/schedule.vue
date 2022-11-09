@@ -119,11 +119,11 @@
                           </div>
                         </div>
                       </td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
                     </tr>
                   </tbody>
                 </table>

@@ -119,11 +119,11 @@
                           </div>
                         </div>
                       </td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add" @click="selected('mondayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add" @click="selected('tuesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add" @click="selected('wednesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add" @click="selected('thursdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-12"><div class="add" @click="selected('fridayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
                     </tr>
                   </tbody>
                 </table>
@@ -131,6 +131,8 @@
             </div>
         </div>
     </div>
+
+    <addModal></addModal>
   </div>
 </template>
 
@@ -138,15 +140,17 @@
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import moment from 'moment'
+import addModal from './modals/add'
 
 export default {
     data: () => ({
         payload: {},
         showFilter: false,
         events: [],
+        identifiant:'',
     }),
 
-    components: { Header, Sidebar },
+    components: { Header, Sidebar, addModal },
 
     computed: {
       date () {
@@ -167,6 +171,11 @@ export default {
       displayFilter () {
         this.showFilter = !this.showFilter
         console.log('showfilter', this.showFilter)
+      },
+
+      selected (id) {
+        this.identifiant = id
+        window.$(`#addScheduleModal`).modal('show')
       }
     }
 }

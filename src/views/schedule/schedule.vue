@@ -58,44 +58,72 @@
                       <th class="th-40">All employees (20)</th>
                       <th class="th-12">
                         <div class="date">
-                          <div class="week-day"></div>
-                          <div class="day"></div>
+                          <div class="week-day">MON</div>
+                          <div :class="['day', current_day=='monday'? 'active' : '']">{{ displayDate('monday') }}</div>
                         </div>
                       </th>
                       <th class="th-12">
                         <div class="date">
-                          <div class="week-day"></div>
-                          <div class="day"></div>
+                          <div class="week-day">TUE</div>
+                          <div :class="['day', current_day=='tuesday'? 'active' : '']">{{ displayDate('tuesday') }}</div>
                         </div>
                       </th>
                       <th class="th-12">
                         <div class="date">
-                          <div class="week-day"></div>
-                          <div class="day"></div>
+                          <div class="week-day">WED</div>
+                          <div :class="['day', current_day=='wednesday'? 'active' : '']">{{ displayDate('wednesday') }}</div>
                         </div>
                       </th>
                       <th class="th-12">
                         <div class="date">
-                          <div class="week-day"></div>
-                          <div class="day"></div>
+                          <div class="week-day">THU</div>
+                          <div :class="['day', current_day=='thursday'? 'active' : '']">{{ displayDate('thursday') }}</div>
                         </div>
                       </th>
                       <th class="th-12">
                         <div class="date">
-                          <div class="week-day"></div>
-                          <div class="day"></div>
+                          <div class="week-day">FRI</div>
+                          <div :class="['day', current_day=='friday'? 'active' : '']">{{ displayDate('friday') }}</div>
                         </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
+                    <tr class="bg">
+                      <td class="th-40">Events</td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                    </tr>
+                    <tr class="bg">
+                      <td class="th-40">
+                        Open Shifts
+                        <div class="hour">0.00 Hrs</div>
+                      </td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                      <td class="th-12"></td>
+                    </tr>
                     <tr>
-                      <td class="th-40"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
+                      <td class="th-40">
+                        <div class="profile">
+                          <i class="feather icon-more-vertical"></i>
+                          <div class="avatar">VI</div>
+                          <div class="content">
+                            <div class="name">Victor I.</div>
+                            <div class="hrs">0.00 Hrs / $0.00 </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
+                      <td class="th-12"><div class="add"><i class="feather icon-plus"></i> Add</div></td>
                     </tr>
                   </tbody>
                 </table>
@@ -109,12 +137,13 @@
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
-// import moment from 'moment'
+import moment from 'moment'
 
 export default {
     data: () => ({
         payload: {},
-        showFilter: false
+        showFilter: false,
+        events: [],
     }),
 
     components: { Header, Sidebar },
@@ -122,7 +151,12 @@ export default {
     computed: {
       date () {
         return 'March 26 - Apr 2, 2019'
-      }
+      },
+
+      current_day () {
+        let d = moment().format('dddd')
+        return d.toLowerCase()
+      },
     },
 
     watch: { },

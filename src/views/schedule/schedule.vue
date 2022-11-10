@@ -55,61 +55,77 @@
                 <table>
                   <thead>
                     <tr>
-                      <th class="th-40">All employees (20)</th>
-                      <th class="th-12">
+                      <th class="th-30">All employees (20)</th>
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">MON</div>
                           <div :class="['day', current_day=='monday'? 'active' : '']">{{ displayDate('monday') }}</div>
                         </div>
                       </th>
-                      <th class="th-12">
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">TUE</div>
                           <div :class="['day', current_day=='tuesday'? 'active' : '']">{{ displayDate('tuesday') }}</div>
                         </div>
                       </th>
-                      <th class="th-12">
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">WED</div>
                           <div :class="['day', current_day=='wednesday'? 'active' : '']">{{ displayDate('wednesday') }}</div>
                         </div>
                       </th>
-                      <th class="th-12">
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">THU</div>
                           <div :class="['day', current_day=='thursday'? 'active' : '']">{{ displayDate('thursday') }}</div>
                         </div>
                       </th>
-                      <th class="th-12">
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">FRI</div>
                           <div :class="['day', current_day=='friday'? 'active' : '']">{{ displayDate('friday') }}</div>
+                        </div>
+                      </th>
+                      <th class="th-10">
+                        <div class="date">
+                          <div class="week-day">SAT</div>
+                          <div :class="['day', current_day=='saturday'? 'active' : '']">{{ displayDate('saturday') }}</div>
+                        </div>
+                      </th>
+                      <th class="th-10">
+                        <div class="date">
+                          <div class="week-day">SUN</div>
+                          <div :class="['day', current_day=='sunday'? 'active' : '']">{{ displayDate('sunday') }}</div>
                         </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="bg">
-                      <td class="th-40">Events</td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
+                      <td class="th-30">Events</td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
                     </tr>
                     <tr class="bg">
-                      <td class="th-40">
+                      <td class="th-30">
                         Open Shifts
                         <div class="hour">0.00 Hrs</div>
                       </td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
-                      <td class="th-12"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
                     </tr>
                     <tr>
-                      <td class="th-40">
+                      <td class="th-30">
                         <div class="profile">
                           <i class="feather icon-more-vertical"></i>
                           <div class="avatar">VI</div>
@@ -119,11 +135,13 @@
                           </div>
                         </div>
                       </td>
-                      <td class="th-12"><div class="add" @click="selected('mondayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add" @click="selected('tuesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add" @click="selected('wednesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add" @click="selected('thursdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-12"><div class="add" @click="selected('fridayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('mondayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('tuesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('wednesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('thursdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('fridayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('saturdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10"><div class="add" @click="selected('sundayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
                     </tr>
                   </tbody>
                 </table>

@@ -197,7 +197,7 @@ export default {
             let day = moment().format('dddd')
             let today = moment().format('YYYY-MM-DD')
             let dt = moment()
-            let tab_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+            let tab_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
             let day_l =  day.toLowerCase()
             let nb_jdv = tab_days.indexOf(jourDeVisite)+1
             let nb_l = tab_days.indexOf(day_l)+1

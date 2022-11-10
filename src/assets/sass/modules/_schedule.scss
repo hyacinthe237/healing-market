@@ -117,7 +117,9 @@
             border: 1px solid #eee;
 
             &.th-40 {width: 40%;}
+            &.th-30 {width: 30%;}
             &.th-12 {width: 12%;}
+            &.th-12 {width: 10%;}
             .date {
               display: flex;
               flex-direction: column;
@@ -214,8 +216,32 @@
                 color: $brand-teal;
               }
             }
+
+            &.th-30 {
+              width: 30%;
+
+              .hour {
+                color: $brand-teal;
+              }
+            }
             &.th-12 {
               width: 12%;
+
+              .add { display: none; }
+
+              &:hover {
+                .add {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  height: 30px;
+                  width: auto;
+                }
+              }
+            }
+            &.th-10 {
+              width: 10%;
 
               .add { display: none; }
 

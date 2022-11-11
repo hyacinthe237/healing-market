@@ -27,7 +27,7 @@
 
               <div>
                   <div class="_tabs mt-20">
-                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <div class="nav nav-tabs bg" id="nav-tab" role="tablist">
                           <a class="nav-item nav-link" id="nav-upcoming-tab"
                               data-toggle="tab" href="#nav-upcoming" role="tab"
                               aria-controls="nav-upcoming">Now & Upcoming (1)</a>

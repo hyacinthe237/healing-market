@@ -238,6 +238,40 @@
 ._modal-content {
     padding: 20px;
 
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      .avatar {
+        border-radius: 40px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(137,0,0,0.2);
+        color: $primary;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 5px;
+        margin-right: 20px;
+        text-transform: uppercase;
+      }
+
+      .name {
+        font-size: 14px;
+        font-weight: bold;
+        color:$dark;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        float: left;
+      }
+    }
+
     &.bg-grey { background-color: #f5f7fa }
     &.bg-white { background-color: white }
     &.bordered {  border-top: 1px solid #e8ecf3; border-bottom: 1px solid #e8ecf3 }

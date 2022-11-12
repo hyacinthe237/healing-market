@@ -20,8 +20,8 @@
                 </ul>
               </nav>
             </div>
-            <div class="site-header__end pointer">
-              <a @click="n('signin')" class="pointer"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
+            <div class="site-header__end pointer" @click="n('signin')">
+              <a class="pointer"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
             </div>
           </div>
       </div>

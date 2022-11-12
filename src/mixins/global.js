@@ -1,3 +1,4 @@
+import moment from 'moment'
 export default {
     data: () => ({
         ghost: {},
@@ -185,6 +186,38 @@ export default {
             }
 
             return str
+        },
+
+        /**
+         * afficher la date en fonction du jour de visite
+         *
+         * @param  {string} jourDeVisite
+         */
+        displayDate (jourDeVisite) {
+            let day = moment().format('dddd')
+            let today = moment().format('YYYY-MM-DD')
+            let dt = moment()
+            let tab_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+            let day_l =  day.toLowerCase()
+            let nb_jdv = tab_days.indexOf(jourDeVisite)+1
+            let nb_l = tab_days.indexOf(day_l)+1
+
+            // si le jourDeVisite égal au jour courant
+            if (nb_jdv == nb_l) {
+                dt = today
+            }
+
+            if (nb_jdv < nb_l) {
+                let s = nb_l - nb_jdv
+                dt = moment().subtract(s, "days")
+            }
+
+            if (nb_jdv > nb_l) {
+                let s = nb_jdv - nb_l
+                dt = moment().add(s, "days")
+            }
+
+            return moment(dt).format('DD')
         }
     }
 }

@@ -8,11 +8,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 20px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     max-height: 50px;
     width: 100%;
 
-    .schedule-spacer { width: 25%; }
+    .schedule-spacer { width: 30%; }
     .filter { display: none; }
 
     .actions-gauche {
@@ -119,7 +121,7 @@
             &.th-40 {width: 40%;}
             &.th-30 {width: 30%;}
             &.th-12 {width: 12%;}
-            &.th-12 {width: 10%;}
+            &.th-10 {width: 10%;}
             .date {
               display: flex;
               flex-direction: column;
@@ -156,7 +158,22 @@
             padding: 5px;
             border: 1px solid #eee;
             cursor: pointer;
+            height: 30px;
             min-height: 30px;
+
+            &.applicable {
+              background-color:rgba(0,128,0,0.2);
+              color:rgb(0,128,0);
+              text-align: center;
+              text-transform: uppercase;
+            }
+
+            &.not-applicable {
+              background-color:rgba(137,0,0,0.2);
+              color:rgb(137,0,0);
+              text-align: center;
+              text-transform: uppercase;
+            }
 
             .profile {
               display: flex;
@@ -170,9 +187,9 @@
               }
 
               .avatar {
-                border-radius: 40px;
-                width: 40px;
-                height: 40px;
+                border-radius: 30px;
+                width: 30px;
+                height: 30px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -180,7 +197,7 @@
                 background-color: rgba(137,0,0,0.1);
                 color: $primary;
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 12px;
                 padding: 5px;
                 margin-right: 5px;
                 text-transform: uppercase;
@@ -191,7 +208,7 @@
                 flex-direction: column;
 
                 .name {
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: bold;
                   color:$dark;
                   display: flex;
@@ -201,7 +218,7 @@
                 }
 
                 .hrs {
-                  font-size: 10px;
+                  font-size: 8px;
                   margin-top: -4px;
                   white-space: nowrap;
                   color: $brand-teal;
@@ -214,6 +231,7 @@
 
               .hour {
                 color: $brand-teal;
+                font-size: 8px;
               }
             }
 
@@ -222,6 +240,7 @@
 
               .hour {
                 color: $brand-teal;
+                font-size: 8px;
               }
             }
             &.th-12 {
@@ -237,6 +256,14 @@
                   align-items: center;
                   height: 30px;
                   width: auto;
+                  white-space: nowrap;
+                  font-size: 8px;
+                  border: 1px solid $first;
+                  background-color: white;
+
+                  i {
+                    font-size: 8px;
+                  }
                 }
               }
             }
@@ -252,7 +279,13 @@
                   justify-content: center;
                   align-items: center;
                   height: 30px;
-                  width: auto;
+                  white-space: nowrap;
+                  font-size: 8px;
+                  border: 1px solid $first;
+
+                  i {
+                    font-size: 8px;
+                  }
                 }
               }
             }
@@ -385,11 +418,11 @@
     margin-top: 20px;
     overflow-x: auto;
 
-    .add {
-      padding: 10px;
-      background-color: rgba(137,0,0,0.2);
-      color: $primary;
-    }
+    // .add {
+    //   padding: 10px;
+    //   background-color: rgba(137,0,0,0.2);
+    //   color: $primary;
+    // }
 
     table {
       width: 100%;

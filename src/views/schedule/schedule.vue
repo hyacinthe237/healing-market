@@ -22,8 +22,8 @@
                 </div>
                 <div class="schedule-spacer"></div>
                 <div class="btns">
-                  <div class="action"><i class="ion-ios-settings"></i></div>
-                  <div class="action"><i class="ion-ios-print"></i></div>
+                  <!-- <div class="action"><i class="ion-ios-settings"></i></div>
+                  <div class="action"><i class="ion-ios-print"></i></div> -->
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
                 </div>
                 <div class="filter" @click="displayFilter()"><i class="feather icon-filter"></i></div>
@@ -45,13 +45,13 @@
                 </div>
                 <div class="schedule-spacer"></div>
                 <div class="btns">
-                  <div class="action"><i class="ion-ios-settings"></i></div>
-                  <div class="action"><i class="ion-ios-print"></i></div>
+                  <!-- <div class="action"><i class="ion-ios-settings"></i></div>
+                  <div class="action"><i class="ion-ios-print"></i></div> -->
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
                 </div>
               </div>
 
-              <div class="_table">
+              <div class="_table mt-20">
                 <table>
                   <thead>
                     <tr>
@@ -86,7 +86,7 @@
                           <div :class="['day', current_day=='friday'? 'active' : '']">{{ displayDate('friday') }}</div>
                         </div>
                       </th>
-                      <th class="th-10">
+                      <!-- <th class="th-10">
                         <div class="date">
                           <div class="week-day">SAT</div>
                           <div :class="['day', current_day=='saturday'? 'active' : '']">{{ displayDate('saturday') }}</div>
@@ -97,32 +97,32 @@
                           <div class="week-day">SUN</div>
                           <div :class="['day', current_day=='sunday'? 'active' : '']">{{ displayDate('sunday') }}</div>
                         </div>
-                      </th>
+                      </th> -->
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="bg">
-                      <td class="th-30">Events</td>
+                    <tr>
+                      <td class="th-30"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
+                      <!-- <td class="th-10"></td>
+                      <td class="th-10"></td> -->
                     </tr>
                     <tr class="bg">
                       <td class="th-30">
                         Open Shifts
                         <div class="hour">0.00 Hrs</div>
                       </td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
+                      <td class="th-10"><div class="add" @click="selected('mondayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('thuesdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('wednesdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('thursdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('fridayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <!-- <td class="th-10"></td>
+                      <td class="th-10"></td> -->
                     </tr>
                     <tr>
                       <td class="th-30">
@@ -135,13 +135,11 @@
                           </div>
                         </div>
                       </td>
-                      <td class="th-10"><div class="add" @click="selected('mondayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('tuesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('wednesdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('thursdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('fridayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('saturdayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
-                      <td class="th-10"><div class="add" @click="selected('sundayId')"><i class="feather icon-plus"></i> <span>Add</span></div></td>
+                      <td class="th-10 applicable">A</td>
+                      <td class="th-10 not-applicable">N.A</td>
+                      <td class="th-10 applicable">A</td>
+                      <td class="th-10 not-applicable">N.A</td>
+                      <td class="th-10 applicable">A</td>
                     </tr>
                   </tbody>
                 </table>

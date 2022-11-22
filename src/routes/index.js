@@ -33,11 +33,11 @@ export default new Router({
         { path: '/signup/step/three', component: SignUpStepThree, name: 'signup-step-three', beforeEnter: Guard.guest },
         { path: '/signup/step/four', component: SignUpStepFour, name: 'signup-step-four', beforeEnter: Guard.guest },
 
-        { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.guest },
-        { path: '/team', name: 'team', component: Team, beforeEnter: Guard.guest },
-        { path: '/schedule', name: 'schedule', component: Schedule, beforeEnter: Guard.guest },
-        { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.guest },
-        { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.guest },
+        { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.auth },
+        { path: '/team', name: 'team', component: Team, beforeEnter: Guard.auth },
+        { path: '/schedule', name: 'schedule', component: Schedule, beforeEnter: Guard.auth },
+        { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.auth },
+        { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.auth },
 
         { path: '*', component: NotFound }
     ]

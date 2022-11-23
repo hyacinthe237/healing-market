@@ -30,28 +30,24 @@
                 <div class="message-big">Welcome Yacuintha!</div>
             </div>
 
-            <form class="_form s-form mt-10">
+            <form class="_form s-form mt-10" @submit.prevent>
                 <div class="form-group">
                     <label>What brings you to NOGADA 360 ?</label>
                     <div class="small">Pick what you need now. You can also do more later.</div>
                     <div class="needs">
-                        <div :class="['need', need == 'Scheduling'?'selected':'']" @click="selectedNeed('Scheduling')">
+                        <div 
+                            :class="['need pointer', need == m.name ? 'selected' : '']" 
+                            @click="selectedNeed(m.name)"
+                            v-for="m in items"
+                            :key="m.id"
+                            :title="m.description"
+                        >
                           <i class="feather icon-plus"></i>
-                          <span>Scheduling</span>
-                        </div>
-
-                        <div :class="['need', need == 'Time Tracking'?'selected':'']" @click="selectedNeed('Time Tracking')">
-                          <i class="feather icon-plus"></i>
-                          <span>Time Tracking</span>
-                        </div>
-
-                        <div :class="['need', need == 'Payroll'?'selected':'']" @click="selectedNeed('Payroll')">
-                          <i class="feather icon-plus"></i>
-                          <span>Payroll</span>
+                          <span>{{ m.name }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="bottom-form" @click="n('signup-step-three')">
+                <div class="bottom-form pointer" @click="save()">
                     <div class="notyet">Not sure yet</div>
                     <div class="button mt-20 pointer">
                         <div class="text">Continue</div>
@@ -76,7 +72,7 @@ export default {
     name: 'Welcome',
 
     data: () => ({
-        ghost: {},
+        ghost: { username: '', app_modules: [] },
         logo,
         showList: false,
         showForm: false,
@@ -87,7 +83,8 @@ export default {
     }),
 
     mounted () {
-      this.initItems()
+      //this.initItems()
+      this.getAppModules()
     },
 
     computed: {
@@ -113,6 +110,45 @@ export default {
               { 'id': 3, 'name': 'Guard tracking' },
             ]
         },
+
+        async getAppModules () {
+            this.startLoading()
+                const response = await this.$api.get('user-api/app-modules/')
+                .catch(error => {
+                    console.log('Error ==> ', error.response.data)
+                    this.stopLoading()
+                    this.$swal.error('Error', error.response.data)
+                })
+            
+            this.stopLoading()
+            if(response) {
+                console.log('app modules', response.data)
+                this.items = response.data.results
+            }
+        },
+
+        async save () {
+            if (this.ghost.username == '') {
+                this.$swal.error('Validation error', 'Please, fill the username.')
+            }
+
+            if (this.ghost.username !== '') {
+                this.startLoading()
+                const response = await this.$api.post('user-api/step-1/manager', this.ghost)
+                .catch(error => {
+                    console.log('Error ==> ', error.response.data)
+                    this.stopLoading()
+                    this.$swal.error('Error', error.response.data)
+                })
+            
+                this.stopLoading()
+                if(response) {
+                    localStorage.setItem('manager', JSON.stringify(response.data))
+                    // this.$swal.success('Confirmation', 'Projet ajouté')
+                    this.n('signup-step-two')
+                }
+            }
+        }
     }
 }
 </script>

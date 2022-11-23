@@ -110,7 +110,7 @@ export default {
                 .catch(error => {
                     console.log('Error ==> ', error.response.data)
                     this.stopLoading()
-                    this.$swal.error('Error', error.response.data)
+                    this.$swal.error('Error', error.response.data.error_message)
                 })
             
                 this.stopLoading()

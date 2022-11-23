@@ -2,7 +2,7 @@ export default {
     keys: {
         domain: process.env.VUE_APP_DOMAIN || '/',
         root_url: `${process.env.VUE_APP_ROOT_URL}` || 'https://nogada-api.herokuapp.com/',
-        base_url: `${process.env.VUE_APP_ROOT_URL}/api` || 'https://nogada-api.herokuapp.com/api',
+        base_url: `${process.env.VUE_APP_ROOT_URL}/` || 'https://nogada-api.herokuapp.com/',
         // front_url: `${process.env.VUE_APP_FRONT_SERVER}/`,
         token: process.env.VUE_APP_TOKEN || 'ha_nogada_token',
         app_key: process.env.VUE_APP_KEY || 'base64:qfqr3qV0NU2R3/4VX11vwREaPpQbKfzyxxYbWKTFZFE=',

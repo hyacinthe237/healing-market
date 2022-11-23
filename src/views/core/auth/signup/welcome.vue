@@ -46,33 +46,34 @@
                     <div class="list-box" v-show="showList">
                         <div class="list-item">
                             <label
-                                class="css-input css-checkbox css-checkbox-primary selected"
+                                :class="['css-input css-checkbox css-checkbox-primary', service == item.name ? 'selected': '']"
+                                v-for="item in items" :key="item.id"
                             >
-                                <input type="checkbox" name="list_item" checked>
+                                <input type="checkbox" name="list_item" @click="selectService(item.name)">
                                 <span class="mr-2"></span>
-                                <span>{{ 'Guard scheduling' }}</span>
+                                <span>{{ item.name }}</span>
                                 <span class="mr-2"></span>
-                                <i class="feather icon-check"></i>
+                                <i class="feather icon-check" v-if="service == item.name"></i>
                             </label>
                         </div>
-                        <div class="list-item">
+                        <!-- <div class="list-item">
                             <label
-                                class="css-input css-checkbox css-checkbox-primary"
+                                :class="['css-input css-checkbox css-checkbox-primary', service == 'VMS visitor management system' ? 'selected': '']"
                             >
-                                <input type="checkbox" name="list_item">
+                                <input type="checkbox" name="list_item" @click="selectService('VMS visitor management system')">
                                 <span class="mr-2"></span>
                                 <span>{{ 'VMS visitor management system' }}</span>
                             </label>
                         </div>
                         <div class="list-item">
                             <label
-                                class="css-input css-checkbox css-checkbox-primary"
+                                :class="['css-input css-checkbox css-checkbox-primary', service == 'Guard tracking' ? 'selected': '']"
                             >
-                                <input type="checkbox" name="list_item">
+                                <input type="checkbox" name="list_item" @click="selectService('Guard tracking')">
                                 <span class="mr-2"></span>
                                 <span>{{ 'Guard tracking' }}</span>
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                     <form class="_form signup-form mt-10" v-show="showList" @click="n('signup-step-one')">
                         <div class="button pointer">
@@ -113,7 +114,8 @@ export default {
         showForm: false,
         selected: [],
         items: [],
-        background, logoUsers,logoApple,logoGoogle
+        background, logoUsers,logoApple,logoGoogle,
+        service: ''
     }),
 
     mounted () {
@@ -124,6 +126,10 @@ export default {
     },
 
     methods: {
+        selectService (value) {
+            this.service = value
+        },
+
         displayList () {
             this.showList = !this.showList
         },

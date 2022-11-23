@@ -1,6 +1,6 @@
 <template lang="html">
     <section class="signup-page">
-        <div class="g-page" :style="`background-image:url(${background})`">
+        <div class="g-page" :style="`background-image:url(${background})`" v-show="!isLoading">
             <div class="overlay">
                 <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
             </div>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-page">
+        <div class="d-page" v-show="!isLoading">
             <div class="profile-top" :style="`background-image:url(${background})`">
                 <div class="overlay"></div>
                 <div class="profile-top-container">
@@ -29,16 +29,16 @@
                 <div class="message-big">Hi, We're <br> NOGODA 360</div>
             </div>
 
-            <form class="_form s-form mt-10">
+            <form class="_form s-form mt-10" @submit.prevent>
                 <div class="form-group">
                     <label>What's your name?</label>
-                    <input type="text" name="name" placeholder="e.g. Art Paul" class="form-control mt-20">
+                    <input type="text" name="username" v-model="ghost.username" placeholder="e.g. Art Paul" class="form-control mt-20">
                     <div class="check-form">
                         <div class="smaller">Try everything free for 14 days. No credit card required. Basic plan is free forever.</div>
                         <input type="checkbox" name="is_free" class="checkbox" checked>
                     </div>
                 </div>
-                <div class="bottom-form" @click="n('signup-step-two')">
+                <div class="bottom-form" @click="save()">
                     <div class="notyet"></div>
                     <div class="button mt-20 pointer">
                         <div class="text">Get Started</div>
@@ -48,6 +48,9 @@
             </form>
 
             <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
+        </div>
+        <div class="_loader" v-show="isLoading">
+            <Spinners :color="'#890000'"></Spinners>
         </div>
     </section>
 </template>
@@ -63,7 +66,7 @@ export default {
     name: 'Welcome',
 
     data: () => ({
-        ghost: {},
+        ghost: { username: '' },
         logo,
         showList: false,
         showForm: false,
@@ -95,6 +98,29 @@ export default {
               { 'id': 3, 'name': 'Guard tracking' },
             ]
         },
+
+        async save () {
+            if (this.ghost.username == '') {
+                this.$swal.error('Validation error', 'Please, fill the username.')
+            }
+
+            if (this.ghost.username !== '') {
+                this.startLoading()
+                const response = await this.$api.post('user-api/step-1/manager', this.ghost)
+                .catch(error => {
+                    console.log('Error ==> ', error.response.data)
+                    this.stopLoading()
+                    this.$swal.error('Error', error.response.data)
+                })
+            
+                this.stopLoading()
+                if(response) {
+                    localStorage.setItem('manager', JSON.stringify(response.data))
+                    // this.$swal.success('Confirmation', 'Projet ajouté')
+                    this.n('signup-step-two')
+                }
+            }
+        }
     }
 }
 </script>

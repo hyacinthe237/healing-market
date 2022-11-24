@@ -50,7 +50,7 @@
             <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
         <div class="_loader" v-show="isLoading">
-            <Spinners :color="'#890000'"></Spinners>
+            <Spinners></Spinners>
         </div>
     </section>
 </template>
@@ -63,7 +63,7 @@ import logoApple from '@/assets/img/landing/apple.png'
 import logoGoogle from '@/assets/img/landing/google-playstore.png'
 
 export default {
-    name: 'Welcome',
+    name: 'Step1',
 
     data: () => ({
         ghost: { username: '' },
@@ -110,12 +110,12 @@ export default {
                 .catch(error => {
                     console.log('Error ==> ', error.response.data)
                     this.stopLoading()
-                    this.$swal.error('Error', error.response.data.error_message)
+                    this.$swal.error('Step 1 Error', error.response.data.error_message)
                 })
             
                 this.stopLoading()
                 if(response) {
-                    localStorage.setItem('manager', JSON.stringify(response.data))
+                    localStorage.setItem('business', JSON.stringify(response.data))
                     // this.$swal.success('Confirmation', 'Projet ajouté')
                     this.n('signup-step-two')
                 }

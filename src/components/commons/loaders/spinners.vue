@@ -1,23 +1,23 @@
 <template lang="html">
-    <hollow-dots-spinner
-        :animation-duration="1000"
-        :dot-size="14"
-        :dots-num="3"
-        :color="colour"/>
+    <breeding-rhombus-spinner
+        :animation-duration="2000"
+        :size="65"
+        :color="colour"
+    />
 </template>
 
 <script>
-import { HollowDotsSpinner } from 'epic-spinners'
+import { BreedingRhombusSpinner  } from 'epic-spinners'
 
 export default {
     components: {
-        HollowDotsSpinner
+        BreedingRhombusSpinner 
     },
 
     props: {
         colour: {
             type: String,
-            default: '#735996'
+            default: '#890000'
         },
 
         size: {
@@ -27,7 +27,7 @@ export default {
 
         dots: {
             type: Number,
-            default: 3
+            default: 6
         },
 
         duration: {

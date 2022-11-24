@@ -1,6 +1,6 @@
 <template lang="html">
     <section class="signup-page">
-        <div class="g-page" :style="`background-image:url(${background})`">
+        <div class="g-page" :style="`background-image:url(${background})`" v-show="!isLoading">
             <div class="overlay">
 
                 <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-page">
+        <div class="d-page" v-show="!isLoading">
             <div class="profile-top" :style="`background-image:url(${background})`">
                 <div class="overlay"></div>
                 <div class="profile-top-container">
@@ -27,7 +27,7 @@
              <div class="dhead mt-20">
                 <div class="step-title">step 2 of 4</div>
                 <div class="progress"><div class="step-2"></div></div>
-                <div class="message-big">Welcome Yacuintha!</div>
+                <div class="message-big">Welcome {{ username }}!</div>
             </div>
 
             <form class="_form s-form mt-10" @submit.prevent>
@@ -58,6 +58,9 @@
 
             <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
         </div>
+        <div class="_loader" v-show="isLoading">
+            <Spinners></Spinners>
+        </div>
     </section>
 </template>
 
@@ -69,10 +72,10 @@ import logoApple from '@/assets/img/landing/apple.png'
 import logoGoogle from '@/assets/img/landing/google-playstore.png'
 
 export default {
-    name: 'Welcome',
+    name: 'Step2',
 
     data: () => ({
-        ghost: { username: '', app_modules: [] },
+        ghost: { username: '', app_modules: '' },
         logo,
         showList: false,
         showForm: false,
@@ -83,11 +86,15 @@ export default {
     }),
 
     mounted () {
-      //this.initItems()
       this.getAppModules()
     },
 
     computed: {
+        business () {
+            return JSON.parse(localStorage.getItem('business'))
+        },
+
+        username () { return this.business.message.username },
     },
 
     methods: {
@@ -101,14 +108,7 @@ export default {
 
         selectedNeed (value) {
             this.need = value
-        },
-
-        initItems () {
-            this.items = [
-              { 'id': 1, 'name': 'Guard scheduling' },
-              { 'id': 2, 'name': 'VMS visitor management system' },
-              { 'id': 3, 'name': 'Guard tracking' },
-            ]
+            this.ghost.app_modules = this.items.filter(m => m.name == value)[0].id
         },
 
         async getAppModules () {
@@ -122,30 +122,30 @@ export default {
             
             this.stopLoading()
             if(response) {
-                console.log('app modules', response.data)
                 this.items = response.data.results
             }
         },
 
         async save () {
-            if (this.ghost.username == '') {
-                this.$swal.error('Validation error', 'Please, fill the username.')
+            if (this.ghost.app_modules == '') {
+                this.$swal.error('Validation error', 'Please, select one module.')
             }
 
-            if (this.ghost.username !== '') {
+            if (this.ghost.app_modules !== '') {
+                this.ghost.username = this.username
                 this.startLoading()
-                const response = await this.$api.post('user-api/step-1/manager', this.ghost)
+                const response = await this.$api.post('user-api/step-2/manager', this.ghost)
                 .catch(error => {
                     console.log('Error ==> ', error.response.data)
                     this.stopLoading()
-                    this.$swal.error('Error', error.response.data)
+                    this.$swal.error('Step 2 Error', error.response.data.error_message)
                 })
             
                 this.stopLoading()
                 if(response) {
-                    localStorage.setItem('manager', JSON.stringify(response.data))
+                    localStorage.setItem('business', JSON.stringify(response.data))
                     // this.$swal.success('Confirmation', 'Projet ajouté')
-                    this.n('signup-step-two')
+                    this.n('signup-step-three')
                 }
             }
         }

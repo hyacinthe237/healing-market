@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+// import _ from 'lodash'
 import config from '@/services/config'
 import logo from '@/assets/img/logo-nogada-foot.png'
 

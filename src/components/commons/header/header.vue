@@ -8,7 +8,7 @@
           <div class="avatar"></div>
           <div class="dropdown dropleft">
             <div class="profil-name dropdown-toggle" type="button" id="dropdownProfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span>Abanda Hyacinthe</span>
+              <span>{{ username }}</span>
             </div>
             <div class="dropdown-menu" aria-labelledby="dropdownProfil">
               <a class="dropdown-item" href="#"><i class="feather icon-user"></i> My profile</a>
@@ -22,6 +22,7 @@
 
 <script>
 import _ from 'lodash'
+import config from '@/services/config'
 import logo from '@/assets/img/logo-nogada-foot.png'
 
 export default {
@@ -40,8 +41,10 @@ export default {
 
     computed: {
         user () {
-           return this.$store.state.users.user
-        }
+           return JSON.parse(localStorage.getItem(config.get('user'))).user
+        },
+
+        username () { return this.user.username },
     },
 
     mounted () {

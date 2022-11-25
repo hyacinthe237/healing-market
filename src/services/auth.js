@@ -1,6 +1,7 @@
 import config from './config'
 
 const TOKEN = config.get('token')
+const USER = config.get('user')
 
 export default {
     user() {
@@ -8,11 +9,11 @@ export default {
     },
 
     setUser (user) {
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem(USER, JSON.stringify(user))
     },
 
     getUser () {
-        return JSON.parse(localStorage.getItem('user'))
+        return JSON.parse(localStorage.getItem(USER))
     },
 
     getToken() {
@@ -20,7 +21,7 @@ export default {
     },
 
     setToken(token) {
-        localStorage.setItem('Token', token)
+        localStorage.setItem(TOKEN, token)
     },
 
     logout() {

@@ -26,8 +26,6 @@
 
 <script>
 import background from '@/assets/img/background.png'
-import ApiService from '@/services/api'
-import AuthService from '@/services/auth'
 
 export default {
     name: 'Step4',
@@ -78,12 +76,8 @@ export default {
             
                 this.stopLoading()
                 if(response) {
-                    let data = response.data
-                    AuthService.setUser(data)
-                    AuthService.setToken(data.token)
-                    ApiService.setToken(data.token)
                     localStorage.removeItem('business')
-                    this.n('dashoard')
+                    this.n('signin')
                 }
             }
         }

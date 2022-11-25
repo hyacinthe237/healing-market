@@ -17,7 +17,7 @@ import Team from '@/views/team/team'
 import Schedule from '@/views/schedule/schedule'
 import Settings from '@/views/settings/settings'
 import Timesheets from '@/views/timesheets/timesheets'
-import Profile from '@/views/users/profile'
+import Profile from '@/views/team/profile'
 
 Vue.use(Router)
 

@@ -67,7 +67,7 @@ export default {
     },
 
     setToken (token) {
-        axios.defaults.headers.common['Authorization'] = `Token ${token}`
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     },
 
     clearToken () {

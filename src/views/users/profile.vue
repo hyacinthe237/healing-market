@@ -8,8 +8,6 @@
                             {{ t('Users') }}
                             <i class="feather icon-users"></i>
                         </div>
-
-                        <Breadcrumb :routes="breadcrumb" :show="isAvailable"></Breadcrumb>
                     </div>
 
                     <div class="col-sm-6 text-right">
@@ -172,8 +170,6 @@ export default {
             handler: function (val) {
                 if (!_.isEmpty(val)) {
                     this.ghost = Object.assign({}, val)
-                    this.ghost.role = this.auth.account.role.id
-                    this.showErrors =  false
                 }
             }
         }
@@ -181,7 +177,7 @@ export default {
 
     computed: {
        user () {
-          return JSON.parse(localStorage.getItem(config.get('user'))).user
+          return JSON.parse(localStorage.getItem(config.get('user')))
        },
     },
 
@@ -228,8 +224,7 @@ export default {
         async getUser () {
             this.startLoading()
 
-            const URL = 'user-api/users/' + this.user.id + '/'
-            const response = await this.$api.get(URL)
+            const response = await this.$api.get(`user-api/users/${this.user.id}/`)
                 .catch(error => {
                     this.stopLoading()
                     this.$swal.error(this.$translate.text('Error'), this.$translate.text(error.response.data.errors))

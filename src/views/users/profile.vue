@@ -153,6 +153,7 @@
 
 <script>
 import _ from 'lodash'
+import config from '@/services/config'
 import usersMixins from './modals/mixins'
 import ResetUserModal from './modals/reset'
 
@@ -180,7 +181,7 @@ export default {
 
     computed: {
        user () {
-          return this.$store.state.users.user
+          return JSON.parse(localStorage.getItem(config.get('user'))).user
        },
     },
 
@@ -227,7 +228,7 @@ export default {
         async getUser () {
             this.startLoading()
 
-            const URL = 'api/accounts/' + this.auth.account.id + '/update'
+            const URL = 'user-api/users/' + this.user.id + '/'
             const response = await this.$api.get(URL)
                 .catch(error => {
                     this.stopLoading()
@@ -236,7 +237,8 @@ export default {
 
                 if (response) {
                     this.stopLoading()
-                    this.$store.commit('users/SET_USER', response.data)
+                    // this.$store.commit('users/SET_USER', response.data)
+                    console.log('profile', response.data)
                 }
         },
 

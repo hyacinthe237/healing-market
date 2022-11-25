@@ -37,6 +37,7 @@
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
+import config from '../../../services/config'
 import logo from '@/assets/img/vertical.png'
 import background from '@/assets/img/background.png'
 
@@ -68,21 +69,111 @@ export default {
 
                 const response = await this.$api.post('user-api/login/', this.ghost)
                     .catch(error => {
-                        this.isLoading = true
+                        this.isLoading = false
                         console.log('error => ', error.response.data.error)
                         this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.error))
                     })
                 
-                this.isLoading = false
+                
                 if (response) {
                     let data = response.data
-                    AuthService.setUser(data)
-                    AuthService.setToken(data.refresh_token)
-                    ApiService.setToken(data.refresh_token)
-                    this.n('dashboard')
+                    AuthService.setUser(data.user)
+
+                    const res = await this.$api.apiToken(this.ghost)
+                    .catch(err => {
+                        this.isLoading = false
+                        console.log('token error', err.response.data)
+                    })
+                    if (res) {
+                        this.isLoading = false
+                        console.log('token', res.data)
+                        AuthService.setToken(res.data.access)
+                        ApiService.setToken(res.data.access)
+
+                        // Set Refresh token
+                        AuthService.setRefreshToken(res.data.refresh)
+                        this.n('dashboard')
+                    }
                 }
             }
             
+        },
+
+        async getNewAccessToken () {
+            this.isLoading = false
+            let payload = {
+                'token': config.get('refresh_token'),
+            }
+            const response = await this.$api.refreshToken(payload)
+                .catch(error => {
+                    this.isLoading = true
+                    console.log('error => ', error.response.data.error)
+                })
+                
+                this.isLoading = false
+
+                if (response) {
+                    let data = response.data
+                    AuthService.setToken(data.refresh)
+                    ApiService.setToken(data.refresh)
+                    console.log('new access token', data)
+                }
+        },
+
+        async getNewRefreshToken (token) {
+            this.isLoading = false
+            const response = await this.$api.refreshToken({ 'refresh': token})
+                .catch(error => {
+                    this.isLoading = true
+                    console.log('error => ', error.response.data.error)
+                })
+                
+                this.isLoading = false
+
+                if (response) {
+                    let data = response.data
+                    console.log(data.token)
+                }
+        },
+
+        async checkAccessToken (token) {
+            this.isLoading = false
+            let payload = { 'token': token }
+
+            const response = await this.$api.verifyToken(payload)
+                .catch(error => {
+                    this.isLoading = true
+                    console.log('error => ', error.response.data.detail)
+                    if(error.response.data.code == 'token_not_valid') {
+                        this.getNewAccessToken()
+                    }
+                })
+                
+                this.isLoading = false
+
+                if (response) {
+                    let data = response.data
+                    console.log('check access token', data)
+                }
+        },
+
+        async checkRefreshToken (payload, token) {
+            this.isLoading = false
+            const response = await this.$api.verifyToken({ 'token': token })
+                .catch(error => {
+                    this.isLoading = true
+                    console.log('error => ', error.response.data.detail)
+                    if(error.response.data.code == 'token_not_valid') {
+                        this.getNewRefreshToken(payload)
+                    }
+                })
+                
+                this.isLoading = false
+
+                if (response) {
+                    let data = response.data
+                    console.log('check refresh token', data)
+                }
         },
     }
 }

@@ -1,5 +1,6 @@
 import config from './config'
 
+const REFRESH_TOKEN = config.get('refresh_token')
 const TOKEN = config.get('token')
 const USER = config.get('user')
 
@@ -22,6 +23,14 @@ export default {
 
     setToken(token) {
         localStorage.setItem(TOKEN, token)
+    },
+
+    getRefreshToken() {
+        return localStorage.getItem(REFRESH_TOKEN)
+    },
+
+    setRefreshToken(refresh_token) {
+        localStorage.setItem(REFRESH_TOKEN, refresh_token)
     },
 
     logout() {

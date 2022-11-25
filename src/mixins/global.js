@@ -1,4 +1,5 @@
 import moment from 'moment'
+
 export default {
     data: () => ({
         ghost: {},

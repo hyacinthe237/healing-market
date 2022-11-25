@@ -94,7 +94,8 @@ export default {
 
     watch: { },
 
-    mounted () { },
+    mounted () { 
+     },
 
     methods: { }
 }

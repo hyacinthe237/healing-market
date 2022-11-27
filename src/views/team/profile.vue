@@ -8,6 +8,16 @@
           <div class="profile-box">
               <div class="profile-form">
                 <div class="tle">My profile detail</div>
+                <div class="content-profile-photo pointer mt-10">
+                  <input type="file" name='image' id="fileElem" accept="image/*" style="display:none" @change="handleFile">
+                  <div class="photo" id="fileSelect">
+                      <i class="feather icon-camera" v-if="displayIcon"></i>
+                      <img class="image" id="image" src="" v-else/>
+                  </div>
+                  <span v-show="displayIcon" class="mt-10">Add a cover</span>
+              </div>
+              </div>
+              <div class="profile-form mt-20">
                 <form class="_form text-center mt-20" @submit.prevent>
                   <div class="container">
                     <div class="row">
@@ -45,7 +55,7 @@
                   </div>
                   
                   <div class="bttn mt-20 pointer" @click="save()">
-                      <div class="text">Save</div>
+                      <div class="text">Save profile</div>
                       <div class="icon"><i class="feather icon-save"></i></div>
                   </div>
                 </form>
@@ -96,11 +106,13 @@
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import config from '../../services/config'
+import AuthService from '@/services/auth'
 
 export default {
     data: () => ({
         phost: { password: '', confirm_password: '', new_password: '' },
-        showFilter: false
+        showFilter: false,
+        displayIcon: true,
     }),
 
     components: { Header, Sidebar },
@@ -115,6 +127,15 @@ export default {
 
     mounted () {
       this.getUser()
+      var fileSelect = document.getElementById("fileSelect"),
+        fileElem = document.getElementById("fileElem");
+
+        fileSelect.addEventListener("click", function (e) {
+            if (fileElem) {
+                fileElem.click();
+            }
+            e.preventDefault(); // empêche la navigation vers "#"
+        }, false);
     },
 
     methods: {
@@ -133,7 +154,47 @@ export default {
               console.log('profile', response.data)
               this.ghost = Object.assign({}, response.data)
           }
+      },
+
+      async save () {
+          this.startLoading()
+          let formData = new FormData()
+          formData.append('username', this.ghost.username)
+          formData.append('email', this.ghost.email)
+          formData.append('phone', this.ghost.phone)
+          formData.append('cover', this.ghost.cover)
+          formData.append('last_name', this.ghost.last_name)
+          formData.append('first_name', this.ghost.first_name)
+
+          const response = await this.$api.put(`user-api/users/${this.user.id}/`, formData)
+          .catch(error => {
+              this.stopLoading()
+              this.$swal.error(this.$translate.text('Error'), this.$translate.text(error.response.data.errors))
+          })
+
+          if (response) {
+              this.stopLoading()
+              // this.$store.commit('users/SET_USER', response.data)
+              console.log('profile', response.data)
+              this.ghost = Object.assign({}, response.data)
+              AuthService.setUser(response.data.data_updated)
+          }
         },
+
+        handleFile (e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+
+            var reader = new FileReader()
+
+            reader.onloadend = function () {
+                $('.image').attr('src', reader.result)
+            }
+            reader.readAsDataURL(files[0])
+            this.ghost.cover = files[0]
+            this.displayIcon = false
+        }
     }
 }
 </script>

@@ -178,6 +178,7 @@ export default {
               console.log('profile', response.data)
               this.ghost = Object.assign({}, response.data)
               AuthService.setUser(response.data.data_updated)
+              this.$swal.error('Confirmation', response.data.message)
           }
         },
 

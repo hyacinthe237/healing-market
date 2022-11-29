@@ -1,15 +1,15 @@
 import axios from 'axios'
 import config from './config'
-import Swal from 'sweetalert2'
+/*import Swal from 'sweetalert2'
 // import AuthService from './auth'
-/*
+
 import StoreService from '../store'
 import _ from 'lodash'*/
 
 axios.defaults.baseURL = config.get('base_url')
 
 if (localStorage.getItem(config.get('token')) !=  null){
-    axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.getItem(config.get('token'))
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem(config.get('token'))
 }
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8'
 

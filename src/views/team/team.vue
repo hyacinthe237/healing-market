@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-      <Header />
-    <div id="wrapper">
+    <Header v-show="!isLoading" />
+    <div id="wrapper" v-show="!isLoading">
         <Sidebar :current="'team'" />
 
         <div id="page-content-wrapper">
@@ -31,7 +31,7 @@
 
                 <div class="lg-btns">
                   <div class="lg-btn-outline">Bulk Action</div>
-                  <div class="lg-btn-primary">Add Team Member</div>
+                  <div class="lg-btn-primary" @click="addTeamModal()">Add Team Member</div>
                 </div>
               </div>
               <div class="filter" @click="displayFilter()"><i class="feather icon-more-vertical"></i></div>
@@ -155,31 +155,59 @@
           </div>
         </div>
     </div>
+    <div class="_loader" v-show="isLoading">
+      <Spinners></Spinners>
+    </div>
+    <AddTeamMember></AddTeamMember>
   </div>
 </template>
 
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
+import config from '../../services/config'
+import AddTeamMember from './modals/add.vue'
 
 export default {
     data: () => ({
         payload: {},
-        showFilter: false
+        showFilter: false,
+        members: [],
     }),
 
-    components: { Header, Sidebar },
+    components: { Header, Sidebar, AddTeamMember },
 
-    computed: { },
+    computed: {
+      user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
+    },
 
     watch: { },
 
-    mounted () { },
+    mounted () { this.getMembers() },
 
     methods: {
       displayFilter () {
         this.showFilter = !this.showFilter
-      }
+      },
+
+      addTeamModal () {
+        this.openModal({ id: 'addUserModal' })
+      },
+
+      async getMembers () {
+            this.startLoading()
+
+            const res = await this.$api.post(`user-api/user/${this.user.id}/`)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('get members error', error.response.data.error_message)
+                })
+
+                if (res) {
+                  this.stopLoading()
+                  console.log('members', res.data)
+                }
+        }
     }
 }
 </script>

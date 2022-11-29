@@ -65,6 +65,7 @@ Vue.config.productionTip = false
 Vue.component('radial-progress-bar', RadialProgressBar)
 Vue.component('multiselect', Multiselect)
 Vue.component('Spinners', Spinners)
+Vue.component('v-error', VErrorComponent)
 
 new Vue({
   router,

@@ -86,7 +86,6 @@ export default {
                     })
                     if (res) {
                         this.isLoading = false
-                        console.log('token', res.data)
                         AuthService.setToken(res.data.access)
                         ApiService.setToken(res.data.access)
 

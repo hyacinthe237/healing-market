@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="_side-modal modal animated fadeIn upload" id="addScheduleModal">
+    <div class="_add-schedule-modal modal animated fadeIn" id="addScheduleModal">
         <div class="modal-dialog" role="document" v-show="!isLoading">
             <div class="modal-content">
                 <div class="_modal-content">
@@ -33,7 +33,7 @@
                                 <div class="custom-box">
                                   <div class="time-select">
                                     <select name="am"><option value="09:00">09:00</option></select>
-                                    <i class="feather icon-minus"></i>
+                                    <div class="midle"><i class="feather icon-minus"></i></div>
                                     <select name="pm"><option value="08:00">08:00</option></select>
                                   </div>
                                 </div>

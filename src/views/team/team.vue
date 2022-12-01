@@ -195,19 +195,19 @@ export default {
       },
 
       async getMembers () {
-            this.startLoading()
+        this.startLoading()
 
-            const res = await this.$api.post(`user-api/user/${this.user.id}/`)
-                .catch(error => {
-                    this.stopLoading()
-                    this.$swal.error('get members error', error.response.data.error_message)
-                })
+        const res = await this.$api.post(`user-api/user/${this.user.id}/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get members error', error.response.data.error_message)
+        })
 
-                if (res) {
-                  this.stopLoading()
-                  console.log('members', res.data)
-                }
+        if (res) {
+          this.stopLoading()
+          console.log('members', res.data)
         }
+      }
     }
 }
 </script>

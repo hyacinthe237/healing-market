@@ -181,7 +181,9 @@ export default {
 
     watch: { },
 
-    mounted () { },
+    mounted () {
+      this.getScheduleEvents()
+    },
 
     methods: {
       displayFilter () {
@@ -192,6 +194,21 @@ export default {
       selected (id) {
         this.identifiant = id
         window.$(`#addScheduleModal`).modal('show')
+      },
+
+      async getScheduleEvents () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/schedule-api/events/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get schedule events error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          console.log('getScheduleEvents', res.data)
+        }
       }
     }
 }

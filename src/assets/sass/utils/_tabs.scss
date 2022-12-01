@@ -117,31 +117,39 @@
     .custom-box {
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       .time-select {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content:flex-start;
-        border: .5px solid $first;
         height: 35px;
-        width: auto;
+        width: 70%;
 
         select {
-          border-top: none;
-          border-left: none;
-          border-bottom: none;
-          border-right: .5px solid $first;
+          border: .5px solid $first;
           padding: 5px;
+          width: 45%;
         }
 
-        i {
-          background-color: #eee;
-          color: $first;
-          font-weight: bold;
+        .midle {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          background-color: $brand-teal;
+          height: 35px;
+          width: 10%;
           padding: 5px;
+
+          i {
+            color: white;
+          }
         }
       }
+
+      
     }
 }
 

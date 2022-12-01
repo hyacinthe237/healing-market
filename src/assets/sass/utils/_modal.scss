@@ -108,6 +108,36 @@
     }
 }
 
+._add-schedule-modal {
+    @media (min-width: 768px) {
+        .modal-dialog {
+            min-width: 375px;
+            width: 30%;
+            margin: 0;
+            position: absolute;
+            right: 0;
+            height: 60vh;
+            box-shadow: 1px 0 15px 10px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .modal-content {
+        box-shadow: none;
+        border:none;
+        border-radius: 0;
+        height: 60vh;
+        overflow-y: scroll;
+
+        .bandeau {
+            width: 100%;
+            background-color: $brand-secondary;
+            color: white;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+    }
+}
+
 ._preview-modal {
     width: 595px;
     height: 842px;

@@ -8,14 +8,14 @@
           <div class="profile-box">
               <div class="profile-form">
                 <div class="tle">My profile detail</div>
-                <div class="content-profile-photo pointer mt-10">
-                  <input type="file" name='image' id="fileElem" accept="image/*" style="display:none" @change="handleFile">
-                  <div class="photo" id="fileSelect">
-                      <i class="feather icon-camera" v-if="displayIcon"></i>
-                      <img class="image" id="image" src="" v-else/>
+                  <div class="content-profile-photo pointer mt-10">
+                    <input type="file" name='image' id="fileElem" accept="image/*" style="display:none" @change="handleFile">
+                    <div class="photo" id="fileSelect">
+                        <i class="feather icon-camera" v-if="displayIcon"></i>
+                        <img class="image" id="image" src="" v-else/>
+                    </div>
+                    <span v-show="displayIcon" class="mt-10">Add a cover</span>
                   </div>
-                  <span v-show="displayIcon" class="mt-10">Add a cover</span>
-              </div>
               </div>
               <div class="profile-form mt-20">
                 <form class="_form text-center mt-20" @submit.prevent>
@@ -150,9 +150,8 @@ export default {
 
           if (response) {
               this.stopLoading()
-              // this.$store.commit('users/SET_USER', response.data)
-              console.log('profile', response.data)
               this.ghost = Object.assign({}, response.data)
+              AuthService.setUser(response.data)
           }
       },
 
@@ -174,11 +173,9 @@ export default {
 
           if (response) {
               this.stopLoading()
-              // this.$store.commit('users/SET_USER', response.data)
-              console.log('profile', response.data)
-              this.ghost = Object.assign({}, response.data)
-              AuthService.setUser(response.data.data_updated)
               this.$swal.error('Confirmation', response.data.message)
+              this.getUser()
+              
           }
         },
 

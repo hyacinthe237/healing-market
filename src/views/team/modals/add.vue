@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <!--<div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="username" v-translate>Username</label>
                                     <input type="text"
@@ -59,7 +59,7 @@
                                     >
                                     <v-error :name="'username'" :err="errors" :show="showErrors"></v-error>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -183,7 +183,7 @@ export default {
             this.startLoading()
             this.ghost.is_employee = true
 
-            const res = await this.$api.post('user-api/register/', this.ghost)
+            const res = await this.$api.post('/user-api/add-member-team', this.ghost)
                 .catch(error => {
                     this.stopLoading()
                     this.$swal.error('Add member error', error.response.data.error_message)

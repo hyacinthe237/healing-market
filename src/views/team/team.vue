@@ -183,7 +183,9 @@ export default {
 
     watch: { },
 
-    mounted () { this.getMembers() },
+    mounted () { 
+      this.getMembers()
+    },
 
     methods: {
       displayFilter () {
@@ -197,7 +199,7 @@ export default {
       async getMembers () {
         this.startLoading()
 
-        const res = await this.$api.post(`user-api/user/${this.user.id}/`)
+        const res = await this.$api.get(`/user-api/manager-team-member`)
         .catch(error => {
             this.stopLoading()
             this.$swal.error('get members error', error.response.data.error_message)

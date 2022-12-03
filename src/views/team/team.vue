@@ -8,7 +8,7 @@
           <div class="team">
             <div class="header-box">
               <div class="title">
-                <span>Team (3)</span>
+                <span>Team ({{ members.length }})</span>
                 <div class="_show">
                   <label><input type="checkbox"> Show Terminated</label>
                 </div>
@@ -26,7 +26,7 @@
                 </select>
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
-                  <div class="action"><i class="ion-md-cloud-download"></i></div>
+                  <div class="action" @click="downloadMembers()"><i class="ion-md-cloud-download"></i></div>
                 </div>
 
                 <div class="lg-btns">
@@ -51,7 +51,7 @@
                 </select>
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
-                  <div class="action"><i class="ion-md-cloud-download"></i></div>
+                  <div class="action" @click="downloadMembers()"><i class="ion-md-cloud-download"></i></div>
                   <div class="lg-btns">
                     <div class="lg-btn-outline">Bulk Action</div>
                     <div class="lg-btn-primary"><i class="feather icon-plus"></i></div>
@@ -66,85 +66,35 @@
                   <thead>
                       <tr>
                           <th class="w30">Name</th>
+                          <th class="w20 no-column">Email</th>
+                          <th class="w20 no-column">Phone</th>
                           <th class="w20 no-column">Position</th>
-                          <th class="w20 no-column">Account status</th>
-                          <th class="w20 no-column">Availability</th>
                           <th class="w10"></th>
                       </tr>
                   </thead>
 
                   <tbody>
-                      <tr>
+                      <tr v-for="m in members" :key="m.id">
                           <td class="w30">
                             <div class="name">
-                              <div class="avatar">AH</div>
-                              Abanda Hyacinthe
+                              <div class="avatar">{{ displayLetter(m) }}</div>
+                              {{ displayName(m) }}
                             </div>
                           </td>
                           <td class="w20 no-column">
-                            <div class="position"></div>
+                            <div class="position">{{ m.email }}</div>
                           </td>
                           <td class="w20 no-column">
-                            <div class="status"></div>
+                            <div class="status">{{ m.phone }}</div>
                           </td>
                           <td class="w20 no-column">
-                            <div class="availability"></div>
+                            <div class="availability">{{ displayPosition(m) }}</div>
                           </td>
                           <td class="w10">
                             <div class="actions pointer">
                               <div class="icons">
-                                <i class="feather icon-edit-2"></i>
-                                <i class="feather icon-more-vertical"></i>
-                              </div>
-                            </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td class="w30">
-                            <div class="name">
-                              <div class="avatar">AH</div>
-                              Abanda Hyacinthe
-                            </div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="position"></div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="status"></div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="availability"></div>
-                          </td>
-                          <td class="w10">
-                            <div class="actions pointer">
-                              <div class="icons">
-                                <i class="feather icon-edit-2"></i>
-                                <i class="feather icon-more-vertical"></i>
-                              </div>
-                            </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td class="w30">
-                            <div class="name">
-                              <div class="avatar">AH</div>
-                              Abanda Hyacinthe
-                            </div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="position"></div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="status"></div>
-                          </td>
-                          <td class="w20 no-column">
-                            <div class="availability"></div>
-                          </td>
-                          <td class="w10">
-                            <div class="actions pointer">
-                              <div class="icons">
-                                <i class="feather icon-edit-2"></i>
-                                <i class="feather icon-more-vertical"></i>
+                                <i class="feather icon-edit-2" @click="editTeamModal(m)"></i>
+                                <i class="feather icon-more-vertical" @click="confirmDelete(m)"></i>
                               </div>
                             </div>
                           </td>
@@ -158,7 +108,8 @@
     <div class="_loader" v-show="isLoading">
       <Spinners></Spinners>
     </div>
-    <AddTeamMember></AddTeamMember>
+    <AddTeamMember @memberAdded="getMembers"></AddTeamMember>
+    <EditTeamMember @memberModified="getMembers" :member="selectedMember"></EditTeamMember>
   </div>
 </template>
 
@@ -167,15 +118,17 @@ import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import config from '../../services/config'
 import AddTeamMember from './modals/add.vue'
+import EditTeamMember from './modals/edit.vue'
 
 export default {
     data: () => ({
         payload: {},
+        selectedMember: {},
         showFilter: false,
         members: [],
     }),
 
-    components: { Header, Sidebar, AddTeamMember },
+    components: { Header, Sidebar, AddTeamMember, EditTeamMember },
 
     computed: {
       user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
@@ -196,6 +149,32 @@ export default {
         this.openModal({ id: 'addUserModal' })
       },
 
+      editTeamModal (member) {
+        this.selectedMember = member
+        this.openModal({ id: 'editUserModal' })
+      },
+
+      displayLetter (member) {
+        let str = ''
+        if ((member.last_name !== '') && (member.first_name !== '')) str = member.last_name[0] + member.first_name[0]
+        else str = member.username[0]
+        return str
+      },
+
+      displayName (member) {
+        let str = ''
+        if ((member.last_name !== '') && (member.first_name !== '')) str = member.last_name + ' ' + member.first_name
+        else str = member.username
+        return str
+      },
+
+      displayPosition (member) {
+        let position = ''
+        if (member.is_employee) position = 'Employee'
+        if (member.is_manager) position = 'Manager'
+        return position
+      },
+
       async getMembers () {
         this.startLoading()
 
@@ -207,9 +186,48 @@ export default {
 
         if (res) {
           this.stopLoading()
-          console.log('members', res.data)
+          console.log('members', res.data.message.teamates)
+          this.members = res.data.message.teamates
         }
-      }
+      },
+
+      async downloadMembers () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/user-api/download-team-member`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get members error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.download(res.data)
+        }
+      },
+
+      download (data) {
+      
+          // Creating a Blob for having a csv file format
+          // and passing the data with type
+          const blob = new Blob([data], { type: 'text/csv' });
+
+          // Creating an object for downloading url
+          const url = window.URL.createObjectURL(blob)
+
+          // Creating an anchor(a) tag of HTML
+          const a = document.createElement('a')
+
+          // Passing the blob downloading url
+          a.setAttribute('href', url)
+
+          // Setting the anchor tag attribute for downloading
+          // and passing the download file name
+          a.setAttribute('download', 'list_of_member.csv');
+
+          // Performing a download with click
+          a.click()
+      },
     }
 }
 </script>

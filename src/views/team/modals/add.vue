@@ -2,18 +2,18 @@
     <div class="_side-modal modal animated fadeIn upload" id="addUserModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="_modal-content bordered">
-                    <div class="primary fs-20">
-                        {{ t('Add a team member') }}
-                    </div>
+                <!-- <div class="_modal-content bordered right">
                     <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
                         <i class="feather icon-x"></i>
                         {{ t('Close') }}
                     </button>
-                </div>
+                </div>-->
 
                 <!-- Uninstalling -->
                 <div class="_modal-content">
+                    <div class="primary fs-20">
+                        {{ t('Add a team member') }}
+                    </div>
                     <form @submit.prevent class="_form mt-20" v-show="!isLoading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -104,6 +104,26 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <label for="role" v-translate>Gender</label>
+                                    <select
+                                        name="sex"
+                                        id="sex"
+                                        v-model="ghost.sex"
+                                        class="form-control form-control-lg"
+                                    >
+                                        <option
+                                            v-for="(sex, index) in genders"
+                                            :key="index+1"
+                                            :value="sex"
+                                        >
+                                            {{ t(sex) }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
                                     <label for="password" v-translate>Password</label>
                                     <input type="password"
                                         name="password"
@@ -135,17 +155,22 @@
                         </div>
                     </form>
 
-                    <div class="mt-20" v-show="!isLoading">
+                    <div class="buttons mt-20" v-show="!isLoading">
                         <button class="btn-primary btn mr-20" @click.prevent="create()">
                             <i class="feather icon-save mr-10"></i>
-                            {{ t('Save user') }}
+                            {{ t('Save member') }}
+                        </button>
+
+                        <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
+                            <i class="feather icon-x"></i>
+                            {{ t('Close') }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-show="isLoading" class="mt-40 pb-40 text-center">
-            <izy-hollow-loading loading />
+        <div v-show="isLoading" class="_loader">
+            <Spinners></Spinners>
         </div>
     </div>
 </template>
@@ -155,24 +180,6 @@ import usersMixins from './mixins'
 
 export default {
     mixins: [usersMixins],
-
-    props: {
-        ghost_data: {
-            type: Object,
-            default: () => {}
-        },
-    },
-
-    watch: {
-        ghost_data: {
-            immediate: true,
-            handler: function (val) {
-                if (!_.isEmpty(val)) {
-                    this.showErrors = false
-                }
-            }
-        }
-    },
 
     methods: {
         async create () {
@@ -192,8 +199,8 @@ export default {
                     this.stopLoading()
                     this.showErrors = false
                     this.closeAllModals()
-                    console.log('member', res.data)
-                    this.$swal.success('Confirmation', this.$translate.text('member created successfully !'))
+                    this.$emit('memberAdded')
+                    this.$swal.success('Confirmation', this.$translate.text('Member created successfully !'))
                 }
         }
     }

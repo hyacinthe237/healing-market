@@ -2,7 +2,8 @@
     <div class="_side-modal modal animated fadeIn upload" id="editUserModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="_modal-content bordered">
+                <!--<div class="_modal-content bordered">
+                    
                     <button class="btn btn-grey mr-10" @click="closeAllModals()" :disabled="isLoading">
                         <i class="feather icon-x"></i>
                         {{ t('Close') }}
@@ -12,12 +13,12 @@
                         <i class="feather icon-save"></i>
                         {{ t('Reset password') }}
                     </button>
-                </div>
+                </div>-->
 
                 <!-- Uninstalling -->
                 <div class="_modal-content">
-                    <div class="secondary fs-20">
-                        {{ t('Edit user') }}
+                    <div class="primary fs-20">
+                        {{ t('Edit member') }}
                     </div>
 
                     <form @submit.prevent class="_form mt-20" v-show="!isLoading">
@@ -54,16 +55,21 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="username" v-translate>Username</label>
-                                    <input type="text"
-                                        name="username"
-                                        v-model="ghost.username"
+                                    <label for="role" v-translate>Gender</label>
+                                    <select
+                                        name="sex"
+                                        id="sex"
+                                        v-model="ghost.sex"
                                         class="form-control form-control-lg"
-                                        v-validate="'required|min:6'"
-                                        :data-vv-as="t('Username')"
-                                        :placeholder="t('Username')"
                                     >
-                                    <v-error :name="'username'" :err="errors" :show="showErrors"></v-error>
+                                        <option
+                                            v-for="(sex, index) in genders"
+                                            :key="index+1"
+                                            :value="sex"
+                                        >
+                                            {{ t(sex) }}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -84,68 +90,46 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="role" v-translate>Role</label>
-                                    <select
-                                        name="role"
-                                        v-model="ghost.role"
-                                        id="role_edit"
+                                    <label for="birthday" v-translate>Birthday</label>
+                                    <input type="date"
+                                        name="birthday"
+                                        v-model="ghost.birthday"
                                         class="form-control form-control-lg"
+                                        v-validate="'required'"
                                     >
-                                    <option
-                                        v-for="r in availableRoles"
-                                        :key="r.id"
-                                        :value="r.id"
-                                        :selected="ghost.role === r.id"
-                                    >
-                                        {{ t(r.name) }}
-                                    </option>
-                                    </select>
+                                    <v-error :name="'birthday'" :err="errors" :show="showErrors"></v-error>
                                 </div>
                             </div>
-                        </div>
-
-                        <h5 class="bold mt-20" v-show="showGroup" v-translate>Groups</h5>
-
-                        <div class="row" v-show="showGroup">
-                            <div class="col-sm-6">
-                                <label class="css-input css-checkbox css-checkbox-primary css-input-block">
-                                    <input type="checkbox" value="develoeprs">
-                                    <span class="mr-10"></span> Developers
-                                </label>
-                            </div>
 
                             <div class="col-sm-6">
-                                <label class="css-input css-checkbox css-checkbox-primary css-input-block">
-                                    <input type="checkbox" value="managers">
-                                    <span class="mr-10"></span> Managers
-                                </label>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label class="css-input css-checkbox css-checkbox-primary css-input-block">
-                                    <input type="checkbox" value="gamers">
-                                    <span class="mr-10"></span> Gamers
-                                </label>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label class="css-input css-checkbox css-checkbox-primary css-input-block">
-                                    <input type="checkbox" value="executives">
-                                    <span class="mr-10"></span> Executives
-                                </label>
+                                <div class="form-group">
+                                    <label for="phone" v-translate>Phone number</label>
+                                    <input type="text"
+                                        name="phone"
+                                        v-model="ghost.phone"
+                                        class="form-control form-control-lg"
+                                        v-validate="'required'"
+                                    >
+                                    <v-error :name="'phone'" :err="errors" :show="showErrors"></v-error>
+                                </div>
                             </div>
                         </div>
                     </form>
 
-                    <div class="mt-20" v-show="!isLoading">
-                        <button class="btn-secondary btn mr-20" @click.prevent="updateUser()">
+                    <div class="buttons mt-20" v-show="!isLoading">
+                        <button class="btn-primary btn mr-20" @click.prevent="updateUser()">
                             <i class="feather icon-save mr-10"></i>
-                            {{ t('Save') }}
+                            {{ t('Update member') }}
+                        </button>
+
+                        <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
+                            <i class="feather icon-x"></i>
+                            {{ t('Close') }}
                         </button>
                     </div>
 
-                    <div v-show="isLoading" class="mt-40 pb-40 text-center">
-                        <izy-hollow-loading loading />
+                    <div v-show="isLoading" class="_loader">
+                        <Spinners></Spinners>
                     </div>
                 </div>
             </div>
@@ -160,14 +144,14 @@ export default {
     mixins: [usersMixins],
 
     props: {
-        person: {
+        member: {
             type: Object,
             default: () => {}
         }
     },
 
     watch: {
-        person: {
+        member: {
             immediate: true,
             handler: function (val) {
                 if (!_.isEmpty(val)) {
@@ -194,9 +178,8 @@ export default {
             if (!isValid) return false
 
             this.startLoading()
-            this.ghost.role = this.roles.filter(r => r.id == this.ghost.role)[0].id
 
-            const res = await this.$api.put('api/accounts/' + this.ghost.id + '/update', this.ghost)
+            const res = await this.$api.patch(`user-api/users/${this.member.id}/`, this.ghost)
                 .catch(error => {
                     this.stopLoading()
                     this.$swal.error(this.$translate.text('Error'), this.$translate.text(error.response.data.errors))
@@ -206,8 +189,8 @@ export default {
                 this.stopLoading()
                 this.showErrors = false
                 this.closeAllModals()
-                this.$store.dispatch('users/getUsers')
-                this.$swal.success(this.$translate.text('User updated successfully !'))
+                this.$emit('memberModified')
+                this.$swal.success(this.$translate.text('Member updated successfully !'))
             }
         },
 

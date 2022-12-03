@@ -8,7 +8,8 @@ export default {
         resetHost: {
             password: '',
             confirm_password: ''
-        }
+        },
+        genders: ['Other', 'Female', 'Male']
     }),
 
     computed: {
@@ -18,41 +19,6 @@ export default {
 
         account () {
             return this.auth.account
-        },
-
-        roles () {
-            return this.$store.state.roles
-        },
-
-        isUser () {
-            return this.account.role.id === 3
-        },
-
-        isAdmin () {
-            return this.account.role.id === 2
-        },
-
-        isSuperAdmin () {
-            return this.account.role.id === 1
-        },
-
-        canSeeClean () {
-            return this.isSuperAdmin
-        },
-
-        isAvailable () {
-            return this.account.role.id == 1 || this.account.role.id == 2
-        },
-
-        availableRoles () {
-            let tab = []
-            if (this.isUser) tab = this.roles.filter(r => r.id != 1 && r.id != 2)
-
-            if (this.isAdmin) tab = this.roles.filter(r => r.id != 1)
-
-            if (this.isSuperAdmin) tab = this.roles.slice()
-
-            return tab
         },
     },
 }

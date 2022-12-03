@@ -150,7 +150,16 @@ export default {
       },
 
       editTeamModal (member) {
-        this.selectedMember = member
+        this.selectedMember = {
+          id: member.id,
+          sex: member.sex,
+          email: member.email,
+          first_name: member.first_name,
+          last_name: member.last_name,
+          birthday: member.birthday,
+          phone: member.phone,
+        }
+
         this.openModal({ id: 'editUserModal' })
       },
 

@@ -179,7 +179,7 @@ export default {
 
             this.startLoading()
 
-            const res = await this.$api.patch(`user-api/users/${this.member.id}/`, this.ghost)
+            const res = await this.$api.put(`user-api/users/${this.member.id}/`, this.ghost)
                 .catch(error => {
                     this.stopLoading()
                     this.$swal.error(this.$translate.text('Error'), this.$translate.text(error.response.data.errors))

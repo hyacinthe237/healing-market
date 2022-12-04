@@ -10,16 +10,16 @@
             <li>
                 <router-link :to="{ name: 'schedule' }" :class="[current == 'schedule' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
-                    <span>{{ t('Schedule') }}</span>
+                    <span>{{ isManager ? t('Schedule') : t('My Schedule') }}</span>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'timesheets' }" :class="[current == 'timesheets' ? 'active' : '']">
                     <i class="ion-md-timer"></i>
-                    <span>{{ t('Timesheets') }}</span>
+                    <span>{{ isManager ? t('Timesheets') : t('My Timesheets') }}</span>
                 </router-link>
             </li>
-            <li>
+            <li v-if="isManager">
                 <router-link :to="{ name: 'team' }" :class="[current == 'team' ? 'active' : '']">
                     <i class="ion-md-people"></i>
                     <span>{{ t('Team') }}</span>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import logo from '@/assets/img/logo-nogada-foot.png'
+import config from '../../../services/config'
 
 export default {
     props: {
@@ -58,24 +58,12 @@ export default {
     }),
 
     computed: {
-        computeSize () {
-            if (this.root && this.root.root) {
-                let value = this.root.root.size
-                let size = ''
-
-                if (value >= 1000) {
-                    let gb = value/1000
-                    this.sizecss = parseInt(gb, 10)
-                    size = gb.toFixed(2) + ' GB'
-                } else { size = value.toFixed(2) + ' MB' }
-
-                return size
-            }
-        },
-
         user () {
-           return this.$store.state.users.user
-        }
+          return JSON.parse(localStorage.getItem(config.get('user')))
+       },
+
+       isManager () { return this.user.is_manager },
+       isEmployee () { return this.user.is_employee },
     },
 
     mounted () {

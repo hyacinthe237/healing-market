@@ -206,10 +206,11 @@
             align-items: center;
             text-decoration: none;
             color: $dark;
-            font-size: 20px;
+            font-size: 18px;
             text-transform: capitalize;
             font-weight: 500;
             cursor: pointer;
+            white-space: nowrap;
 
             i {
                 font-size: 30px;
@@ -217,9 +218,7 @@
                 padding-right: 20px;
             }
 
-            span {
-
-            }
+            span {}
 
             &.active {
                 text-decoration: none;

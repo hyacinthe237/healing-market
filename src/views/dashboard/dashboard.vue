@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-      <Header />
-    <div id="wrapper">
+      <Header v-show="!isLoading" />
+    <div id="wrapper" v-show="!isLoading">
         <Sidebar :current="'dashboard'" />
 
         <div id="page-content-wrapper">
@@ -118,6 +118,9 @@
             </div>
         </div>
     </div>
+    <div class="_loader" v-show="isLoading">
+      <Spinners></Spinners>
+    </div>
   </div>
 </template>
 
@@ -141,12 +144,28 @@ export default {
        isManager () { return this.user.is_manager },
        isEmployee () { return this.user.is_employee },
     },
-
+    
     watch: { },
 
     mounted () { 
+      //this.getDoashboard()
      },
 
-    methods: { }
+    methods: { 
+      async getDoashboard () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/schedule-api/dashboard-event`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('Sorry', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          console.log('members', res.data)
+        }
+      },
+    }
 }
 </script>

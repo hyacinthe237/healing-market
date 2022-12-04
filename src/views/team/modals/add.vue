@@ -2,12 +2,6 @@
     <div class="_side-modal modal animated fadeIn upload" id="addUserModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!-- <div class="_modal-content bordered right">
-                    <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
-                        <i class="feather icon-x"></i>
-                        {{ t('Close') }}
-                    </button>
-                </div>-->
 
                 <!-- Uninstalling -->
                 <div class="_modal-content">
@@ -45,21 +39,6 @@
                                     <v-error :name="'last_name'" :err="errors" :show="showErrors"></v-error>
                                 </div>
                             </div>
-
-                            <!--<div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="username" v-translate>Username</label>
-                                    <input type="text"
-                                        name="username"
-                                        v-model="ghost.username"
-                                        class="form-control form-control-lg"
-                                        v-validate="'required|min:6'"
-                                        :data-vv-as="t('Username')"
-                                        :placeholder="t('Username')"
-                                    >
-                                    <v-error :name="'username'" :err="errors" :show="showErrors"></v-error>
-                                </div>
-                            </div>-->
 
                             <div class="col-sm-6">
                                 <div class="form-group">

@@ -10,6 +10,7 @@ import SignUpStepTwo from '@/views/core/auth/signup/steps/step-two'
 import SignUpStepThree from '@/views/core/auth/signup/steps/step-three'
 import SignUpStepFour from '@/views/core/auth/signup/steps/step-four'
 import AuthSignin from '@/views/core/auth/signin'
+import CompleteAccess from '@/views/core/auth/complete-access'
 import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
 import Dashboard from '@/views/dashboard/dashboard'
@@ -27,6 +28,7 @@ export default new Router({
     routes: [
         { path: '/', component: CoreBody, name: 'landing' },
         { path: '/signin', component: AuthSignin, name: 'signin' },
+        { path: '/complete/access', component: CompleteAccess, name: 'complete-access' },
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },
         { path: '/signup/welcome', component: SignUpWelcome, name: 'signup-welcome', beforeEnter: Guard.guest },
         { path: '/signup/step/one', component: SignUpStepOne, name: 'signup-step-one', beforeEnter: Guard.guest },

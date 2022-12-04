@@ -1,6 +1,9 @@
 <template lang="html">
     <section class="welcome-page">
-        <div class="profile-top" :style="`background-image:url(${background})`" @click="n('home')">
+        <div class="_loader" v-show="isLoading">
+            <Spinners></Spinners>
+        </div>
+        <div v-show="!isLoading" class="profile-top pointer" :style="`background-image:url(${background})`" @click="n('home')">
             <div class="overlay"></div>
             <div class="profile-top-container">
                 <div
@@ -10,18 +13,18 @@
                 </div>
             </div>
         </div>
-        <div class="content">
+        <div class="content" v-show="!isLoading">
             <div class="head mt-10">
                 <div class="message-big" v-show="showForm">Put in mail so we can verify<br> you have been added by<br> your manager</div>
                 <div class="message-big" v-show="!showForm">Become more <br><span>efficient</span> today</div>
                 <div class="message-small mt-10" v-show="!showForm">How will you want to use <span class="bold">NOGADA 360</span>?</div>
             </div>
 
-            <form class="_form signup-form mt-60" v-show="showForm">
+            <form class="_form signup-form mt-60" v-show="showForm" @submit.prevent>
                 <div class="form-group">
-                    <input type="text" name="email" placeholder="Email address" class="form-control">
+                    <input type="text" name="email" v-model="ghost.email" placeholder="Email address" class="form-control">
                 </div>
-                <div class="button mt-20 pointer" @click="n('dashboard')">
+                <div class="button mt-20 pointer" @click="checkMyEmail()">
                     <div class="text">Continue</div>
                     <div class="icon"><i class="feather icon-chevron-right"></i></div>
                 </div>
@@ -56,24 +59,6 @@
                                 <i class="feather icon-check" v-if="service == item.name"></i>
                             </label>
                         </div>
-                        <!-- <div class="list-item">
-                            <label
-                                :class="['css-input css-checkbox css-checkbox-primary', service == 'VMS visitor management system' ? 'selected': '']"
-                            >
-                                <input type="checkbox" name="list_item" @click="selectService('VMS visitor management system')">
-                                <span class="mr-2"></span>
-                                <span>{{ 'VMS visitor management system' }}</span>
-                            </label>
-                        </div>
-                        <div class="list-item">
-                            <label
-                                :class="['css-input css-checkbox css-checkbox-primary', service == 'Guard tracking' ? 'selected': '']"
-                            >
-                                <input type="checkbox" name="list_item" @click="selectService('Guard tracking')">
-                                <span class="mr-2"></span>
-                                <span>{{ 'Guard tracking' }}</span>
-                            </label>
-                        </div> -->
                     </div>
                     <form class="_form signup-form mt-10" v-show="showList" @click="n('signup-step-one')">
                         <div class="button pointer">
@@ -145,6 +130,21 @@ export default {
               { 'id': 3, 'name': 'Guard tracking' },
             ]
         },
+
+        async checkMyEmail () {
+            this.startLoading()
+
+            const res = await this.$api.post('user-api/verify-employee-email', this.ghost)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('Sorry', error.response.data.message)
+                })
+                if (res) {
+                    this.stopLoading()
+                    this.n('complete-access')
+                    localStorage.setItem('member', JSON.stringify(res.data.message))
+                }
+        }
     }
 }
 </script>

@@ -54,7 +54,7 @@
                   <div class="action" @click="downloadMembers()"><i class="ion-md-cloud-download"></i></div>
                   <div class="lg-btns">
                     <div class="lg-btn-outline">Bulk Action</div>
-                    <div class="lg-btn-primary"><i class="feather icon-plus"></i></div>
+                    <div class="lg-btn-primary" @click="addTeamModal()"><i class="feather icon-plus"></i></div>
                   </div>
                 </div>
               </div>

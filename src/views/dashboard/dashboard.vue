@@ -8,7 +8,7 @@
             <div class="dashboard">
               <div class="cards">
 
-                <div class="card">
+                <div class="card" v-show="isManager">
                   <div class="gauche">
                     <div class="number">45</div>
                     <div class="name">Team members</div>
@@ -16,16 +16,40 @@
                   <div class="droite"><i class="feather icon-users"></i></div>
                 </div>
 
-                <div class="card">
+                <div class="card" v-show="isManager">
                   <div class="gauche">
                     <div class="number">45</div>
                     <div class="name">Clocked in</div>
                   </div>
                   <div class="droite"><i class="feather icon-user"></i></div>
                 </div>
+
+                <div class="card" v-show="isEmployee">
+                  <div class="gauche">
+                    <div class="number">02</div>
+                    <div class="name">Active shifts</div>
+                  </div>
+                  <div class="droite"><i class="feather icon-file"></i>!</div>
+                </div>
+
+                <div class="card" v-show="isEmployee">
+                  <div class="gauche">
+                    <div class="number">00</div>
+                    <div class="name">Completed shifts</div>
+                  </div>
+                  <div class="droite"><i class="feather icon-file"></i></div>
+                </div>
+
+                <div class="card" v-show="isEmployee">
+                  <div class="gauche">
+                    <div class="number">$00</div>
+                    <div class="name">Actual earning</div>
+                  </div>
+                  <div class="droite"><i class="feather icon-user"></i></div>
+                </div>
               </div>
 
-              <div>
+              <div v-show="isManager">
                   <div class="_tabs mt-20">
                       <div class="nav nav-tabs bg" id="nav-tab" role="tablist">
                           <a class="nav-item nav-link" id="nav-upcoming-tab"
@@ -72,7 +96,25 @@
                       </div>
                   </div>
               </div>
-
+              <div class="cards" v-show="isEmployee">
+                <div class="schedule-item">
+                  <div class="gauche">
+                    <div class="label">Security officer</div>
+                    <div class="time">10pm - 6am</div>
+                    <div class="more mt-20">Views details</div>
+                  </div>
+                  <div class="droite"><i class="feather icon-message-square"></i></div>
+                </div>
+                
+                <div class="schedule-item">
+                  <div class="gauche">
+                    <div class="label">Security officer</div>
+                    <div class="time">10pm - 6am</div>
+                    <div class="more mt-20">Views details</div>
+                  </div>
+                  <div class="droite"><i class="feather icon-message-square"></i></div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
@@ -82,6 +124,7 @@
 <script>
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
+import config from '../../services/config'
 
 export default {
     data: () => ({
@@ -90,7 +133,14 @@ export default {
 
     components: { Header, Sidebar },
 
-    computed: { },
+    computed: {
+       user () {
+          return JSON.parse(localStorage.getItem(config.get('user')))
+       },
+
+       isManager () { return this.user.is_manager },
+       isEmployee () { return this.user.is_employee },
+    },
 
     watch: { },
 

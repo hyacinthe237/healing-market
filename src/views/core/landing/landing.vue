@@ -7,7 +7,7 @@
                     <div class="col-sm-6">
                         <div class="title"><span>All in one</span> solution to <br> track
                             and manage <br> your <span>security</span> <br> services</div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        <p>Every tool you need to manage  and run your security agency with ease.</p>
 
                         <form action="#" class="_form mt-20">
                             <div class="form-group mt-20">
@@ -61,20 +61,15 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="sub-title">Property management</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Rerum esse impedit facere eos consectetur, ipsa ducimus quos eius reiciendis voluptatibus
-                            dolores ut quisquam maiores accusantium.
-                            Temporibus sunt nesciunt similique quidem.</p>
+                        <div class="sub-title">Visitor management system</div>
+                        <p>Track and grant access to everyone that enters your building , office or property.</p>
                         <a href="#">Learn more about property management</a>
                     </div>
                     <div class="spacer"></div>
                     <div class="col-sm-6">
                         <div class="sub-title">Scheduling</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Rerum esse impedit facere eos consectetur, ipsa ducimus quos eius reiciendis voluptatibus
-                            dolores ut quisquam maiores accusantium.
-                            Temporibus sunt nesciunt similique quidem.</p>
+                        <p>Schedule your team in minutes NOT DAYS.
+                            Manage your team’s schedules,view open shifts, time clocking, timesheets, communication, all in one place.</p>
                         <a href="#">Learn more about scheduling</a>
                     </div>
                     <div class="col-sm-6">

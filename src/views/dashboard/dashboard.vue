@@ -148,7 +148,7 @@ export default {
     watch: { },
 
     mounted () { 
-      //this.getDoashboard()
+      this.getDoashboard()
      },
 
     methods: { 

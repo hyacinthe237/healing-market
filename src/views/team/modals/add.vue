@@ -71,7 +71,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="phone" v-translate>Phone number</label>
-                                    <input type="text"
+                                    <input type="number"
                                         name="phone"
                                         v-model="ghost.phone"
                                         class="form-control form-control-lg"

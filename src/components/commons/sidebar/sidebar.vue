@@ -25,6 +25,12 @@
                     <span>{{ t('Team') }}</span>
                 </router-link>
             </li>
+            <li v-if="isManager">
+                <router-link :to="{ name: 'jobsites' }" :class="[current == 'jobsites' ? 'active' : '']">
+                    <i class="ion-ios-briefcase"></i>
+                    <span>{{ t('Job sites') }}</span>
+                </router-link>
+            </li>
             <li>
                 <router-link :to="{ name: 'settings' }" :class="[current == 'settings' ? 'active' : '']">
                     <i class="ion-md-settings"></i>

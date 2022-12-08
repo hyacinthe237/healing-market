@@ -19,6 +19,7 @@ import Schedule from '@/views/schedule/schedule'
 import Settings from '@/views/settings/settings'
 import Timesheets from '@/views/timesheets/timesheets'
 import Profile from '@/views/team/profile'
+import JobSite from '@/views/jobsites/jobsites'
 
 Vue.use(Router)
 
@@ -42,6 +43,7 @@ export default new Router({
         { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.auth },
         { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.auth },
         { path: '/profile', name: 'profile', component: Profile, beforeEnter: Guard.auth },
+        { path: '/jobsites', name: 'jobsites', component: JobSite, beforeEnter: Guard.auth },
 
         { path: '*', component: NotFound }
     ]

@@ -66,9 +66,12 @@
                   <thead>
                       <tr>
                           <th class="w30">Name</th>
-                          <th class="w20 no-column">Email</th>
-                          <th class="w20 no-column">Phone</th>
-                          <th class="w20 no-column">Position</th>
+                          <th class="w20">Email</th>
+                          <th class="w20">Phone</th>
+                          <th class="w20">Position</th>
+                          <th class="w20">Wage</th>
+                          <th class="w20">Job site</th>
+                          <th class="w20">Status</th>
                           <th class="w10"></th>
                       </tr>
                   </thead>
@@ -81,14 +84,23 @@
                               {{ displayName(m) }}
                             </div>
                           </td>
-                          <td class="w20 no-column">
+                          <td class="w20">
                             <div class="position">{{ m.email }}</div>
                           </td>
-                          <td class="w20 no-column">
+                          <td class="w20">
                             <div class="status">{{ m.phone }}</div>
                           </td>
-                          <td class="w20 no-column">
+                          <td class="w20">
                             <div class="availability">{{ displayPosition(m) }}</div>
+                          </td>
+                          <td class="w20">
+                            <div class="position"></div>
+                          </td>
+                          <td class="w20">
+                            <div class="status"></div>
+                          </td>
+                          <td class="w20">
+                            <div class="availability"></div>
                           </td>
                           <td class="w10">
                             <div class="actions pointer">

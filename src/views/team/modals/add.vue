@@ -173,7 +173,7 @@
                     <div class="buttons mt-20" v-show="!isLoading">
                         <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
                             <i class="feather icon-x"></i>
-                            {{ t('Save and exit') }}
+                            {{ t('Save and Finish') }}
                         </button>
 
                         <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
@@ -183,7 +183,7 @@
 
                         <button class="btn-primary btn" @click.prevent="create()">
                             <i class="feather icon-save mr-10"></i>
-                            {{ t('Save and another') }}
+                            {{ t('Save and Add another') }}
                         </button>
                     </div>
                 </div>

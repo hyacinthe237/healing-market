@@ -94,7 +94,7 @@
                             <div class="actions pointer">
                               <div class="icons">
                                 <i class="feather icon-edit-2" @click="editTeamModal(m)"></i>
-                                <i class="feather icon-more-vertical" @click="confirmDelete(m)"></i>
+                                <i class="feather icon-more-vertical"></i>
                               </div>
                             </div>
                           </td>
@@ -119,6 +119,7 @@ import Sidebar from '@/components/commons/sidebar/sidebar'
 import config from '../../services/config'
 import AddTeamMember from './modals/add.vue'
 import EditTeamMember from './modals/edit.vue'
+import Swal from 'sweetalert2'
 
 export default {
     data: () => ({
@@ -236,6 +237,38 @@ export default {
 
           // Performing a download with click
           a.click()
+      },
+
+      async deleteTeamMember (site) {
+        this.startLoading()
+
+        const res = await this.$api.delete(`/timesheet-api/job-sites/${site.id}`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('Sorry', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.getJobSites()
+          this.$swal.success('Confirmation', "Job site are deleted successfuly!")
+        }
+      },
+
+      confirmDelete (member) {
+        Swal.fire({
+              text: this.$translate.text("Are you sure you want to delete the selected team member ?"),
+              type: 'warning',
+              showCancelButton: true,
+              cancelButtonText: this.$translate.text('Cancel'),
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: this.$translate.text('Yes, delete!')
+        }).then((result) => {
+              if (result.value) {
+                  this.deleteTeamMember(member)
+              }
+        })
       },
     }
 }

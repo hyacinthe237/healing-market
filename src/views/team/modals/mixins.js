@@ -5,11 +5,13 @@ export default {
         user_actions: [],
         more_actions: false,
         showGroup: false,
+        isSelected: '',
         resetHost: {
             password: '',
             confirm_password: ''
         },
-        genders: ['Other', 'Female', 'Male']
+        genders: ['Other', 'Female', 'Male'],
+        periods: ['/hour', '/month', '/year'],
     }),
 
     computed: {

@@ -37,7 +37,7 @@ import VErrorComponent from '@/components/commons/error/v-error'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
-import messagesFr from 'vee-validate/dist/locale/fr.js'
+import messagesEn from 'vee-validate/dist/locale/en.js'
 
 global.$ = $
 window.eventBus = new Vue()
@@ -59,7 +59,7 @@ Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
 Vue.use(VueParticlesBg)
 Vue.use(VueScrollFixedNavbar)
-Vue.use(VeeValidate, { locale: 'fr', dictionary: { fr: messagesFr } })
+Vue.use(VeeValidate, { locale: 'en', dictionary: { en: messagesEn } })
 
 Vue.config.productionTip = false
 Vue.component('radial-progress-bar', RadialProgressBar)

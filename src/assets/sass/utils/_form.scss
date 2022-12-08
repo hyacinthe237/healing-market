@@ -60,7 +60,28 @@
 
     .form-group {
         margin-bottom: 10px;
+        .levels {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
 
+            .level {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 5px;
+                border: 1px solid $first;
+                margin-right: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &.selected {
+                    background-color: $primary;
+                    color: white;
+                }
+            }
+        }
         input, select {
             border: none;
             padding-left: 20px;

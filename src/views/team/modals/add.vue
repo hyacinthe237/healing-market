@@ -101,48 +101,89 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="password" v-translate>Password</label>
-                                    <input type="password"
-                                        name="password"
-                                        v-model="ghost.password1"
-                                        class="form-control form-control-lg"
-                                        v-validate="'required|min:6'"
-                                        ref="password"
-                                        :data-vv-as="t('Password')"
-                                        :placeholder="t('Password')"
-                                    >
-                                    <v-error :name="'password'" :err="errors" :show="showErrors"></v-error>
+                                    <label for="role" v-translate>Access level</label>
+                                    <div class="levels">
+                                        <div :class="['level', isSelected == 'employee' ? 'selected' : '']" @click="selecteEmployee()">Employee</div>
+                                        <div :class="['level', isSelected == 'manager' ? 'selected' : '']" @click="selecteManager()">Manager</div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="password2" v-translate>Confirm Password</label>
-                                    <input type="password"
-                                        name="password2"
-                                        v-model="ghost.password2"
-                                        class="form-control form-control-lg"
-                                        v-validate="'required|confirmed:password'"
-                                        :data-vv-as="t('Confirm Password')"
-                                        :placeholder="t('Confirm Password')"
-                                    >
-                                    <v-error :name="'confirm password'" :err="errors" :show="showErrors"></v-error>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Job sites</label>
+                                            <select
+                                                name="job_site"
+                                                id="job_site"
+                                                v-model="ghost.job_site"
+                                                class="form-control form-control-lg"
+                                            >
+                                                <option
+                                                    v-for="(sex, index) in genders"
+                                                    :key="index+1"
+                                                    :value="sex"
+                                                >
+                                                    {{ t(sex) }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Wage</label>
+                                            <input type="number"
+                                                name="wage"
+                                                v-model="ghost.wage"
+                                                class="form-control form-control-lg"
+                                                v-validate="'required'"
+                                                placeholder="$"
+                                            >
+                                            <v-error :name="'wage'" :err="errors" :show="showErrors"></v-error>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Period</label>
+                                            <select
+                                                name="period"
+                                                id="period"
+                                                v-model="ghost.period"
+                                                class="form-control form-control-lg"
+                                            >
+                                                <option
+                                                    v-for="(p, index) in periods"
+                                                    :key="index+1"
+                                                    :value="p"
+                                                >
+                                                    {{ t(p) }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form>
 
                     <div class="buttons mt-20" v-show="!isLoading">
-                        <button class="btn-primary btn mr-20" @click.prevent="create()">
-                            <i class="feather icon-save mr-10"></i>
-                            {{ t('Save member') }}
+                        <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
+                            <i class="feather icon-x"></i>
+                            {{ t('Save and exit') }}
                         </button>
 
-                        <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
+                        <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
                             <i class="feather icon-x"></i>
                             {{ t('Close') }}
+                        </button>
+
+                        <button class="btn-primary btn" @click.prevent="create()">
+                            <i class="feather icon-save mr-10"></i>
+                            {{ t('Save and another') }}
                         </button>
                     </div>
                 </div>
@@ -161,13 +202,24 @@ export default {
     mixins: [usersMixins],
 
     methods: {
+        selecteEmployee () {
+            this.isSelected = 'employee'
+            this.ghost.is_employee = true
+            this.ghost.is_manager = false
+        },
+
+        selecteManager () {
+            this.ghost.is_employee = false
+            this.ghost.is_manager = true
+            this.isSelected = 'manager'
+        },
+
         async create () {
             this.showErrors = true
             const isValid = await this.$validator.validate()
             if (!isValid) return false
 
             this.startLoading()
-            this.ghost.is_employee = true
 
             const res = await this.$api.post('/user-api/add-member-team', this.ghost)
                 .catch(error => {

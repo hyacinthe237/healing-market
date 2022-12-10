@@ -58,7 +58,7 @@
                                   <div class="actions pointer">
                                     <div class="icons">
                                       <i class="feather icon-edit-2" @click="edit(s)"></i>
-                                      <i class="feather icon-more-vertical" @click="confirmDelete(s)"></i>
+                                      <i class="feather icon-more-vertical" ></i>
                                     </div>
                                   </div>
                                 </td>
@@ -124,7 +124,7 @@ export default {
 
       async addJobSite () {
         this.startLoading()
-        this.ghost.business = this.user.id
+        this.ghost.business = this.user.business[0].business_id
 
         const res = await this.$api.post(`/timesheet-api/job-sites/`, this.ghost)
         .catch(error => {
@@ -143,8 +143,13 @@ export default {
       async editJobSite () {
         this.startLoading()
         this.ghost.business = this.user.id
+        const editObject = {
+          name: this.ghost.name,
+          color_code: this.ghost.color_code,
+          business: this.ghost.business.id
+        }
 
-        const res = await this.$api.put(`/timesheet-api/job-sites/${this.ghost.id}`, this.ghost)
+        const res = await this.$api.put(`/timesheet-api/job-sites/${this.ghost.id}/`, editObject)
         .catch(error => {
             this.stopLoading()
             this.$swal.error('Sorry', error.response.data.error_message)

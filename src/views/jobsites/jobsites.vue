@@ -142,7 +142,7 @@ export default {
 
       async editJobSite () {
         this.startLoading()
-        this.ghost.business = this.user.id
+        
         const editObject = {
           name: this.ghost.name,
           color_code: this.ghost.color_code,

@@ -94,13 +94,13 @@
                             <div class="availability">{{ displayPosition(m) }}</div>
                           </td>
                           <td class="w20">
-                            <div class="position"></div>
+                            <div class="position">${{ m.wage }}</div>
                           </td>
                           <td class="w20">
                             <div class="status"></div>
                           </td>
                           <td class="w20">
-                            <div class="availability"></div>
+                            <div class="availability">{{ m.status }}</div>
                           </td>
                           <td class="w10">
                             <div class="actions pointer">
@@ -120,7 +120,7 @@
     <div class="_loader" v-show="isLoading">
       <Spinners></Spinners>
     </div>
-    <AddTeamMember @memberAdded="getMembers"></AddTeamMember>
+    <AddTeamMember @memberAdded="getMembers" :sites="sites"></AddTeamMember>
     <EditTeamMember @memberModified="getMembers" :member="selectedMember"></EditTeamMember>
   </div>
 </template>
@@ -139,6 +139,7 @@ export default {
         selectedMember: {},
         showFilter: false,
         members: [],
+        sites: []
     }),
 
     components: { Header, Sidebar, AddTeamMember, EditTeamMember },
@@ -151,6 +152,7 @@ export default {
 
     mounted () { 
       this.getMembers()
+      this.getJobSites()
     },
 
     methods: {
@@ -160,6 +162,21 @@ export default {
 
       addTeamModal () {
         this.openModal({ id: 'addUserModal' })
+      },
+
+      async getJobSites () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/timesheet-api/job-sites/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get job site error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.sites = res.data.results
+        }
       },
 
       editTeamModal (member) {

@@ -8,6 +8,9 @@
                     <div class="primary fs-20">
                         {{ t('Add a team member') }}
                     </div>
+                    <div class="close" @click="closeAllModals()">
+                        <i class="feather icon-x"></i>
+                    </div>
                     <form @submit.prevent class="_form mt-20" v-show="!isLoading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -122,11 +125,11 @@
                                                 class="form-control form-control-lg"
                                             >
                                                 <option
-                                                    v-for="(sex, index) in genders"
-                                                    :key="index+1"
-                                                    :value="sex"
+                                                    v-for="site in sites"
+                                                    :key="site.id"
+                                                    :value="site.id"
                                                 >
-                                                    {{ t(sex) }}
+                                                    {{ site. name }}
                                                 </option>
                                             </select>
                                         </div>
@@ -171,7 +174,7 @@
                     </form>
 
                     <div class="buttons mt-20" v-show="!isLoading">
-                        <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
+                        <button class="btn btn-grey mr-20" @click="save('finished')" :disabled="isLoading">
                             <i class="feather icon-x"></i>
                             {{ t('Save and Finish') }}
                         </button>
@@ -181,7 +184,7 @@
                             {{ t('Close') }}
                         </button>
 
-                        <button class="btn-primary btn" @click.prevent="create()">
+                        <button class="btn-primary btn" @click.prevent="save('another')">
                             <i class="feather icon-save mr-10"></i>
                             {{ t('Save and Add another') }}
                         </button>
@@ -201,6 +204,13 @@ import usersMixins from './mixins'
 export default {
     mixins: [usersMixins],
 
+    props: {
+        sites: {
+            type: Array,
+            default: () => []
+        }
+    },
+
     methods: {
         selecteEmployee () {
             this.isSelected = 'employee'
@@ -214,7 +224,7 @@ export default {
             this.isSelected = 'manager'
         },
 
-        async create () {
+        async save (value) {
             this.showErrors = true
             const isValid = await this.$validator.validate()
             if (!isValid) return false
@@ -229,7 +239,10 @@ export default {
                 if (res) {
                     this.stopLoading()
                     this.showErrors = false
-                    this.closeAllModals()
+                    if (value == 'finished') {
+                        this.closeAllModals()
+                    }
+                    
                     this.$emit('memberAdded')
                     this.$swal.success('Confirmation', this.$translate.text('Member created successfully !'))
                 }

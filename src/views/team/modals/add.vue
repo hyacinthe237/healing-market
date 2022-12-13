@@ -243,6 +243,10 @@ export default {
                     if (value == 'finished') {
                         this.closeModal()
                     }
+
+                    if (value == 'another') {
+                        this.resetGhost()
+                    }
                     
                     this.$emit('memberAdded')
                     this.$swal.success('Confirmation', this.$translate.text('Member created successfully !'))

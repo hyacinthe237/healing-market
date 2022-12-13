@@ -288,6 +288,13 @@
 ._modal-content {
     padding: 20px;
 
+    .close {
+        margin-top: -30px;
+        z-index: 9;
+        cursor: pointer;
+        color: $dark;
+    }
+
     .content {
       display: flex;
       flex-direction: row;

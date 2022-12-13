@@ -8,7 +8,7 @@
                     <div class="primary fs-20">
                         {{ t('Add a team member') }}
                     </div>
-                    <div class="close" @click="closeAllModals()">
+                    <div class="close" @click="closeModal()">
                         <i class="feather icon-x"></i>
                     </div>
                     <form @submit.prevent class="_form mt-20" v-show="!isLoading">
@@ -179,10 +179,10 @@
                             {{ t('Save and Finish') }}
                         </button>
 
-                        <button class="btn btn-grey mr-20" @click="closeAllModals()" :disabled="isLoading">
+                        <!--<button class="btn btn-grey mr-20" @click="closeModal()" :disabled="isLoading">
                             <i class="feather icon-x"></i>
                             {{ t('Close') }}
-                        </button>
+                        </button>-->
 
                         <button class="btn-primary btn" @click.prevent="save('another')">
                             <i class="feather icon-save mr-10"></i>
@@ -239,13 +239,35 @@ export default {
                 if (res) {
                     this.stopLoading()
                     this.showErrors = false
+                    
                     if (value == 'finished') {
-                        this.closeAllModals()
+                        this.closeModal()
                     }
                     
                     this.$emit('memberAdded')
                     this.$swal.success('Confirmation', this.$translate.text('Member created successfully !'))
                 }
+        },
+
+        closeModal () {
+            this.resetGhost()
+            this.closeAllModals()
+        },
+
+        resetGhost () {
+            this.ghost = {
+                first_name: '',
+                last_name: '',
+                sex: '',
+                wage: '',
+                period: '',
+                birthday: '',
+                phone: '',
+                email: '',
+                is_employee: false,
+                is_manager: false
+            }
+            this.isSelected = ''
         }
     }
 }

@@ -2,23 +2,14 @@
     <div class="_side-modal modal animated fadeIn upload" id="editUserModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!--<div class="_modal-content bordered">
-                    
-                    <button class="btn btn-grey mr-10" @click="closeAllModals()" :disabled="isLoading">
-                        <i class="feather icon-x"></i>
-                        {{ t('Close') }}
-                    </button>
-
-                    <button class="btn-primary btn" @click="reset()" :disabled="isLoading">
-                        <i class="feather icon-save"></i>
-                        {{ t('Reset password') }}
-                    </button>
-                </div>-->
 
                 <!-- Uninstalling -->
                 <div class="_modal-content">
                     <div class="primary fs-20">
                         {{ t('Edit member') }}
+                    </div>
+                    <div class="close" @click="closeAllModals()">
+                        <i class="feather icon-x"></i>
                     </div>
 
                     <form @submit.prevent class="_form mt-20" v-show="!isLoading">
@@ -113,6 +104,74 @@
                                     <v-error :name="'phone'" :err="errors" :show="showErrors"></v-error>
                                 </div>
                             </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="role" v-translate>Access level</label>
+                                    <div class="levels">
+                                        <div :class="['level', isSelected == 'employee' ? 'selected' : '']" @click="selecteEmployee()">Employee</div>
+                                        <div :class="['level', isSelected == 'manager' ? 'selected' : '']" @click="selecteManager()">Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Job sites</label>
+                                            <select
+                                                name="job_site"
+                                                id="job_site"
+                                                v-model="ghost.job_site"
+                                                class="form-control form-control-lg"
+                                            >
+                                                <option
+                                                    v-for="site in sites"
+                                                    :key="site.id"
+                                                    :value="site.id"
+                                                >
+                                                    {{ site. name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Wage</label>
+                                            <input type="number"
+                                                name="wage"
+                                                v-model="ghost.wage"
+                                                class="form-control form-control-lg"
+                                                v-validate="'required'"
+                                                placeholder="$"
+                                            >
+                                            <v-error :name="'wage'" :err="errors" :show="showErrors"></v-error>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="role" v-translate>Period</label>
+                                            <select
+                                                name="period"
+                                                id="period"
+                                                v-model="ghost.period"
+                                                class="form-control form-control-lg"
+                                            >
+                                                <option
+                                                    v-for="(p, index) in periods"
+                                                    :key="index+1"
+                                                    :value="p"
+                                                >
+                                                    {{ t(p) }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
 
@@ -120,11 +179,6 @@
                         <button class="btn-primary btn mr-20" @click.prevent="updateUser()">
                             <i class="feather icon-save mr-10"></i>
                             {{ t('Update member') }}
-                        </button>
-
-                        <button class="btn btn-grey" @click="closeAllModals()" :disabled="isLoading">
-                            <i class="feather icon-x"></i>
-                            {{ t('Close') }}
                         </button>
                     </div>
 
@@ -147,7 +201,12 @@ export default {
         member: {
             type: Object,
             default: () => {}
-        }
+        },
+
+        sites: {
+            type: Array,
+            default: () => []
+        },
     },
 
     watch: {
@@ -157,6 +216,12 @@ export default {
                 if (!_.isEmpty(val)) {
                     this.showErrors = false
                     this.ghost = Object.assign({}, val)
+                    if (val.is_manager) {
+                        this.isSelected = 'manager'
+                    }
+                    if (val.is_employee) {
+                        this.isSelected = 'employee'
+                    }
                 }
             }
         }
@@ -167,6 +232,12 @@ export default {
             if (!_.isEmpty(result)) {
                 this.showErrors = false
                 this.ghost = Object.assign({}, result)
+                if (result.is_manager) {
+                    this.isSelected = 'manager'
+                }
+                if (result.is_employee) {
+                    this.isSelected = 'employee'
+                }
             }
         })
     },
@@ -198,6 +269,18 @@ export default {
             window.$('#editUserModal').modal('hide')
             window.eventBus.$emit('reset', 'password')
             this.$emit('reset', this.person)
+        },
+
+        selecteEmployee () {
+            this.isSelected = 'employee'
+            this.ghost.is_employee = true
+            this.ghost.is_manager = false
+        },
+
+        selecteManager () {
+            this.ghost.is_employee = false
+            this.ghost.is_manager = true
+            this.isSelected = 'manager'
         },
     }
 }

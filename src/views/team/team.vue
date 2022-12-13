@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="lg-btns">
-                  <div class="lg-btn-outline">Bulk Action</div>
+                  <div class="lg-btn-outline" @click="openBulkActionsModal()">Bulk Action</div>
                   <div class="lg-btn-primary" @click="addTeamModal()">Add Team Member</div>
                 </div>
               </div>
@@ -53,7 +53,7 @@
                   <div class="action"><i class="ion-ios-print"></i></div>
                   <div class="action" @click="downloadMembers()"><i class="ion-md-cloud-download"></i></div>
                   <div class="lg-btns">
-                    <div class="lg-btn-outline">Bulk Action</div>
+                    <div class="lg-btn-outline" @click="openBulkActionsModal()">Bulk Action</div>
                     <div class="lg-btn-primary" @click="addTeamModal()"><i class="feather icon-plus"></i></div>
                   </div>
                 </div>
@@ -120,8 +120,16 @@
     <div class="_loader" v-show="isLoading">
       <Spinners></Spinners>
     </div>
-    <AddTeamMember @memberAdded="getMembers" :sites="sites"></AddTeamMember>
-    <EditTeamMember @memberModified="getMembers" :member="selectedMember"></EditTeamMember>
+    <AddTeamMember 
+      @memberAdded="getMembers" 
+      :sites="sites"
+    ></AddTeamMember>
+    <EditTeamMember 
+      @memberModified="getMembers" 
+      :member="selectedMember"
+      :sites="sites"
+    ></EditTeamMember>
+    <BulkActionsModal></BulkActionsModal>
   </div>
 </template>
 
@@ -131,6 +139,7 @@ import Sidebar from '@/components/commons/sidebar/sidebar'
 import config from '../../services/config'
 import AddTeamMember from './modals/add.vue'
 import EditTeamMember from './modals/edit.vue'
+import BulkActionsModal from './modals/bulk-actions.vue'
 import Swal from 'sweetalert2'
 
 export default {
@@ -142,7 +151,7 @@ export default {
         sites: []
     }),
 
-    components: { Header, Sidebar, AddTeamMember, EditTeamMember },
+    components: { Header, Sidebar, AddTeamMember, EditTeamMember, BulkActionsModal },
 
     computed: {
       user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
@@ -162,6 +171,10 @@ export default {
 
       addTeamModal () {
         this.openModal({ id: 'addUserModal' })
+      },
+
+      openBulkActionsModal () {
+        this.openModal({ id: 'bulkActionsModal' })
       },
 
       async getJobSites () {
@@ -188,6 +201,9 @@ export default {
           last_name: member.last_name,
           birthday: member.birthday,
           phone: member.phone,
+          wage: member.wage,
+          is_employee: member.is_employee,
+          is_manager: member.is_manager,
         }
 
         this.openModal({ id: 'editUserModal' })

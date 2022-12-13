@@ -9,6 +9,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <form class="_form mt-20 padding" @submit.prevent>
+                  <div class="reset" @click="resetGhost()"><i class="feather icon-repeat"></i></div>
                   <h3>{{ type_name }} a job site</h3>
                   <div class="form-group">
                     <label for="name">Name</label>

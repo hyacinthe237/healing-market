@@ -105,7 +105,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="role" v-translate>Wage</label>
+                                    <input type="number"
+                                        name="wage"
+                                        v-model="ghost.wage"
+                                        class="form-control form-control-lg"
+                                        v-validate="'required'"
+                                        placeholder="$"
+                                    >
+                                    <v-error :name="'wage'" :err="errors" :show="showErrors"></v-error>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="role" v-translate>Access level</label>
                                     <div class="levels">
@@ -115,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <!--<div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -171,7 +185,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </form>
 

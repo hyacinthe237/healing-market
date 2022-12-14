@@ -242,7 +242,7 @@ export default {
         if (res) {
           this.stopLoading()
           console.log('members', res.data.message.teamates)
-          this.members = res.data.message.teamates
+          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
         }
       },
 

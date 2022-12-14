@@ -3,7 +3,7 @@
         <div class="_loader" v-show="isLoading">
             <Spinners></Spinners>
         </div>
-        <div v-show="!isLoading" class="profile-top pointer" :style="`background-image:url(${background})`" @click="n('home')">
+        <div v-show="!isLoading" class="profile-top pointer" :style="`background-image:url(${background})`" @click="n('landing')">
             <div class="overlay"></div>
             <div class="profile-top-container">
                 <div

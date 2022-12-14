@@ -1,6 +1,6 @@
 <template lang="html">
   <section class="welcome-page">
-      <div class="profile-top" :style="`background-image:url(${background})`" @click="n('home')" v-show="!isLoading">
+      <div class="profile-top pointer" :style="`background-image:url(${background})`" @click="n('landing')" v-show="!isLoading">
           <div class="overlay"></div>
           <div class="profile-top-container">
               <div class="profile-photo"><img :src="logo" /></div>

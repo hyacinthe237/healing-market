@@ -17,11 +17,15 @@
                   <li class="nav__item"><a href="#">Product</a></li>
                   <li class="nav__item"><a href="#">Pricing</a></li>
                   <li class="nav__item"><a href="#">Contact us</a></li>
-                  <li class="nav__item signin"><a href="#" @click="n('signin')">Signin</a></li>
+                  <li class="nav__item signin"><a href="#" @click="n('signin')" v-show="!isConnected">Signin</a></li>
+                  <li class="nav__item signin"><a href="#" @click="n('dashboard')" v-show="isConnected">View dashboard</a></li>
                 </ul>
               </nav>
             </div>
-            <div class="site-header__end pointer" @click="n('signin')">
+            <div class="site-header__end pointer" @click="n('dashboard')" v-show="isConnected">
+              <a class="pointer"><span>View dashboard</span> <i class="feather icon-log-in"></i></a>
+            </div>
+            <div class="site-header__end pointer" @click="n('signin')" v-show="!isConnected">
               <a class="pointer"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
             </div>
           </div>
@@ -32,6 +36,9 @@
 
 <script>
 import logo from '@/assets/img/logo.png'
+import config from '../../../../services/config';
+import _ from 'lodash'
+
 export default {
   data: () => ({
     logo
@@ -52,6 +59,16 @@ export default {
               this.setAttribute("aria-expanded", "true");
           }
       });
-  }
+  },
+
+  computed: {
+    user () {
+      return JSON.parse(localStorage.getItem(config.get('user')))
+    },
+
+    isConnected () {
+      return !_.isEmpty(this.user)
+    }
+  },
 }
 </script>

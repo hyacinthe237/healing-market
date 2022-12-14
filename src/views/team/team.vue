@@ -21,8 +21,10 @@
                 <select name="date">
                   <option>By Access Level</option>
                 </select>
-                <select name="date">
-                  <option>By Status</option>
+                <select name="status" v-model="status">
+                  <option value="">By Status</option>
+                  <option value="activated">Activated</option>
+                  <option value="pending">Pending</option>
                 </select>
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
@@ -40,14 +42,16 @@
             <div class="filter-box" v-if="showFilter">
               <div class="reste">
                 <input type="text" placeholder="Enter name">
-                <select name="date">
-                  <option>Select...</option>
+                <select name="job_site">
+                  <option value="">Select...</option>
                 </select>
-                <select name="date">
-                  <option>By Access Level</option>
+                <select name="access">
+                  <option value="">By Access Level</option>
                 </select>
-                <select name="date">
-                  <option>By Status</option>
+                <select name="status" v-model="status">
+                  <option value="">By Status</option>
+                  <option value="activated">Activated</option>
+                  <option value="pending">Pending</option>
                 </select>
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
@@ -148,7 +152,8 @@ export default {
         selectedMember: {},
         showFilter: false,
         members: [],
-        sites: []
+        sites: [],
+        status: ''
     }),
 
     components: { Header, Sidebar, AddTeamMember, EditTeamMember, BulkActionsModal },
@@ -157,7 +162,13 @@ export default {
       user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
     },
 
-    watch: { },
+    watch: {
+      'status': function (val) {
+        if (val !== '') {
+          this.members = this.members.filter(m => m.status == val)
+        }
+      },
+    },
 
     mounted () { 
       this.getMembers()

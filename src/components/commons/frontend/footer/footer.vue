@@ -5,7 +5,7 @@
                 <div class="img">
                     <img :src="logoFooter" alt="">
                 </div>
-                <form action="" class="_form mt-20">
+                <form action="" class="_form mt-20" v-show="!isConnected">
                     <div class="form-group mt-20">
                         <div class="content bs">
                             <input type="email"
@@ -53,6 +53,9 @@ export default {
     data: () => ({
       logoFooter
     }),
+    props: {
+        isConnected: { type: Boolean, default: false }
+    },
     methods: {
         goto (name) {
             this.$router.push({ name })

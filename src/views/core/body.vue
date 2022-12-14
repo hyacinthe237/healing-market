@@ -9,7 +9,7 @@
                         and manage <br> your <span>security</span> <br> services</div>
                     <p>Every tool you need to manage  and run your security agency with ease.</p>
 
-                    <form action="#" class="_form mt-20">
+                    <form action="#" class="_form mt-20" v-show="!isConnected">
                         <div class="form-group mt-20">
                             <div class="content bs">
                                 <input type="email"
@@ -163,7 +163,8 @@
                 <div class="spacer"></div>
                 <div class="col-sm-12 text-center">
                     <i>It takes just a minute</i>
-                    <button class="btn btn-primary" @click="n('signup-welcome')">Sign up now</button>
+                    <button class="btn btn-primary" @click="n('signup-welcome')" v-show="!isConnected">Sign up now</button>
+                    <button class="btn btn-primary" @click="n('dashboard')" v-show="isConnected">View dashboard</button>
                 </div>
             </div>
         </div>
@@ -306,7 +307,7 @@
         </div>
     </section>
 
-    <Footer></Footer>
+    <Footer :isConnected="isConnected"></Footer>
     <previewModal :text="selectedText"></previewModal>
   </div>
 </template>
@@ -323,6 +324,7 @@ import logoApple from '@/assets/img/landing/apple.png'
 import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
 import previewModal from './modals/preview'
+import config from '../../services/config'
 
 export default {
     name: 'CoreBody',
@@ -334,6 +336,16 @@ export default {
 
     components: {
         Navbar, Footer, previewModal
+    },
+
+    computed: {
+        user () {
+            return JSON.parse(localStorage.getItem(config.get('user')))
+        },
+
+        isConnected () {
+            return !_.isEmpty(this.user)
+        }
     },
 
     methods: {

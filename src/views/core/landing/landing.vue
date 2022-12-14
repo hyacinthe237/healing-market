@@ -9,7 +9,7 @@
                             and manage <br> your <span>security</span> <br> services</div>
                         <p>Every tool you need to manage  and run your security agency with ease.</p>
 
-                        <form action="#" class="_form mt-20">
+                        <form action="#" class="_form mt-20" v-show="!isConnected">
                             <div class="form-group mt-20">
                                 <div class="content bs">
                                     <input type="email"
@@ -321,6 +321,7 @@ import logoGoogle from '@/assets/img/landing/google.png'
 import logoApple from '@/assets/img/landing/apple.png'
 import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
+import config from '../../../services/config'
 
 export default {
     name: 'LandingPage',
@@ -331,6 +332,16 @@ export default {
 
     components: {
         Navbar, Footer
-    }
+    },
+
+    computed: {
+        user () {
+            return JSON.parse(localStorage.getItem(config.get('user')))
+        },
+
+        isConnected () {
+            return !_.isEmpty(this.user)
+        }
+    },
 }
 </script>

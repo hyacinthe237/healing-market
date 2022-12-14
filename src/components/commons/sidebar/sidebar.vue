@@ -37,6 +37,12 @@
                     <span>{{ t('Settings') }}</span>
                 </router-link>
             </li>
+            <li>
+                <router-link :to="{ name: 'landing' }">
+                    <i class="ion-md-globe"></i>
+                    <span>{{ t('Website') }}</span>
+                </router-link>
+            </li>
         </ul>
     </div>
 </template>

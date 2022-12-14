@@ -17,6 +17,7 @@
                   <li class="nav__item"><a href="#">Product</a></li>
                   <li class="nav__item"><a href="#">Pricing</a></li>
                   <li class="nav__item"><a href="#">Contact us</a></li>
+                  <li class="nav__item signin"><a href="#" @click="n('signin')">Signin</a></li>
                 </ul>
               </nav>
             </div>

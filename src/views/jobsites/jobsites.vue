@@ -249,6 +249,9 @@ export default {
 
       resetGhost () {
         this.ghost = { name: '', color_code: '', business: '' }
+        this.selectedColor = ''
+        this.selectedColorName = ''
+        this.active = false
       },
     }
 }

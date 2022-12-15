@@ -16,10 +16,21 @@
                     <input type="text" name="name" v-model="ghost.name" placeholder="Name" class="form-control">
                   </div>
 
-                  <div class="form-group mt-20">
+                  <div id="color-picker" class="form-group mt-20">
                     <label for="color_code">Color code</label>
-                    <input type="text" name="color_code" v-model="ghost.color_code" placeholder="#890000" class="form-control">
-                  </div>
+                    <div class="wrapper-dropdown">
+                      <span @click="toggleDropdown()" v-html="selector"></span>
+                      <ul class="dropdown" v-show="active">
+                        <li 
+                          v-for="color in colors" 
+                          :key="color.hex"
+                          @click="setColor(color)"
+                        >
+                          <span :style="{background: color.hex}"></span> {{color.name}}
+                        </li>
+                      </ul>
+                    </div>
+                    </div>
                   
                   <div class="save-button mt-20 pointer" @click="editJobSite()" v-if="isEdit">
                       <div class="text">Edit a job site</div>
@@ -46,7 +57,7 @@
                         </thead>
       
                         <tbody>
-                            <tr v-for="s in sites" :key="s.id">
+                            <tr v-for="s in sites" :key="s.id" :style="{color: s.color_code}">
                                 <td class="w30">
                                   <div class="name">
                                     {{ s.name }}
@@ -90,7 +101,11 @@ export default {
         payload: {},
         selectedMember: {},
         isEdit: false,
+        active: false,
         sites: [],
+        selectedColor: '',
+        selectedColorName: '',
+        colors: []
     }),
 
     components: { Header, Sidebar },
@@ -98,6 +113,14 @@ export default {
     computed: {
       user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
       type_name () { return this.isEdit ? 'Edit' : 'Add' },
+      selector () {
+        if(!this.selectedColor) {
+          return 'Please select your color';
+        }
+        else {
+          return '<span style="background: ' + this.selectedColor + '"></span> ' + this.selectedColorName;
+        }
+      }
     },
 
     watch: { },
@@ -105,6 +128,7 @@ export default {
     mounted () { 
       this.getJobSites()
       this.resetGhost()
+      this.initColors()
     },
 
     methods: {
@@ -121,6 +145,28 @@ export default {
           this.stopLoading()
           this.sites = res.data.results
         }
+      },
+
+      initColors () {
+        this.colors = [
+          { hex: '#1B3C71', name: 'Blue', },
+          { hex: '#A71930', name: 'Red' },
+          { hex: '#27B086', name: 'Green' },
+          { hex: '#735996', name: 'Indigo' },
+          { hex: '#FF6900', name: 'Orange' },
+          { hex: '#ffc107', name: 'Yellow' },
+        ]
+      },
+
+      setColor (color) {
+        this.selectedColor = color.hex
+        this.selectedColorName = color.name
+        this.active = false
+        this.ghost.color_code = color.hex
+      },
+
+      toggleDropdown () {
+        this.active = !this.active
       },
 
       async addJobSite () {

@@ -74,7 +74,6 @@
                           <th class="w20">Phone</th>
                           <th class="w20">Position</th>
                           <th class="w20">Wage</th>
-                          <th class="w20">Job site</th>
                           <th class="w20">Status</th>
                           <th class="w10"></th>
                       </tr>
@@ -99,9 +98,6 @@
                           </td>
                           <td class="w20">
                             <div class="position">${{ m.wage }}</div>
-                          </td>
-                          <td class="w20">
-                            <div class="status"></div>
                           </td>
                           <td class="w20">
                             <div class="availability">{{ m.status }}</div>

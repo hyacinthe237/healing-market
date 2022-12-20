@@ -163,6 +163,10 @@ export default {
         if (val !== '') {
           this.members = this.members.filter(m => m.status == val)
         }
+
+        if (val == '') {
+          this.members = this.members
+        }
       },
     },
 

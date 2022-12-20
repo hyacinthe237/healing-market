@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-      <Header />
-    <div id="wrapper">
+      <Header v-show="!isLoading" />
+    <div id="wrapper" v-show="!isLoading">
         <Sidebar :current="'timesheets'" />
 
         <div id="page-content-wrapper">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="lg-btns">
-                  <div class="lg-btn-outline">Add Time Card</div>
+                  <div class="lg-btn-outline" @click="addCardTimeModal()">Add Time Card</div>
                   <div class="lg-btn-primary">Download</div>
                 </div>
               </div>
@@ -35,7 +35,7 @@
                 <div class="lg-btns">
                   <div class="lg-btn-outline">filter table</div>
                   <div class="lg-btn-outline">View Totals</div>
-                  <div class="lg-btn-outline"><i class="feather icon-plus"></i> Card</div>
+                  <div class="lg-btn-outline" @click="addCardTimeModal()"><i class="feather icon-plus"></i> Card</div>
                   <div class="lg-btn-outline"><i class="ion-ios-print"></i></div>
                   <div class="lg-btn-primary">Download</div>
                 </div>
@@ -110,10 +110,24 @@
                 </tr>
               </tbody>
             </table>
-            <div class="add"><i class="feather icon-plus-circle"></i> Add an Employee</div>
+            <div class="add pointer" @click="addTeamModal()"><i class="feather icon-plus-circle"></i> Add an Employee</div>
           </div>
         </div>
     </div>
+    <div class="_loader" v-show="isLoading">
+      <Spinners></Spinners>
+    </div>
+
+    <AddTeamMember 
+      @memberAdded="getMembers" 
+      :sites="sites"
+    ></AddTeamMember>
+
+    <AddCardTimeModal 
+      @timeAdded="getMembers" 
+      :sites="sites"
+      :members="members"
+    ></AddCardTimeModal>
   </div>
 </template>
 
@@ -121,15 +135,21 @@
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import moment from 'moment'
+import AddTeamMember from '../team/modals/add.vue'
+import AddCardTimeModal from './modals/add.vue'
+
+import config from '../../services/config'
 
 export default {
     data: () => ({
         payload: {},
         showFilter: false,
         showFilterGrey: false,
+        members: [],
+        sites: [],
     }),
 
-    components: { Header, Sidebar },
+    components: { Header, Sidebar, AddTeamMember, AddCardTimeModal },
 
     computed: {
       last_seven_day () {
@@ -137,18 +157,61 @@ export default {
         let lastdat = moment().subtract(7, 'days').format('ddd MMM d')
 
         return `${lastdat} - ${today}`
-      }
+      },
+
+      user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
     },
 
     watch: { },
 
     mounted () {
-      console.log(this.last_seven_day)
+      this.getJobSites()
+      this.getMembers()
     },
 
     methods: {
       displayFilter () { this.showFilter = !this.showFilter },
-      displayFilterGrey () { this.showFilterGrey = !this.showFilterGrey }
+      displayFilterGrey () { this.showFilterGrey = !this.showFilterGrey },
+
+      addTeamModal () {
+        this.openModal({ id: 'addUserModal' })
+      },
+
+      addCardTimeModal () {
+        window.eventBus.$emit('addcard', 'time')
+        this.openModal({ id: 'addCardTimeModal' })
+      },
+
+      async getMembers () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/user-api/manager-team-member`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get members error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          console.log('members', res.data.message.teamates)
+          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
+        }
+      },
+
+      async getJobSites () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/timesheet-api/job-sites/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get job site error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.sites = res.data.results
+        }
+      },
     }
 }
 </script>

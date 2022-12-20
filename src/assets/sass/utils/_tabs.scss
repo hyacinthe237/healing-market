@@ -149,8 +149,46 @@
         }
       }
 
-      
-    }
+      .select-line {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+
+        select {
+          padding: 5px;
+          width: 100%;
+        }
+      }
+
+      .applies {
+        .days {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          width: 100%;
+
+          .day {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: darkgrey;
+            cursor: pointer;
+
+            &.active {
+              background-color: $primary;
+            }
+          }
+        }
+
+        
+      }
+     }
 }
 
 ._tabs > div a.nav-item.nav-link:hover,

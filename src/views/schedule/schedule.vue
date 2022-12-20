@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-      <Header />
-    <div id="wrapper">
+      <Header v-show="!isLoading" />
+    <div id="wrapper" v-show="!isLoading">
         <Sidebar :current="'schedule'" />
 
         <div id="page-content-wrapper">
@@ -86,7 +86,7 @@
                           <div :class="['day', current_day=='friday'? 'active' : '']">{{ displayDate('friday') }}</div>
                         </div>
                       </th>
-                      <!-- <th class="th-10">
+                      <th class="th-10">
                         <div class="date">
                           <div class="week-day">SAT</div>
                           <div :class="['day', current_day=='saturday'? 'active' : '']">{{ displayDate('saturday') }}</div>
@@ -97,7 +97,7 @@
                           <div class="week-day">SUN</div>
                           <div :class="['day', current_day=='sunday'? 'active' : '']">{{ displayDate('sunday') }}</div>
                         </div>
-                      </th> -->
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -108,21 +108,21 @@
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
-                      <!-- <td class="th-10"></td>
-                      <td class="th-10"></td> -->
+                      <td class="th-10"></td>
+                      <td class="th-10"></td>
                     </tr>
                     <tr class="bg">
                       <td class="th-30">
                         Open Shifts
                         <div class="hour">0.00 Hrs</div>
                       </td>
-                      <td class="th-10"><div class="add" @click="selected('mondayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('thuesdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('wednesdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('thursdayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('fridayId')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <!-- <td class="th-10"></td>
-                      <td class="th-10"></td> -->
+                      <td class="th-10"><div class="add" @click="selected('monday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('thuesday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('wednesday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('thursday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('friday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('saturday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('sunday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
                     </tr>
                     <tr>
                       <td class="th-30">
@@ -148,7 +148,11 @@
         </div>
     </div>
 
-    <addModal></addModal>
+    <div class="_loader" v-show="isLoading">
+      <Spinners></Spinners>
+    </div>
+
+    <addModal :sites="sites" :user="user"></addModal>
   </div>
 </template>
 
@@ -157,12 +161,14 @@ import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import moment from 'moment'
 import addModal from './modals/add'
+import config from '../../services/config'
 
 export default {
     data: () => ({
         payload: {},
         showFilter: false,
         events: [],
+        sites: [],
         identifiant:'',
     }),
 
@@ -177,12 +183,15 @@ export default {
         let d = moment().format('dddd')
         return d.toLowerCase()
       },
+
+      user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
     },
 
     watch: { },
 
     mounted () {
       this.getScheduleEvents()
+      this.getJobSites()
     },
 
     methods: {
@@ -191,8 +200,8 @@ export default {
         console.log('showfilter', this.showFilter)
       },
 
-      selected (id) {
-        this.identifiant = id
+      selected (day) {
+        window.eventBus.$emit('add-schedule', day)
         window.$(`#addScheduleModal`).modal('show')
       },
 
@@ -209,7 +218,22 @@ export default {
           this.stopLoading()
           console.log('getScheduleEvents', res.data)
         }
-      }
+      },
+
+      async getJobSites () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/timesheet-api/job-sites/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get job site error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.sites = res.data.results
+        }
+      },
     }
 }
 </script>

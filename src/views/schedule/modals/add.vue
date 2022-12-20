@@ -3,12 +3,12 @@
         <div class="modal-dialog" role="document" v-show="!isLoading">
             <div class="modal-content">
                 <div class="_modal-content">
-                    <!-- <button class="btn btn-grey mr-10" @click="close()">
-                        <i class="feather icon-x"></i></button> -->
-
                       <div class="content">
-                        <div class="avatar">AH</div>
-                        <div class="name">Abanda Hyacinthe</div>
+                        <div class="avatar">{{ displayLetter }}</div>
+                        <div class="name">{{ displayName }}</div>
+                      </div>
+                      <div class="close" @click="close()">
+                        <i class="feather icon-x"></i>
                       </div>
 
                       <div>
@@ -30,12 +30,83 @@
 
                           <div class="tab-content" id="nav-tabContent">
                               <div class="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
-                                <div class="custom-box">
+                                <div class="custom-box _form">
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" name="title" v-model="ghost.title" class="form-control">
+                                    </div>
                                   <div class="time-select">
-                                    <select name="am"><option value="09:00">09:00</option></select>
+                                    <select name="am">
+                                        <option value="00:00">00:00 AM</option>
+                                        <option value="01:00">01:00 AM</option>
+                                        <option value="02:00">02:00 AM</option>
+                                        <option value="03:00">03:00 AM</option>
+                                        <option value="04:00">04:00 AM</option>
+                                        <option value="05:00">05:00 AM</option>
+                                        <option value="06:00">06:00 AM</option>
+                                        <option value="07:00">07:00 AM</option>
+                                        <option value="08:00">08:00 AM</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 AM</option>
+                                    </select>
                                     <div class="midle"><i class="feather icon-minus"></i></div>
-                                    <select name="pm"><option value="08:00">08:00</option></select>
+                                    <select name="pm">
+                                        <option value="00:00">00:00 PM</option>
+                                        <option value="01:00">01:00 PM</option>
+                                        <option value="02:00">02:00 PM</option>
+                                        <option value="03:00">03:00 PM</option>
+                                        <option value="04:00">04:00 PM</option>
+                                        <option value="05:00">05:00 PM</option>
+                                        <option value="06:00">06:00 PM</option>
+                                        <option value="07:00">07:00 PM</option>
+                                        <option value="08:00">08:00 PM</option>
+                                        <option value="09:00">09:00 PM</option>
+                                        <option value="10:00">10:00 PM</option>
+                                        <option value="11:00">11:00 PM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                    </select>
                                   </div>
+                                  <div class="select-line mt-10">
+                                        <div id="color-picker" class="form-group mt-20">
+                                            <div class="wrapper-dropdown">
+                                            <span @click="toggleDropdown()" v-html="selector"></span>
+                                            <ul class="dropdown" v-show="active">
+                                                <li 
+                                                v-for="site in sites" 
+                                                :key="site.id"
+                                                @click="setColor(site)"
+                                                >
+                                                <span :style="{background: site.color_code}"></span> {{site.name}}
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                  </div>
+
+                                  <div class="applies mt-10">
+                                        <label for="apply">Apply to</label>
+                                        <div class="days">
+                                            <div :class="['day', day=='monday' ? 'active' : '']" @click="selectDay('monday')">M</div>
+                                            <div :class="['day', day=='tuesday' ? 'active' : '']" @click="selectDay('tuesday')">T</div>
+                                            <div :class="['day', day=='wednesday' ? 'active' : '']" @click="selectDay('wednesday')">W</div>
+                                            <div :class="['day', day=='thursday' ? 'active' : '']" @click="selectDay('thursday')">T</div>
+                                            <div :class="['day', day=='friday' ? 'active' : '']" @click="selectDay('friday')">F</div>
+                                            <div :class="['day', day=='saturday' ? 'active' : '']" @click="selectDay('saturday')">S</div>
+                                            <div :class="['day', day=='sunday' ? 'active' : '']" @click="selectDay('sunday')">S</div>
+                                        </div>
+                                  </div>
+
+                                  <div class="form-group mt-20">
+                                    <label for="notes">Notes</label>
+                                    <textarea name="description" v-model="ghost.description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                  </div>
+
+                                  <div class="save-button mt-20 pointer" @click="save()">
+                                    <div class="text">Add schedule</div>
+                                    <div class="icon"><i class="feather icon-save"></i></div>
+                                </div>
                                 </div>
                               </div>
 
@@ -56,9 +127,9 @@
             </div>
         </div>
 
-        <div v-show="isLoading" class="mt-40 pb-40 text-center">
-            <izy-hollow-loading loading />
-        </div>
+        <div class="_loader" v-show="isLoading">
+            <Spinners></Spinners>
+          </div>
     </div>
 </template>
 
@@ -71,30 +142,94 @@ export default {
         id: {
             type: String,
             default: '',
-        }
+        },
+        user: {
+            type: Object,
+            default: () => {},
+        },
+        sites: {
+            type: Array,
+            default: () => [],
+        },
     },
 
-    data: () => ({ }),
+    data: () => ({
+        active: false,
+        selectedColor: '',
+        selectedColorName: '',
+        day: '',
+    }),
 
-    computed: { },
+    computed: {
+        selector () {
+            if(!this.selectedColor) {
+            return 'Please select your color';
+            }
+            else {
+            return '<span style="background: ' + this.selectedColor + '"></span> ' + this.selectedColorName;
+            }
+        },
+
+        displayLetter () {
+            let str = ''
+            if ((this.user.last_name !== '') && (this.user.first_name !== '')) str = this.user.last_name[0] + this.user.first_name[0]
+            else str = this.user.username[0]
+            return str
+        },
+
+        displayName () {
+            let str = ''
+            if ((this.user.last_name !== '') && (this.user.first_name !== '')) str = this.user.last_name + ' ' + this.user.first_name
+            else str = this.user.username
+            return str
+        },
+    },
 
     watch: {},
 
     mounted () {
-        // window.eventBus.$on('preview-file', (result) => {
-        //     if (result == 'previewfile') {
-        //         this.resetGhost()
-        //         this.initPayload()
-        //         this.getOrgMetadatas()
-        //         this.setDeleteParams()
-        //     }
-        // })
+        window.eventBus.$on('add-schedule', (result) => {
+             if (result !== '') {
+                this.day = result
+             }
+        })
     },
 
     methods: {
+        selectDay (value) {
+            this.day = value
+        },
         close () {
             window.$('.modal').modal('hide')
         },
+
+        setColor (site) {
+            this.selectedColor = site.color_code
+            this.selectedColorName = site.name
+            this.active = false
+            this.ghost.color_code = site.color_code
+        },
+
+        toggleDropdown () {
+            this.active = !this.active
+        },
+
+        async save () {
+            this.startLoading()
+            this.ghost.business = this.user.business[0].business_id
+
+            const response = await this.$api.post('schedule-api/events/', this.ghost)
+            .catch(error => {
+                console.log('error', error.response.data)
+                this.stopLoading()
+            })
+            if (response) {
+                this.stopLoading()
+                this.$swal.success('Confirmation', 'Schedule Event added successfuly')
+                this.$emit('scheduleAdded')
+                this.closeAllModals()
+            }
+        }
     }
 }
 </script>

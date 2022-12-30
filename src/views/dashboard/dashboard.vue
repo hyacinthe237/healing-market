@@ -62,7 +62,7 @@
                       </div>
                   </div>
 
-                  <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-content pt-20" id="nav-tabContent">
                       <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                           <div class="upcoming-box">
                             <div class="upcoming-item">

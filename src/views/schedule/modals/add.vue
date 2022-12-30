@@ -2,39 +2,41 @@
     <div class="_add-schedule-modal modal animated fadeIn" id="addScheduleModal">
         <div class="modal-dialog" role="document" v-show="!isLoading">
             <div class="modal-content">
-                <div class="_modal-content">
-                      <div class="content">
+                <div class="modal-header">
+                    <div class="modal-title content" v-if="canDisplay">
                         <div class="avatar">{{ displayLetter }}</div>
                         <div class="name">{{ displayName }}</div>
-                      </div>
-                      <div class="close" @click="close()">
-                        <i class="feather icon-x"></i>
-                      </div>
+                    </div>
 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-if="canDisplay">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <div type="button" class="closer" data-dismiss="modal" aria-label="Close" v-show="!canDisplay">
+                        <span aria-hidden="true">×</span>
+                    </div>
+
+                    <div class="_tabs">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link" id="nav-custom-tab"
+                                data-toggle="tab" href="#nav-custom" role="tab"
+                                aria-controls="nav-custom">Custom</a>
+
+                            <a class="nav-item nav-link" id="nav-common-tab"
+                                data-toggle="tab" href="#nav-common" role="tab"
+                                aria-controls="nav-common">Common</a>
+
+                            <a class="nav-item nav-link" id="nav-timeoff-tab"
+                                data-toggle="tab" href="#nav-timeoff" role="tab"
+                                aria-controls="nav-timeoff" v-if="canDisplay">Time Off</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="_modal-content">
                       <div>
-                          <div class="_tabs mt-20">
-                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                  <a class="nav-item nav-link" id="nav-custom-tab"
-                                      data-toggle="tab" href="#nav-custom" role="tab"
-                                      aria-controls="nav-custom">Custom</a>
-
-                                  <a class="nav-item nav-link" id="nav-common-tab"
-                                      data-toggle="tab" href="#nav-common" role="tab"
-                                      aria-controls="nav-common">Common</a>
-
-                                  <a class="nav-item nav-link" id="nav-timeoff-tab"
-                                      data-toggle="tab" href="#nav-timeoff" role="tab"
-                                      aria-controls="nav-timeoff">Time Off</a>
-                              </div>
-                          </div>
-
                           <div class="tab-content" id="nav-tabContent">
                               <div class="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab">
                                 <div class="custom-box _form">
-                                    <div class="form-group">
-                                        <label for="title">Title</label>
-                                        <input type="text" name="title" v-model="ghost.title" class="form-control">
-                                    </div>
                                   <div class="time-select">
                                     <select name="am">
                                         <option value="00:00">00:00 AM</option>
@@ -68,19 +70,20 @@
                                         <option value="12:00">12:00 PM</option>
                                     </select>
                                   </div>
-                                  <div class="select-line mt-10">
-                                        <div id="color-picker" class="form-group mt-20">
+                                  <div class="select-line">
+                                        <div id="color-picker" class="form-group mt-10">
                                             <div class="wrapper-dropdown">
-                                            <span @click="toggleDropdown()" v-html="selector"></span>
-                                            <ul class="dropdown" v-show="active">
-                                                <li 
-                                                v-for="site in sites" 
-                                                :key="site.id"
-                                                @click="setColor(site)"
-                                                >
-                                                <span :style="{background: site.color_code}"></span> {{site.name}}
-                                                </li>
-                                            </ul>
+                                                <span @click="toggleDropdown()" v-html="selector"></span>
+                                                <ul class="dropdown" v-show="active">
+                                                    <li>No job site</li>
+                                                    <li 
+                                                    v-for="site in sites" 
+                                                    :key="site.id"
+                                                    @click="setColor(site)"
+                                                    >
+                                                    <span :style="{background: site.color_code}"></span> {{site.name}}
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                   </div>
@@ -99,12 +102,12 @@
                                   </div>
 
                                   <div class="form-group mt-20">
-                                    <label for="notes">Notes</label>
-                                    <textarea name="description" v-model="ghost.description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                    <label for="notes">Shift Notes</label>
+                                    <textarea placeholder="Leave a note for your employee, like the address of a job site, and they'll see it when they clock in." name="description" v-model="ghost.description" id="description" cols="1" rows="2" class="form-control"></textarea>
                                   </div>
 
                                   <div class="save-button mt-20 pointer" @click="save()">
-                                    <div class="text">Add schedule</div>
+                                    <div class="text">Add</div>
                                     <div class="icon"><i class="feather icon-save"></i></div>
                                 </div>
                                 </div>
@@ -119,10 +122,6 @@
                               </div>
                           </div>
                       </div>
-                </div>
-
-                <div class="_modal-content">
-
                 </div>
             </div>
         </div>
@@ -151,6 +150,10 @@ export default {
             type: Array,
             default: () => [],
         },
+        canDisplay: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data: () => ({
@@ -163,7 +166,7 @@ export default {
     computed: {
         selector () {
             if(!this.selectedColor) {
-            return 'Please select your color';
+                return 'No job site';
             }
             else {
             return '<span style="background: ' + this.selectedColor + '"></span> ' + this.selectedColorName;
@@ -191,6 +194,8 @@ export default {
         window.eventBus.$on('add-schedule', (result) => {
              if (result !== '') {
                 this.day = result
+                $('#nav-custom').addClass("active")
+                $('#nav-custom').click()
              }
         })
     },

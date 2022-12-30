@@ -30,9 +30,10 @@
     background: transparent;
     line-height: 25px;
     border: none;
-    padding-top:20px;
     position: relative;
     z-index: 1;
+
+    &.pt-20 { padding-top:20px; }
 
     .upcoming-box {
       display: flex;

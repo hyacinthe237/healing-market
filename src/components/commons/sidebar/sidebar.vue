@@ -7,10 +7,16 @@
                     <span>{{ 'Dashboard' }}</span>
                 </router-link>
             </li>
-            <li>
+            <li v-if="isManager">
                 <router-link :to="{ name: 'schedule' }" :class="[current == 'schedule' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
-                    <span>{{ isManager ? t('Schedule') : t('My Schedule') }}</span>
+                    <span>{{ t('Schedule') }}</span>
+                </router-link>
+            </li>
+            <li v-if="isEmployee">
+                <router-link :to="{ name: 'my-schedule' }" :class="[current == 'myschedule' ? 'active' : '']">
+                    <i class="ion-md-calendar"></i>
+                    <span>{{ t('My Schedule') }}</span>
                 </router-link>
             </li>
             <li>

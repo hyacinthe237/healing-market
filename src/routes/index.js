@@ -16,6 +16,7 @@ import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 import Dashboard from '@/views/dashboard/dashboard'
 import Team from '@/views/team/team'
 import Schedule from '@/views/schedule/schedule'
+import MySchedule from '@/views/schedule/my-schedule'
 import Settings from '@/views/settings/settings'
 import Timesheets from '@/views/timesheets/timesheets'
 import Profile from '@/views/team/profile'
@@ -40,6 +41,7 @@ export default new Router({
         { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.auth },
         { path: '/team', name: 'team', component: Team, beforeEnter: Guard.auth },
         { path: '/schedule', name: 'schedule', component: Schedule, beforeEnter: Guard.auth },
+        { path: '/my/schedule', name: 'my-schedule', component: MySchedule, beforeEnter: Guard.auth },
         { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.auth },
         { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.auth },
         { path: '/profile', name: 'profile', component: Profile, beforeEnter: Guard.auth },

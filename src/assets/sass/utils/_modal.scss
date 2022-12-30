@@ -109,10 +109,43 @@
 }
 
 ._add-schedule-modal {
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+  
+        .avatar {
+          border-radius: 40px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(137,0,0,0.2);
+          color: $primary;
+          font-weight: bold;
+          font-size: 18px;
+          padding: 5px;
+          margin-right: 20px;
+          text-transform: uppercase;
+        }
+  
+        .name {
+          font-size: 14px;
+          font-weight: bold;
+          color:$dark;
+          display: flex;
+          flex-direction: column;
+          white-space: nowrap;
+          float: left;
+        }
+      }
     @media (min-width: 768px) {
         .modal-dialog {
             min-width: 375px;
-            width: 30%;
+            width: 40%;
             margin: 0;
             position: absolute;
             right: 0;
@@ -127,6 +160,28 @@
         border-radius: 0;
         min-height: 100vh;
         overflow-y: scroll;
+
+        .modal-header {
+            flex-direction: column;
+
+            .close {
+                z-index: 9;
+                margin-top: -50px;
+            }
+
+            .closer {
+                z-index: 9;
+                cursor: pointer;
+                color: $dark;
+                float: right;
+                font-size: 14px;
+                font-weight: bold;
+
+                i {
+                    color: $brand-teal;
+                }
+            }
+        }
 
         .bandeau {
             width: 100%;
@@ -286,7 +341,10 @@
 }
 
 ._modal-content {
-    padding: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
 
     .close {
         margin-top: -30px;
@@ -314,40 +372,6 @@
             font-size: 12px;
             color: $dark;
         }
-    }
-
-    .content {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-
-      .avatar {
-        border-radius: 40px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(137,0,0,0.2);
-        color: $primary;
-        font-weight: bold;
-        font-size: 18px;
-        padding: 5px;
-        margin-right: 20px;
-        text-transform: uppercase;
-      }
-
-      .name {
-        font-size: 14px;
-        font-weight: bold;
-        color:$dark;
-        display: flex;
-        flex-direction: column;
-        white-space: nowrap;
-        float: left;
-      }
     }
 
     &.bg-grey { background-color: #f5f7fa }

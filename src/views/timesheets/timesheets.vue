@@ -16,15 +16,9 @@
                 </div>
               </div>
               <div class="reste">
-                <div class="filter-table"><i class="ion-ios-tool"></i> filter table</div>
                 <div class="btns">
                   <div class="action"><i class="ion-ios-print"></i></div>
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
-                </div>
-
-                <div class="lg-btns">
-                  <div class="lg-btn-outline" @click="addCardTimeModal()">Add Time Card</div>
-                  <div class="lg-btn-primary">Download</div>
                 </div>
               </div>
               <div class="filter" @click="displayFilter()"><i class="feather icon-more-vertical"></i></div>
@@ -33,9 +27,7 @@
             <div class="filter-box" v-if="showFilter">
               <div class="reste">
                 <div class="lg-btns">
-                  <div class="lg-btn-outline">filter table</div>
                   <div class="lg-btn-outline">View Totals</div>
-                  <div class="lg-btn-outline" @click="addCardTimeModal()"><i class="feather icon-plus"></i> Card</div>
                   <div class="lg-btn-outline"><i class="ion-ios-print"></i></div>
                   <div class="lg-btn-primary">Download</div>
                 </div>

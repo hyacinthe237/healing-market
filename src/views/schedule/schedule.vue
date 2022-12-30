@@ -55,7 +55,7 @@
                 <table>
                   <thead>
                     <tr>
-                      <th class="th-30">All employees (20)</th>
+                      <th class="th-30">All employees ({{ members.length }})</th>
                       <th class="th-10">
                         <div class="date">
                           <div class="week-day">MON</div>
@@ -124,22 +124,24 @@
                       <td class="th-10"><div class="add" @click="selected('saturday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
                       <td class="th-10"><div class="add" @click="selected('sunday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
                     </tr>
-                    <tr>
+                    <tr v-for="m in members" :key="m.id">
                       <td class="th-30">
                         <div class="profile">
                           <i class="feather icon-more-vertical"></i>
-                          <div class="avatar">VI</div>
+                          <div class="avatar">{{ displayLetter(m) }}</div>
                           <div class="content">
-                            <div class="name">Victor I.</div>
+                            <div class="name">{{ displayName(m) }}</div>
                             <div class="hrs">0.00 Hrs / $0.00 </div>
                           </div>
                         </div>
                       </td>
-                      <td class="th-10 applicable">A</td>
+                      <td class="th-10 applicable" @click="selectedUser('monday', m)">A</td>
                       <td class="th-10 not-applicable">N.A</td>
                       <td class="th-10 applicable">A</td>
                       <td class="th-10 not-applicable">N.A</td>
                       <td class="th-10 applicable">A</td>
+                      <td class="th-10 not-applicable">N.A</td>
+                      <td class="th-10 not-applicable">N.A</td>
                     </tr>
                   </tbody>
                 </table>
@@ -152,7 +154,7 @@
       <Spinners></Spinners>
     </div>
 
-    <addModal :sites="sites" :user="user"></addModal>
+    <addModal :sites="sites" :user="payload" :canDisplay="canDisplay"></addModal>
   </div>
 </template>
 
@@ -167,8 +169,10 @@ export default {
     data: () => ({
         payload: {},
         showFilter: false,
+        canDisplay: false,
         events: [],
         sites: [],
+        members: [],
         identifiant:'',
     }),
 
@@ -176,7 +180,7 @@ export default {
 
     computed: {
       date () {
-        return 'March 26 - Apr 2, 2019'
+        return this.displayDateFromDay('monday') + ' - ' + this.displayDateFromDay('sunday')
       },
 
       current_day () {
@@ -192,6 +196,7 @@ export default {
     mounted () {
       this.getScheduleEvents()
       this.getJobSites()
+      this.getMembers()
     },
 
     methods: {
@@ -200,8 +205,45 @@ export default {
         console.log('showfilter', this.showFilter)
       },
 
+      displayLetter (member) {
+        let str = ''
+        if ((member.last_name !== '') && (member.first_name !== '')) str = member.last_name[0] + member.first_name[0]
+        else str = member.username[0]
+        return str
+      },
+
+      displayName (member) {
+        let str = ''
+        if ((member.last_name !== '') && (member.first_name !== '')) str = member.last_name + ' ' + member.first_name
+        else str = member.username
+        return str
+      },
+
+      async getMembers () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/user-api/manager-team-member`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get members error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
+        }
+      },
+
+      selectedUser (day, user) {
+        window.eventBus.$emit('add-schedule', day)
+        this.payload = user
+        this.canDisplay = true
+        window.$(`#addScheduleModal`).modal('show')
+      },
+
       selected (day) {
         window.eventBus.$emit('add-schedule', day)
+        this.canDisplay = false
         window.$(`#addScheduleModal`).modal('show')
       },
 

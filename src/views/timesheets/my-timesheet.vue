@@ -2,7 +2,7 @@
   <div class="">
       <Header v-show="!isLoading" />
     <div id="wrapper" v-show="!isLoading">
-        <Sidebar :current="'myschedule'" />
+        <Sidebar :current="'mytimesheet'" />
 
         <div id="page-content-wrapper">
             <div class="schedule">
@@ -20,9 +20,7 @@
                 <div class="schedule-spacer"></div>
                 <div class="btns">
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
-                  <div class="action pointer" @click="openModal()"><i class="feather icon-plus"></i></div>
                 </div>
-                <div class="filter" @click="displayFilter()"><i class="feather icon-filter"></i></div>
               </div>
 
               <div class="_table mt-20">
@@ -93,8 +91,6 @@
     <div class="_loader" v-show="isLoading">
       <Spinners></Spinners>
     </div>
-
-    <addModal :user="user" @added="getAvailabilities"></addModal>
   </div>
 </template>
 
@@ -102,7 +98,6 @@
 import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import moment from 'moment'
-import addModal from './modals/add-availability'
 import config from '../../services/config'
 
 export default {
@@ -114,7 +109,7 @@ export default {
         identifiant:'',
     }),
 
-    components: { Header, Sidebar, addModal },
+    components: { Header, Sidebar },
 
     computed: {
       date () {
@@ -143,7 +138,6 @@ export default {
       },
 
       openModal () {
-        window.eventBus.$emit('add-availability', 'added')
         window.$(`#addAvailabilityModal`).modal('show')
       },
 

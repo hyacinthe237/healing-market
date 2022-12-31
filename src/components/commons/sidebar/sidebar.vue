@@ -19,10 +19,16 @@
                     <span>{{ t('My Schedule') }}</span>
                 </router-link>
             </li>
-            <li>
+            <li v-if="isManager">
                 <router-link :to="{ name: 'timesheets' }" :class="[current == 'timesheets' ? 'active' : '']">
                     <i class="ion-md-timer"></i>
-                    <span>{{ isManager ? t('Timesheets') : t('My Timesheets') }}</span>
+                    <span>{{ t('Timesheets') }}</span>
+                </router-link>
+            </li>
+            <li v-if="isEmployee">
+                <router-link :to="{ name: 'mytimesheet' }" :class="[current == 'mytimesheet' ? 'active' : '']">
+                    <i class="ion-md-timer"></i>
+                    <span>{{ t('My Timesheets') }}</span>
                 </router-link>
             </li>
             <li v-if="isManager">

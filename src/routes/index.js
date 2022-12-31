@@ -19,6 +19,7 @@ import Schedule from '@/views/schedule/schedule'
 import MySchedule from '@/views/schedule/my-schedule'
 import Settings from '@/views/settings/settings'
 import Timesheets from '@/views/timesheets/timesheets'
+import MyTimesheet from '@/views/timesheets/my-timesheet'
 import Profile from '@/views/team/profile'
 import JobSite from '@/views/jobsites/jobsites'
 
@@ -44,6 +45,7 @@ export default new Router({
         { path: '/my/schedule', name: 'my-schedule', component: MySchedule, beforeEnter: Guard.auth },
         { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.auth },
         { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.auth },
+        { path: '/my/timesheet', name: 'mytimesheet', component: MyTimesheet, beforeEnter: Guard.auth },
         { path: '/profile', name: 'profile', component: Profile, beforeEnter: Guard.auth },
         { path: '/jobsites', name: 'jobsites', component: JobSite, beforeEnter: Guard.auth },
 

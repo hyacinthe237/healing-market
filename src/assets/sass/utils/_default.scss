@@ -318,3 +318,115 @@ h5 { font-size: 1.1em }
     width: 100%;
     min-height: 100vh;
 }
+
+.abanda-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+
+    .abanda-head {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .ht {
+            text-align: center;
+            &:first-child { flex: 30%;  }
+            &:nth-child(2) { flex: 30%;  }
+            &:last-child { flex: 30%; }
+        }
+
+        .ht-p {
+            text-align: center;
+            &:first-child { flex: 30%;  }
+            &:nth-child(2) { flex: 20%;  }
+            &:nth-child(3) { flex: 20%;  }
+            &:last-child { flex: 20%; }
+        }
+    }
+
+    .m-body {
+        width: 100%;
+
+        .m-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .crl-name {
+                color: white;
+                background-color: $brand-info;
+                padding: 10px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .client-box {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 5px 15px 0 rgba(42,55,71,0.15);
+                background-color: white;
+                padding: 10px;
+                width: 100%;
+                color: $dark;
+
+                &.Effectuer {
+                    background-color: rgba(7, 148, 130,0.29);
+                    // color: $green;
+                }
+
+                &.Non, &.no-display {
+                    background-color: rgba(255, 0, 0,0.29);
+                    // color: $red;
+                }
+
+                .elt {
+                    text-align: center;
+                    &:first-child { flex: 30%; padding-left: 5px; }
+                    &:nth-child(2) { flex: 30%;  }
+                    &:last-child { flex: 30%; padding-left: 5px;}
+                }
+
+                .elt-p {
+                    text-align: center;
+                    &:first-child { flex: 30%;  }
+                    &:nth-child(2) { flex: 20%;  }
+                    &:nth-child(3) { flex: 20%;  }
+                    &:last-child { flex: 20%; }
+
+                    &.active { background-color: $brand-success; color: white; padding: 5px;}
+                    &.pending { background-color: $brand-warning; color: white; padding: 5px; }
+                    &.blocked { background-color: $brand-danger; color: white; padding: 5px; }
+
+                    &.receive {
+                        color: white;
+                        background-color: $cyan;
+                    }
+
+                    &.btns {
+                        font-size: 18px;
+                        font-weight: bold;
+
+                        .icon-edit-2 {
+                            color: $brand-success;
+                        }
+                        .icon-x {
+                            color: $primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

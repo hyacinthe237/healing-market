@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="save-button mt-20 pointer" @click="save()">
+                        <div class="save-button mt-20 pointer" @click="boucleDispo()" v-if="items.length>0">
                             <div class="text">Save</div>
                             <div class="icon"><i class="feather icon-save"></i></div>
                         </div>
@@ -173,12 +173,24 @@ export default {
             }
         },
 
-        async save () {
-            this.startLoading()
-            this.ghost.employee = this.user.id
-            this.ghost.availabilities = this.items
+        boucleDispo () {
+            for (let index = 0; index < this.items.length; index++) {
+                const element = this.items[index]
+                element.day_cut = element.day
+                element.time_cut = element.start_time + ' - ' + element.end_time
+                this.items = this.items.filter(p=>p.day != element.day)
+                delete element.day
+                delete element.start_time
+                delete element.end_time
+                this.save(element)
+            }
+        },
 
-            const response = await this.$api.post('/timesheet-api/availibilities/', this.ghost)
+        async save (object) {
+            this.startLoading()
+            object.employee = this.user.id
+
+            const response = await this.$api.post('/timesheet-api/availibilities/', object)
             .catch(error => {
                 console.log('error', error.response.data)
                 this.stopLoading()
@@ -187,7 +199,6 @@ export default {
                 this.stopLoading()
                 this.$swal.success('Confirmation', 'Availibilities added successfuly')
                 this.$emit('added')
-                this.close()
             }
         },
 

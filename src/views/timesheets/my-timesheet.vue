@@ -26,53 +26,21 @@
               <div class="_table mt-20">
                 <table>
                   <thead>
-                    <tr>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">MON</div>
-                          <div :class="['day']">{{ displayDate('monday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">TUE</div>
-                          <div :class="['day']">{{ displayDate('tuesday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">WED</div>
-                          <div :class="['day']">{{ displayDate('wednesday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">THU</div>
-                          <div :class="['day']">{{ displayDate('thursday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">FRI</div>
-                          <div :class="['day']">{{ displayDate('friday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">SAT</div>
-                          <div :class="['day']">{{ displayDate('saturday') }}</div>
-                        </div>
-                      </th>
-                      <th class="th-10">
-                        <div class="date">
-                          <div class="week-day">SUN</div>
-                          <div :class="['day']">{{ displayDate('sunday') }}</div>
-                        </div>
-                      </th>
+                    <tr class="bg">
+                      <td class="th-10">Date</td>
+                      <td class="th-10">Role</td>
+                      <td class="th-10">Hourly rate</td>
+                      <td class="th-10">Number of shift</td>
+                      <td class="th-10">Est earning</td>
+                      <td class="th-10">Completed shift</td>
+                      <td class="th-10">Acc</td>
+                      <td class="th-10">Issus</td>
                     </tr>
                   </thead>
+
                   <tbody>
                     <tr>
+                      <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>

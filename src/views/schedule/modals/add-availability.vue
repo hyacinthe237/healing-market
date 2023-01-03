@@ -11,13 +11,13 @@
                 </div>
                 <div class="_modal-content">
                       <form class="_form">
-                        <div class="form-group">
+                        <div class="form-group" v-if="days.length>0">
                             <select name="day" id="day" class="form-control" v-model="line.day">
                                 <option value="">Select a day</option>
                                 <option v-for="(day, index) in days" :value="day" :key="index++">{{ day }}</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" v-if="days.length>0">
                             <div class="row">
                                 <div class="col-5">
                                     <select name="start_time" v-model="line.start_time" class="form-control">

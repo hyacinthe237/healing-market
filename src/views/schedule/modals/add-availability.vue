@@ -177,7 +177,8 @@ export default {
             for (let index = 0; index < this.items.length; index++) {
                 const element = this.items[index]
                 element.day_cut = element.day
-                element.time_cut = element.start_time + ' - ' + element.end_time
+                element.time_cut_start = element.start_time
+                element.time_cut_end = element.end_time
                 this.items = this.items.filter(p=>p.day != element.day)
                 delete element.day
                 delete element.start_time
@@ -192,8 +193,9 @@ export default {
 
             const response = await this.$api.post('/timesheet-api/availibilities/', object)
             .catch(error => {
-                console.log('error', error.response.data)
-                this.stopLoading()
+                console.log('error', error.response.data.error_message)
+                this.$swal.error('Warning', error.response.data.error_message)
+                // this.stopLoading()
             })
             if (response) {
                 this.stopLoading()

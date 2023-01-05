@@ -135,13 +135,34 @@
                           </div>
                         </div>
                       </td>
-                      <td class="th-10 applicable" @click="selectedUser('monday', m)">A</td>
-                      <td class="th-10 not-applicable">N.A</td>
-                      <td class="th-10 applicable">A</td>
-                      <td class="th-10 not-applicable">N.A</td>
-                      <td class="th-10 applicable">A</td>
-                      <td class="th-10 not-applicable">N.A</td>
-                      <td class="th-10 not-applicable">N.A</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Monday')]" 
+                        @click="selectedUser('monday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Monday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Tuesday')]"
+                        @click="selectedUser('tuesday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Tuesday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Wednesday')]"
+                        @click="selectedUser('wednesday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Wednesday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Thursday')]"
+                        @click="selectedUser('thursday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Thursday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Friday')]"
+                        @click="selectedUser('friday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Friday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Saturday')]"
+                        @click="selectedUser('saturday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Saturday') }}</td>
+                      <td 
+                        :class="['th-10', isAvailable(m.availibilities, 'Sunday')]"
+                        @click="selectedUser('sunday', m)"
+                      >{{ displayAvailableText(m.availibilities, 'Sunday') }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -173,6 +194,7 @@ export default {
         events: [],
         sites: [],
         members: [],
+        dispos: [],
         identifiant:'',
     }),
 
@@ -217,6 +239,40 @@ export default {
         if ((member.last_name !== '') && (member.first_name !== '')) str = member.last_name + ' ' + member.first_name
         else str = member.username
         return str
+      },
+
+      isAvailable (tableaux_dispo, day) {
+        if (tableaux_dispo.length>0) {
+          let availability = tableaux_dispo.filter(f=>f.day_cut == day)
+          return availability.length>0 ? 'applicable' : 'not-applicable'
+        }
+
+        if (tableaux_dispo.length==0) { return 'not-applicable' }
+      },
+
+      displayAvailableText (tableaux_dispo, day) {
+        if (tableaux_dispo.length>0) {
+          let availability = tableaux_dispo.filter(f=>f.day_cut == day)
+          return availability.length>0 ? 'A' : 'N.A'
+        }
+
+        if (tableaux_dispo.length==0) { return 'N.A' }
+      },
+
+      async getAvailabilities () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/timesheet-api/employee/${this.user.id}/availibilities`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get availabilities error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          console.log(res.data.results)
+          this.dispos = res.data.results
+        }
       },
 
       async getMembers () {

@@ -160,7 +160,7 @@ export default {
     props: {
         id: {
             type: String,
-            default: '',
+            default: 'another',
         },
         user: {
             type: Object,
@@ -232,13 +232,13 @@ export default {
 
     mounted () {
         window.eventBus.$on('add-schedule', (result) => {
-             if (result !== '') {
+             if (result !== 'another') {
                 this.initUserAvailabilities()
                 this.resetGhost()
              }
 
-             if (result == '') {
-                this.selected = []
+             if (result == 'another') {
+                this.selected = [this.id]
                 this.resetGhost()
              }
         })
@@ -253,8 +253,9 @@ export default {
             }
             
             if (exist_day.length==0) {
-                this.selected.push(value)
-                this.ghost.days_week = this.selected
+                //this.selected.push(value)
+                //this.ghost.days_week = this.selected
+                this.$swal.error('Sorry', `"${this.displayName}" are not available on "${value}"`)
             }
         },
 
@@ -303,9 +304,27 @@ export default {
             this.active = !this.active
         },
 
+        initDaysDate () {
+            let tab = this.ghost.days_week
+            let tab_rst = []
+            for (let index = 0; index < tab.length; index++) {
+                const element = this.displayFormatedDate(tab[index])
+                tab_rst.push(element)
+            }
+            this.ghost.days = tab_rst
+        },
+
         async save () {
             this.startLoading()
+            let tab_rst = []
+            let tab = this.ghost.days_week
+            for (let index = 0; index < tab.length; index++) {
+                const element = this.displayFormatedDate(tab[index])
+                tab_rst.push(element)
+            }
+            this.ghost.days = tab_rst
             this.ghost.business = this.user.business[0].business_id
+            this.ghost.employees = [this.user.id]
 
             const response = await this.$api.post('schedule-api/events/', this.ghost)
             .catch(error => {

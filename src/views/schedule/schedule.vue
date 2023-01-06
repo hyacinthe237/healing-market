@@ -116,13 +116,13 @@
                         Open Shifts
                         <div class="hour">0.00 Hrs</div>
                       </td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
-                      <td class="th-10"><div class="add" @click="selected('')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Monday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Tuesday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Wednesday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Thursday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Friday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Saturday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
+                      <td class="th-10"><div class="add" @click="selected('Sunday')"><span>Create open shift</span> <i class="feather icon-plus"></i></div></td>
                     </tr>
                     <tr v-for="m in members" :key="m.id">
                       <td class="th-30">
@@ -175,7 +175,12 @@
       <Spinners></Spinners>
     </div>
 
-    <addModal :sites="sites" :user="payload" :canDisplay="canDisplay"></addModal>
+    <addModal 
+      :sites="sites" 
+      :user="payload" 
+      :canDisplay="canDisplay"
+      :id="identifiant"
+    ></addModal>
   </div>
 </template>
 
@@ -292,13 +297,15 @@ export default {
 
       selectedUser (day, user) {
         window.eventBus.$emit('add-schedule', day)
+        this.identifiant = day
         this.payload = user
         this.canDisplay = true
         window.$(`#addScheduleModal`).modal('show')
       },
 
       selected (day) {
-        window.eventBus.$emit('add-schedule', day)
+        window.eventBus.$emit('add-schedule', 'another')
+        this.identifiant = day
         this.canDisplay = false
         this.payload = {}
         window.$(`#addScheduleModal`).modal('show')

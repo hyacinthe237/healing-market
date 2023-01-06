@@ -184,6 +184,10 @@
             &.active {
               background-color: $primary;
             }
+
+            &.not {
+              pointer-events: none;
+            }
           }
         }
 

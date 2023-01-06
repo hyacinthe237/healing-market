@@ -236,6 +236,11 @@ export default {
                 this.initUserAvailabilities()
                 this.resetGhost()
              }
+
+             if (result == '') {
+                this.selected = []
+                this.resetGhost()
+             }
         })
     },
 

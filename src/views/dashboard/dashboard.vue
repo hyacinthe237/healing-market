@@ -148,7 +148,10 @@ export default {
     watch: { },
 
     mounted () { 
-      this.getDoashboard()
+      if (this.isManager) {
+        this.getDoashboard()
+      }
+      
      },
 
     methods: { 

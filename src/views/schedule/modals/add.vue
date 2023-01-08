@@ -39,75 +39,22 @@
                                 <div class="custom-box _form">
                                   <div class="time-select">
                                     <select name="debut_time" v-model="ghost.debut_time">
-                                        <option value="12:00am">12:00 AM</option><option value="12:15am">12:15 AM</option><option value="12:30am">12:30 AM</option><option value="12:45am">12:45 AM</option>
-                                        <option value="1:00am">1:00 AM</option><option value="1:15am">1:15 AM</option><option value="1:30am">1:30 AM</option><option value="1:45am">1:45 AM</option>
-                                        <option value="2:00am">2:00 AM</option><option value="2:15am">2:15 AM</option><option value="2:30am">2:30 AM</option><option value="2:45am">2:45 AM</option>
-                                        <option value="3:00am">3:00 AM</option><option value="3:15am">3:15 AM</option><option value="3:30am">3:30 AM</option><option value="3:45am">3:45 AM</option>
-                                        <option value="4:00am">4:00 AM</option><option value="4:15am">4:15 AM</option><option value="4:30am">4:30 AM</option><option value="4:45am">4:45 AM</option>
-                                        <option value="5:00am">5:00 AM</option><option value="5:15am">5:15 AM</option><option value="5:30am">5:30 AM</option><option value="5:45am">5:45 AM</option>
-                                        <option value="6:00am">6:00 AM</option><option value="6:15am">6:15 AM</option><option value="6:30am">6:30 AM</option><option value="6:45am">6:45 AM</option>
-                                        <option value="7:00am">7:00 AM</option><option value="7:15am">7:15 AM</option><option value="7:30am">7:30 AM</option><option value="7:45am">7:45 AM</option>
-                                        <option value="8:00am">8:00 AM</option><option value="8:15am">8:15 AM</option><option value="8:30am">8:30 AM</option><option value="8:45am">8:45 AM</option>
-                                        <option value="9:00am">9:00 AM</option><option value="9:15am">9:15 AM</option><option value="9:30am">9:30 AM</option><option value="9:45am">9:45 AM</option>
-                                        <option value="10:00am">10:00 AM</option><option value="10:15am">10:15 AM</option><option value="10:30am">10:30 AM</option><option value="10:45am">10:45 AM</option>
-                                        <option value="11:00am">11:00 AM</option><option value="11:15am">11:15 AM</option><option value="11:30am">11:30 AM</option><option value="11:45am">11:45 AM</option>
-                                        <option value="12:00pm">12:00 PM</option><option value="12:15pm">12:15 PM</option><option value="12:30pm">12:30 PM</option><option value="12:45pm">12:45 PM</option>
-                                        <option value="1:00pm">1:00 PM</option><option value="1:15pm">1:15 PM</option><option value="1:30pm">1:30 PM</option><option value="1:45pm">1:45 PM</option>
-                                        <option value="2:00pm">2:00 PM</option><option value="2:15pm">2:15 PM</option><option value="2:30pm">2:30 PM</option><option value="2:45pm">2:45 PM</option>
-                                        <option value="3:00pm">3:00 PM</option><option value="3:15pm">3:15 PM</option><option value="3:30pm">3:30 PM</option><option value="3:45pm">3:45 PM</option>
-                                        <option value="4:00pm">4:00 PM</option><option value="4:15pm">4:15 PM</option><option value="4:30pm">4:30 PM</option><option value="4:45pm">4:45 PM</option>
-                                        <option value="5:00pm">5:00 PM</option><option value="5:15pm">5:15 PM</option><option value="5:30pm">5:30 PM</option><option value="5:45pm">5:45 PM</option>
-                                        <option value="6:00pm">6:00 PM</option><option value="6:15pm">6:15 PM</option><option value="6:30pm">6:30 PM</option><option value="6:45pm">6:45 PM</option>
-                                        <option value="7:00pm">7:00 PM</option><option value="7:15pm">7:15 PM</option><option value="7:30pm">7:30 PM</option><option value="7:45pm">7:45 PM</option>
-                                        <option value="8:00pm">8:00 PM</option><option value="8:15pm">8:15 PM</option><option value="8:30pm">8:30 PM</option><option value="8:45pm">8:45 PM</option>
-                                        <option value="9:00pm">9:00 PM</option><option value="9:15pm">9:15 PM</option><option value="9:30pm">9:30 PM</option><option value="9:45pm">9:45 PM</option>
-                                        <option value="10:00pm">10:00 PM</option><option value="10:15pm">10:15 PM</option><option value="10:30pm">10:30 PM</option><option value="10:45pm">10:45 PM</option>
-                                        <option value="11:00pm">11:00 PM</option><option value="11:15pm">11:15 PM</option><option value="11:30pm">11:30 PM</option><option value="11:45pm">11:45 PM</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                     <div class="midle"><i class="feather icon-minus"></i></div>
                                     <select name="end_time" v-model="ghost.end_time">
-                                        <option value="12:00am">12:00 AM</option><option value="12:15am">12:15 AM</option><option value="12:30am">12:30 AM</option><option value="12:45am">12:45 AM</option>
-                                        <option value="1:00am">1:00 AM</option><option value="1:15am">1:15 AM</option><option value="1:30am">1:30 AM</option><option value="1:45am">1:45 AM</option>
-                                        <option value="2:00am">2:00 AM</option><option value="2:15am">2:15 AM</option><option value="2:30am">2:30 AM</option><option value="2:45am">2:45 AM</option>
-                                        <option value="3:00am">3:00 AM</option><option value="3:15am">3:15 AM</option><option value="3:30am">3:30 AM</option><option value="3:45am">3:45 AM</option>
-                                        <option value="4:00am">4:00 AM</option><option value="4:15am">4:15 AM</option><option value="4:30am">4:30 AM</option><option value="4:45am">4:45 AM</option>
-                                        <option value="5:00am">5:00 AM</option><option value="5:15am">5:15 AM</option><option value="5:30am">5:30 AM</option><option value="5:45am">5:45 AM</option>
-                                        <option value="6:00am">6:00 AM</option><option value="6:15am">6:15 AM</option><option value="6:30am">6:30 AM</option><option value="6:45am">6:45 AM</option>
-                                        <option value="7:00am">7:00 AM</option><option value="7:15am">7:15 AM</option><option value="7:30am">7:30 AM</option><option value="7:45am">7:45 AM</option>
-                                        <option value="8:00am">8:00 AM</option><option value="8:15am">8:15 AM</option><option value="8:30am">8:30 AM</option><option value="8:45am">8:45 AM</option>
-                                        <option value="9:00am">9:00 AM</option><option value="9:15am">9:15 AM</option><option value="9:30am">9:30 AM</option><option value="9:45am">9:45 AM</option>
-                                        <option value="10:00am">10:00 AM</option><option value="10:15am">10:15 AM</option><option value="10:30am">10:30 AM</option><option value="10:45am">10:45 AM</option>
-                                        <option value="11:00am">11:00 AM</option><option value="11:15am">11:15 AM</option><option value="11:30am">11:30 AM</option><option value="11:45am">11:45 AM</option>
-                                        <option value="12:00pm">12:00 PM</option><option value="12:15pm">12:15 PM</option><option value="12:30pm">12:30 PM</option><option value="12:45pm">12:45 PM</option>
-                                        <option value="1:00pm">1:00 PM</option><option value="1:15pm">1:15 PM</option><option value="1:30pm">1:30 PM</option><option value="1:45pm">1:45 PM</option>
-                                        <option value="2:00pm">2:00 PM</option><option value="2:15pm">2:15 PM</option><option value="2:30pm">2:30 PM</option><option value="2:45pm">2:45 PM</option>
-                                        <option value="3:00pm">3:00 PM</option><option value="3:15pm">3:15 PM</option><option value="3:30pm">3:30 PM</option><option value="3:45pm">3:45 PM</option>
-                                        <option value="4:00pm">4:00 PM</option><option value="4:15pm">4:15 PM</option><option value="4:30pm">4:30 PM</option><option value="4:45pm">4:45 PM</option>
-                                        <option value="5:00pm">5:00 PM</option><option value="5:15pm">5:15 PM</option><option value="5:30pm">5:30 PM</option><option value="5:45pm">5:45 PM</option>
-                                        <option value="6:00pm">6:00 PM</option><option value="6:15pm">6:15 PM</option><option value="6:30pm">6:30 PM</option><option value="6:45pm">6:45 PM</option>
-                                        <option value="7:00pm">7:00 PM</option><option value="7:15pm">7:15 PM</option><option value="7:30pm">7:30 PM</option><option value="7:45pm">7:45 PM</option>
-                                        <option value="8:00pm">8:00 PM</option><option value="8:15pm">8:15 PM</option><option value="8:30pm">8:30 PM</option><option value="8:45pm">8:45 PM</option>
-                                        <option value="9:00pm">9:00 PM</option><option value="9:15pm">9:15 PM</option><option value="9:30pm">9:30 PM</option><option value="9:45pm">9:45 PM</option>
-                                        <option value="10:00pm">10:00 PM</option><option value="10:15pm">10:15 PM</option><option value="10:30pm">10:30 PM</option><option value="10:45pm">10:45 PM</option>
-                                        <option value="11:00pm">11:00 PM</option><option value="11:15pm">11:15 PM</option><option value="11:30pm">11:30 PM</option><option value="11:45pm">11:45 PM</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                   </div>
                                   <div class="select-line">
-                                        <div id="color-picker" class="form-group mt-10">
-                                            <div class="wrapper-dropdown">
-                                                <span @click="toggleDropdown()" v-html="selector"></span>
-                                                <ul class="dropdown" v-show="active">
-                                                    <li>No job site</li>
-                                                    <li 
-                                                    v-for="site in sites" 
-                                                    :key="site.id"
-                                                    @click="setColor(site)"
-                                                    >
-                                                    <span :style="{background: site.color_code}"></span> {{site.name}}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <select name="jobsite_id" v-model="ghost.jobsite_id">
+                                            <option value="">Select a job site</option>
+                                            <option v-for="site in sites" :value="site.id" :key="site.id" @click="changeColor(site)">
+                                                {{ site.name }}
+                                            </option>
+                                        </select>
+                                        <div @click="openPalette()" class="label" :style="{background: colors}"></div>
+                                        <twitter-picker v-model="colors" @input="updateValue" v-if="showPalette" />
                                   </div>
 
                                   <div class="applies mt-10">
@@ -123,7 +70,8 @@
 
                                   <div class="form-group mt-20">
                                     <label for="notes">Shift Notes</label>
-                                    <textarea placeholder="Leave a note for your employee, like the address of a job site, and they'll see it when they clock in." name="description" v-model="ghost.description" id="description" cols="1" rows="2" class="form-control"></textarea>
+                                    <textarea placeholder="Leave a note for your employee, like the address of a job site, and they'll see it when they clock in." 
+                                    name="description" v-model="ghost.notes" id="notes" cols="1" rows="2" class="form-control"></textarea>
                                   </div>
 
                                   <div class="save-button mt-20 pointer" @click="save()">
@@ -156,11 +104,10 @@
 // import _ from 'lodash'
 
 export default {
-
     props: {
         id: {
             type: String,
-            default: 'another',
+            default: '',
         },
         user: {
             type: Object,
@@ -174,6 +121,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        businessId: {
+            type: Number,
+            default: 0,
+        },
     },
 
     data: () => ({
@@ -181,18 +132,46 @@ export default {
         selectedColor: '',
         selectedColorName: '',
         day: '',
+        colors: '#890000',
+        showPalette: false,
         selected: [],
+        selected_days: [],
         ghost: {
             notes: '',
-            job_site: '',
-            end_time: '5:00pm',
-            debut_time: '9:00am',
-            business: '',
+            jobsite_id: '',
+            end_time: '17:00',
+            debut_time: '9:00',
+            business_id: '',
             employees: '',
-            days_week: '',
-            days: ''
+            days_of_week: '',
+            days_of_calendar: ''
         },
         days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        tab_hours: [
+        {value: "1:00", option: "1:00 AM"}, {value: "1:15", option: "1:15 AM"}, {value: "1:30", option: "1:30 AM"}, {value: "1:45", option: "1:45 AM"},
+        {value: "2:00", option: "2:00 AM"}, {value: "2:15", option: "2:15 AM"}, {value: "2:30", option: "2:30 AM"}, {value: "2:45", option: "2:45 AM"},
+        {value: "3:00", option: "3:00 AM"}, {value: "3:15", option: "3:15 AM"}, {value: "3:30", option: "3:30 AM"}, {value: "3:45", option: "3:45 AM"},
+        {value: "4:00", option: "4:00 AM"}, {value: "4:15", option: "4:15 AM"}, {value: "4:30", option: "4:30 AM"}, {value: "4:45", option: "4:45 AM"},
+        {value: "5:00", option: "5:00 AM"}, {value: "5:15", option: "5:15 AM"}, {value: "5:30", option: "5:30 AM"}, {value: "5:45", option: "5:45 AM"},
+        {value: "6:00", option: "6:00 AM"}, {value: "6:15", option: "6:15 AM"}, {value: "6:30", option: "6:30 AM"}, {value: "6:45", option: "6:45 AM"},
+        {value: "7:00", option: "7:00 AM"}, {value: "7:15", option: "7:15 AM"}, {value: "7:30", option: "7:30 AM"}, {value: "7:45", option: "7:45 AM"},
+        {value: "8:00", option: "8:00 AM"}, {value: "8:15", option: "8:15 AM"}, {value: "8:30", option: "8:30 AM"}, {value: "8:45", option: "8:45 AM"},
+        {value: "9:00", option: "9:00 AM"}, {value: "9:15", option: "9:15 AM"}, {value: "9:30", option: "9:30 AM"}, {value: "9:45", option: "9:45 AM"},
+        {value: "10:00", option: "10:00 AM"}, {value: "10:15", option: "10:15 AM"}, {value: "10:30", option: "10:30 AM"}, {value: "10:45", option: "10:45 AM"},
+        {value: "11:00", option: "11:00 AM"}, {value: "11:15", option: "11:15 AM"}, {value: "11:30", option: "11:30 AM"}, {value: "11:45", option: "11:45 AM"},
+        {value: "12:00", option: "12:00 AM"}, {value: "12:15", option: "12:15 AM"}, {value: "12:30", option: "12:30 AM"}, {value: "12:45", option: "12:45 AM"},
+        {value: "13:00", option: "1:00 PM"}, {value: "13:15", option: "1:15 PM"}, {value: "13:30", option: "1:30 PM"}, {value: "13:45", option: "1:45 PM"},
+        {value: "14:00", option: "2:00 PM"}, {value: "14:15", option: "2:15 PM"}, {value: "14:30", option: "2:30 PM"}, {value: "14:45", option: "2:45 PM"},
+        {value: "15:00", option: "3:00 PM"}, {value: "15:15", option: "3:15 PM"}, {value: "15:30", option: "3:30 PM"}, {value: "15:45", option: "3:45 PM"},
+        {value: "16:00", option: "4:00 PM"}, {value: "16:15", option: "4:15 PM"}, {value: "16:30", option: "4:30 PM"}, {value: "16:45", option: "4:45 PM"},
+        {value: "17:00", option: "5:00 PM"}, {value: "17:15", option: "5:15 PM"}, {value: "17:30", option: "5:30 PM"}, {value: "17:45", option: "5:45 PM"},
+        {value: "18:00", option: "6:00 PM"}, {value: "18:15", option: "6:15 PM"}, {value: "18:30", option: "6:30 PM"}, {value: "18:45", option: "6:45 PM"},
+        {value: "19:00", option: "7:00 PM"}, {value: "19:15", option: "7:15 PM"}, {value: "19:30", option: "7:30 PM"}, {value: "19:45", option: "7:45 PM"},
+        {value: "20:00", option: "8:00 PM"}, {value: "8:15", option: "8:15 PM"}, {value: "8:30", option: "8:30 PM"}, {value: "8:45", option: "8:45 PM"},
+        {value: "21:00", option: "9:00 PM"}, {value: "21:15", option: "9:15 PM"}, {value: "21:30", option: "9:30 PM"}, {value: "21:45", option: "9:45 PM"},
+        {value: "22:00", option: "10:00 PM"}, {value: "22:15", option: "10:15 PM"}, {value: "22:30", option: "10:30 PM"}, {value: "22:45", option: "10:45 PM"},
+        {value: "23:00", option: "11:00 PM"}, {value: "23:15", option: "11:15 PM"}, {value: "23:30", option: "11:30 PM"}, {value: "23:45", option: "11:45 PM"},
+        {value: "00:00", option: "12:00 PM"}, {value: "00:15", option: "12:15 PM"}, {value: "00:30", option: "12:30 PM"}, {value: "00:45", option: "12:45 PM"}]
     }),
 
     watch: {
@@ -238,7 +217,7 @@ export default {
              }
 
              if (result == 'another') {
-                this.selected = [this.id]
+                this.selected.push(this.id)
                 this.resetGhost()
              }
         })
@@ -247,16 +226,30 @@ export default {
     methods: {
         selectDay (value) {
             let exist_day = this.selected.filter(d => d == value)
-            if (exist_day.length>0) {
+            /*if (exist_day.length>0) {
                 this.selected = this.selected.filter(d => d !== value)
                 this.ghost.days_week = this.selected
-            }
+            }*/
             
             if (exist_day.length==0) {
                 //this.selected.push(value)
                 //this.ghost.days_week = this.selected
                 this.$swal.error('Sorry', `"${this.displayName}" are not available on "${value}"`)
             }
+        },
+
+        changeColor (site) {
+            this.colors = site.color_code
+        },
+
+        openPalette () {
+            this.showPalette = !this.showPalette
+        },
+
+        updateValue (color) {
+            console.log('updateValue', color)
+            this.colors = color.hex
+            this.openPalette()
         },
 
         close () {
@@ -274,21 +267,26 @@ export default {
         },
 
         initUserAvailabilities () {
+            let elt = ''
             if (this.userAvailabilities) {
-                this.userAvailabilities.forEach(u => this.selected.push(u.day_cut))
+                this.userAvailabilities.forEach(u => {
+                    this.selected.push(u.day_cut)
+                    elt = this.displayFormatedDate(u.day_cut)
+                    this.selected_days.push(elt)
+                })
             }
-            this.ghost.days_week = this.selected
+            this.ghost.days_of_week = this.selected
         },
 
         resetGhost () {
             this.ghost = {
                 notes: '',
-                job_site: '',
-                end_time: '5:00pm',
-                debut_time: '9:00am',
-                business: '',
+                jobsite_id: '',
+                end_time: '17:00',
+                debut_time: '9:00',
+                business_id: '',
                 employees: '',
-                days_week: '',
+                days_of_week: '',
                 days: ''
             }
         },
@@ -297,36 +295,22 @@ export default {
             this.selectedColor = site.color_code
             this.selectedColorName = site.name
             this.active = false
-            this.ghost.job_site = site.id
+            this.ghost.jobsite_id = site.id
         },
 
         toggleDropdown () {
             this.active = !this.active
         },
 
-        initDaysDate () {
-            let tab = this.ghost.days_week
-            let tab_rst = []
-            for (let index = 0; index < tab.length; index++) {
-                const element = this.displayFormatedDate(tab[index])
-                tab_rst.push(element)
-            }
-            this.ghost.days = tab_rst
-        },
-
         async save () {
             this.startLoading()
-            let tab_rst = []
-            let tab = this.ghost.days_week
-            for (let index = 0; index < tab.length; index++) {
-                const element = this.displayFormatedDate(tab[index])
-                tab_rst.push(element)
-            }
-            this.ghost.days = tab_rst
-            this.ghost.business = this.user.business[0].business_id
+            this.ghost.days_of_calendar = this.selected_days
+            this.ghost.business_id = this.businessId
             this.ghost.employees = [this.user.id]
+            this.ghost.days_of_week = this.selected
+            console.log(this.ghost)
 
-            const response = await this.$api.post('schedule-api/events/', this.ghost)
+            const response = await this.$api.post('/timesheet-api/shifts/', this.ghost)
             .catch(error => {
                 console.log('error', error.response.data)
                 this.stopLoading()
@@ -334,8 +318,10 @@ export default {
             if (response) {
                 this.stopLoading()
                 this.$swal.success('Confirmation', 'Schedule Event added successfuly')
-                this.$emit('scheduleAdded')
+                this.$emit('shiftAdded')
                 this.closeAllModals()
+                this.selected_days = []
+                this.selected = []
             }
         }
     }

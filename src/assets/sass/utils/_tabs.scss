@@ -155,10 +155,28 @@
         width: 100%;
         justify-content: space-between;
         flex-direction: row;
+        margin-top: 10px;
+
+        .label {
+          width: 20%;
+          height: 35px;
+          border: .5px solid $first;
+          cursor: pointer;
+        }
 
         select {
           padding: 5px;
-          width: 100%;
+          width: 80%;
+          border: .5px solid $first;
+          height: 35px;
+          margin-right: 5px;
+
+          option {
+            span {
+              width: 20px;
+              height: 20px;
+            }
+          }
         }
       }
 

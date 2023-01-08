@@ -16,10 +16,13 @@ import Multiselect from 'vue-multiselect'
 import RadialProgressBar from 'vue-radial-progress'
 import VueParticlesBg from "particles-bg-vue"
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
+import { Photoshop, Compact, Twitter } from 'vue-color'
+import VueTimepicker from 'vue2-timepicker'
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import 'vue2-timepicker/dist/VueTimepicker.css'
 
 
 import App from './App.vue'
@@ -66,6 +69,10 @@ Vue.component('radial-progress-bar', RadialProgressBar)
 Vue.component('multiselect', Multiselect)
 Vue.component('Spinners', Spinners)
 Vue.component('v-error', VErrorComponent)
+Vue.component('photoshop-picker', Photoshop)
+Vue.component('compact-picker', Compact)
+Vue.component('twitter-picker', Twitter)
+Vue.component('vue-timepicker', VueTimepicker)
 
 new Vue({
   router,

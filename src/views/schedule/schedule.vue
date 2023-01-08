@@ -180,6 +180,8 @@
       :user="payload" 
       :canDisplay="canDisplay"
       :id="identifiant"
+      :businessId="businessId"
+      @shiftAdded="getMembers"
     ></addModal>
   </div>
 </template>
@@ -216,6 +218,8 @@ export default {
       },
 
       user () { return JSON.parse(localStorage.getItem(config.get('user'))) },
+
+      businessId () { return this.user.business[0].business_id }
     },
 
     watch: { },

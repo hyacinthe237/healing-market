@@ -11,105 +11,27 @@
                 </div>
                 <div class="_modal-content">
                       <form class="_form">
-                        <div class="form-group" v-if="days.length>0">
-                            <select name="day" id="day" class="form-control" v-model="line.day">
+                        <div class="form-group">
+                            <select name="day_cut" id="day" class="form-control" v-model="line.day_cut">
                                 <option value="">Select a day</option>
                                 <option v-for="(day, index) in days" :value="day" :key="index++">{{ day }}</option>
                             </select>
                         </div>
-                        <div class="form-group" v-if="days.length>0">
+                        <div class="form-group">
                             <div class="row">
-                                <div class="col-5">
-                                    <select name="start_time" v-model="line.start_time" class="form-control">
-                                        <option value="">Select start time</option>
-                                        <option value="12:00am">12:00 AM</option><option value="12:15am">12:15 AM</option><option value="12:30am">12:30 AM</option><option value="12:45am">12:45 AM</option>
-                                        <option value="1:00am">1:00 AM</option><option value="1:15am">1:15 AM</option><option value="1:30am">1:30 AM</option><option value="1:45am">1:45 AM</option>
-                                        <option value="2:00am">2:00 AM</option><option value="2:15am">2:15 AM</option><option value="2:30am">2:30 AM</option><option value="2:45am">2:45 AM</option>
-                                        <option value="3:00am">3:00 AM</option><option value="3:15am">3:15 AM</option><option value="3:30am">3:30 AM</option><option value="3:45am">3:45 AM</option>
-                                        <option value="4:00am">4:00 AM</option><option value="4:15am">4:15 AM</option><option value="4:30am">4:30 AM</option><option value="4:45am">4:45 AM</option>
-                                        <option value="5:00am">5:00 AM</option><option value="5:15am">5:15 AM</option><option value="5:30am">5:30 AM</option><option value="5:45am">5:45 AM</option>
-                                        <option value="6:00am">6:00 AM</option><option value="6:15am">6:15 AM</option><option value="6:30am">6:30 AM</option><option value="6:45am">6:45 AM</option>
-                                        <option value="7:00am">7:00 AM</option><option value="7:15am">7:15 AM</option><option value="7:30am">7:30 AM</option><option value="7:45am">7:45 AM</option>
-                                        <option value="8:00am">8:00 AM</option><option value="8:15am">8:15 AM</option><option value="8:30am">8:30 AM</option><option value="8:45am">8:45 AM</option>
-                                        <option value="9:00am">9:00 AM</option><option value="9:15am">9:15 AM</option><option value="9:30am">9:30 AM</option><option value="9:45am">9:45 AM</option>
-                                        <option value="10:00am">10:00 AM</option><option value="10:15am">10:15 AM</option><option value="10:30am">10:30 AM</option><option value="10:45am">10:45 AM</option>
-                                        <option value="11:00am">11:00 AM</option><option value="11:15am">11:15 AM</option><option value="11:30am">11:30 AM</option><option value="11:45am">11:45 AM</option>
-                                        <option value="12:00pm">12:00 PM</option><option value="12:15pm">12:15 PM</option><option value="12:30pm">12:30 PM</option><option value="12:45pm">12:45 PM</option>
-                                        <option value="1:00pm">1:00 PM</option><option value="1:15pm">1:15 PM</option><option value="1:30pm">1:30 PM</option><option value="1:45pm">1:45 PM</option>
-                                        <option value="2:00pm">2:00 PM</option><option value="2:15pm">2:15 PM</option><option value="2:30pm">2:30 PM</option><option value="2:45pm">2:45 PM</option>
-                                        <option value="3:00pm">3:00 PM</option><option value="3:15pm">3:15 PM</option><option value="3:30pm">3:30 PM</option><option value="3:45pm">3:45 PM</option>
-                                        <option value="4:00pm">4:00 PM</option><option value="4:15pm">4:15 PM</option><option value="4:30pm">4:30 PM</option><option value="4:45pm">4:45 PM</option>
-                                        <option value="5:00pm">5:00 PM</option><option value="5:15pm">5:15 PM</option><option value="5:30pm">5:30 PM</option><option value="5:45pm">5:45 PM</option>
-                                        <option value="6:00pm">6:00 PM</option><option value="6:15pm">6:15 PM</option><option value="6:30pm">6:30 PM</option><option value="6:45pm">6:45 PM</option>
-                                        <option value="7:00pm">7:00 PM</option><option value="7:15pm">7:15 PM</option><option value="7:30pm">7:30 PM</option><option value="7:45pm">7:45 PM</option>
-                                        <option value="8:00pm">8:00 PM</option><option value="8:15pm">8:15 PM</option><option value="8:30pm">8:30 PM</option><option value="8:45pm">8:45 PM</option>
-                                        <option value="9:00pm">9:00 PM</option><option value="9:15pm">9:15 PM</option><option value="9:30pm">9:30 PM</option><option value="9:45pm">9:45 PM</option>
-                                        <option value="10:00pm">10:00 PM</option><option value="10:15pm">10:15 PM</option><option value="10:30pm">10:30 PM</option><option value="10:45pm">10:45 PM</option>
-                                        <option value="11:00pm">11:00 PM</option><option value="11:15pm">11:15 PM</option><option value="11:30pm">11:30 PM</option><option value="11:45pm">11:45 PM</option>
+                                <div class="col-6">
+                                    <select name="time_cut_start" v-model="line.time_cut_start" class="form-control">
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                 </div>
-                                <div class="col-5">
-                                    <select name="end_time" v-model="line.end_time" class="form-control">
-                                        <option value="">Select start time</option>
-                                        <option value="12:00am">12:00 AM</option><option value="12:15am">12:15 AM</option><option value="12:30am">12:30 AM</option><option value="12:45am">12:45 AM</option>
-                                        <option value="1:00am">1:00 AM</option><option value="1:15am">1:15 AM</option><option value="1:30am">1:30 AM</option><option value="1:45am">1:45 AM</option>
-                                        <option value="2:00am">2:00 AM</option><option value="2:15am">2:15 AM</option><option value="2:30am">2:30 AM</option><option value="2:45am">2:45 AM</option>
-                                        <option value="3:00am">3:00 AM</option><option value="3:15am">3:15 AM</option><option value="3:30am">3:30 AM</option><option value="3:45am">3:45 AM</option>
-                                        <option value="4:00am">4:00 AM</option><option value="4:15am">4:15 AM</option><option value="4:30am">4:30 AM</option><option value="4:45am">4:45 AM</option>
-                                        <option value="5:00am">5:00 AM</option><option value="5:15am">5:15 AM</option><option value="5:30am">5:30 AM</option><option value="5:45am">5:45 AM</option>
-                                        <option value="6:00am">6:00 AM</option><option value="6:15am">6:15 AM</option><option value="6:30am">6:30 AM</option><option value="6:45am">6:45 AM</option>
-                                        <option value="7:00am">7:00 AM</option><option value="7:15am">7:15 AM</option><option value="7:30am">7:30 AM</option><option value="7:45am">7:45 AM</option>
-                                        <option value="8:00am">8:00 AM</option><option value="8:15am">8:15 AM</option><option value="8:30am">8:30 AM</option><option value="8:45am">8:45 AM</option>
-                                        <option value="9:00am">9:00 AM</option><option value="9:15am">9:15 AM</option><option value="9:30am">9:30 AM</option><option value="9:45am">9:45 AM</option>
-                                        <option value="10:00am">10:00 AM</option><option value="10:15am">10:15 AM</option><option value="10:30am">10:30 AM</option><option value="10:45am">10:45 AM</option>
-                                        <option value="11:00am">11:00 AM</option><option value="11:15am">11:15 AM</option><option value="11:30am">11:30 AM</option><option value="11:45am">11:45 AM</option>
-                                        <option value="12:00pm">12:00 PM</option><option value="12:15pm">12:15 PM</option><option value="12:30pm">12:30 PM</option><option value="12:45pm">12:45 PM</option>
-                                        <option value="1:00pm">1:00 PM</option><option value="1:15pm">1:15 PM</option><option value="1:30pm">1:30 PM</option><option value="1:45pm">1:45 PM</option>
-                                        <option value="2:00pm">2:00 PM</option><option value="2:15pm">2:15 PM</option><option value="2:30pm">2:30 PM</option><option value="2:45pm">2:45 PM</option>
-                                        <option value="3:00pm">3:00 PM</option><option value="3:15pm">3:15 PM</option><option value="3:30pm">3:30 PM</option><option value="3:45pm">3:45 PM</option>
-                                        <option value="4:00pm">4:00 PM</option><option value="4:15pm">4:15 PM</option><option value="4:30pm">4:30 PM</option><option value="4:45pm">4:45 PM</option>
-                                        <option value="5:00pm">5:00 PM</option><option value="5:15pm">5:15 PM</option><option value="5:30pm">5:30 PM</option><option value="5:45pm">5:45 PM</option>
-                                        <option value="6:00pm">6:00 PM</option><option value="6:15pm">6:15 PM</option><option value="6:30pm">6:30 PM</option><option value="6:45pm">6:45 PM</option>
-                                        <option value="7:00pm">7:00 PM</option><option value="7:15pm">7:15 PM</option><option value="7:30pm">7:30 PM</option><option value="7:45pm">7:45 PM</option>
-                                        <option value="8:00pm">8:00 PM</option><option value="8:15pm">8:15 PM</option><option value="8:30pm">8:30 PM</option><option value="8:45pm">8:45 PM</option>
-                                        <option value="9:00pm">9:00 PM</option><option value="9:15pm">9:15 PM</option><option value="9:30pm">9:30 PM</option><option value="9:45pm">9:45 PM</option>
-                                        <option value="10:00pm">10:00 PM</option><option value="10:15pm">10:15 PM</option><option value="10:30pm">10:30 PM</option><option value="10:45pm">10:45 PM</option>
-                                        <option value="11:00pm">11:00 PM</option><option value="11:15pm">11:15 PM</option><option value="11:30pm">11:30 PM</option><option value="11:45pm">11:45 PM</option>
+                                <div class="col-6">
+                                    <select name="time_cut_end" v-model="line.time_cut_end" class="form-control">
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
-                                </div>
-                                <div class="col-2">
-                                    <div class="save-button pointer" @click="add()">
-                                        <div class="text"><i class="feather icon-plus"></i></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="abanda-list mt-20" v-if="items.length>0">
-                            <div class="abanda-head">
-                                <div class="ht-p">Day</div>
-                                <div class="ht-p">Start time</div>
-                                <div class="ht-p">End time</div>
-                                <div class="ht-p">Actions</div>
-                            </div>
-        
-                            <div class="m-body">
-                                <div class="m-box">
-                                  <div
-                                      class="client-box"
-                                      v-for="d in items"
-                                      :key="d.day"
-                                  >
-                                      <div class="elt-p">{{ d.day }}</div>
-                                      <div class="elt-p">{{ d.start_time }}</div>
-                                      <div class="elt-p">{{ d.end_time }}</div>
-                                      <div class="elt-p btns pointer">
-                                          <i class="feather icon-x" @click="del(d)"></i>
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="save-button mt-20 pointer" @click="boucleDispo()" v-if="items.length>0">
+                        <div class="save-button mt-20 pointer" @click="save()">
                             <div class="text">Save</div>
                             <div class="icon"><i class="feather icon-save"></i></div>
                         </div>
@@ -139,10 +61,35 @@ export default {
         days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         items: [],
         line: {
-            day: '',
-            start_time: '9:00am',
-            end_time: '5:00pm',
+            day_cut: '',
+            time_cut_start: '9h00',
+            time_cut_end: '17h00',
         },
+        tab_hours: [
+        {value: "1h00", option: "1:00 AM"}, {value: "1h15", option: "1:15 AM"}, {value: "1h30", option: "1:30 AM"}, {value: "1h45", option: "1:45 AM"},
+        {value: "2h00", option: "2:00 AM"}, {value: "2h15", option: "2:15 AM"}, {value: "2h30", option: "2:30 AM"}, {value: "2h45", option: "2:45 AM"},
+        {value: "3h00", option: "3:00 AM"}, {value: "3h15", option: "3:15 AM"}, {value: "3h30", option: "3:30 AM"}, {value: "3h45", option: "3:45 AM"},
+        {value: "4h00", option: "4:00 AM"}, {value: "4h15", option: "4:15 AM"}, {value: "4h30", option: "4:30 AM"}, {value: "4:45am", option: "4:45 AM"},
+        {value: "5h00", option: "5:00 AM"}, {value: "5h15", option: "5:15 AM"}, {value: "5h30", option: "5:30 AM"}, {value: "5h45", option: "5:45 AM"},
+        {value: "6h00", option: "6:00 AM"}, {value: "6h15", option: "6:15 AM"}, {value: "6h30", option: "6:30 AM"}, {value: "6h45", option: "6:45 AM"},
+        {value: "7h00", option: "7:00 AM"}, {value: "7h15", option: "7:15 AM"}, {value: "7h30", option: "7:30 AM"}, {value: "7h45", option: "7:45 AM"},
+        {value: "8h00", option: "8:00 AM"}, {value: "8h15", option: "8:15 AM"}, {value: "8h30", option: "8:30 AM"}, {value: "8h45", option: "8:45 AM"},
+        {value: "9h00", option: "9:00 AM"}, {value: "9h15", option: "9:15 AM"}, {value: "9h30", option: "9:30 AM"}, {value: "9h45", option: "9:45 AM"},
+        {value: "10h00", option: "10:00 AM"}, {value: "10h15", option: "10:15 AM"}, {value: "10h30", option: "10:30 AM"}, {value: "10h45", option: "10:45 AM"},
+        {value: "11h00", option: "11:00 AM"}, {value: "11h15", option: "11:15 AM"}, {value: "11h30", option: "11:30 AM"}, {value: "11h45", option: "11:45 AM"},
+        {value: "12h00", option: "12:00 AM"}, {value: "12h15", option: "12:15 AM"}, {value: "12h30", option: "12:30 AM"}, {value: "12h45", option: "12:45 AM"},
+        {value: "13h00", option: "1:00 PM"}, {value: "13h15", option: "1:15 PM"}, {value: "13h30", option: "1:30 PM"}, {value: "13h45", option: "1:45 PM"},
+        {value: "14h00", option: "2:00 PM"}, {value: "14h15", option: "2:15 PM"}, {value: "14h30", option: "2:30 PM"}, {value: "14h45", option: "2:45 PM"},
+        {value: "15h00", option: "3:00 PM"}, {value: "15h15", option: "3:15 PM"}, {value: "15h30", option: "3:30 PM"}, {value: "15h45", option: "3:45 PM"},
+        {value: "16h00", option: "4:00 PM"}, {value: "16h15", option: "4:15 PM"}, {value: "16h30", option: "4:30 PM"}, {value: "16h45", option: "4:45 PM"},
+        {value: "17h00", option: "5:00 PM"}, {value: "17h15", option: "5:15 PM"}, {value: "17h30", option: "5:30 PM"}, {value: "17h45", option: "5:45 PM"},
+        {value: "18h00", option: "6:00 PM"}, {value: "18h15", option: "6:15 PM"}, {value: "18h30", option: "6:30 PM"}, {value: "18h45", option: "6:45 PM"},
+        {value: "19h00", option: "7:00 PM"}, {value: "19h15", option: "7:15 PM"}, {value: "19h30", option: "7:30 PM"}, {value: "19h45", option: "7:45 PM"},
+        {value: "20h00", option: "8:00 PM"}, {value: "82015", option: "8:15 PM"}, {value: "8h200", option: "8:30 PM"}, {value: "8h420", option: "8:45 PM"},
+        {value: "21h00", option: "9:00 PM"}, {value: "21h15", option: "9:15 PM"}, {value: "21h30", option: "9:30 PM"}, {value: "21h45", option: "9:45 PM"},
+        {value: "22h00", option: "10:00 PM"}, {value: "22h15", option: "10:15 PM"}, {value: "22h30", option: "10:30 PM"}, {value: "22h45", option: "10:45 PM"},
+        {value: "23h00", option: "11:00 PM"}, {value: "23h15", option: "11:15 PM"}, {value: "23h30", option: "11:30 PM"}, {value: "23h45", option: "11:45 PM"},
+        {value: "00h00", option: "12:00 PM"}, {value: "00h15", option: "12:15 PM"}, {value: "00h30", option: "12:30 PM"}, {value: "00h45", option: "12:45 PM"}]
     }),
 
     computed: {
@@ -167,9 +114,9 @@ export default {
 
         resetGhost () {
             this.line = {
-                day: '',
-                start_time: '9:00am',
-                end_time: '5:00pm',
+                day_cut: '',
+                time_cut_start: '9h00',
+                time_cut_end: '17h00',
             }
         },
 
@@ -187,20 +134,21 @@ export default {
             }
         },
 
-        async save (object) {
+        async save () {
             this.startLoading()
-            object.employee = this.user.id
+            this.line.employee = this.user.id
 
-            const response = await this.$api.post('/timesheet-api/availibilities/', object)
+            const response = await this.$api.post('/timesheet-api/availibilities/', this.line)
             .catch(error => {
                 console.log('error', error.response.data.error_message)
                 this.$swal.error('Warning', error.response.data.error_message)
-                // this.stopLoading()
+                this.stopLoading()
             })
             if (response) {
                 this.stopLoading()
                 this.$swal.success('Confirmation', 'Availibilities added successfuly')
                 this.$emit('added')
+                this.closeAllModals()
             }
         },
 

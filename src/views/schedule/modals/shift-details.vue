@@ -1,34 +1,20 @@
 <template lang="html">
-    <div class="_add-schedule-modal modal animated fadeIn" id="addScheduleModal">
+    <div class="_add-schedule-modal modal animated fadeIn" id="showShiftDetailsModal">
         <div class="modal-dialog" role="document" v-show="!isLoading">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-title content" v-if="canDisplay">
-                        <div class="avatar">{{ displayLetter }}</div>
-                        <div class="name">{{ displayName }}</div>
-                    </div>
-
-                    <h5 class="modal-title" v-show="!canDisplay">Open shift</h5>
-
+                    <h5 class="modal-title">Shift Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
 
-                    <div class="_tabs">
+                    <!--<div class="_tabs">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-custom-tab"
                                 data-toggle="tab" href="#nav-custom" role="tab"
-                                aria-controls="nav-custom">Custom</a>
-
-                            <a class="nav-item nav-link" id="nav-common-tab"
-                                data-toggle="tab" href="#nav-common" role="tab"
-                                aria-controls="nav-common">Common</a>
-
-                            <a class="nav-item nav-link" id="nav-timeoff-tab"
-                                data-toggle="tab" href="#nav-timeoff" role="tab"
-                                aria-controls="nav-timeoff" v-if="canDisplay">Time Off</a>
+                                aria-controls="nav-custom">Current</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="_modal-content">
                       <div>
@@ -37,11 +23,11 @@
                                 <div class="custom-box _form">
                                   <div class="time-select">
                                     <select name="debut_time" v-model="ghost.debut_time">
-                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.option" :key="index++">{{ h.option }}</option>
                                     </select>
                                     <div class="midle"><i class="feather icon-minus"></i></div>
                                     <select name="end_time" v-model="ghost.end_time">
-                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.option" :key="index++">{{ h.option }}</option>
                                     </select>
                                   </div>
                                   <div class="select-line">
@@ -72,19 +58,11 @@
                                     name="description" v-model="ghost.notes" id="notes" cols="1" rows="2" class="form-control"></textarea>
                                   </div>
 
-                                  <div class="save-button mt-20 pointer" @click="save()">
-                                    <div class="text">Add</div>
-                                    <div class="icon"><i class="feather icon-save"></i></div>
+                                  <div class="save-button mt-20 pointer">
+                                    <div class="icon mr-5" @click="confirmDelete()">Delete</div>
+                                    <div class="text" @click="save()">Edit</div>
+                                 </div>
                                 </div>
-                                </div>
-                              </div>
-
-                              <div class="tab-pane fade" id="nav-common" role="tabpanel" aria-labelledby="nav-common-tab">
-
-                              </div>
-
-                              <div class="tab-pane fade" id="nav-timeoff" role="tabpanel" aria-labelledby="nav-timeoff-tab">
-
                               </div>
                           </div>
                       </div>
@@ -99,25 +77,21 @@
 </template>
 
 <script>
-// import _ from 'lodash'
+import Swal from 'sweetalert2'
 
 export default {
     props: {
-        id: {
-            type: String,
-            default: '',
-        },
         user: {
+            type: Object,
+            default: () => {},
+        },
+        shift: {
             type: Object,
             default: () => {},
         },
         sites: {
             type: Array,
             default: () => [],
-        },
-        canDisplay: {
-            type: Boolean,
-            default: false,
         },
         businessId: {
             type: Number,
@@ -130,7 +104,7 @@ export default {
         selectedColor: '',
         selectedColorName: '',
         day: '',
-        colors: '#890000',
+        colors: '#000000',
         showPalette: false,
         selected: [],
         selected_days: [],
@@ -176,6 +150,18 @@ export default {
         ghost () {
             this.initUserAvailabilities()
         },
+
+        shift: {
+            immediate: true,
+            handler: function (val) {
+                if (val) {
+                    this.ghost = Object.assign({}, val)
+                    this.ghost.debut_time = val.debut_time.toUpperCase()
+                    this.ghost.end_time = val.end_time.toUpperCase()
+                    this.ghost.jobsite_id = val.job_site.id
+                }
+            }
+        }
     },
 
     computed: {
@@ -208,15 +194,12 @@ export default {
     },
 
     mounted () {
-        window.eventBus.$on('add-schedule', (result) => {
-             if (result !== 'another') {
-                this.initUserAvailabilities()
-                this.resetGhost()
-             }
-
-             if (result == 'another') {
-                this.selected.push(this.id)
-                this.resetGhost()
+        window.eventBus.$on('shift-details', (result) => {
+             if (result) {
+                this.ghost = Object.assign({}, this.shift)
+                this.ghost.debut_time = this.shift.debut_time.toUpperCase()
+                    this.ghost.end_time = this.shift.end_time.toUpperCase()
+                    this.ghost.jobsite_id = this.shift.job_site.id
              }
         })
     },
@@ -308,20 +291,56 @@ export default {
             this.ghost.days_of_week = this.selected
             console.log(this.ghost)
 
-            const response = await this.$api.post('/timesheet-api/shifts/', this.ghost)
+            const response = await this.$api.put(`/timesheet-api/shifts/${this.ghost.id}/`, this.ghost)
             .catch(error => {
                 console.log('error', error.response.data)
                 this.stopLoading()
             })
             if (response) {
                 this.stopLoading()
-                this.$swal.success('Confirmation', 'Schedule Event added successfuly')
+                this.$swal.success('Confirmation', 'Shift edited successfuly')
                 this.$emit('shiftAdded')
                 this.closeAllModals()
                 this.selected_days = []
                 this.selected = []
             }
-        }
+        },
+
+        confirmDelete () {
+             Swal.fire({
+                 // title: this.$translate.text('Are you sure ?'),
+                 text: this.$translate.text("Are you sure you want to delete the selected shift ?"),
+                 type: 'warning',
+                 showCancelButton: true,
+                 cancelButtonText: this.$translate.text('Cancel'),
+                 confirmButtonColor: '#890000',
+                 cancelButtonColor: '#000000',
+                 confirmButtonText: this.$translate.text('Yes, delete!')
+             }).then((result) => {
+                 if (result.value) {
+                    this.closeModal('showShiftDetailsModal')
+                     this.deleteShift()
+                 }
+             })
+         },
+
+        async deleteShift () {
+            this.startLoading()
+
+            const response = await this.$api.delete(`/timesheet-api/shifts/${this.ghost.id}/`)
+            .catch(error => {
+                console.log('error', error.response.data)
+                this.stopLoading()
+            })
+            if (response) {
+                this.stopLoading()
+                this.$swal.success('Confirmation', 'Shift deleted successfuly')
+                this.$emit('shiftAdded')
+                this.closeAllModals()
+                this.selected_days = []
+                this.selected = []
+            }
+        },
     }
 }
 </script>

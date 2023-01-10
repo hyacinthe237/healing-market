@@ -136,33 +136,33 @@
                         </div>
                       </td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Monday')]" 
+                        :class="['th-10', isAvailable(m, 'Monday')]" 
                         @click="selectedUser('monday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Monday') }}</td>
+                      >{{ displayAvailableText(m, 'Monday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Tuesday')]"
+                        :class="['th-10', isAvailable(m, 'Tuesday')]"
                         @click="selectedUser('tuesday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Tuesday') }}</td>
+                      >{{ displayAvailableText(m, 'Tuesday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Wednesday')]"
+                        :class="['th-10', isAvailable(m, 'Wednesday')]"
                         @click="selectedUser('wednesday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Wednesday') }}</td>
+                      >{{ displayAvailableText(m, 'Wednesday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Thursday')]"
+                        :class="['th-10', isAvailable(m, 'Thursday')]"
                         @click="selectedUser('thursday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Thursday') }}</td>
+                      >{{ displayAvailableText(m, 'Thursday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Friday')]"
+                        :class="['th-10', isAvailable(m, 'Friday')]"
                         @click="selectedUser('friday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Friday') }}</td>
+                      >{{ displayAvailableText(m, 'Friday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Saturday')]"
+                        :class="['th-10', isAvailable(m, 'Saturday')]"
                         @click="selectedUser('saturday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Saturday') }}</td>
+                      >{{ displayAvailableText(m, 'Saturday') }}</td>
                       <td 
-                        :class="['th-10', isAvailable(m.availibilities, 'Sunday')]"
+                        :class="['th-10', isAvailable(m, 'Sunday')]"
                         @click="selectedUser('sunday', m)"
-                      >{{ displayAvailableText(m.availibilities, 'Sunday') }}</td>
+                      >{{ displayAvailableText(m, 'Sunday') }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -183,6 +183,13 @@
       :businessId="businessId"
       @shiftAdded="getMembers"
     ></addModal>
+
+    <shiftDetailsModal 
+      :sites="sites" 
+      :user="payload"
+      :shift="selectedShift"
+      :businessId="businessId"
+    ></shiftDetailsModal>
   </div>
 </template>
 
@@ -191,11 +198,13 @@ import Header from '@/components/commons/header/header'
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import moment from 'moment'
 import addModal from './modals/add'
+import shiftDetailsModal from './modals/shift-details'
 import config from '../../services/config'
 
 export default {
     data: () => ({
         payload: {},
+        selectedShift: {},
         showFilter: false,
         canDisplay: false,
         events: [],
@@ -205,7 +214,7 @@ export default {
         identifiant:'',
     }),
 
-    components: { Header, Sidebar, addModal },
+    components: { Header, Sidebar, addModal, shiftDetailsModal },
 
     computed: {
       date () {
@@ -250,22 +259,22 @@ export default {
         return str
       },
 
-      isAvailable (tableaux_dispo, day) {
-        if (tableaux_dispo.length>0) {
-          let availability = tableaux_dispo.filter(f=>f.day_cut == day)
-          return availability.length>0 ? 'applicable' : 'not-applicable'
+      isAvailable (member, day) {
+        if (member.availibilities.length>0) {
+          let availability = member.availibilities.filter(f=>f.day_cut == day)
+          return availability.length>0 ? member.shifts.length>0 ? 'assigned' :'applicable' : 'not-applicable'
         }
 
-        if (tableaux_dispo.length==0) { return 'not-applicable' }
+        if (member.availibilities.length==0) { return 'not-applicable' }
       },
 
-      displayAvailableText (tableaux_dispo, day) {
-        if (tableaux_dispo.length>0) {
-          let availability = tableaux_dispo.filter(f=>f.day_cut == day)
-          return availability.length>0 ? 'A' : 'N.A'
+      displayAvailableText (member, day) {
+        if (member.availibilities.length>0) {
+          let availability = member.availibilities.filter(f=>f.day_cut == day)
+          return availability.length>0 ? member.shifts.length>0 ? 'Assigned' : 'A' : 'N.A'
         }
 
-        if (tableaux_dispo.length==0) { return 'N.A' }
+        if (member.availibilities.length==0) { return 'N.A' }
       },
 
       async getAvailabilities () {
@@ -300,11 +309,19 @@ export default {
       },
 
       selectedUser (day, user) {
-        window.eventBus.$emit('add-schedule', day)
-        this.identifiant = day
-        this.payload = user
-        this.canDisplay = true
-        window.$(`#addScheduleModal`).modal('show')
+        if (user.shifts.length==0) {
+          window.eventBus.$emit('add-schedule', day)
+          this.identifiant = day
+          this.payload = user
+          this.canDisplay = true
+          window.$(`#addScheduleModal`).modal('show')
+        }
+        if (user.shifts.length>0) {
+          window.eventBus.$emit('shift-details[', user.shifts[0])
+          this.payload = user
+          this.selectedShift = user.shifts[0]
+          window.$(`#showShiftDetailsModal`).modal('show')
+        }
       },
 
       selected (day) {

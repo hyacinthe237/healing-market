@@ -176,6 +176,13 @@
             height: 30px;
             min-height: 30px;
 
+            &.assigned {
+              background-color:rgba(0, 4, 128, 0.2);
+              color:rgb(0, 4, 128);
+              text-align: center;
+              text-transform: uppercase;
+            }
+
             &.applicable {
               background-color:rgba(0,128,0,0.2);
               color:rgb(0,128,0);

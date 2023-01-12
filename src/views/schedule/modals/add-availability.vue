@@ -12,6 +12,7 @@
                 <div class="_modal-content">
                       <form class="_form">
                         <div class="form-group">
+                            <label for="day_cut">Select a day</label>
                             <select name="day_cut" id="day" class="form-control" v-model="line.day_cut">
                                 <option value="">Select a day</option>
                                 <option v-for="(day, index) in days" :value="day" :key="index++">{{ day }}</option>
@@ -20,18 +21,20 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-6">
+                                    <label for="time_cut_start">Select start time</label>
                                     <select name="time_cut_start" v-model="line.time_cut_start" class="form-control">
                                         <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
+                                    <label for="time_cut_end">Select end time</label>
                                     <select name="time_cut_end" v-model="line.time_cut_end" class="form-control">
                                         <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="save-button mt-20 pointer" @click="save()">
+                        <div class="mt-20 save-button pointer" @click="save()">
                             <div class="text">Save</div>
                             <div class="icon"><i class="feather icon-save"></i></div>
                         </div>

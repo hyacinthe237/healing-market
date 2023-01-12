@@ -51,7 +51,7 @@
                 </div>
               </div>
 
-              <div class="_table mt-20">
+              <div class="mt-20 _table">
                 <table>
                   <thead>
                     <tr>
@@ -317,7 +317,7 @@ export default {
           window.$(`#addScheduleModal`).modal('show')
         }
         if (user.shifts.length>0) {
-          window.eventBus.$emit('shift-details[', user.shifts[0])
+          window.eventBus.$emit('shift-details', user.shifts[0])
           this.payload = user
           this.selectedShift = user.shifts[0]
           window.$(`#showShiftDetailsModal`).modal('show')

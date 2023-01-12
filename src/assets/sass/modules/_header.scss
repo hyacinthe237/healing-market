@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: space-between;
     max-height: 60px;
+    z-index: 999;
+    position: sticky;
 
     .dashboard-brand {
       display: flex;

@@ -18,11 +18,13 @@ import VueParticlesBg from "particles-bg-vue"
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
 import { Photoshop, Compact, Twitter } from 'vue-color'
 import VueTimepicker from 'vue2-timepicker'
+import { BootstrapVue,  } from 'bootstrap-vue'
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import 'vue2-timepicker/dist/VueTimepicker.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 import App from './App.vue'
@@ -37,6 +39,7 @@ import { french } from '@/assets/i18n'
 
 import Spinners from '@/components/commons/loaders/spinners'
 import VErrorComponent from '@/components/commons/error/v-error'
+import PopoverComponent from '@/components/commons/popover/popover'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -62,6 +65,7 @@ Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
 Vue.use(VueParticlesBg)
 Vue.use(VueScrollFixedNavbar)
+Vue.use(BootstrapVue)
 Vue.use(VeeValidate, { locale: 'en', dictionary: { en: messagesEn } })
 
 Vue.config.productionTip = false
@@ -73,6 +77,7 @@ Vue.component('photoshop-picker', Photoshop)
 Vue.component('compact-picker', Compact)
 Vue.component('twitter-picker', Twitter)
 Vue.component('vue-timepicker', VueTimepicker)
+Vue.component('popover-vue', PopoverComponent)
 
 new Vue({
   router,

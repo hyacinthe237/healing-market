@@ -7,16 +7,16 @@
           </div>
       </div>
       <div class="content">
-          <div class="head mt-40">
+          <div class="mt-40 head">
               <div class="message-big">Forgot password</div>
           </div>
 
-          <form class="_form signup-form mt-20">
+          <form class="mt-20 _form signup-form">
               <div class="form-group">
                   <input type="text" name="email" placeholder="Email address" class="form-control">
               </div>
-              <div class="button mt-20 pointer">
-                  <div class="text">Sign In</div>
+              <div class="mt-20 button pointer">
+                  <div class="text">Recover now</div>
                   <div class="icon"><i class="feather icon-log-in"></i></div>
               </div>
           </form>

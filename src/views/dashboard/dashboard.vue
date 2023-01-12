@@ -50,7 +50,7 @@
               </div>
 
               <div v-show="isManager">
-                  <div class="_tabs mt-20">
+                  <div class="mt-20 _tabs">
                       <div class="nav nav-tabs bg" id="nav-tab" role="tablist">
                           <a class="nav-item nav-link" id="nav-upcoming-tab"
                               data-toggle="tab" href="#nav-upcoming" role="tab"
@@ -62,7 +62,7 @@
                       </div>
                   </div>
 
-                  <div class="tab-content pt-20" id="nav-tabContent">
+                  <div class="pt-20 tab-content" id="nav-tabContent">
                       <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                           <div class="upcoming-box">
                             <div class="upcoming-item">
@@ -97,20 +97,11 @@
                   </div>
               </div>
               <div class="cards" v-show="isEmployee">
-                <div class="schedule-item">
+                <div class="schedule-item" v-for="shift in shifts" :key="shift.id">
                   <div class="gauche">
                     <div class="label">Security officer</div>
-                    <div class="time">10pm - 6am</div>
-                    <div class="more mt-20">Views details</div>
-                  </div>
-                  <div class="droite"><i class="feather icon-message-square"></i></div>
-                </div>
-                
-                <div class="schedule-item">
-                  <div class="gauche">
-                    <div class="label">Security officer</div>
-                    <div class="time">10pm - 6am</div>
-                    <div class="more mt-20">Views details</div>
+                    <div class="time">{{ shift.debut_time +' - '+ shift.end_time }}</div>
+                    <popover-vue :id="`popover-active-${shift.id}`" :item="shift" />
                   </div>
                   <div class="droite"><i class="feather icon-message-square"></i></div>
                 </div>
@@ -131,7 +122,8 @@ import config from '../../services/config'
 
 export default {
     data: () => ({
-        payload: {}
+        payload: {},
+        shifts: []
     }),
 
     components: { Header, Sidebar },
@@ -147,12 +139,15 @@ export default {
     
     watch: { },
 
-    mounted () { 
-      if (this.isManager) {
-        this.getDoashboard()
+    mounted () {
+      $(function(){
+          // Enables popover
+          $("[data-toggle=popover]").popover();
+      });
+      if (this.isEmployee) {
+        this.getEmployeeDoashboard()
       }
-      
-     },
+    },
 
     methods: { 
       async getDoashboard () {
@@ -167,6 +162,22 @@ export default {
         if (res) {
           this.stopLoading()
           console.log('members', res.data)
+        }
+      },
+
+      async getEmployeeDoashboard () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/user-api/users/${this.user.id}/`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('Sorry', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.payload = Object.assign({}, res.data)
+          this.shifts = res.data.shifts.slice(0,2)
         }
       },
     }

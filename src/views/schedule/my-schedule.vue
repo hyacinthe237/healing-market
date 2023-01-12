@@ -20,12 +20,13 @@
                 <div class="schedule-spacer"></div>
                 <div class="btns">
                   <div class="action"><i class="ion-md-cloud-download"></i></div>
+                  <div>Set day(s) your not available</div>
                   <div class="action pointer" @click="openModal()"><i class="feather icon-plus"></i></div>
                 </div>
                 <div class="filter" @click="displayFilter()"><i class="feather icon-filter"></i></div>
               </div>
 
-              <div class="_table mt-20">
+              <div class="mt-20 _table">
                 <table>
                   <thead>
                     <tr>

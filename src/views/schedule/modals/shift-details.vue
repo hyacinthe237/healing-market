@@ -23,11 +23,11 @@
                                 <div class="custom-box _form">
                                   <div class="time-select">
                                     <select name="debut_time" v-model="ghost.debut_time">
-                                        <option v-for="(h, index) in tab_hours" :value="h.option" :key="index++">{{ h.option }}</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                     <div class="midle"><i class="feather icon-minus"></i></div>
                                     <select name="end_time" v-model="ghost.end_time">
-                                        <option v-for="(h, index) in tab_hours" :value="h.option" :key="index++">{{ h.option }}</option>
+                                        <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                                     </select>
                                   </div>
                                   <div class="select-line">
@@ -41,7 +41,7 @@
                                         <twitter-picker v-model="colors" @input="updateValue" v-if="showPalette" />
                                   </div>
 
-                                  <div class="applies mt-10">
+                                  <div class="mt-10 applies">
                                         <label for="apply">Apply to</label>
                                         <div class="days">
                                             <div 
@@ -52,14 +52,14 @@
                                         </div>
                                   </div>
 
-                                  <div class="form-group mt-20">
+                                  <div class="mt-20 form-group">
                                     <label for="notes">Shift Notes</label>
                                     <textarea placeholder="Leave a note for your employee, like the address of a job site, and they'll see it when they clock in." 
                                     name="description" v-model="ghost.notes" id="notes" cols="1" rows="2" class="form-control"></textarea>
                                   </div>
 
-                                  <div class="save-button mt-20 pointer">
-                                    <div class="icon mr-5" @click="confirmDelete()">Delete</div>
+                                  <div class="mt-20 save-button pointer">
+                                    <div class="mr-5 icon" @click="confirmDelete()">Delete</div>
                                     <div class="text" @click="save()">Edit</div>
                                  </div>
                                 </div>
@@ -78,6 +78,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import _ from 'lodash'
 
 export default {
     props: {
@@ -154,10 +155,10 @@ export default {
         shift: {
             immediate: true,
             handler: function (val) {
-                if (val) {
+                if (!_.isEmpty(val)) {
                     this.ghost = Object.assign({}, val)
-                    this.ghost.debut_time = val.debut_time.toUpperCase()
-                    this.ghost.end_time = val.end_time.toUpperCase()
+                    this.ghost.debut_time = this.displayHourValue(val.debut_time)
+                    this.ghost.end_time = this.displayHourValue(val.end_time)
                     this.ghost.jobsite_id = val.job_site.id
                 }
             }
@@ -195,11 +196,12 @@ export default {
 
     mounted () {
         window.eventBus.$on('shift-details', (result) => {
-             if (result) {
-                this.ghost = Object.assign({}, this.shift)
-                this.ghost.debut_time = this.shift.debut_time.toUpperCase()
-                    this.ghost.end_time = this.shift.end_time.toUpperCase()
-                    this.ghost.jobsite_id = this.shift.job_site.id
+             if (!_.isEmpty(result)) {
+                this.ghost = Object.assign({}, result)
+                this.ghost.debut_time = this.displayHourValue(result.debut_time)
+                this.ghost.end_time = this.displayHourValue(result.end_time)
+                this.ghost.jobsite_id = result.job_site.id
+                console.log('result', this.ghost)
              }
         })
     },

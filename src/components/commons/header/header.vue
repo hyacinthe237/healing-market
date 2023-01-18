@@ -1,5 +1,5 @@
 <template lang="html">
-  <!--<VueScrollFixedNavbar>-->
+  <div>
       <section class="_header">
         <div class="dashboard-brand">
           <a href="#"><img :src="logo" alt=""></a>
@@ -18,7 +18,9 @@
           </div>
         </div>
       </section>
-  <!--</VueScrollFixedNavbar>-->
+
+      <div class="clearfix"></div>
+    </div>
 </template>
 
 <script>

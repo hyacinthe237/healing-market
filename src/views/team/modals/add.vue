@@ -11,7 +11,7 @@
                     <div class="close" @click="closeModal()">
                         <i class="feather icon-x"></i>
                     </div>
-                    <form @submit.prevent class="_form mt-20" v-show="!isLoading">
+                    <form @submit.prevent class="mt-20 _form" v-show="!isLoading">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -106,7 +106,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="role" v-translate>Wage</label>
+                                    <label for="role" v-translate>Wage hourly</label>
                                     <input type="number"
                                         name="wage"
                                         v-model="ghost.wage"
@@ -176,19 +176,19 @@
                         </div>
                     </form>
 
-                    <div class="buttons mt-20" v-show="!isLoading">
-                        <button class="btn btn-grey mr-20" @click="save('finished')" :disabled="isLoading">
+                    <div class="mt-20 buttons" v-show="!isLoading">
+                        <button class="mr-20 btn btn-grey" @click="save('finished')" :disabled="isLoading">
                             <i class="feather icon-x"></i>
                             {{ t('Save and Finish') }}
                         </button>
 
-                        <!--<button class="btn btn-grey mr-20" @click="closeModal()" :disabled="isLoading">
+                        <!--<button class="mr-20 btn btn-grey" @click="closeModal()" :disabled="isLoading">
                             <i class="feather icon-x"></i>
                             {{ t('Close') }}
                         </button>-->
 
                         <button class="btn-primary btn" @click.prevent="save('another')">
-                            <i class="feather icon-save mr-10"></i>
+                            <i class="mr-10 feather icon-save"></i>
                             {{ t('Save and Add another') }}
                         </button>
                     </div>

@@ -8,7 +8,7 @@
           <div class="contiainer">
             <div class="row">
               <div class="col-sm-4">
-                <form class="_form mt-20 padding" @submit.prevent>
+                <form class="mt-20 _form padding" @submit.prevent>
                   <div class="reset" @click="resetGhost()"><i class="feather icon-repeat"></i></div>
                   <h3>{{ type_name }} a job site</h3>
                   <div class="form-group">
@@ -16,7 +16,13 @@
                     <input type="text" name="name" v-model="ghost.name" placeholder="Name" class="form-control">
                   </div>
 
-                  <div id="color-picker" class="form-group mt-20">
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea placeholder="Describe address" 
+                        name="description" v-model="ghost.address" id="address" cols="1" rows="2" class="form-control"></textarea>
+                  </div>
+
+                  <div id="color-picker" class="mt-20 form-group">
                     <label for="color_code">Color code</label>
                     <div class="wrapper-dropdown">
                       <span @click="toggleDropdown()" v-html="selector"></span>
@@ -32,12 +38,12 @@
                     </div>
                     </div>
                   
-                  <div class="save-button mt-20 pointer" @click="editJobSite()" v-if="isEdit">
+                  <div class="mt-20 save-button pointer" @click="editJobSite()" v-if="isEdit">
                       <div class="text">Edit a job site</div>
                       <div class="icon"><i class="feather icon-save"></i></div>
                   </div>
 
-                  <div class="save-button mt-20 pointer" @click="addJobSite()" v-else>
+                  <div class="mt-20 save-button pointer" @click="addJobSite()" v-else>
                       <div class="text">Add a job site</div>
                       <div class="icon"><i class="feather icon-save"></i></div>
                   </div>
@@ -193,6 +199,7 @@ export default {
         const editObject = {
           name: this.ghost.name,
           color_code: this.ghost.color_code,
+          address: this.ghost.address,
           business: this.ghost.business.id
         }
 
@@ -248,7 +255,7 @@ export default {
       },
 
       resetGhost () {
-        this.ghost = { name: '', color_code: '', business: '' }
+        this.ghost = { name: '', color_code: '', business: '', address: '' }
         this.selectedColor = ''
         this.selectedColorName = ''
         this.active = false

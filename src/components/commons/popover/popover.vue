@@ -2,7 +2,7 @@
     <div id="my-container">
       <div class="my-3">
         <!-- Our triggering (target) element -->
-        <b-button :id="`${id}`" variant="primary" ref="button" class="mt-20 more">
+        <b-button :id="`${id}`" variant="primary" ref="button" class="mt-10 more">
           Views details
         </b-button>
       </div>
@@ -141,7 +141,7 @@
           // updated & popover positioned first
           this.$nextTick(() => {
             this.$nextTick(() => {
-              ;(ref.$el || ref).focus()
+              (ref.$el || ref).focus()
             })
           })
         }

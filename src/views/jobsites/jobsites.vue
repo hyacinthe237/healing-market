@@ -56,7 +56,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="w30">Name</th>
+                                <th class="w20">Name</th>
                                 <th class="w20">Address</th>
                                 <th class="w10"></th>
                             </tr>
@@ -64,14 +64,8 @@
       
                         <tbody>
                             <tr v-for="s in sites" :key="s.id" :style="{color: s.color_code}">
-                                <td class="w30">
-                                  <div class="name">
-                                    {{ s.name }}
-                                  </div>
-                                </td>
-                                <td class="w20 no-column">
-                                  <div class="position">{{ s.address }}</div>
-                                </td>
+                                <td class="w20">{{ s.name }}</td>
+                                <td class="w20">{{ s.address }}</td>
                                 <td class="w10">
                                   <div class="actions pointer">
                                     <div class="icons">

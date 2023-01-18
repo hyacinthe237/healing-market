@@ -5,7 +5,7 @@
         <Sidebar :current="'jobsites'" />
 
         <div id="page-content-wrapper">
-          <div class="contiainer">
+          <div class="container">
             <div class="row">
               <div class="col-sm-4">
                 <form class="mt-20 _form padding" @submit.prevent>
@@ -57,7 +57,7 @@
                         <thead>
                             <tr>
                                 <th class="w30">Name</th>
-                                <th class="w20">Color code</th>
+                                <th class="w20">Address</th>
                                 <th class="w10"></th>
                             </tr>
                         </thead>
@@ -70,7 +70,7 @@
                                   </div>
                                 </td>
                                 <td class="w20 no-column">
-                                  <div class="position">{{ s.color_code }}</div>
+                                  <div class="position">{{ s.address }}</div>
                                 </td>
                                 <td class="w10">
                                   <div class="actions pointer">
@@ -259,6 +259,7 @@ export default {
         this.selectedColor = ''
         this.selectedColorName = ''
         this.active = false
+        this.isEdit = false
       },
     }
 }

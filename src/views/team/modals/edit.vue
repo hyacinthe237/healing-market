@@ -107,7 +107,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="role" v-translate>Wage</label>
+                                    <label for="role" v-translate>Wage hourly</label>
                                     <input type="number"
                                         name="wage"
                                         v-model="ghost.wage"

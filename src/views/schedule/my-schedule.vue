@@ -196,7 +196,7 @@
                 </table>
               </div>
 
-              <!--<main-calendar v-if="period == 'month'"/>-->
+              <izy-calendar v-if="period == 'month'"/>
             </div>
         </div>
     </div>

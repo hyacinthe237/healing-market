@@ -13,8 +13,10 @@
                   <div class="date">{{ date }}</div>
                 </div>
                 <div class="select">
-                  <select name="date">
-                    <option>Week</option>
+                  <select name="date" v-model="period">
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
                   </select>
                 </div>
                 <div class="schedule-spacer"></div>
@@ -43,7 +45,7 @@
                 </div>
               </div>
 
-              <div class="mt-20 _table">
+              <div class="mt-20 _table" v-if="period == 'week'">
                 <table>
                   <thead>
                     <tr>
@@ -193,6 +195,8 @@
                   </tbody>
                 </table>
               </div>
+
+              <!--<main-calendar v-if="period == 'month'"/>-->
             </div>
         </div>
     </div>
@@ -218,6 +222,7 @@ export default {
         showFilter: false,
         events: [],
         sites: [],
+        period:'week',
         identifiant:'',
         tab_hours: [
         {value: "1:00", option: "1:00 AM"}, {value: "1:15", option: "1:15 AM"}, {value: "1:30", option: "1:30 AM"}, {value: "1:45", option: "1:45 AM"},

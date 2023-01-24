@@ -135,12 +135,16 @@
             background-color: rgba(137,0,0,0.1);
             color: $primary;
             font-weight: bold;
+            text-align: center;
+            font-size: 11px;
 
             th {
               height: 30px;
-              font-size: 12px;
+              font-size: 10px;
               text-align: center;
               justify-content: center;
+
+              &.th-10 {width: 10%; text-align: center;}
             }
           }
 
@@ -344,6 +348,19 @@
             }
             &.th-10 {
               width: 10%;
+
+              .txtdt {
+                padding-right: 10px;
+                text-transform: uppercase;
+                font-size: small;
+                font-weight: bold;
+              }
+
+              .chdt {
+                color: $brand-teal;
+                text-transform: uppercase;
+                font-size: larger;
+              }
               
               .date {
                 display: flex;

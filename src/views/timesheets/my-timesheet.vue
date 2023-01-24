@@ -39,10 +39,13 @@
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
-                      <td class="th-10"></td>
+                    <tr v-for="e in events" :key="e.id">
+                      <td class="th-10">
+                        <span class="txtdt">{{ formatedDayTxt(e.created_at) }}</span>
+                        <span class="chdt">{{ formatedDayChiffre(e.created_at) }}</span>
+                      </td>
+                      <td class="th-10">{{ displayRole() }}</td>
+                      <td class="th-10">{{ displayRate() }}</td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
                       <td class="th-10"></td>
@@ -103,6 +106,26 @@ export default {
       displayFilter () {
         this.showFilter = !this.showFilter
         console.log('showfilter', this.showFilter)
+      },
+
+      displayRole () {
+        let str = ''
+        if (this.user.is_employee) str = 'Employee'
+        if (this.user.is_manager) str = 'Manager'
+        return str
+      },
+
+      displayRate () {
+        return '$ ' + this.user.wage
+      },
+
+      formatedDayTxt (dt) {
+        let txtdt = moment(dt).format('dddd')
+        return txtdt.slice(0, 3)
+      },
+
+      formatedDayChiffre (dt) {
+        return moment(dt).format('DD')
       },
 
       openModal () {

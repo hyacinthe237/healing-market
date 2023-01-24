@@ -314,7 +314,7 @@
                         </button>
                     </div>-->
 
-                    <div class="datepicker-month" v-for="month in months" :key="month">
+                    <div class="datepicker-month" v-for="(month, index) in months" :key="index+1">
                         <!--<transition-group name="slidev">
                             <div class="datepicker-month-label"
                                  v-for="(month, index) in [month]"

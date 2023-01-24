@@ -27,6 +27,15 @@ Vue.filter('datetime', function (value, formatted) {
     }
 })
 
+Vue.filter('day', function (value, formatted) {
+    if (value) {
+        if (formatted) {
+            return moment(String(value)).format(formatted)
+        }
+        return moment(String(value)).format('DDDD DD')
+    }
+})
+
 Vue.filter('duration', function (value) {
     if (value) {
         return moment(String(value)).fromNow()

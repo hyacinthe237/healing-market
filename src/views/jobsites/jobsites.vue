@@ -18,8 +18,8 @@
 
                   <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea placeholder="Describe address" 
-                        name="description" v-model="ghost.address" id="address" cols="1" rows="2" class="form-control"></textarea>
+                    <textarea placeholder="Enter address" 
+                        name="address" v-model="ghost.address" id="address" cols="1" rows="2" class="form-control"></textarea>
                   </div>
 
                   <div id="color-picker" class="mt-20 form-group">

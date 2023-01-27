@@ -250,8 +250,8 @@
               color:rgb(137,0,0);
               text-align: center;
               text-transform: uppercase;
-              cursor: not-allowed;
-              pointer-events: none;
+              cursor: pointer;
+              /*pointer-events: none;*/
             }
 
             .profile {

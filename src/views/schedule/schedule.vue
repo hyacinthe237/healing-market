@@ -137,31 +137,31 @@
                       </td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Monday')]" 
-                        @click="selectedUser('monday', m)"
+                        @click="selectedUser('monday', m, isAvailable(m, 'Monday'))"
                       >{{ displayAvailableText(m, 'Monday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Tuesday')]"
-                        @click="selectedUser('tuesday', m)"
+                        @click="selectedUser('tuesday', m, isAvailable(m, 'Tuesday'))"
                       >{{ displayAvailableText(m, 'Tuesday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Wednesday')]"
-                        @click="selectedUser('wednesday', m)"
+                        @click="selectedUser('wednesday', m, isAvailable(m, 'Wednesday'))"
                       >{{ displayAvailableText(m, 'Wednesday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Thursday')]"
-                        @click="selectedUser('thursday', m)"
+                        @click="selectedUser('thursday', m, isAvailable(m, 'Thursday'))"
                       >{{ displayAvailableText(m, 'Thursday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Friday')]"
-                        @click="selectedUser('friday', m)"
+                        @click="selectedUser('friday', m, isAvailable(m, 'Friday'))"
                       >{{ displayAvailableText(m, 'Friday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Saturday')]"
-                        @click="selectedUser('saturday', m)"
+                        @click="selectedUser('saturday', m, isAvailable(m, 'Saturday'))"
                       >{{ displayAvailableText(m, 'Saturday') }}</td>
                       <td 
                         :class="['th-10', isAvailable(m, 'Sunday')]"
-                        @click="selectedUser('sunday', m)"
+                        @click="selectedUser('sunday', m, isAvailable(m, 'Sunday'))"
                       >{{ displayAvailableText(m, 'Sunday') }}</td>
                     </tr>
                   </tbody>
@@ -242,7 +242,6 @@ export default {
     methods: {
       displayFilter () {
         this.showFilter = !this.showFilter
-        console.log('showfilter', this.showFilter)
       },
 
       displayLetter (member) {
@@ -295,8 +294,11 @@ export default {
 
       async getMembers () {
         this.startLoading()
-
-        const res = await this.$api.get(`/user-api/manager-team-member`)
+        const payload = {
+          start_date: this.displayFullDate('monday'),
+          end_date: this.displayFullDate('sunday')
+        }
+        const res = await this.$api.get(`/user-api/manager-team-member-per-period`, { params: payload })
         .catch(error => {
             this.stopLoading()
             this.$swal.error('get members error', error.response.data.error_message)
@@ -308,14 +310,19 @@ export default {
         }
       },
 
-      selectedUser (day, user) {
-        if (user.shifts.length==0) {
+      selectedUser (day, user, css) {
+        if (user.shifts.length==0 && css == 'applicable') {
           window.eventBus.$emit('add-schedule', day)
           this.identifiant = day
           this.payload = user
           this.canDisplay = true
           window.$(`#addScheduleModal`).modal('show')
         }
+
+        if (user.shifts.length==0 && css == 'not-applicable') {
+          this.$swal.error('Sorry', 'Team member is not available for this day')
+        }
+
         if (user.shifts.length>0) {
           window.eventBus.$emit('shift-details', user.shifts[0])
           this.payload = user

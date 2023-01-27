@@ -10,7 +10,7 @@
 
                 <div class="card" v-show="isManager">
                   <div class="gauche">
-                    <div class="number">45</div>
+                    <div class="number">{{ members.length }}</div>
                     <div class="name">Team members</div>
                   </div>
                   <div class="droite"><i class="feather icon-users"></i></div>
@@ -18,7 +18,7 @@
 
                 <div class="card" v-show="isManager">
                   <div class="gauche">
-                    <div class="number">45</div>
+                    <div class="number">{{ 0 }}</div>
                     <div class="name">Clocked in</div>
                   </div>
                   <div class="droite"><i class="feather icon-user"></i></div>
@@ -123,7 +123,8 @@ import config from '../../services/config'
 export default {
     data: () => ({
         payload: {},
-        shifts: []
+        shifts: [],
+        members: [],
     }),
 
     components: { Header, Sidebar },
@@ -147,6 +148,9 @@ export default {
       if (this.isEmployee) {
         this.getEmployeeDoashboard()
       }
+      if (this.isManager) {
+        this.getMembers()
+      }
     },
 
     methods: { 
@@ -162,6 +166,21 @@ export default {
         if (res) {
           this.stopLoading()
           console.log('members', res.data)
+        }
+      },
+
+      async getMembers () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/user-api/manager-team-member`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('get members error', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
         }
       },
 

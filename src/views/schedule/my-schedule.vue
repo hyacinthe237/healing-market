@@ -296,8 +296,12 @@ export default {
 
       async getScheduleEvents () {
         this.startLoading()
+        const payload = {
+          start_date: this.displayFullDate('monday'),
+          end_date: this.displayFullDate('sunday')
+        }
 
-        const res = await this.$api.get(`/timesheet-api/employee/${this.user.id}/shifts`)
+        const res = await this.$api.get(`/timesheet-api/employee/${this.user.id}/shifts-per-period`, { params: payload })
         .catch(error => {
             this.stopLoading()
             this.$swal.error('get schedule events error', error.response.data.error_message)

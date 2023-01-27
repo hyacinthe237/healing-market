@@ -26,7 +26,7 @@
 
                 <div class="card" v-show="isEmployee">
                   <div class="gauche">
-                    <div class="number">02</div>
+                    <div class="number">{{ shifts.length }}</div>
                     <div class="name">Active shifts</div>
                   </div>
                   <div class="droite"><i class="feather icon-file"></i>!</div>
@@ -49,7 +49,7 @@
                 </div>
               </div>
 
-              <div v-show="isManager">
+              <!-- <div v-show="isManager">
                   <div class="mt-20 _tabs">
                       <div class="nav nav-tabs bg" id="nav-tab" role="tablist">
                           <a class="nav-item nav-link" id="nav-upcoming-tab"
@@ -105,7 +105,7 @@
                   </div>
                   <div class="droite"><i class="feather icon-message-square"></i></div>
                 </div>
-              </div>
+              </div> -->
             </div>
         </div>
     </div>

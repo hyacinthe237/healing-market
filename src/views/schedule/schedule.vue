@@ -234,7 +234,7 @@ export default {
     watch: { },
 
     mounted () {
-      this.getScheduleEvents()
+      // this.getScheduleEvents()
       this.getJobSites()
       this.getMembers()
     },

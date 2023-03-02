@@ -5,6 +5,7 @@ window.PDFViewer = require('pdfjs')
 window.FS = require('fs')
 window.FileSaver = require('file-saver')
 
+
 import 'bootstrap'
 import Vue from 'vue'
 import VeeValidate from 'vee-validate'

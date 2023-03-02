@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import logo from '@/assets/img/logo.png'
+import logo from '@/assets/img/healing/logo.svg'
 import config from '../../../../services/config';
 import _ from 'lodash'
 

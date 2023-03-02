@@ -17,135 +17,78 @@
         color: #ffffff;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
+        padding: 80px;
 
-        .title {
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: 900;
-            font-weight: bold;
-        }
+        .cardre {
 
-        .line {
-            width: 40px;
-            border-radius: 20px;
-            border: 2px solid #890000;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        .hab-website {
-            .img {
-                img {
-                    width: 300px;
-                }
+            &.logo {
+                min-width: 40%;
+                padding-right: 40px;
             }
 
-            .footer-form {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                font-size: 14px;
-                margin-top: 20px;
-                box-shadow: 0 10px 48px rgba(248, 171, 3, 0.1), 0 1px 1px rgba(248, 171, 3, 0.1);
-
-                &.small {
-                    input {
-                        border-radius: 50px;
-                        height: 30px;
-                        padding-left: 25px;
-                    }
-
-                    button {
-                        color: white;
-                        background-color: #890000;
-                        border-radius: 50px;
-                        z-index: 9999;
-                        border: none;
-                        padding: 10px;
-                        margin-left: -30px;
-                    }
-                }
-
-                &.big {
-                    input {
-                        border-radius: 50px;
-                        min-height: 50px;
-                        padding-left: 25px;
-                    }
-
-                    button {
-                        color: white;
-                        background-color: #890000;
-                        border-radius: 50px;
-                        z-index: 9999;
-                        border: none;
-                        padding: 10px;
-                        margin-left: -20px;
-                    }
-                }
+            &.other {
+                min-width: 20%;
             }
-        }
 
-        .hab-useful-links {
-            .links {
-                display: flex;
-                flex-direction: column;
-                margin-top: 20px;
+            p {
+                font-size: 12px;
+                color: white;
+            }
 
-                .link {
+            h3 {
+                color: $primary;
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            button {
+                border-radius: 5px;
+            }
+
+            ul {
+                list-style-type: none;
+
+                li {
                     margin-bottom: 10px;
-                    font-size: 14px;
-                    cursor: pointer;
                 }
             }
-        }
 
-        .hab-follow-us {
-            .social-links {
+            .icons {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-around;
-                margin-top: 20px;
-
-                .social {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    height: 50px;
-                    width: 50px;
-                    background-color: #890000;
-                    color: #fff;
-                    padding: 10px;
-                    border-radius: 50px;
-                    margin-right: 10px;
-                    cursor: pointer;
-
-                    i {
-                        color:#fff;
-                        font-size: 25px;
-                    }
+                
+                a {
+                    padding-right: 20px;
+                    text-decoration: none;
+                    color: white;
                 }
+
+                i { font-size: 16px; }
             }
         }
     }
 
     .hab-footer-bottom {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 50px;
-        background-color: #890000;
+        height: 30px;
+        background-color: #000;
         color: #ffffff;
         padding: 20px;
+        font-size: 14px;
 
-        .uppercase {
-            text-transform: uppercase;
-            padding-right: 10px;
+        .copy {
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }        
+        .line {
+            width: 50%;
+            border-bottom: #fff solid 1px;
         }
     }
 }
@@ -166,17 +109,30 @@
             flex-direction: column;
             justify-content: space-around;
 
-            .hab-website {
-                display: flex;
-                flex-direction: column;
-            }
+            .cardre {
+                margin-bottom: 20px;
 
-            .hab-useful-links {
-                margin-top: 20px;
-            }
-
-            .hab-follow-us {
-                margin-top: 20px;
+                &.logo {
+                    width: 100%;
+                }
+    
+                &.other {
+                    width: 100%;
+                }
+    
+                .icons {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap:wrap;
+                    
+                    a {
+                        padding-right: 5px;
+                        text-decoration: none;
+                        color: white;
+                    }
+    
+                    i { font-size: 16px; }
+                }
             }
         }
 
@@ -184,6 +140,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding-bottom: 40px;
+            font-size: 12px;
+
+            .copy {
+                padding-top: 20px;
+                // margin-bottom: 20px;
+            }        
+            .line {
+                width: 100%;
+                border-bottom: #fff solid 1px;
+            }
         }
     }
   }

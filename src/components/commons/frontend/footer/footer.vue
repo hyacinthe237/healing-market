@@ -1,54 +1,51 @@
 <template lang="html">
     <div class="hab-footer">
         <div class="hab-footer-top">
-            <div class="hab-website">
-                <div class="img">
-                    <img :src="logoFooter" alt="">
-                </div>
-                <form action="" class="_form mt-20" v-show="!isConnected">
-                    <div class="form-group mt-20">
-                        <div class="content bs">
-                            <input type="email"
-                                name="email"
-                                placeholder="Email address"
-                                class="form-control form-control-lg dark no-white"
-                            >
-                            <button>Start free trial version</button>
-                        </div>
-                        <div class="text-center button mt-20">
-                            <button class="btn btn-primary">Start free trial version</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="hab-useful-links">
-                <div class="title">Useful links</div>
-                <div class="line"></div>
-                <div class="links">
-                    <div class="link">Terms of Service</div>
-                    <div class="link">Privacy Policy</div>
-                    <div class="link">Accessibility</div>
+            <div class="cardre logo">
+                <img :src="logoFooter" alt="LOGO" />
+                <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                    Incidunt est accusantium veniam ab possimus suscipit doloremque</p>
+                <div class="icons">
+                    <div><a href="#" target="_blank"><i class="feather icon-youtube"></i></a></div>
+                    <div><a href="#" target="_blank"><i class="feather icon-linkedin"></i></a></div>
+                    <div><a href="#" target="_blank"><i class="feather icon-twitter"></i></a></div>
+                    <div><a href="#" target="_blank"><i class="feather icon-facebook"></i></a></div>
+                    <div><a href="#" target="_blank"><i class="feather icon-instagram"></i></a></div>
                 </div>
             </div>
-            <div class="hab-follow-us">
-                <div class="title">Follow us</div>
-                <div class="line"></div>
-                <div class="social-links">
-                    <div class="social"><i class="feather icon-facebook"></i></div>
-                    <div class="social"><i class="feather icon-instagram"></i></div>
-                </div>
+            <div class="cardre other">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li>Privacy policy</li>
+                    <li>Terms and conditions</li>
+                    <li>Join our beta teste</li>
+                </ul>
+            </div>
+            <div class="cardre other">
+                <h3 class="white">About</h3>
+                <ul>
+                    <li>Find a practitioner</li>
+                    <li>Ask a question</li>
+                    <li>About us</li>
+                </ul>
+            </div>
+            <div class="cardre other">
+                <button class="btn btn-primary">List your practice</button>
             </div>
         </div>
         <div class="hab-footer-bottom">
-            <span class="uppercase">&copy; 2022 nogada 360.</span>
-            <span>All Rights Reserved.</span>
+            <div class="line"></div>
+            <div class="copy">
+                <span>&copy; 2022 Healing Marketplace - </span>
+                <span>All Rights Reserved.</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 
-import logoFooter from '@/assets/img/logo-nogada-foot.png'
+import logoFooter from '@/assets/img/healing/logo.svg'
 export default {
     data: () => ({
       logoFooter

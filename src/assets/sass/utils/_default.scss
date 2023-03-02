@@ -2,22 +2,22 @@
 a { text-decoration: none; color: $linkColour }
 
 @font-face {
-    font-family: "Poppins Bold";
-    src: url("~@/assets/fonts/poppins/Poppins-ExtraBold.otf");
+    font-family: "Montserrat Bold";
+    src: url("~@/assets/fonts/montserratalternates/MontserratAlternates-Bold.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Poppins Light";
-    src: url("~@/assets/fonts/poppins/Poppins-Light.otf");
+    font-family: "Montserrat Light";
+    src: url("~@/assets/fonts/montserrat/Montserrat-Light.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Poppins Regular";
-    src: url("~@/assets/fonts/poppins/Poppins-Regular.otf");
+    font-family: "Montserrat Regular";
+    src: url("~@/assets/fonts/montserrat/Montserrat-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
@@ -25,7 +25,7 @@ a { text-decoration: none; color: $linkColour }
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: 'Poppins Regular', sans-serif;
+    font-family: 'Montserrat Regular', sans-serif;
     background-color: $body-bg;
     font-size: 18px;
     color: $titleColour;
@@ -33,14 +33,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+  font-family: 'Montserrat SemiBold', 'Montserrat Bold', Avenir, Calibri, sans-serif;
   color: $brand-dark;
-  display: flex;
-  justify-content: center;
 }
 
 .sub-title {
-    font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
+    font-family: 'Montserrat Bold', Avenir, Calibri, sans-serif;
     color: #e8955f;
     font-weight: 900;
     font-size: 34px;
@@ -53,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-size: 25px;
+    font-size: 16px;
     color: $brand-darker;
     // padding: 20px;
 }
@@ -300,7 +298,7 @@ h5 { font-size: 1.1em }
     // }
 
     h1 {
-        font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+        font-family: 'Montserrat SemiBold', 'Montserrat Bold', Avenir, Calibri, sans-serif;
         color: $brand-dark;
         font-weight: 700;
         font-size: 2.4em;
@@ -309,7 +307,7 @@ h5 { font-size: 1.1em }
     }
 
     h2 {
-        font-family: 'Poppins SemiBold', 'Poppins Bold', Avenir, Calibri, sans-serif;
+        font-family: 'Montserrat SemiBold', 'Montserrat Bold', Avenir, Calibri, sans-serif;
         color: $brand-dark;
         font-weight: 700;
         font-size: 1.6em;

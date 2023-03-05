@@ -1,95 +1,35 @@
 <template lang="html">
   <div class="landing">
     <Navbar></Navbar>
-    <section class="section-home">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="title"><span>All in one</span> solution to <br> track
-                        and manage <br> your <span>security</span> <br> services</div>
-                    <p>Every tool you need to manage  and run your security agency with ease.</p>
 
-                    <form action="#" class="_form mt-20" v-show="!isConnected">
-                        <div class="form-group mt-20">
-                            <div class="content bs">
-                                <input type="email"
-                                    name="email"
-                                    placeholder="Email address"
-                                    class="form-control form-control-lg dark no-white"
-                                >
-                                <button @click="n('signup-welcome')">Start free trial version</button>
-                            </div>
-                            <div class="text-center button mt-20">
-                                <button class="btn btn-primary" @click="n('signup-welcome')">Start free trial version</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-6">
-                    <div class="img-hero">
-                        <img :src="logoHeaderSection" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section-home mt--40">
+    <section class="section-hero" :style="`background-image:url(${hero})`">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="title">Discover our <br><span>products</span></div>
-                </div>
-                <div class="spacer"></div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="sub-title">Employee geotracking</div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Rerum esse impedit facere eos consectetur, ipsa ducimus quos eius reiciendis voluptatibus
-                        dolores ut quisquam maiores accusantium.
-                        Temporibus sunt nesciunt similique quidem.</p>
-                    <a href="#">Learn more about employee tracking</a>
-                </div>
-                <div class="col-sm-6">
-                    <div class="img">
-                        <img :src="logoGeotracking" alt="">
+            <div class="content">
+                <h2>book your next</h2>
+                <h2>wellness practitioner</h2>
+
+                <form class="form-inline mt-20">
+                    <div class="input-group">
+                        <div class="icon"><i class="feather icon-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Try Message or Back Pain" />
                     </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="img mg">
-                        <img :src="logoManagement" alt="">
+                    <div class="input-group">
+                        <div class="icon"><i class="feather icon-map-pin"></i></div>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Yaounde, Cameroun"
+                            name="address"
+                            v-model="ghost.address"
+                            v-validate="'required'"
+                            id="address"
+                        />
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="sub-title">Visitor management system</div>
-                    <p>Track and grant access to everyone that enters your building , office or property.</p>
-                    <a href="#" @click="openPreviewModal('management')">Learn more about property management</a>
-                </div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="sub-title">Scheduling</div>
-                    <p>Schedule your team in minutes NOT DAYS. Manage your team’s schedules, 
-                        view open shifts, time clocking, timesheets, communication, all in one place.</p>
-                    <a href="#" @click="openPreviewModal('scheduling')">Learn more about scheduling</a>
-                </div>
-                <div class="col-sm-6">
-                    <div class="img">
-                        <img :src="logoScheduling" alt="">
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="img">
-                        <img :src="logoClocking" alt="">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="sub-title">Time clocking</div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Rerum esse impedit facere eos consectetur, ipsa ducimus quos eius reiciendis voluptatibus
-                        dolores ut quisquam maiores accusantium.
-                        Temporibus sunt nesciunt similique quidem.</p>
-                    <a href="#">Learn more about time clocking</a>
+                    <button class="btn btn-secondary">Search</button>
+                </form>
+                <div class="lists">
+                    <div class="list">Message</div>
+                    <div class="list">Browse Services</div>
                 </div>
             </div>
         </div>
@@ -97,16 +37,62 @@
 
     <div class="spacer"></div>
 
-    <section class="section-home bg-red">
+    <section class="section-home">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="_title"><span>10000+</span>trust and user our product daily</div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="img">
-                        <img :src="logoScheduling" alt="">
+            <div class="section-header">
+                <h2>BOOK ONLINE HOLISTIC CARE</h2>
+                <div class="see-all bold">See all</div>
+            </div>
+            <div class="cares">
+                <div class="care">
+                    <img :src="femme" alt="">
+                    <div class="care-content">
+                        <h6>How to make your Own room perfume efficiently</h6>
+                        <div class="verified">4.6 (verified reviews)</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                        <div class="care-footer">
+                            <div class="price">$75.00</div>
+                            <button class="btn btn-secondary">Book</button>
+                        </div>
                     </div>
+                </div>
+                <div class="care">
+                    <img :src="homme" alt="">
+                    <div class="care-content">
+                        <h6>How to make your Own room perfume efficiently</h6>
+                        <div class="verified">4.6 (verified reviews)</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="care-footer">
+                            <div class="price">$75.00</div>
+                            <button class="btn btn-secondary">Book</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="care">
+                    <img :src="femme" alt="">
+                    <div class="care-content">
+                        <h6>tips cleaning your big house for one person</h6>
+                        <div class="verified">4.6 (verified reviews)</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="care-footer">
+                            <div class="price">$75.00</div>
+                            <button class="btn btn-secondary">Book</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="care">
+                    <img :src="homme" alt="">
+                    <div class="care-content">
+                        <h6>cleaning home fastly and perfect clean for perfect house</h6>
+                        <div class="verified">4.6 (verified reviews)</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="care-footer">
+                            <div class="price">$75.00</div>
+                            <button class="btn btn-secondary">Book</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -114,228 +100,94 @@
 
     <section class="section-home">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="title">What makes our <br>product <span>stand out?</span></div>
+            <div class="bg-box pointer" :style="`background-image:url(${bg})`">
+                <h1>match with the perfect</h1>
+                <h1>practitioner in under a minute.</h1>
+                <button class="btn btn-primary mt-20">Get startet</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-home bg-gray">
+        <div class="container">
+            <div class="banner">
+                <div class="text">
+                    <h1>wellness practitioner?</h1>
+                    <p>Crow your practice and join our mission to make wellness primary care</p>
+                    <button class="btn btn-primary">List your practice</button>
                 </div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="blocks">
-                        <div class="number">1</div>
-                        <div class="block">
-                            <div class="block-title bold">Cost-efficient</div>
-                            <div class="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Reiciendis porro magni facere</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="blocks">
-                        <div class="number">2</div>
-                        <div class="block">
-                            <div class="block-title bold">Simple and intuitive usage</div>
-                            <div class="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Reiciendis porro magni facere</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="col-sm-6">
-                    <div class="blocks">
-                        <div class="number">3</div>
-                        <div class="block">
-                            <div class="block-title bold">Every product you need to run your security company</div>
-                            <div class="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Reiciendis porro magni facere</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="blocks">
-                        <div class="number">4</div>
-                        <div class="block">
-                            <div class="block-title bold">100% satisfaction guaranteed</div>
-                            <div class="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Reiciendis porro magni facere</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="col-sm-12 text-center">
-                    <i>It takes just a minute</i>
-                    <button class="btn btn-primary" @click="n('signup-welcome')" v-show="!isConnected">Sign up now</button>
-                    <button class="btn btn-primary" @click="n('dashboard')" v-show="isConnected">View dashboard</button>
+                <div class="img">
+                    <img :src="circle" alt="image en cercle">
                 </div>
             </div>
         </div>
+        
     </section>
 
     <section class="section-home">
         <div class="container">
+            <div class="section-header">
+                <h2>Read Our Blogs</h2>
+                <div class="see-all bold">See all</div>
+            </div>
             <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="title">Testimonials</div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div class="posts">
+                <div class="post">
+                    <img :src="post1" alt="">
+                    <div class="post-content">
+                        <h6>How to make your Own room perfume efficiently</h6>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat commodi, maiores, perferendis veritatis non ducimus consectetur exercitationem</p>
+                    </div>
                 </div>
-                <div class="col-sm-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Carousel indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                        </ol>
-                        <!-- Wrapper for carousel items -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Paula Wilson</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Antonio Moreno</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Paula Wilson</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Antonio Moreno</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Paula Wilson</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="testimonial-wrapper bs">
-                                            <div class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt.</div>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="overview">
-                                                        <div class="rond"></div>
-                                                        <div class="name">Antonio Moreno</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="post">
+                    <img :src="post2" alt="">
+                    <div class="post-content">
+                        <h6>tips cleaning your big house for one person</h6>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat commodi, maiores, perferendis veritatis non ducimus consectetur exercitationem</p>
+                    </div>
+                </div>
+                <div class="post">
+                    <img :src="post3" alt="">
+                    <div class="post-content">
+                        <h6>cleaning home fastly and perfect clean for perfect house</h6>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat commodi, maiores, perferendis veritatis non ducimus consectetur exercitationem</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="section-home bg-grey mt-20">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="title">Download App</div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-                    <div class="buttons">
-                        <button class="app-store">
-                            <img :src="logoApple" alt="">
-                            <span>Download on the <br> App Store</span>
-                        </button>
-                        <button class="play-store">
-                            <img :src="logoGoogle" alt="">
-                            <span>Get it on <br> Google Play</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <Footer :isConnected="isConnected"></Footer>
-    <previewModal :text="selectedText"></previewModal>
   </div>
 </template>
 
 <script>
-import logoHeaderSection from '@/assets/img/landing/header-section.png'
-import logoManagement from '@/assets/img/landing/management.png'
-import logoGeotracking from '@/assets/img/landing/geotracking.png'
-import logoScheduling from '@/assets/img/landing/scheduling.png'
-import logoClocking from '@/assets/img/landing/clocking.png'
-import logoParners from '@/assets/img/landing/partners.jpg'
-import logoGoogle from '@/assets/img/landing/google.png'
-import logoApple from '@/assets/img/landing/apple.png'
+import post1 from '@/assets/img/healing/post1.png'
+import post2 from '@/assets/img/healing/post2.png'
+import post3 from '@/assets/img/healing/post3.png'
+import bg from '@/assets/img/healing/bg.png'
+import circle from '@/assets/img/healing/image-circle.png'
+import femme from '@/assets/img/healing/profil-femme.png'
+import homme from '@/assets/img/healing/profil-homme.png'
+import hero from '@/assets/img/healing/hero.png'
 import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
-import previewModal from './modals/preview'
 import config from '../../services/config'
+import BodyMixins from './mixins'
 
 export default {
     name: 'CoreBody',
 
+    mixins: [BodyMixins],
+
     data: () => ({
         selectedText: '',
-        logoParners, logoApple, logoGoogle, logoHeaderSection, logoManagement, logoGeotracking, logoScheduling, logoClocking
+        post1, post2, post3, circle, bg, femme, homme, hero
     }),
 
     components: {
-        Navbar, Footer, previewModal
+        Navbar, Footer
     },
 
     computed: {

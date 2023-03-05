@@ -3,8 +3,7 @@
         <div class="hab-footer-top">
             <div class="cardre logo">
                 <img :src="logoFooter" alt="LOGO" />
-                <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    Incidunt est accusantium veniam ab possimus suscipit doloremque</p>
+                <p class="mt-20">Use of this website, content, and products are for informational purposes only. Healing Marketplace does not provide medical advice, diagnosis, or treatment.</p>
                 <div class="icons">
                     <div><a href="#" target="_blank"><i class="feather icon-youtube"></i></a></div>
                     <div><a href="#" target="_blank"><i class="feather icon-linkedin"></i></a></div>
@@ -18,7 +17,7 @@
                 <ul>
                     <li>Privacy policy</li>
                     <li>Terms and conditions</li>
-                    <li>Join our beta teste</li>
+                    <li>Join our beta test</li>
                 </ul>
             </div>
             <div class="cardre other">

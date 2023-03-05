@@ -24,12 +24,17 @@ a { text-decoration: none; color: $linkColour }
 
 body {
     margin: 0;
+    width: 100%;
     min-height: 100vh;
     font-family: 'Montserrat Regular', sans-serif;
     background-color: $body-bg;
     font-size: 18px;
     color: $titleColour;
     font-weight: 300;
+}
+
+button {
+    border-radius: 5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -301,18 +306,16 @@ h5 { font-size: 1.1em }
         font-family: 'Montserrat SemiBold', 'Montserrat Bold', Avenir, Calibri, sans-serif;
         color: $brand-dark;
         font-weight: 700;
-        font-size: 2.4em;
+        font-size: 1.8em;
         text-transform:capitalize;
-        text-align: center;
     }
 
     h2 {
         font-family: 'Montserrat SemiBold', 'Montserrat Bold', Avenir, Calibri, sans-serif;
         color: $brand-dark;
         font-weight: 700;
-        font-size: 1.6em;
+        font-size: 1.2em;
         text-transform: capitalize;
-        text-align: center;
     }
 }
 

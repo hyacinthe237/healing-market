@@ -52,6 +52,10 @@
 
                 li {
                     margin-bottom: 10px;
+                    cursor:pointer;
+                    &:hover {
+                        color: $secondary;
+                    }
                 }
             }
 
@@ -65,7 +69,13 @@
                     color: white;
                 }
 
-                i { font-size: 16px; }
+                i { 
+                    font-size: 16px;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
             }
         }
     }
@@ -131,7 +141,9 @@
                         color: white;
                     }
     
-                    i { font-size: 16px; }
+                    i { 
+                        font-size: 12px; 
+                    }
                 }
             }
         }

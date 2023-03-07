@@ -3,9 +3,10 @@
   <VueScrollFixedNavbar>
     <header class="site-header">
       <div class="container">
-          <div class="wrapper site-header__wrapper">
+          <!-- <div class="wrapper site-header__wrapper">
             <div class="site-header__start">
               <a href="#" class="brand"><img :src="logo" alt=""></a>
+              <a href="#">Home</a>
             </div>
             <div class="site-header__middle">
               <nav class="nav">
@@ -26,9 +27,26 @@
               <a class="pointer"><span>View dashboard</span> <i class="feather icon-log-in"></i></a>
             </div>
             <div class="site-header__end pointer" @click="n('signin')" v-show="!isConnected">
-              <a class="pointer"><span>Sign in</span> <i class="feather icon-log-in"></i></a>
+              <a class="pointer"><span>List your practice</span> <i class="feather icon-log-in"></i></a>
             </div>
-          </div>
+          </div> -->
+          <nav class="navbar">
+            <div class="brand-title">
+              <a href="#"><img :src="logo" alt=""></a>
+              <div class="ml-5 bold pointer">Browse Services</div>
+            </div>
+            <a href="#" class="toggle-button">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+              <ul>
+                <li><a href="#">Sign in</a></li>
+                <li><a href="#" class="practice">List your practice</a></li>
+              </ul>
+            </div>
+          </nav>
       </div>
     </header>
   </VueScrollFixedNavbar>

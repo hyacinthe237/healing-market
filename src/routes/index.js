@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Guard from '@/services/middleware'
 
 import NotFound from '@/views/core/errors/notfound'
+import PractitionerDetails from '@/views/core/services/details'
 import CoreBody from '@/views/core/body'
 import SignUpWelcome from '@/views/core/auth/signup/welcome'
 import SignUpStepOne from '@/views/core/auth/signup/steps/step-one'
@@ -30,6 +31,7 @@ export default new Router({
 
     routes: [
         { path: '/', component: CoreBody, name: 'landing' },
+        { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
         { path: '/signin', component: AuthSignin, name: 'signin' },
         { path: '/complete/access', component: CompleteAccess, name: 'complete-access' },
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },

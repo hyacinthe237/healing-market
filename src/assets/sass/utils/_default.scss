@@ -1,5 +1,5 @@
 * { margin: 0; padding: 0 }
-a { text-decoration: none; color: $linkColour }
+a { text-decoration: none; }
 
 @font-face {
     font-family: "Montserrat Bold";
@@ -139,6 +139,7 @@ h5 { font-size: 1.1em }
 .btn-wise { background-color: $brand-wise; color: white }
 .btn-blue { background-color: $brand-presumi; color: white }
 .btn-secondary { background-color: $brand-secondary; color: white }
+.btn-primary { background-color: $brand-primary; color: white }
 .btn-grey { background-color: #e4e9f2; color: $formColor }
 .btn-greyer { background-color: $brand-greyer; color: white }
 .btn-red { background-color: $brand-red; color: white }

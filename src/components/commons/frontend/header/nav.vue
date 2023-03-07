@@ -43,7 +43,7 @@
             <div class="navbar-links">
               <ul>
                 <li><a href="#">Sign in</a></li>
-                <li><a href="#" class="practice">List your practice</a></li>
+                <li><a class="practice pointer" @click="n('list-practice')">List your practice</a></li>
               </ul>
             </div>
           </nav>

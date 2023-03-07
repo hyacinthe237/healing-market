@@ -1,14 +1,20 @@
 <template lang="html">
-    <section class="signup-page">
+    <section class="list-practice">
         <div class="g-page" v-show="!isLoading">
             <div class="overlay">
-                <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
+                <div class="link">Apply to feature your<br>practice on the #1 plateform<br>for
+                     <span>holistic practitioners</span></div>
+                <div class="b-text mt-40">
+                    <div class="tle">two steps to apply:</div>
+                    <div class="stp1">1) Fill Out Our Application Form</div>
+                    <div class="stp2 mt-10">2) Select A Time For An Onboarding<br>Interview With A Member Of Our Team</div>
+                </div>
             </div>
             <div class="profile-top-container">
                 <div
                     class="profile-photo"
                 >
-                  
+                <img :src="logo" alt="" />                  
                 </div>
             </div>
         </div>
@@ -19,35 +25,43 @@
                     <div
                         class="profile-photo"
                     >
-                      
+                    <img :src="logo" alt="" />
                     </div>
                 </div>
             </div>
-             <div class="dhead mt-20">
-                <div class="step-title">step 1 of 4</div>
-                <div class="progress"><div class="step-1"></div></div>
-                <div class="message-big">Hi, We're <br> NOGODA 360</div>
+
+            <div class="_more">
+                <div class="links">Apply to feature your practice on <br>the #1 plateform for
+                    <span>holistic practitioners</span></div>
+               <div class="b-texts mt-10">
+                   <div class="tle">two steps to apply:</div>
+                   <div class="stp1">1) Fill Out Our Application Form</div>
+                   <div class="stp2">2) Select A Time For An Onboarding<br>Interview With A Member Of Our Team</div>
+               </div>
             </div>
 
-            <form class="_form s-form mt-10" @submit.prevent>
-                <div class="form-group">
-                    <label>What's your name?</label>
-                    <input type="text" name="username" v-model="ghost.username" placeholder="e.g. Art Paul" class="form-control mt-20">
-                    <div class="check-form">
-                        <div class="smaller">Try everything free for 14 days. No credit card required. Basic plan is free forever.</div>
-                        <input type="checkbox" name="is_free" class="checkbox" checked>
-                    </div>
-                </div>
-                <div class="bottom-form" @click="save()">
-                    <div class="notyet"></div>
-                    <div class="button mt-20 pointer">
-                        <div class="text">Get Started</div>
-                        <div class="icon"><i class="feather icon-chevron-right"></i></div>
-                    </div>
-                </div>
-            </form>
+            <div class="form">
+                <h4>Apply to feature your practice on<br>Healing Marketplace</h4>
 
-            <div class="link">Already have an account? <span @click="n('signin')" class="pointer">Sign In</span></div>
+                <form class="_form mt-20" @submit.prevent>
+                    <div class="form-group">
+                        <input type="text" name="first_name" v-model="ghost.first_name" placeholder="First name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="last_name" v-model="ghost.last_name" placeholder="Last name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" v-model="ghost.email" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="phone" v-model="ghost.phone" placeholder="Phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="url" v-model="ghost.url" placeholder="Website URL/Facebook or Instagram" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Apply Now</button>
+                </form>
+            </div>
         </div>
         <div class="_loader" v-show="isLoading">
             <Spinners></Spinners>
@@ -57,11 +71,13 @@
   
   <script>
     import config from '@/services/config'
+    import logo from '@/assets/img/healing/logo.svg'
   
   export default {
       name: 'PractitionerDetails',
   
       data: () => ({
+        logo
       }),
   
       components: { },

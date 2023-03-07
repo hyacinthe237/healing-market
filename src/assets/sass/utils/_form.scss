@@ -9,6 +9,10 @@
 ._form {
     width: 100%;
 
+    button {
+        border-radius: 5px;
+    }
+
     .content-profile-photo {
         display: flex;
         flex-direction: column;

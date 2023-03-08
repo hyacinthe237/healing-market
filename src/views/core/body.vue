@@ -114,7 +114,7 @@
                 <div class="text">
                     <h1>wellness practitioner?</h1>
                     <p>Crow your practice and join our mission to make wellness primary care</p>
-                    <button class="btn btn-primary">List your practice</button>
+                    <button class="btn btn-primary"  @click="n('list-practice')">List your practice</button>
                 </div>
                 <div class="img">
                     <img :src="circle" alt="image en cercle">

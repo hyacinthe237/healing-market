@@ -181,7 +181,7 @@
 
       .profile-top {
           width: 100%;
-          height: 100px;
+          height: 80px;
           position: relative;
           background-color: transparent;
           background-size: 800px 600px;
@@ -193,14 +193,14 @@
           align-items: center;
 
           img {
-              width: 100px;
+              width: 150px;
               color: white;
           }
 
           .overlay {
               background-color: rgba(0, 0, 0, 0.1);
               width: 100%;
-              height: 100px;
+              height: 80px;
               position: relative;
               // border-radius: 0px 0px 100px 100px;
           }
@@ -219,13 +219,13 @@
           .profile-photo {
               width: 100%;
               height: 100%;
-              max-height: 100px;
+              max-height: 80px;
               margin: 0 auto;
               background-size: cover;
               background-position: center;
 
               img {
-                  width: 100px;
+                  width: 150px;
               }
           }
       }

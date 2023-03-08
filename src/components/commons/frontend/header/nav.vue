@@ -1,54 +1,31 @@
 <template lang="html">
 <!-- Header Start -->
-  <VueScrollFixedNavbar>
-    <header class="site-header">
+  <VueScrollFixedNavbar>      
+    <nav class="navbar navbar-expand-lg navbar-default bg-default">
       <div class="container">
-          <!-- <div class="wrapper site-header__wrapper">
-            <div class="site-header__start">
-              <a href="#" class="brand"><img :src="logo" alt=""></a>
-              <a href="#">Home</a>
-            </div>
-            <div class="site-header__middle">
-              <nav class="nav">
-                <button class="nav__toggle" aria-expanded="false" type="button">
-                  <i class="feather icon-align-justify"></i>
-                </button>
-                <ul class="nav__wrapper">
-                  <li class="nav__item"><a href="#">Home</a></li>
-                  <li class="nav__item"><a href="#">Product</a></li>
-                  <li class="nav__item"><a href="#">Pricing</a></li>
-                  <li class="nav__item"><a href="#">Contact us</a></li>
-                  <li class="nav__item signin"><a href="#" @click="n('signin')" v-show="!isConnected">Signin</a></li>
-                  <li class="nav__item signin"><a href="#" @click="n('dashboard')" v-show="isConnected">View dashboard</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="site-header__end pointer" @click="n('dashboard')" v-show="isConnected">
-              <a class="pointer"><span>View dashboard</span> <i class="feather icon-log-in"></i></a>
-            </div>
-            <div class="site-header__end pointer" @click="n('signin')" v-show="!isConnected">
-              <a class="pointer"><span>List your practice</span> <i class="feather icon-log-in"></i></a>
-            </div>
-          </div> -->
-          <nav class="navbar">
-            <div class="brand-title">
-              <a href="#"><img :src="logo" alt=""></a>
-              <div class="ml-5 bold pointer">Browse Services</div>
-            </div>
-            <a href="#" class="toggle-button">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </a>
-            <div class="navbar-links">
-              <ul>
-                <li><a href="#">Sign in</a></li>
-                <li><a class="practice pointer" @click="n('list-practice')">List your practice</a></li>
-              </ul>
-            </div>
-          </nav>
+      <a class="navbar-brand" href="#"><img :src="logo" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="feather icon-align-justify"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary pointer" @click="n('list-practice')">List your practice</a>
+          </li>
+        </ul>
       </div>
-    </header>
+      
+      </div>
+    </nav>
   </VueScrollFixedNavbar>
 </template>
 
@@ -62,22 +39,7 @@ export default {
     logo
   }),
 
-  mounted () {
-      let navToggle = document.querySelector(".nav__toggle");
-      let navWrapper = document.querySelector(".nav__wrapper");
-
-      navToggle.addEventListener("click", function () {
-          if (navWrapper.classList.contains("active")) {
-              this.setAttribute("aria-expanded", "false");
-              this.setAttribute("aria-label", "menu");
-              navWrapper.classList.remove("active");
-          } else {
-              navWrapper.classList.add("active");
-              this.setAttribute("aria-label", "close menu");
-              this.setAttribute("aria-expanded", "true");
-          }
-      });
-  },
+  mounted () {},
 
   computed: {
     user () {

@@ -10,7 +10,7 @@
                     <div class="stp2 mt-10">2) Select A Time For An Onboarding<br>Interview With A Member Of Our Team</div>
                 </div>
             </div>
-            <div class="profile-top-container">
+            <div class="profile-top-container pointer" @click="n('landing')">
                 <div
                     class="profile-photo"
                 >
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="d-page" v-show="!isLoading">
-            <div class="profile-top">
+            <div class="profile-top" @click="n('landing')">
                 <div class="overlay"></div>
                 <div class="profile-top-container">
                     <div
@@ -31,7 +31,7 @@
             </div>
 
             <div class="_more">
-                <div class="links">Apply to feature your practice on <br>the #1 plateform for
+                <div class="links">Apply to feature your<br> practice on the #1 plateform <br>for
                     <span>holistic practitioners</span></div>
                <div class="b-texts mt-10">
                    <div class="tle">two steps to apply:</div>

@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <div class="cardre other">
-                <button class="btn btn-primary">List your practice</button>
+                <button class="btn btn-primary"  @click="n('list-practice')">List your practice</button>
             </div>
         </div>
         <div class="hab-footer-bottom">

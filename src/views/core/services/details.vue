@@ -190,12 +190,12 @@
                       <div class="titre">Service Description</div>
                       <div class="divider"></div>
                       <div class="d-box">
-                        <div class="short-text">Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
-                        <button type="submit" class="btn btn-secondary">Continue Booking</button>
+                        <div class="short-text">Lorem ipsum dolor sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
+                        <div class="button"><button type="submit" class="btn btn-secondary">Continue Booking</button></div>
                       </div>
                     </div>
                     <div class="contact mt-20">
-                      <div class="btn-text">Contact the practitioner</div>
+                        <button type="submit" class="btn btn-primary">Message the practitioner</button>
                     </div>
                 </div>
               </div>

@@ -22,7 +22,6 @@
                             name="address"
                             v-model="ghost.address"
                             v-validate="'required'"
-                            id="address"
                         />
                     </div>
                     <button class="btn btn-secondary">Search</button>

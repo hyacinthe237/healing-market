@@ -44,6 +44,11 @@
                         </VueSlickCarousel>
                     </div>
                     <div class="droite">
+                        <div class="header">
+                            <h3>Welcome to Healing marketplace</h3>
+    
+                            <p>Just answer a few questions and we'll match you to practitioners who can help you achieve your wellness goals</p>
+                        </div>
                         <form class="_form">
                             <div class="question">
                                 <h5>On a scale of 1-10, where would you rank your health today?</h5>
@@ -67,10 +72,9 @@
                                         <label class="typo__label">Select all that apply</label>
                                         <multiselect
                                             v-model="values"
-                                            label="name"
-                                            track-by="id"
+                                            track-by="name"
                                             placeholder="Select all that apply"
-                                            :options="importantOptions"
+                                            :options="lookings"
                                             :multiple="true"
                                             :taggable="true"
                                         ></multiselect>
@@ -88,9 +92,8 @@
                                         <label class="typo__label">Select as many as you would like</label>
                                         <multiselect
                                             v-model="value"
-                                            label="name"
-                                            track-by="id"
-                                            placeholder="Select as many as you would like"
+                                            track-by="name"
+                                            placeholder="Select as many"
                                             :options="importantOptions"
                                             :multiple="true"
                                             :taggable="true"
@@ -154,7 +157,7 @@
                                     <input type="text" name="zip_code" class="form-control">
                                 </div>
                             </div>
-                            <div class="question mt-20">
+                            <div class="question mt-20 button">
                                 <button type="submit" class="btn btn-primary">Get started</button>
                             </div>
                         </form>
@@ -184,14 +187,17 @@ export default {
         genders: ['Male', 'Female'],
         preferences: ['Male', 'Female', 'No preference'],
         groups: ['Under 18', '30 - 39', '50 - 59', '70+', '18 - 29', '40 - 49', '60 - 69', 'Prefer not to say'],
-        importantOptions: [{ name: 'Option Name', id: 1 },{ name: 'Option Name', id: 2 },{ name: 'Option Name', id: 3 },],
+        importantOptions: ['Close to my location', 'Years of experience', 'Well-reviewed', 'License & credentials'],
         selectedGender: '',
         selectedPreference: '',
         selectedGroup: '',
         selectedRange: '',
         value: [],
         values: [],
-        checks: ['Really Bad','Bad','So so','Not too bad','Ok','Average','Good','Healthy','Pretty Good','Perfect']
+        checks: ['Really Bad','Bad','So so','Not too bad','Ok','Average','Good','Healthy','Pretty Good','Perfect'],
+        lookings: ['Addiction','Anxiety','Autism','Depression','Brain Fog','Cancer','Headaches','Insomnia','Autoimmune Disease','Digestive Disorders', 
+        'Stress', 'Pregnancy', 'Sleep', 'Trauma', 'Weight Loss', 'Diabetes', 'Nutrition', 'Fatigue', 'Relationship Issues', 'Irritable Bowel Syndrome (IBS)',
+        'Lyme Disease', 'Chronic Pain', 'Joint Pain'],
     }),
 
     mounted () {

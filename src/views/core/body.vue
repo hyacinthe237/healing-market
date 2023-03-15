@@ -102,7 +102,7 @@
             <div class="bg-box pointer" :style="`background-image:url(${bg})`">
                 <h1>match with the perfect</h1>
                 <h1>practitioner in under a minute.</h1>
-                <button class="btn btn-primary mt-20">Get startet</button>
+                <button class="btn btn-primary mt-20" @click="openGetStartedModal()">Get startet</button>
             </div>
         </div>
     </section>
@@ -156,7 +156,8 @@
         </div>
         </div>
     </section>
-
+    
+    <GetStartedModal></GetStartedModal>
     <Footer :isConnected="isConnected"></Footer>
   </div>
 </template>
@@ -174,6 +175,7 @@ import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
 import config from '../../services/config'
 import BodyMixins from './mixins'
+import GetStartedModal from './modals/get-started'
 
 export default {
     name: 'CoreBody',
@@ -186,7 +188,7 @@ export default {
     }),
 
     components: {
-        Navbar, Footer
+        Navbar, Footer, GetStartedModal
     },
 
     computed: {
@@ -200,10 +202,8 @@ export default {
     },
 
     methods: {
-        openPreviewModal (text) {
-            this.selectedText = text
-            this.showBtn = false
-            this.openModal({ id: 'previewModal' })
+        openGetStartedModal () {
+            this.openModal({ id: 'GetStartedModal' })
         },
     },
 }

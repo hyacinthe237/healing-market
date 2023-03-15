@@ -1,10 +1,10 @@
 <template>
     <div
-        :class="['_checkbox', currentColour]"
+        class="item-box"
         @click="check()"
     >
         <div class="check">
-            <i :class="`feather icon-${isChecked ? 'check' : 'circle'}`"></i>
+            <i :class="`feather icon-${isChecked ? 'check-square' : 'square'}`"></i>
         </div>
 
         <div v-show="labelValue===0" class="checkbox-content">
@@ -23,12 +23,12 @@ export default {
         value: { type: [String, Number], default: '' },
         color: { type: String, default: '' },
         selectedColor: { type: String, default: '' },
-        selected: { type: Array, default: () => [] },
+        selected: { type: String, default: '' },
     },
 
     computed: {
         isChecked () {
-            return !!this.selected.find(l => l === this.value)
+            return this.selected === this.value
         },
 
         currentColour () {

@@ -76,9 +76,11 @@ fieldset[disabled] .multiselect{
     margin-right:10px;
     color:$brand-dark;
     line-height:1;
-    background: #eee;
+    background: $brand-secondary;
+    color:white;
     margin-bottom:8px;
     white-space:nowrap;
+    border-radius: 10px;
 }
 .multiselect__tag-icon{
     cursor:pointer;
@@ -93,7 +95,7 @@ fieldset[disabled] .multiselect{
     transition:all .2s ease;
     border-radius:2px
 }
-.multiselect__tag-icon:after{content:"\D7";color:#333;font-size:20px}
+.multiselect__tag-icon:after{content:"\D7";color:#fff;font-size:20px}
 .multiselect__tag-icon:focus:after,
 .multiselect__tag-icon:hover:after{color:#fff}
 
@@ -139,9 +141,9 @@ fieldset[disabled] .multiselect{
 .multiselect__content::webkit-scrollbar{display:none}
 .multiselect__element{display:block}.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap}
 .multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px}
-.multiselect__option--highlight{background:#41b883;outline:none;color:#fff}
-.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff}
-.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700}.multiselect__option--selected:after{content:attr(data-selected);color:silver}.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff}
+.multiselect__option--highlight{background:$primary;outline:none;color:#fff}
+.multiselect__option--highlight:after{content:attr(data-select);background:$primary;color:#fff}
+.multiselect__option--selected{background:$brand-secondary;color:white;font-weight:700}.multiselect__option--selected:after{content:attr(data-selected);color:silver}.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff}
 .multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff}
 .multiselect--disabled{background:#ededed;pointer-events:none}
 .multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select,.multiselect__option--disabled{background:#ededed;color:#a6a6a6}

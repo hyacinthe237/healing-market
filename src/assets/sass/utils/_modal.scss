@@ -12,7 +12,6 @@
         @include box-shadow;
         border: none;
         height: auto;
-        max-height: calc(100vh - 80px);
 
         .modal-heading {
             padding: 20px;
@@ -213,9 +212,7 @@
 
     ._preview-dialog {
         width: 100%;
-        height: 100%;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        min-height: 100vh;
 
         ._preview-content {
             box-shadow: none;
@@ -226,7 +223,6 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            padding: 20px;
             background-color: white;
 
             p {
@@ -237,18 +233,137 @@
 
             .close {
                 text-align: right;
-                background-color: $primary;
-                color: white;
+                color: rgba(0, 0, 0, 0.3);
                 border-radius: 50%;
                 padding: 5px;
                 cursor: pointer;
-                margin-bottom: -60px;
+                margin-bottom: -70px;
                 z-index: 1px;
+                border: rgba(0, 0, 0, 0.3) solid 1px;
             }
 
-            img {
+            .started-container {
+                display: flex;
+                flex-direction: row;
+                min-height: 100vh;
                 width: 100%;
-                height: 100%;
+
+                .gauche {
+                    max-width: 40%;
+                    min-height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    padding: 50px;
+
+                    p {
+                        margin-top: 20px;
+                        text-transform: capitalize;
+                    }
+                }
+
+                .carousel {
+                    z-index: 1;
+                    width: 300px;
+                    min-height: 100vh;
+                    bottom: -250px;
+                    border: rgba(0, 0, 0, 0.3);
+                    margin-left: -200px;
+                    margin-bottom: -300px;
+                    position: relative;
+
+                    .content {
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                .droite {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 40%;
+                    padding: 50px;
+
+                    .question {
+                        margin-bottom: 10px;
+
+                        .content {
+                            margin-top:10px;
+                            input {
+                                background-color: rgba(0, 0, 0, 0.1);
+                            }
+                            .range-slider{
+                                margin-top:95px;
+                                width:100%;
+
+                                .bullet-container {
+                                    position:relative;
+                                    margin:0px 18px;
+                                    width:100%;
+
+                                    .bullet{
+                                        position:absolute;
+                                        left:50%;top:-93px;
+                                        width:119px;height:40px;
+                                        display:flex;
+                                        justify-content:center;
+                                        padding:0 10px;
+                                        align-items:center;
+                                        background-color:transparent;
+                                        transform:translate(-50%);
+
+                                        .text{color:white;text-align:center}
+
+                                        &::after{
+                                            content:'';
+                                            position:absolute;
+                                            top:100%;
+                                            left:50%;
+                                            width:15px;
+                                            height:15px;
+                                            transform:translate(-50%, -50%) rotate(45deg);
+                                            background-color:inherit
+                                        }
+                                    }
+                                }
+
+                                .ticks{
+                                    display:flex;
+                                    flex-direction: row;
+                                    justify-content:space-between;
+                                    padding:0px 18px;
+    
+                                    .tick{
+                                        position:relative;
+                                        display:flex;
+                                        justify-content:center;
+                                        width:1px;
+    
+                                        .line{color:#C8D6DF}
+                                        .tick-number{
+                                            color:#55778A;
+                                            position:absolute;
+                                            left:0;
+                                            bottom:30px;
+                                            transform:translateX(-50%);
+                                        }
+                                    }
+                                }
+
+                                .range {
+                                    padding: 0px 18px;
+                                    input[type="range"] {
+                                        width:100%;
+                                    }
+                                }
+                            }
+
+                            
+                        }
+                    }
+                }
             }
         }
     }

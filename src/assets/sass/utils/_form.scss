@@ -176,7 +176,7 @@
 
         .form-control {
             background-color: white;
-            border: 1px solid $brand-dark;
+            border: 1px solid rgba(137, 0, 0, 0.1);
             box-shadow: none;
             color: $brand-dark;
             font-size: 14px;
@@ -190,7 +190,7 @@
             }
 
             &:focus {
-                border: 2px solid $brand-dark;
+                border: 1px solid $primary;
             }
 
             &.form-control-lg { font-size: 16px; }

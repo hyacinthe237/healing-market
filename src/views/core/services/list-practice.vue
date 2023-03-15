@@ -31,13 +31,7 @@
             </div>
 
             <div class="_more">
-                <div class="links">Apply to feature your<br> practice on the #1 plateform <br>for
-                    <span>holistic practitioners</span></div>
-               <div class="b-texts mt-10">
-                   <div class="tle">two steps to apply:</div>
-                   <div class="stp1">1) Fill Out Our Application Form</div>
-                   <div class="stp2">2) Select A Time For An Onboarding<br>Interview With A Member Of Our Team</div>
-               </div>
+                <div class="links">Enter your log in details below</div>
             </div>
 
             <div class="form">

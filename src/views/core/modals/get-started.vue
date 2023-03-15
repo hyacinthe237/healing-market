@@ -72,6 +72,7 @@
                                         <label class="typo__label">Select all that apply</label>
                                         <multiselect
                                             v-model="values"
+                                            label="name"
                                             track-by="name"
                                             placeholder="Select all that apply"
                                             :options="lookings"
@@ -92,6 +93,7 @@
                                         <label class="typo__label">Select as many as you would like</label>
                                         <multiselect
                                             v-model="value"
+                                            label="name"
                                             track-by="name"
                                             placeholder="Select as many"
                                             :options="importantOptions"
@@ -187,7 +189,7 @@ export default {
         genders: ['Male', 'Female'],
         preferences: ['Male', 'Female', 'No preference'],
         groups: ['Under 18', '30 - 39', '50 - 59', '70+', '18 - 29', '40 - 49', '60 - 69', 'Prefer not to say'],
-        importantOptions: ['Close to my location', 'Years of experience', 'Well-reviewed', 'License & credentials'],
+        importantOptions: [{ name: 'Close to my location'}, { name: 'Years of experience'}, { name: 'Well-reviewed'}, { name: 'License & credentials'}],
         selectedGender: '',
         selectedPreference: '',
         selectedGroup: '',
@@ -195,9 +197,31 @@ export default {
         value: [],
         values: [],
         checks: ['Really Bad','Bad','So so','Not too bad','Ok','Average','Good','Healthy','Pretty Good','Perfect'],
-        lookings: ['Addiction','Anxiety','Autism','Depression','Brain Fog','Cancer','Headaches','Insomnia','Autoimmune Disease','Digestive Disorders', 
-        'Stress', 'Pregnancy', 'Sleep', 'Trauma', 'Weight Loss', 'Diabetes', 'Nutrition', 'Fatigue', 'Relationship Issues', 'Irritable Bowel Syndrome (IBS)',
-        'Lyme Disease', 'Chronic Pain', 'Joint Pain'],
+        lookings: [
+            {name: 'Addiction'},
+            {name: 'Anxiety'},
+            {name: 'Autism'},
+            {name: 'Depression'},
+            {name: 'Brain Fog'},
+            {name: 'Cancer'},
+            {name: 'Headaches'},
+            {name: 'Insomnia'},
+            {name: 'Autoimmune Disease'},
+            {name: 'Digestive Disorders'},
+            {name: 'Stress'},
+            {name: 'Pregnancy'},
+            {name: 'Sleep'},
+            {name: 'Trauma'},
+            {name: 'Weight Loss'},
+            {name: 'Diabetes'},
+            {name: 'Nutrition'},
+            {name: 'Fatigue'},
+            {name: 'Relationship Issues'},
+            {name: 'Irritable Bowel Syndrome (IBS)'},
+            {name: 'Lyme Disease'},
+            {name: 'Chronic Pain'},
+            {name: 'Joint Pain'}
+        ],
     }),
 
     mounted () {

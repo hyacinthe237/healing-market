@@ -30,10 +30,6 @@
                 </div>
             </div>
 
-            <!-- <div class="_more">
-                <div class="links">Enter your log in details below</div>
-            </div> -->
-
             <div class="form">
                 <h4>Apply to feature your practice on<br>Healing Marketplace</h4>
 

@@ -4,15 +4,9 @@ import Guard from '@/services/middleware'
 
 import NotFound from '@/views/core/errors/notfound'
 import PractitionerDetails from '@/views/core/services/details'
-import ListPractice from '@/views/core/services/list-practice'
 import CoreBody from '@/views/core/body'
-import SignUpWelcome from '@/views/core/auth/signup/welcome'
-import SignUpStepOne from '@/views/core/auth/signup/steps/step-one'
-import SignUpStepTwo from '@/views/core/auth/signup/steps/step-two'
-import SignUpStepThree from '@/views/core/auth/signup/steps/step-three'
-import SignUpStepFour from '@/views/core/auth/signup/steps/step-four'
+import SignUp from '@/views/core/auth/signup'
 import AuthSignin from '@/views/core/auth/signin'
-import CompleteAccess from '@/views/core/auth/complete-access'
 import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
 import Dashboard from '@/views/dashboard/dashboard'
@@ -32,16 +26,10 @@ export default new Router({
 
     routes: [
         { path: '/', component: CoreBody, name: 'landing' },
-        { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
-        { path: '/list/your/practice', component: ListPractice, name: 'list-practice' },
         { path: '/signin', component: AuthSignin, name: 'signin' },
-        { path: '/complete/access', component: CompleteAccess, name: 'complete-access' },
+        { path: '/signup', component: SignUp, name: 'signup', beforeEnter: Guard.guest },
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },
-        { path: '/signup/welcome', component: SignUpWelcome, name: 'signup-welcome', beforeEnter: Guard.guest },
-        { path: '/signup/step/one', component: SignUpStepOne, name: 'signup-step-one', beforeEnter: Guard.guest },
-        { path: '/signup/step/two', component: SignUpStepTwo, name: 'signup-step-two', beforeEnter: Guard.guest },
-        { path: '/signup/step/three', component: SignUpStepThree, name: 'signup-step-three', beforeEnter: Guard.guest },
-        { path: '/signup/step/four', component: SignUpStepFour, name: 'signup-step-four', beforeEnter: Guard.guest },
+        { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
 
         { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.auth },
         { path: '/team', name: 'team', component: Team, beforeEnter: Guard.auth },

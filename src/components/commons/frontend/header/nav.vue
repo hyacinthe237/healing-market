@@ -16,10 +16,10 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign in</a>
+            <a class="nav-link pointer" @click="n('signin')">Sign in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-primary pointer" @click="n('list-practice')">List your practice</a>
+            <a class="nav-link btn btn-primary pointer" @click="n('signup')">List your practice</a>
           </li>
         </ul>
       </div>

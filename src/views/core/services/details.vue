@@ -62,7 +62,7 @@
                                     :rating="4"
                                     inactive-color="#000"
                                     active-color="#FF6900"
-                                    star-size="20"
+                                    :star-size="20"
                                 ></star-rating>(verified reviews)
                             </div>
                             <div class="location"><i class="feather icon-map-pin"></i> Oakalnd, CA</div>
@@ -86,7 +86,7 @@
                                             :rating="5"
                                             inactive-color="#000"
                                             active-color="#FF6900"
-                                            star-size="20"
+                                            :star-size="20"
                                         ></star-rating>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                             :rating="5"
                                             inactive-color="#000"
                                             active-color="#FF6900"
-                                            star-size="20"
+                                            :star-size="20"
                                         ></star-rating>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                             :rating="5"
                                             inactive-color="#000"
                                             active-color="#FF6900"
-                                            star-size="20"
+                                            :star-size="20"
                                         ></star-rating>
                                     </div>
                                 </div>
@@ -191,11 +191,11 @@
                       <div class="divider"></div>
                       <div class="d-box">
                         <div class="short-text">Lorem ipsum dolor sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
-                        <div class="button"><button type="submit" class="btn btn-secondary">Continue Booking</button></div>
+                        <div class="button"><button type="submit" class="btn btn-secondary" @click="openSelectTimeModal()">Continue Booking</button></div>
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-primary">Message the practitioner</button>
+                        <button type="submit" class="btn btn-primary">Message practitioner</button>
                     </div>
                 </div>
               </div>
@@ -204,6 +204,9 @@
 
 
   
+      <SignInModal @signup="openSignUpModal"></SignInModal>
+      <SignUpModal @signin="openSignInModal"></SignUpModal>
+      <SelectTimeModal></SelectTimeModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -218,6 +221,9 @@
     import VueSlickCarousel from 'vue-slick-carousel'
     import 'vue-slick-carousel/dist/vue-slick-carousel.css'
     import StarRating from 'vue-star-rating'
+    import SignInModal from '../modals/signin'
+    import SignUpModal from '../modals/signup'
+    import SelectTimeModal from '../modals/select-time'
   
   export default {
       name: 'PractitionerDetails',
@@ -244,7 +250,7 @@
       }),
   
       components: {
-          Navbar, Footer, VueSlickCarousel, StarRating
+          Navbar, Footer, VueSlickCarousel, StarRating, SignInModal, SignUpModal, SelectTimeModal
       },
   
       computed: {
@@ -258,11 +264,29 @@
       },
   
       methods: {
-          openPreviewModal (text) {
-              this.selectedText = text
-              this.showBtn = false
-              this.openModal({ id: 'previewModal' })
-          },
+        openPreviewModal (text) {
+            this.selectedText = text
+            this.showBtn = false
+            this.openModal({ id: 'previewModal' })
+        },
+
+        openSelectTimeModal () {
+            setTimeout(() => {
+                $('#selectTimeModal').modal('show')
+            }, 150)
+        },
+
+        openSignInModal () {
+            setTimeout(() => {
+                $('#signInModal').modal('show')
+            }, 150)
+        },
+
+        openSignUpModal () {
+            setTimeout(() => {
+                $('#signUpModal').modal('show')
+            }, 150)
+        },
       },
   }
   </script>

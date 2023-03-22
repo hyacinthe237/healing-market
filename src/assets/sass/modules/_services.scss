@@ -157,7 +157,7 @@
                     }
                     .box {
                         background-color: white;
-                        border: #000 solid 1px;
+                        border: #ccc solid 1px;
                         border-radius: 10px;
                         width: 100%;
     
@@ -259,7 +259,7 @@
             .droite {
                 .description {
                     background-color: white;
-                    border: #000 solid 1px;
+                    border: #ccc solid 1px;
                     border-radius: 10px;
                     width: 100%;
 
@@ -349,7 +349,7 @@
     
             .details-box {
                 display: flex;
-                flex-direction: column;
+                flex-direction: column-reverse;
                 padding-top: 50px;
                 padding-bottom: 50px;
                 justify-content: center;
@@ -451,9 +451,6 @@
     
                     .reviews-carousel {
                         width: 325px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
     
                         .box-header {
                             display: flex;
@@ -482,9 +479,9 @@
                         }
                         .box {
                             background-color: white;
-                            border: #000 solid 1px;
+                            border: #ccc solid 1px;
                             border-radius: 10px;
-                            width: 100%;
+                            width: 325px;
         
                             .titre {
                                 color: #000;
@@ -583,7 +580,7 @@
                 .droite {
                     .description {
                         background-color: white;
-                        border: #000 solid 1px;
+                        border: #ccc solid 1px;
                         border-radius: 10px;
                         width: 100%;
     
@@ -616,20 +613,15 @@
                     }
     
                     .contact {
-                        background-color: $primary;
                         text-align: center;
                         display: flex;
                         justify-content: center;
-                        padding: 10px 40px;
-                        border-radius: 10px;
+                        margin-bottom: 40px;
                         cursor: pointer;
-    
-                        .btn-text {
-                            border: white solid 1px;
-                            border-radius: 10px;
-                            text-align: center;
-                            width: 100%;
-                            padding: 10px;
+
+                        button {
+                            border-radius: 5px;
+                            width: auto;
                         }
                     }
                 }

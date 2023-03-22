@@ -41,7 +41,7 @@ import { french } from '@/assets/i18n'
 import Spinners from '@/components/commons/loaders/spinners'
 import VErrorComponent from '@/components/commons/error/v-error'
 import PopoverComponent from '@/components/commons/popover/popover'
-//import MainCalendar from '@/components/commons/calendar/calendar'
+import MainModal from '@/components/commons/modals/main-modal'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -80,7 +80,7 @@ Vue.component('compact-picker', Compact)
 Vue.component('twitter-picker', Twitter)
 Vue.component('vue-timepicker', VueTimepicker)
 Vue.component('popover-vue', PopoverComponent)
-//Vue.component('main-calendar', MainCalendar)
+Vue.component('main-modal', MainModal)
 
 new Vue({
   router,

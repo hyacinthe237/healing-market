@@ -14,7 +14,7 @@
     }
 
     .datepicker-header {
-        background-color: $primary-color;
+        /*background-color: $primary-color;
         color: $font-color;
         padding: 15px 20px;
         border-radius: 3px 3px 0 0;
@@ -23,7 +23,8 @@
             height: 337px;
             width: 165px;
             float: left;
-        }
+        }*/
+        display: none;
     }
 
     .datepicker-body {
@@ -305,14 +306,14 @@
 
                 <div class="datepicker-body"
                      :class="[classOrientation]">
-                    <!--<div class="datepicker-controls"
+                    <div class="datepicker-controls"
                          :class="[isDoubled, classOrientation]">
                         <button class="datepicker-next" @click="nextMonth">
                             <svg class="datepicker-arrow" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0.5 900.5 30 30" enable-background="new 0.5 900.5 30 30"><path d="M8.779 928.31c-.473.567-.396 1.406.171 1.88.566.474 1.409.396 1.881-.17l11.391-13.664c.208-.247.31-.551.31-.855 0-.304-.103-.607-.31-.855l-11.391-13.666c-.472-.566-1.315-.644-1.881-.17-.565.473-.643 1.313-.171 1.881l10.679 12.809-10.679 12.81z"/></svg>                </button>
                         <button class="datepicker-prev" @click="prevMonth">
                             <svg class="datepicker-arrow" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0.5 900.5 30 30" enable-background="new 0.5 900.5 30 30"><path d="M22.221 928.31l-10.679-12.81 10.679-12.809c.472-.567.395-1.408-.171-1.881-.565-.474-1.409-.396-1.881.17l-11.39 13.665c-.208.248-.31.552-.31.855 0 .305.103.608.31.855l11.391 13.664c.472.566 1.315.644 1.881.17.566-.473.643-1.312.17-1.879z"/></svg>
                         </button>
-                    </div>-->
+                    </div>
 
                     <div class="datepicker-month" v-for="(month, index) in months" :key="index+1">
                         <!--<transition-group name="slidev">

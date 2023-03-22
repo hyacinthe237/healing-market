@@ -11,7 +11,7 @@
 
 #sidebar-wrapper {
     // z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: $sidebar-width;
     width: 0;
     min-height: 100vh;
@@ -23,8 +23,8 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     // box-shadow: 1px 0 15px 8px rgba(30, 107, 174, 0.1);
-    background-color: #ccc;
-    padding-top: 70px;
+    background-color: white;
+    // padding-top: 70px;
 }
 
 #wrapper.toggled {
@@ -43,7 +43,8 @@
     padding-top: 0px;
     min-height: 100vh;
     overflow-y: auto;
-    padding-top: 70px;
+    // padding-top: 70px;
+    background-color: rgba(0,0,0,0.1);
 
     .toggle-container {
         cursor: pointer;
@@ -64,9 +65,8 @@
     padding: 0;
     list-style: none;
     text-align: left;
-    padding-bottom: 20px;
     font-family: 'Poppins Regular', sans-serif;
-    padding: 20px;
+    // padding: 20px;
 
     &.bottom {
         bottom:0;
@@ -201,9 +201,8 @@
     }
 
     > li {
-        margin-bottom: 10px;
         a {
-            padding: 15px;
+            padding: 10px 40px;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -218,28 +217,26 @@
 
             i {
                 font-size: 30px;
-                color: $dark;
-                padding-right: 20px;
+                color: $secondary;
+                padding-right: 10px;
             }
 
             span {}
 
             &.active {
                 text-decoration: none;
-                color: $sidebarActiveColour;
-                background: $sidebarActiveBackgroundColour;
-                i { color: $sidebarActiveColour }
-                border-radius: 10px;
+                color: white;
+                background: $secondary;
+                i { color: white }
             }
 
             &:hover,
             &:active,
             &:focus {
                 text-decoration: none;
-                color: $sidebarActiveColour;
-                background: $sidebarActiveBackgroundColour;
-                i { color: $sidebarActiveColour }
-                border-radius: 10px;
+                color: white;
+                background: $secondary;
+                i { color: white }
             }
         }
 

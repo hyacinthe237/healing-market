@@ -2,11 +2,11 @@
   <div class="">
     <Navbar></Navbar>
     <div id="wrapper" v-show="!isLoading">
-        <Sidebar :current="'dashboard'" />
+        <Sidebar :current="'booking'" />
 
         <div id="page-content-wrapper">
             <div class="dashboard">
-              <h2>Recent Booking</h2>
+              <!-- <h2>Recent Booking</h2> -->
               <div class="bookings">
                   <div class="booking">
                     <div class="name">

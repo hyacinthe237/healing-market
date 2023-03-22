@@ -7,40 +7,16 @@
                     <span>{{ 'Dashboard' }}</span>
                 </router-link>
             </li>
-            <li v-if="isManager">
-                <router-link :to="{ name: 'schedule' }" :class="[current == 'schedule' ? 'active' : '']">
+            <li>
+                <router-link :to="{ name: 'booking' }" :class="[current == 'booking' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
-                    <span>{{ t('Schedule') }}</span>
+                    <span>{{ t('Booking') }}</span>
                 </router-link>
             </li>
-            <li v-if="isEmployee">
-                <router-link :to="{ name: 'my-schedule' }" :class="[current == 'myschedule' ? 'active' : '']">
-                    <i class="ion-md-calendar"></i>
-                    <span>{{ t('My Schedule') }}</span>
-                </router-link>
-            </li>
-            <li v-if="isManager">
-                <router-link :to="{ name: 'timesheets' }" :class="[current == 'timesheets' ? 'active' : '']">
-                    <i class="ion-md-timer"></i>
-                    <span>{{ t('Timesheets') }}</span>
-                </router-link>
-            </li>
-            <li v-if="isEmployee">
-                <router-link :to="{ name: 'mytimesheet' }" :class="[current == 'mytimesheet' ? 'active' : '']">
-                    <i class="ion-md-timer"></i>
-                    <span>{{ t('My Timesheets') }}</span>
-                </router-link>
-            </li>
-            <li v-if="isManager">
-                <router-link :to="{ name: 'team' }" :class="[current == 'team' ? 'active' : '']">
-                    <i class="ion-md-people"></i>
-                    <span>{{ t('Team') }}</span>
-                </router-link>
-            </li>
-            <li v-if="isManager">
-                <router-link :to="{ name: 'jobsites' }" :class="[current == 'jobsites' ? 'active' : '']">
-                    <i class="ion-ios-briefcase"></i>
-                    <span>{{ t('Job sites') }}</span>
+            <li>
+                <router-link :to="{ name: 'messages' }" :class="[current == 'messages' ? 'active' : '']">
+                    <i class="feather icon-message-square"></i>
+                    <span>{{ t('Messages') }}</span>
                 </router-link>
             </li>
             <li>
@@ -48,6 +24,12 @@
                     <i class="ion-md-settings"></i>
                     <span>{{ t('Settings') }}</span>
                 </router-link>
+            </li>
+            <li>
+                <a href="" @click="signout()">
+                    <i class="ion-md-log-out"></i>
+                    <span>{{ t('Sign out') }}</span>
+                </a>
             </li>
         </ul>
     </div>

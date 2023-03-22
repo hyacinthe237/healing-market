@@ -10,6 +10,7 @@ import AuthSignin from '@/views/core/auth/signin'
 import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
 import Dashboard from '@/views/dashboard/dashboard'
+import Booking from '@/views/booking/booking'
 import Team from '@/views/team/team'
 import Schedule from '@/views/schedule/schedule'
 import MySchedule from '@/views/schedule/my-schedule'
@@ -31,15 +32,16 @@ export default new Router({
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },
         { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
 
-        { path: '/dashboard', name: 'dashboard', component: Dashboard, beforeEnter: Guard.auth },
-        { path: '/team', name: 'team', component: Team, beforeEnter: Guard.auth },
-        { path: '/schedule', name: 'schedule', component: Schedule, beforeEnter: Guard.auth },
-        { path: '/my/schedule', name: 'my-schedule', component: MySchedule, beforeEnter: Guard.auth },
-        { path: '/settings', name: 'settings', component: Settings, beforeEnter: Guard.auth },
-        { path: '/timesheets', name: 'timesheets', component: Timesheets, beforeEnter: Guard.auth },
-        { path: '/my/timesheet', name: 'mytimesheet', component: MyTimesheet, beforeEnter: Guard.auth },
-        { path: '/profile', name: 'profile', component: Profile, beforeEnter: Guard.auth },
-        { path: '/jobsites', name: 'jobsites', component: JobSite, beforeEnter: Guard.auth },
+        { path: '/dashboard', name: 'dashboard', component: Dashboard },
+        { path: '/booking', name: 'booking', component: Booking },
+        { path: '/team', name: 'team', component: Team },
+        { path: '/schedule', name: 'schedule', component: Schedule },
+        { path: '/my/schedule', name: 'my-schedule', component: MySchedule },
+        { path: '/settings', name: 'settings', component: Settings },
+        { path: '/timesheets', name: 'timesheets', component: Timesheets },
+        { path: '/my/timesheet', name: 'mytimesheet', component: MyTimesheet },
+        { path: '/profile', name: 'profile', component: Profile },
+        { path: '/jobsites', name: 'jobsites', component: JobSite },
 
         { path: '*', component: NotFound }
     ]

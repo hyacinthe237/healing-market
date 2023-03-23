@@ -2,25 +2,25 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li>
-                <router-link :to="{ name: 'dashboard' }" :class="[current == 'dashboard' ? 'active' : '']">
+                <router-link :to="{ name: 'client-dashboard' }" :class="[current == 'dashboard' ? 'active' : '']">
                     <i class="ion-md-grid"></i>
                     <span>{{ 'Dashboard' }}</span>
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'booking' }" :class="[current == 'booking' ? 'active' : '']">
+                <router-link :to="{ name: 'client-booking' }" :class="[current == 'booking' ? 'active' : '']">
                     <i class="ion-md-calendar"></i>
                     <span>{{ t('Booking') }}</span>
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'messages' }" :class="[current == 'messages' ? 'active' : '']">
+                <router-link :to="{ name: 'client-messages' }" :class="[current == 'messages' ? 'active' : '']">
                     <i class="feather icon-message-square"></i>
                     <span>{{ t('Messages') }}</span>
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'settings' }" :class="[current == 'settings' ? 'active' : '']">
+                <router-link :to="{ name: 'client-settings' }" :class="[current == 'settings' ? 'active' : '']">
                     <i class="ion-md-settings"></i>
                     <span>{{ t('Settings') }}</span>
                 </router-link>
@@ -61,9 +61,6 @@ export default {
         user () {
           return JSON.parse(localStorage.getItem(config.get('user')))
        },
-
-       isManager () { return this.user.is_manager },
-       isEmployee () { return this.user.is_employee },
     },
 
     mounted () {

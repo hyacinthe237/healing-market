@@ -217,7 +217,7 @@
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
-import config from '../../services/config'
+import config from '@/services/config'
 import _ from 'lodash'
 
 export default {

@@ -88,7 +88,7 @@
 import Sidebar from '@/components/commons/sidebar/sidebar'
 import Navbar from '@/components/commons/frontend/header/nav'
 import Footer from '@/components/commons/frontend/footer/footer'
-import config from '../../services/config'
+import config from '@/services/config'
 import _ from 'lodash'
 
 export default {
@@ -112,18 +112,7 @@ export default {
     
     watch: { },
 
-    mounted () {
-      $(function(){
-          // Enables popover
-          $("[data-toggle=popover]").popover();
-      });
-      if (this.isEmployee) {
-        this.getEmployeeDoashboard()
-      }
-      if (this.isManager) {
-        this.getMembers()
-      }
-    },
+    mounted () {},
 
     methods: { 
       async getDoashboard () {

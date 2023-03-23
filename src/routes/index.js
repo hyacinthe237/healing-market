@@ -9,17 +9,10 @@ import SignUp from '@/views/core/auth/signup'
 import AuthSignin from '@/views/core/auth/signin'
 import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
-import Dashboard from '@/views/dashboard/dashboard'
-import Booking from '@/views/booking/booking'
-import Messages from '@/views/messages/messages'
-import Team from '@/views/team/team'
-import Schedule from '@/views/schedule/schedule'
-import MySchedule from '@/views/schedule/my-schedule'
-import Settings from '@/views/settings/settings'
-import Timesheets from '@/views/timesheets/timesheets'
-import MyTimesheet from '@/views/timesheets/my-timesheet'
-import Profile from '@/views/team/profile'
-import JobSite from '@/views/jobsites/jobsites'
+import ClientDashboard from '@/views/client/dashboard/dashboard'
+import ClientBooking from '@/views/client/booking/booking'
+import ClientMessages from '@/views/client/messages/messages'
+import ClientSettings from '@/views/client/settings/settings'
 
 Vue.use(Router)
 
@@ -33,17 +26,10 @@ export default new Router({
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },
         { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
 
-        { path: '/dashboard', name: 'dashboard', component: Dashboard },
-        { path: '/booking', name: 'booking', component: Booking },
-        { path: '/messages', name: 'messages', component: Messages },
-        { path: '/team', name: 'team', component: Team },
-        { path: '/schedule', name: 'schedule', component: Schedule },
-        { path: '/my/schedule', name: 'my-schedule', component: MySchedule },
-        { path: '/settings', name: 'settings', component: Settings },
-        { path: '/timesheets', name: 'timesheets', component: Timesheets },
-        { path: '/my/timesheet', name: 'mytimesheet', component: MyTimesheet },
-        { path: '/profile', name: 'profile', component: Profile },
-        { path: '/jobsites', name: 'jobsites', component: JobSite },
+        { path: '/client/dashboard', name: 'client-dashboard', component: ClientDashboard },
+        { path: '/client/booking', name: 'client-booking', component: ClientBooking },
+        { path: '/client/messages', name: 'client-messages', component: ClientMessages },
+        { path: '/client/settings', name: 'client-settings', component: ClientSettings },
 
         { path: '*', component: NotFound }
     ]

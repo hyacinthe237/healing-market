@@ -13,6 +13,9 @@
           <li class="nav-item active" v-if="isLandingPage">
             <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item active" v-if="isLandingPage">
+            <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
+          </li>
         </ul>
         <ul class="navbar-nav" v-if="isLandingPage">
           <li class="nav-item">
@@ -70,10 +73,6 @@ export default {
       return this.role == 'client'
     },
 
-    isPractitioner () {
-      return this.role == 'practitioner'
-    },
-
     isLandingPage () {
       return this.$route.name == 'landing'
     },
@@ -93,6 +92,40 @@ export default {
     isClientSettingsPage () {
       return this.$route.name == 'client-settings'
     },
+    
+    isPractitionerDashboardPage () {
+      return this.$route.name == 'practitioner-dashboard'
+    },
+
+    isPractitionerBookingPage () {
+      return this.$route.name == 'practitioner-booking'
+    },
+
+    isPractitionerMessagesPage () {
+      return this.$route.name == 'practitioner-messages'
+    },
+
+    isPractitionerWalletPage () {
+      return this.$route.name == 'practitioner-wallet'
+    },
+
+    isPractitionerAnalyticsPage () {
+      return this.$route.name == 'practitioner-analytics'
+    },
+
+    isPractitionerBusinessPage () {
+      return this.$route.name == 'practitioner-business'
+    },
+
+    isPractitioner () {
+      return this.isPractitionerDashboardPage 
+        || this.isPractitionerBookingPage 
+        || this.isPractitionerMessagesPage 
+        || this.isPractitionerWalletPage
+        || this.isPractitionerAnalyticsPage
+        || this.isPractitionerBusinessPage
+
+    }
   },
 }
 </script>

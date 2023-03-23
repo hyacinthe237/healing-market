@@ -1,6 +1,22 @@
 .dashboard {
-    padding: 40px;
+    padding: 20px 50px;
     margin-top: 0px;
+
+    ._title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      button {
+        border-radius: 5px;
+        white-space: nowrap;
+        background-color: white;
+
+        i {
+          color: $secondary;
+        }
+      }
+    }
 
     .bookings {
       display: flex;
@@ -51,62 +67,28 @@
   .dashboard {
     display: flex;
     flex-direction: column;
+    padding: 20px 20px;
+    margin-top: 0px;
 
-      .cards {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
+    ._title {
+      display: flex;
+      flex-direction: column;
 
-          .card {
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-              padding: 10px;
-              color: $dark;
-              border-radius: 10px;
-              font-weight: 300;
-              max-width: 250px;
-              width: 100%;
-              margin-bottom: 20px;
-
-              .gauche {
-                display: flex;
-                flex-direction: column;
-
-                .number {
-                  font-family: 'Poppins Bold', Avenir, Calibri, sans-serif;
-                  color: $brand-darker;
-                  font-weight: 900;
-                  font-size: 24px;
-                  line-height: 1.2em;
-                }
-
-
-                .name {
-                  margin-top: 10px;
-                  white-space: nowrap;
-                  font-size: 14px;
-                  color: $brand-darker;
-                }
-              }
-              .droite {
-                background-color: $primary;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                padding: 10px;
-                border-radius: 10px;
-
-                i {
-                    font-size: 15px;
-                    color: white;
-                }
-              }
-
-          }
+      .text {
+        p, h4 {
+          white-space: nowrap;
+        }
       }
+
+      button {
+        border-radius: 5px;
+        white-space: nowrap;
+        background-color: white;
+
+        i {
+          color: $secondary;
+        }
+      }
+    }
   }
 }

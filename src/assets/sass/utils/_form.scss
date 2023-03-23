@@ -191,10 +191,14 @@
 
         .form-control {
             background-color: white;
-            border: 1px solid rgba(137, 0, 0, 0.1);
             box-shadow: none;
             color: $brand-dark;
             font-size: 14px;
+
+            &.round {
+                border-radius: 40px;
+                background-color: rgba(0, 0, 0, 0.1);
+            }
 
             &.textarea {
                 border-radius: 20px;
@@ -209,6 +213,21 @@
             }
 
             &.form-control-lg { font-size: 16px; }
+        }
+
+        .message-control {
+            background-color: rgba(0, 0, 0, 0.1);
+            box-shadow: none;
+            color: $brand-dark;
+            font-size: 14px;
+            border-radius: 40px;
+            height: 44px;
+            padding-left: 20px;
+            width: 100%;
+
+            &:focus {
+                border: 1px solid $primary;
+            }
         }
 
         .form-control-modal {
@@ -296,14 +315,15 @@
         }
 
         .form-control {
-            background-color: transparent;
-            // border: none;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: none;
             box-shadow: none;
             color: $brand-dark;
             font-size: 14px;
             justify-content: flex-start;
-            padding:0px;
+            padding-left: 30px;
             margin-top: -10px;
+            border-radius: 40px;
 
             &.no-border-right { border-right: none; }
             &.no-border-left { border-left: none; }
@@ -311,6 +331,23 @@
             &.dark { color: $brand-dark; }
 
             &.form-control-lg { font-size: 14px; }
+        }
+
+        .icon {
+            width:30px;
+            height:30px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            z-index: 9;
+            margin-right: -35px;
+            margin-top: -25px
+
+            i {
+                font-size: 12px;
+            }
         }
 
         .input-group-append {

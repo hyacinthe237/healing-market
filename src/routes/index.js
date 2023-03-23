@@ -11,6 +11,7 @@ import AuthPasswordForgot from '@/views/core/auth/password-forgot'
 
 import Dashboard from '@/views/dashboard/dashboard'
 import Booking from '@/views/booking/booking'
+import Messages from '@/views/messages/messages'
 import Team from '@/views/team/team'
 import Schedule from '@/views/schedule/schedule'
 import MySchedule from '@/views/schedule/my-schedule'
@@ -34,6 +35,7 @@ export default new Router({
 
         { path: '/dashboard', name: 'dashboard', component: Dashboard },
         { path: '/booking', name: 'booking', component: Booking },
+        { path: '/messages', name: 'messages', component: Messages },
         { path: '/team', name: 'team', component: Team },
         { path: '/schedule', name: 'schedule', component: Schedule },
         { path: '/my/schedule', name: 'my-schedule', component: MySchedule },

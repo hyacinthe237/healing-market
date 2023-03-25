@@ -14,6 +14,14 @@ import ClientBooking from '@/views/client/booking/booking'
 import ClientMessages from '@/views/client/messages/messages'
 import ClientSettings from '@/views/client/settings/settings'
 
+// For Practitioner components
+import PractitionerDashboard from '@/views/practitioner/dashboard/dashboard'
+import PractitionerBooking from '@/views/practitioner/my-business/booking'
+import PractitionerWallet from '@/views/practitioner/my-business/wallet'
+import PractitionerOfferStat from '@/views/practitioner/my-business/offer-stat'
+import PractitionerMessages from '@/views/practitioner/messages/messages'
+import PractitionerAnalytics from '@/views/practitioner/analytics/analytics'
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +38,13 @@ export default new Router({
         { path: '/client/booking', name: 'client-booking', component: ClientBooking },
         { path: '/client/messages', name: 'client-messages', component: ClientMessages },
         { path: '/client/settings', name: 'client-settings', component: ClientSettings },
+
+        { path: '/practitioner/dashboard', name: 'practitioner-dashboard', component: PractitionerDashboard },
+        { path: '/practitioner/booking', name: 'practitioner-booking', component: PractitionerBooking },
+        { path: '/practitioner/messages', name: 'practitioner-messages', component: PractitionerMessages },
+        { path: '/practitioner/analytics', name: 'practitioner-analytics', component: PractitionerAnalytics },
+        { path: '/practitioner/wallet', name: 'practitioner-wallet', component: PractitionerWallet },
+        { path: '/practitioner/offer/stat', name: 'practitioner-offer-stat', component: PractitionerOfferStat },
 
         { path: '*', component: NotFound }
     ]

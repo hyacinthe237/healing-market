@@ -9,14 +9,53 @@
       </button>
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active" v-if="isLandingPage">
+        <ul class="navbar-nav mr-auto padding">
+          <li class="nav-item" v-if="isLandingPage">
             <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active" v-if="isLandingPage">
-            <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
+          <li class="nav-item" v-if="isPractitioner">
+            <a :class="['nav-link', isPractitionerDashboardPage ? 'active' : '']" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item" v-if="isPractitioner">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item dropdown" v-if="isPractitioner">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              My business
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item pointer" @click="n('practitioner-booking')">Booking</a>
+              <a class="dropdown-item pointer" @click="n('practitioner-wallet')">Wallet</a>
+              <a class="dropdown-item pointer" @click="n('practitioner-offer-stat')">Offer stat</a>
+            </div>
+          </li>
+          <li class="nav-item pointer" v-if="isPractitioner">
+            <a :class="['nav-link', isPractitionerAnalyticsPage ? 'active' : '']" @click="n('practitioner-analytics')">Analytics</a>
           </li>
         </ul>
+        <ul class="navbar-nav" v-if="isPractitioner">
+          <li class="nav-item">
+            <a class="nav-link pointer">
+              <i class="feather icon-help-circle"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer">
+              <i class="feather icon-message-square"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer">
+              <i class="feather icon-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer">
+              <img :src="profil" alt="" style="width:45px; height:45px; border-radius:45px;">
+            </a>
+          </li>
+        </ul>
+
         <ul class="navbar-nav" v-if="isLandingPage">
           <li class="nav-item">
             <a class="nav-link pointer" @click="n('signin')">Sign in</a>
@@ -113,8 +152,8 @@ export default {
       return this.$route.name == 'practitioner-analytics'
     },
 
-    isPractitionerBusinessPage () {
-      return this.$route.name == 'practitioner-business'
+    isPractitionerOfferStatPage () {
+      return this.$route.name == 'practitioner-offer-stat'
     },
 
     isPractitioner () {
@@ -123,7 +162,7 @@ export default {
         || this.isPractitionerMessagesPage 
         || this.isPractitionerWalletPage
         || this.isPractitionerAnalyticsPage
-        || this.isPractitionerBusinessPage
+        || this.isPractitionerOfferStatPage
 
     }
   },

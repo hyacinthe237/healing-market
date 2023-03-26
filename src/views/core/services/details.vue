@@ -207,6 +207,7 @@
       <SignInModal @signup="openSignUpModal"></SignInModal>
       <SignUpModal @signin="openSignInModal"></SignUpModal>
       <SelectTimeModal></SelectTimeModal>
+      <CheckoutModal></CheckoutModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -224,6 +225,7 @@
     import SignInModal from '../modals/signin'
     import SignUpModal from '../modals/signup'
     import SelectTimeModal from '../modals/select-time'
+    import CheckoutModal from '../modals/checkout'
   
   export default {
       name: 'PractitionerDetails',
@@ -250,7 +252,7 @@
       }),
   
       components: {
-          Navbar, Footer, VueSlickCarousel, StarRating, SignInModal, SignUpModal, SelectTimeModal
+          Navbar, Footer, VueSlickCarousel, StarRating, SignInModal, SignUpModal, SelectTimeModal, CheckoutModal
       },
   
       computed: {
@@ -272,8 +274,11 @@
 
         openSelectTimeModal () {
             setTimeout(() => {
-                $('#selectTimeModal').modal('show')
+                $('#checkoutModal').modal('show')
             }, 150)
+            // setTimeout(() => {
+            //     $('#selectTimeModal').modal('show')
+            // }, 150)
         },
 
         openSignInModal () {

@@ -13,11 +13,8 @@
           <li class="nav-item" v-if="isLandingPage">
             <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item" v-if="isPractitioner">
-            <a :class="['nav-link', isPractitionerDashboardPage ? 'active' : '']" href="#">Dashboard</a>
-          </li>
-          <li class="nav-item" v-if="isPractitioner">
-            <a class="nav-link" href="#"></a>
+          <li class="nav-item pointer" v-if="isPractitioner">
+            <a :class="['nav-link', isPractitionerDashboardPage ? 'active' : '']"  @click="n('practitioner-dashboard')">Dashboard</a>
           </li>
           <li class="nav-item dropdown" v-if="isPractitioner">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

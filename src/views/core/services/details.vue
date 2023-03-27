@@ -195,7 +195,7 @@
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-primary">Message practitioner</button>
+                        <button type="submit" class="btn btn-primary" @click="openSignInModal()">Message practitioner</button>
                     </div>
                 </div>
               </div>
@@ -206,8 +206,9 @@
   
       <SignInModal @signup="openSignUpModal"></SignInModal>
       <SignUpModal @signin="openSignInModal"></SignUpModal>
-      <SelectTimeModal></SelectTimeModal>
-      <CheckoutModal></CheckoutModal>
+      <SelectTimeModal @continue="openCheckoutModal"></SelectTimeModal>
+      <SuccessModal></SuccessModal>
+      <CheckoutModal @success="openSuccessModal"></CheckoutModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -226,6 +227,7 @@
     import SignUpModal from '../modals/signup'
     import SelectTimeModal from '../modals/select-time'
     import CheckoutModal from '../modals/checkout'
+    import SuccessModal from '../modals/success'
   
   export default {
       name: 'PractitionerDetails',
@@ -252,7 +254,7 @@
       }),
   
       components: {
-          Navbar, Footer, VueSlickCarousel, StarRating, SignInModal, SignUpModal, SelectTimeModal, CheckoutModal
+          Navbar, Footer, VueSlickCarousel, StarRating, SignInModal, SignUpModal, SelectTimeModal, CheckoutModal, SuccessModal
       },
   
       computed: {
@@ -274,11 +276,20 @@
 
         openSelectTimeModal () {
             setTimeout(() => {
+                $('#selectTimeModal').modal('show')
+            }, 150)
+        },
+
+        openCheckoutModal () {
+            setTimeout(() => {
                 $('#checkoutModal').modal('show')
             }, 150)
-            // setTimeout(() => {
-            //     $('#selectTimeModal').modal('show')
-            // }, 150)
+        },
+
+        openSuccessModal () {
+            setTimeout(() => {
+                $('#successModal').modal('show')
+            }, 150)
         },
 
         openSignInModal () {

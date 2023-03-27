@@ -12,7 +12,7 @@
                     <div class="time" v-for="(time, index) in times" :key="index++">{{ time }}</div>
                 </div>
                 <div class="buttons mt-20">
-                    <button class="btn btn-primary">Continue</button>
+                    <button class="btn btn-primary" @click="selected()">Continue</button>
                     <button class="btn btn-outline-primary">Cancel</button>
                 </div>
              </div>
@@ -86,10 +86,10 @@ export default {
             
         },
 
-        signup () {
-            this.$emit('signup')
+        selected () {
+            this.$emit('continue')
             setTimeout(() => {
-                $('#signInModal').modal('hide')
+                $('#selectTimeModal').modal('hide')
             }, 150)
         },
 

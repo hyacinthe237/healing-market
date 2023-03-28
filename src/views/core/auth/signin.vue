@@ -20,7 +20,7 @@
               </div>
               <div class="forgot pointer" @click="n('password-forgot')">Password forgot ?</div>
               <div class="bouton">
-                <button type="submit" class="btn btn-primary mt-20 pointer" @click="signin()">Sign In</button>
+                <button type="submit" class="btn btn-primary mt-20 pointer" @click="n('practitioner-dashboard')">Sign In</button>
               </div>
           </form>
 

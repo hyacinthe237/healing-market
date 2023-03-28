@@ -42,6 +42,8 @@ import Spinners from '@/components/commons/loaders/spinners'
 import VErrorComponent from '@/components/commons/error/v-error'
 import PopoverComponent from '@/components/commons/popover/popover'
 import MainModal from '@/components/commons/modals/main-modal'
+import PractitionerSideBar from '@/components/commons/practitioner/practitioner-sidebar'
+import PractitionerOffers from '@/components/commons/offers/offers'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -81,6 +83,8 @@ Vue.component('twitter-picker', Twitter)
 Vue.component('vue-timepicker', VueTimepicker)
 Vue.component('popover-vue', PopoverComponent)
 Vue.component('main-modal', MainModal)
+Vue.component('Practitioner-SideBar', PractitionerSideBar)
+Vue.component('Practitioner-Offers', PractitionerOffers)
 
 new Vue({
   router,

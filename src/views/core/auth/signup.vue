@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <input type="text" name="url" v-model="ghost.url" placeholder="Website URL/Facebook or Instagram" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Apply Now</button>
+                    <button type="submit" class="btn btn-primary btn-block" @click="n('practitioner-dashboard')">Apply Now</button>
                 </form>
             </div>
         </div>

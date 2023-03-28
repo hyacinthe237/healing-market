@@ -1,27 +1,29 @@
 <template lang="html">
     <main-modal 
-        :id="'withdrawModal'"
-        :title="'How much do you wish to withdraw From account ?'"
+        :id="'addOfferModal'"
+        :title="'Add a new offer'"
     >
         <div class="">
-            <form class="_form" @submit.prevent>
+            <form class="_form" @submit.prevent="add()">
                 <div class="form-group">
-                    <label for="amount">Withdrawal amount</label>
-                    <input type="text" name="amount" v-model="ghost.amount" placeholder="$ 100" class="form-control">
+                    <label for="title">Offer title</label>
+                    <input type="text" name="title" v-model="ghost.title" placeholder="Offer title" class="form-control-modal">
                 </div>
-                
-                <h6>Select a payment method</h6>
-                <div class="bouton">
-                    <div class="pointer text-center" @click="paypaled()">
-                        <img :src="paypal" alt="PayPal" style="width:50px;height:50px;border-radius:50px;">
-                    </div>
-                    
-                    <div class="pointer text-center" @click="bankdeposited()">
-                        <img :src="bankdeposit" width="100px"  alt="Bank Deposit" style="width:50px;height:50px;border-radius:50px;border:1px solid rgba(0,0,0,0.1);" />
-                    </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" v-model="ghost.description" cols="30" rows="5" class="form-control-modal"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="price">Offer price</label>
+                    <input type="number" name="price" v-model="ghost.price" placeholder="Offer price" class="form-control-modal">
+                </div>
+                <div class="form-group">
+                    <label for="image">Upload offer image</label>
+                    <input type="file" name="image" id="image" class="form-control-modal">
+                </div>
+                <button type="submit" class="btn btn-secondary uppercase">Save</button>
 
-                <!-- <div class="link mt-20">Don't have an account? <span @click="signup()" class="primary pointer">Sign Up</span></div> -->
+                <!-- <div class="link mt-20">Have an account? <span @click="signin()" class="primary pointer">Sign In</span></div> -->
             </form>
         </div>
     </main-modal>
@@ -30,36 +32,26 @@
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
-import config from '../../../services/config'
-import paypal from '@/assets/img/healing/paypal.png'
-import bankdeposit from '@/assets/img/healing/bank-deposit.png'
+import config from '@/services/config'
 export default {
-    name: 'WithdrawModal',
+    name: 'AddOfferModal',
 
     data: () => ({
         ghost: {
-            email: '',
-            phone: '',
-            password: '',
-            confirm_password: ''
+            title: '',
+            description: '',
+            price: '',
+            image: ''
         },
-        paypal, bankdeposit
     }),
 
     computed: {},
 
     methods: {
-        paypaled () {
-            this.$emit('paypal')
+        add () {
+            this.$emit('added')
             setTimeout(() => {
-                $('#withdrawModal').modal('hide')
-            }, 150)
-        },
-
-        bankdeposited () {
-            this.$emit('bankdeposit')
-            setTimeout(() => {
-                $('#withdrawModal').modal('hide')
+                $('#addOfferModal').modal('hide')
             }, 150)
         },
 

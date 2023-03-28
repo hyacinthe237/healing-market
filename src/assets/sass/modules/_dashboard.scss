@@ -649,5 +649,46 @@
         }
       }
     }
+
+    .bookings {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      
+        .booking {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            color: $dark;
+            border-radius: 10px;
+            width: 100%;
+            cursor: pointer;
+            background-color: white;
+            margin-bottom: 10px;
+
+            &.empty {
+              background-color: transparent;
+              color: $brand-teal;
+              font-size: 20px;
+            }
+
+            .name {
+              padding-right: 10px;
+              white-space: nowrap;
+            }
+
+            .date {
+              display: flex;
+              color: $brand-teal;
+              padding-left: 10px;
+
+              i {
+                padding-right: 10px;
+              }
+            }
+
+        }
+    }
   }
 }

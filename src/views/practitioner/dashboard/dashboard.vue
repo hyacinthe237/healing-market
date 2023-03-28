@@ -3,69 +3,8 @@
       <Navbar></Navbar>
       <div class="practitioner-dashboard" v-show="!isLoading">
         
-        <div class="gauche">
-            <div class="card">
-                <div class="profil">
-                    <img :src="profil" alt="" style="width:75px; height:75px; border-radius:75px;margin-right:10px;">
-                    <div class="available">
-                        Availability <i class="feather icon-toggle-right"></i>
-                    </div>
-                </div>
-                <div class="card-head mt-20">
-                    <h5 class="nowrap">Hyacinthe ABANDA</h5>
-                    <a href="" class="secondary pointer nowrap"><i class="feather icon-edit-2"></i></a>
-                </div>
+        <Practitioner-SideBar></Practitioner-SideBar>
 
-                <div class="mt-20">
-                    <button class="btn btn-outline-secondary btn-block">Edit profile</button>
-                </div>
-
-                <div class="mt-20">
-                    <div class="location">
-                        <div class="icon nowrap">
-                            <i class="feather icon-map-pin"></i> Oakalnd, CA
-                        </div>
-                    </div>
-                    <div class="location">
-                        <div class="icon nowrap">
-                            <i class="feather icon-user-check"></i> Member since 
-                        </div>
-                        <span class="nowrap">May 2023</span></div>
-                </div>
-
-                <div class="mt-20">
-                    <button class="btn btn-secondary btn-block">Manage calendar</button>
-                </div>
-
-            </div>
-
-            <div class="card">
-                <div class="card-head">
-                    <h5 class="nowrap">Profile description</h5>
-                    <a href="" class="secondary pointer nowrap"><i class="feather icon-edit-2"></i></a>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-                <div class="card-head mt-10">
-                    <h5 class="nowrap">Language</h5>
-                    <a href="" class="secondary pointer nowrap">Add new</a>
-                </div>
-                <p>English</p>
-            </div>
-
-            <div class="card">
-                <div class="card-head">
-                    <h5 class="nowrap">Specialities</h5>
-                    <a href="" class="secondary pointer nowrap">Add new</a>
-                </div>
-                <div class="skills mt-20">
-                    <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">licensed mariage and family therapist</span></div>
-                    <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">licensed alcohol drug courselor</span></div>
-                    <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">access bars&rArr; practitioner</span></div>
-                    <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">accredited, certified advanced EFT practitioner</span></div>
-                </div>
-            </div>
-        </div>
         <div class="droite">
             <div>
                 <div class="_tabs mt-20">
@@ -82,70 +21,16 @@
 
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
 
-                        <div class="add-block mt-20">
+                        <div class="add-block mt-20" @click="openAddOfferModal()">
                             <i class="feather icon-plus-circle"></i>
                             <p>Create new offer</p>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
                     </div>
                 </div>
             </div>
@@ -156,6 +41,7 @@
         <Spinners></Spinners>
       </div>
   
+      <AddOfferModal></AddOfferModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -166,16 +52,19 @@
   import config from '@/services/config'
   import _ from 'lodash'
   import profil from '@/assets/img/healing/profil-homme.png'
+  import AddOfferModal from '../modals/add-offer'
   
   export default {
       data: () => ({
           payload: {},
-          shifts: [],
-          members: [],
+          offers: [
+            {id: 1, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
+            {id: 2, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
+          ],
           profil
       }),
   
-      components: { Navbar, Footer },
+      components: { Navbar, Footer, AddOfferModal },
   
       computed: {
          user () {
@@ -206,6 +95,12 @@
             console.log('members', res.data)
           }
         },
+
+        openAddOfferModal () {
+            setTimeout(() => {
+                $('#addOfferModal').modal('show')
+            }, 150)
+        }
       }
   }
   </script>

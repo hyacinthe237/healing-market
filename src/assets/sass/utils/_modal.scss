@@ -375,7 +375,7 @@
                 i {
                     font-size: 20px;
                 }
-            }
+            }            
 
             .checkout-container {
                 display: flex;
@@ -944,12 +944,32 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     i {
-        font-size: 30px;
+        font-size: 50px;
         color: green;
-
     }
+
+    span {
+        font-weight: bold;
+    }
+
+    p {
+        padding: 10px 30px;
+        text-align: center;
+        margin:0px;
+    }
+
+
+    button {
+        border-radius: 5px;
+        width: 200px;
+    }
+}
+
+.withdraw-modal {
+    padding: 20px 50px;
 }
 
 

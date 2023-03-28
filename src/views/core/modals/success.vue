@@ -71,11 +71,12 @@ export default {
             
         },
 
-        signup () {
-            this.$emit('signup')
+        gotoDashboard () {
+            // this.$emit('signup')
             setTimeout(() => {
-                $('#signInModal').modal('hide')
+                $('#successModal').modal('hide')
             }, 150)
+            this.n('client-dashboard')
         },
 
         gotoForgot () {

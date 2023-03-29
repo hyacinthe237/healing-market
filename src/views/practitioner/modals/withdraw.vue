@@ -5,20 +5,33 @@
     >
         <div class="">
             <form class="_form" @submit.prevent>
-                <div class="form-group">
-                    <label for="amount">Withdrawal amount</label>
-                    <input type="text" name="amount" v-model="ghost.amount" placeholder="$ 100" class="form-control">
-                </div>
-                
-                <h6>Select a payment method</h6>
-                <div class="bouton">
-                    <div class="pointer text-center" @click="paypaled()">
-                        <img :src="paypal" alt="PayPal" style="width:50px;height:50px;border-radius:50px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="amount">Withdrawal amount</label>
+                            <input type="text" name="amount" v-model="ghost.amount" placeholder="$ 100" class="form-control">
+                        </div>
                     </div>
                     
-                    <div class="pointer text-center" @click="bankdeposited()">
-                        <img :src="bankdeposit" width="100px"  alt="Bank Deposit" style="width:50px;height:50px;border-radius:50px;border:1px solid rgba(0,0,0,0.1);" />
+                    <div class="col-sm-12">
+                        <h6>Select a payment method</h6>
+                        <div class="bouton">
+                            <div class="pointer" style="display:flex;flex-direction:row;align-items:center;">
+                                <input type="radio" name="paypal" id="paypal" style="width:25px;height:25px;margin-right:20px">
+                                <img :src="paypal" alt="PayPal" style="width:50px;height:50px;border-radius:50px;">                                
+                            </div>
+                            
+                            <div class="pointer text-center" style="display:flex;flex-direction:row;align-items:center;">
+                                <input type="radio" name="paypal" id="bank" style="width:25px;height:25px;margin-right:20px">
+                                <img :src="bankdeposit" width="100px"  alt="Bank Deposit" style="width:50px;height:50px;border-radius:50px;border:1px solid rgba(0,0,0,0.1);" />
+                            </div>
+                        </div>
                     </div>
+                </div>
+                
+                
+                <div class="bouton text-center mt-20">
+                    <button type="submit" class="btn btn-secondary pointer uppercase" @click="signin()">Next</button>
                 </div>
 
                 <!-- <div class="link mt-20">Don't have an account? <span @click="signup()" class="primary pointer">Sign Up</span></div> -->

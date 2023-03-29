@@ -5,7 +5,7 @@
     >
         <div class="main-container">
              <div class="select-date">
-                <div id="datepicker" class="datepicker"></div>
+                <Datepicker :inline="true"></Datepicker>
              </div>
              <div class="content">
                 <div class="times">
@@ -24,6 +24,8 @@
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
 import config from '@/services/config'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 
 const MOMENT_DATE_FORMAT = 'DD/MM/YYYY'
 const BOOTSTRAP_DATE_FORMAT = 'dd/mm/yyyy'
@@ -35,11 +37,15 @@ export default {
             username: '',
             password: ''
         },
-        times: ['9:00 am', '10:00 am', '11:00 am', '12:00 am', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm']
+        times: ['9:00 am', '10:00 am', '11:00 am', '12:00 am', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm'],
     }),
 
     mounted () {
-       this.makeDatepicker()
+       
+    },
+
+    components: {
+        Datepicker
     },
 
     methods: {

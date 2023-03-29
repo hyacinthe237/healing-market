@@ -1,10 +1,10 @@
 
 <template>
     <div class="datepicker-container">
-        <!-- <input type="text" readonly
+        <input type="text" readonly
                :class="classDesign"
                :value="date_formatted"
-               @click="showDatepicker"> -->
+               @click="showDatepicker">
 
         <input type="hidden"
                :id="id"

@@ -890,16 +890,21 @@
 
 .main-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     overflow-y: auto;
+    max-width: 640px;
 
     .select-date {
-        width:40%;
-
+        width:100%;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .content {
-        width: 60%;
+        width: 100%;
         .times {
             display:flex;
             flex-wrap: wrap;

@@ -110,7 +110,7 @@ export default {
     },
 
     isLandingPage () {
-      return this.$route.name == 'landing'
+      return this.$route.name == 'landing' || this.$route.name == 'practitioner-details'
     },
 
     isClientDashboardPage () {

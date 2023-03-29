@@ -85,9 +85,8 @@
         font-size: 13px;
         line-height: 13px;
         color: rgba(0, 0, 0, 0.8);
-        //padding: 0 10px;
+        padding: 0 10px;
         padding-left: 5px;
-        background-color: #fff;
     }
 
     .datepicker-weekday {
@@ -132,7 +131,7 @@
         }
 
         &:hover {
-            color: $primary-color;
+            color: $focus-color;
             .datepicker-day-effect {
                 transform: scale(1);
                 opacity: 0.6;
@@ -140,7 +139,7 @@
         }
 
         &.selected {
-            color: $primary-color;
+            color: $focus-color;
             .datepicker-day-effect {
                 transform: scale(1);
                 opacity: 1;

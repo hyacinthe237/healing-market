@@ -72,7 +72,7 @@
 
                 <div class="stat">
                   <div class="circle">
-                    <i class="feather icon-calendar"></i>
+                    <img alt="" :src="money" width="25px" height="25px" />
                   </div>
                   <div class="line"></div>
                   <div class="earning">
@@ -94,7 +94,7 @@
 
                 <div class="stat">
                   <div class="circle">
-                    <i class="feather icon-calendar"></i>
+                    <img alt="" :src="moneys" width="25px" height="25px" />
                   </div>
                   <div class="line"></div>
                   <div class="earning">
@@ -148,13 +148,15 @@
   import config from '@/services/config'
   import _ from 'lodash'
   import profil from '@/assets/img/healing/profil-homme.png'
+  import money from '@/assets/img/healing/money.png'
+  import moneys from '@/assets/img/healing/moneys.png'
   
   export default {
       data: () => ({
           payload: {},
           shifts: [],
           members: [],
-          profil
+          profil, money, moneys
       }),
   
       components: { Navbar, Footer },

@@ -8,7 +8,7 @@
             <div>
                 <div class="_tabs mt-20">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link" id="nav-upcoming-tab"
+                        <a class="nav-item nav-link active" id="nav-upcoming-tab"
                             data-toggle="tab" href="#nav-upcoming" role="tab"
                             aria-controls="nav-upcoming">Active offers</a>
 
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+                    <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                         <div class="blocks">
                             <div class="block">
                                 <div class="sharebox">

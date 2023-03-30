@@ -190,6 +190,50 @@
     flex-direction: column;
     min-height: 100vh;
 
+    .bookings {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      
+        .booking {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px;
+            color: $dark;
+            border-radius: 10px;
+            width: 100%;
+            cursor: pointer;
+            background-color: white;
+            margin-bottom: 10px;
+
+            &.empty {
+              background-color: transparent;
+              color: $brand-teal;
+              font-size: 20px;
+            }
+
+            .name {
+              padding-right: 10px;
+              white-space: nowrap;
+            }
+
+            .date {
+              display: flex;
+              align-items: center;
+              color: $brand-teal;
+              border-left: 1px solid rgba(0,0,0,0.1);
+              padding-left: 10px;
+
+              i {
+                padding-right: 10px;
+              }
+            }
+
+        }
+    }
+
     .add-block {
       display: flex;
       flex-direction: column;

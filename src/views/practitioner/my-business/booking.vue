@@ -5,86 +5,45 @@
         
         <Practitioner-SideBar></Practitioner-SideBar>
         <div class="droite">
-            <div>
-                <div class="_tabs mt-20">
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link" id="nav-upcoming-tab"
-                            data-toggle="tab" href="#nav-upcoming" role="tab"
-                            aria-controls="nav-upcoming">Active offers</a>
-
-                        <a class="nav-item nav-link" id="nav-completed-tab"
-                            data-toggle="tab" href="#nav-completed" role="tab"
-                            aria-controls="nav-completed">Paused offers</a>
-                    </div>
+            <div class="bookings">
+                <div class="booking">
+                  <div class="name">
+                    <h5 class="primary bold">Maryjane A Henning</h5>
+                    <div class="secondary">Holistic Weellness Coach</div>
+                  </div>
+                  <div class="date">
+                    <i class="feather icon-calendar"></i> 22.03.2023
+                  </div>
                 </div>
-
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="add-block mt-20">
-                            <i class="feather icon-plus-circle"></i>
-                            <p>Create new offer</p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="booking">
+                  <div class="name">
+                    <h5 class="primary bold">Maryjane A Henning</h5>
+                    <div class="secondary">Holistic Weellness Coach</div>
+                  </div>
+                  <div class="date">
+                    <i class="feather icon-calendar"></i> 22.03.2023
+                  </div>
+                </div>
+                <div class="booking">
+                  <div class="name">
+                    <h5 class="primary bold">Maryjane A Henning</h5>
+                    <div class="secondary">Holistic Weellness Coach</div>
+                  </div>
+                  <div class="date">
+                    <i class="feather icon-calendar"></i> 22.03.2023
+                  </div>
+                </div>
+                <div class="booking">
+                  <div class="name">
+                    <h5 class="primary bold">Maryjane A Henning</h5>
+                    <div class="secondary">Holistic Weellness Coach</div>
+                  </div>
+                  <div class="date">
+                    <i class="feather icon-calendar"></i> 22.03.2023
+                  </div>
+                </div>
+                <div class="booking empty">
+                  No booking for the moment
                 </div>
             </div>
         </div>

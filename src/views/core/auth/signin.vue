@@ -1,6 +1,6 @@
 <template lang="html">
   <section class="welcome-page">
-      <div class="profile-top pointer" @click="n('landing')" v-show="!isLoading">
+      <div class="profile-top pointer" :style="`background-image:url(${background})`" @click="n('landing')" v-show="!isLoading">
           <div class="overlay"></div>
           <div class="profile-top-container">
               <div class="profile-photo"><img :src="logo" /></div>
@@ -37,6 +37,7 @@ import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
 import config from '../../../services/config'
 import logo from '@/assets/img/healing/logo.svg'
+import background from '@/assets/img/healing/hero.png'
 
 export default {
     name: 'Signin',
@@ -46,7 +47,7 @@ export default {
             username: '',
             password: ''
         },
-        logo
+        logo, background
     }),
 
     computed: {},

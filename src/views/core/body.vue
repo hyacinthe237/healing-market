@@ -44,7 +44,9 @@
             </div>
             <div class="cares">
                 <div class="care pointer" @click="n('practitioner-details')">
-                    <img :src="femme" alt="">
+                    <div class="image" :style="`background-image:url(${femme})`">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="care-content">
                         <h6>How to make your Own room perfume efficiently</h6>
                         <div class="verified">4.6 (verified reviews)</div>
@@ -57,7 +59,9 @@
                     </div>
                 </div>
                 <div class="care pointer" @click="n('practitioner-details')">
-                    <img :src="homme" alt="">
+                    <div class="image" :style="`background-image:url(${homme})`">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="care-content">
                         <h6>How to make your Own room perfume efficiently</h6>
                         <div class="verified">4.6 (verified reviews)</div>
@@ -69,7 +73,9 @@
                     </div>
                 </div>
                 <div class="care pointer" @click="n('practitioner-details')">
-                    <img :src="femme" alt="">
+                    <div class="image" :style="`background-image:url(${femme})`">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="care-content">
                         <h6>tips cleaning your big house for one person</h6>
                         <div class="verified">4.6 (verified reviews)</div>
@@ -81,7 +87,9 @@
                     </div>
                 </div>
                 <div class="care pointer" @click="n('practitioner-details')">
-                    <img :src="homme" alt="">
+                    <div class="image" :style="`background-image:url(${homme})`">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="care-content">
                         <h6>cleaning home fastly and perfect clean for perfect house</h6>
                         <div class="verified">4.6 (verified reviews)</div>

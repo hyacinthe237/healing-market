@@ -252,8 +252,18 @@
                 margin-right: 0;
               }
 
-              img {
-                height: 270px;
+              .image {
+                width: 270px;
+                height: 250px;
+                position: relative;
+                background-color: transparent;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
               }
 
               .care-content {
@@ -535,8 +545,19 @@
             box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.2);
             width: 270px;
 
-            img {
-              height: 200px;
+            .image {
+              width: 270px;
+              height: 180px;
+              position: relative;
+              background-color: transparent;
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              border-radius: 20px 20px 0px 0px;
             }
 
             .care-content {

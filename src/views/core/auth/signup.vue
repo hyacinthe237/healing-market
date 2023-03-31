@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="d-page" v-show="!isLoading">
-            <div class="profile-top" @click="n('landing')">
+            <div class="profile-top"  :style="`background-image:url(${hero})`" @click="n('landing')">
                 <div class="overlay"></div>
                 <div class="profile-top-container">
                     <div
@@ -63,13 +63,14 @@
   <script>
     import config from '@/services/config'
     import logo from '@/assets/img/healing/logo.svg'
+    import hero from '@/assets/img/healing/hero.png'
     import successModal from './modals/success'
   
   export default {
       name: 'PractitionerDetails',
   
       data: () => ({
-        logo
+        logo, hero
       }),
   
       components: { successModal },

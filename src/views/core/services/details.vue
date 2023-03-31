@@ -17,31 +17,34 @@
                     <div class="carrousel">
                       <VueSlickCarousel v-bind="settings1" id="carousel1">
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                           <div class="content">
-                              <img :src="femme" alt="" srcset="">
-                          </div>
-                          <div class="content">
-                              <img :src="femme" alt="" srcset="">
-                          </div>
-                          <div class="content">
-                              <img :src="femme" alt="" srcset="">
-                          </div>
-                          <div class="content">
-                              <img :src="femme" alt="" srcset="">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
                           </div>
                       </VueSlickCarousel>
                     </div>

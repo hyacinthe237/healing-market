@@ -22,7 +22,7 @@
                     <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                         <Practitioner-Offers :items="offers"></Practitioner-Offers>
 
-                        <div class="add-block mt-20">
+                        <div class="add-block mt-20" @click="openAddOfferModal()">
                             <i class="feather icon-plus-circle"></i>
                             <p>Create new offer</p>
                         </div>
@@ -39,7 +39,8 @@
       <div class="_loader" v-show="isLoading">
         <Spinners></Spinners>
       </div>
-  
+      
+      <AddOfferModal></AddOfferModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -50,6 +51,7 @@
   import config from '@/services/config'
   import _ from 'lodash'
   import profil from '@/assets/img/healing/profil-homme.png'
+  import AddOfferModal from '../modals/add-offer'
   
   export default {
       data: () => ({
@@ -61,7 +63,7 @@
           profil
       }),
   
-      components: { Navbar, Footer },
+      components: { Navbar, Footer, AddOfferModal },
   
       computed: {
          user () {
@@ -92,6 +94,12 @@
             console.log('members', res.data)
           }
         },
+
+        openAddOfferModal () {
+            setTimeout(() => {
+                $('#addOfferModal').modal('show')
+            }, 150)
+        }
       }
   }
   </script>

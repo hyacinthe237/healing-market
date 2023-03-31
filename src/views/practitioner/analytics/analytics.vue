@@ -46,7 +46,7 @@
             <div class="lists">
                 <div class="head-list">
                     <div class="th">Active offers</div>
-                    <div class="th">Click</div>
+                    <div class="th">Clicks</div>
                     <div class="th">Booking</div>
                 </div>
                 <div class="body-list">

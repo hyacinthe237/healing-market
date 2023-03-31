@@ -212,7 +212,7 @@
       <SignInModal @signup="openSignUpModal"></SignInModal>
       <SignUpModal @signin="openSignInModal"></SignUpModal>
       <SelectTimeModal @continue="openCheckoutModal"></SelectTimeModal>
-      <SuccessModal></SuccessModal>
+      <SuccessModal @open="opendash"></SuccessModal>
       <CheckoutModal @success="openSuccessModal"></CheckoutModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
@@ -308,6 +308,10 @@
                 $('#signUpModal').modal('show')
             }, 150)
         },
+
+        opendash () {
+            this.n('client-dashboard')
+        }
       },
   }
   </script>

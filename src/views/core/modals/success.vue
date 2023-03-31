@@ -6,7 +6,7 @@
         <div class="_success">
             <i class="feather icon-check-circle"></i>
             <p>Thanks <span>Client Name</span>. Your booking with <span>Practitioner name</span> was successful.</p>
-            <button type="submit" class="btn btn-secondary pointer mt-20" @click="n('client-dashboard')">Go to dashboard</button>
+            <button type="submit" class="btn btn-secondary pointer mt-20" @click="gotoDashboard()">Go to dashboard</button>
         </div>
     </main-modal>
 </template>
@@ -72,10 +72,7 @@ export default {
         },
 
         gotoDashboard () {
-            // this.$emit('signup')
-            setTimeout(() => {
-                $('#successModal').modal('hide')
-            }, 150)
+            this.closeAllModals()
             this.n('client-dashboard')
         },
 

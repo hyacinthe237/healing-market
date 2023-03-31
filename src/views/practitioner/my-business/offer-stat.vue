@@ -20,34 +20,7 @@
 
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
 
                         <div class="add-block mt-20">
                             <i class="feather icon-plus-circle"></i>
@@ -56,34 +29,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <div class="blocks">
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="sharebox">
-                                    <div class="share">
-                                        <i class="feather icon-share-2"></i>
-                                    </div>
-                                </div>
-                                <div class="bg-img"></div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                <div class="footer">
-                                    <i class="feather icon-more-horizontal"></i>
-                                    <span class="secondary bold">$ 75</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
                     </div>
                 </div>
             </div>
@@ -108,8 +54,10 @@
   export default {
       data: () => ({
           payload: {},
-          shifts: [],
-          members: [],
+          offers: [
+            {id: 1, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
+            {id: 2, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
+          ],
           profil
       }),
   

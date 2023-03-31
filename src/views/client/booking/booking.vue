@@ -10,7 +10,7 @@
               <div class="bookings">
                   <div class="booking">
                     <div class="name">
-                      <h5 class="primary bold">Maryjane A Henning</h5>
+                      <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
                     </div>
                     <div class="date">
@@ -19,7 +19,7 @@
                   </div>
                   <div class="booking">
                     <div class="name">
-                      <h5 class="primary bold">Maryjane A Henning</h5>
+                      <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
                     </div>
                     <div class="date">
@@ -28,7 +28,7 @@
                   </div>
                   <div class="booking">
                     <div class="name">
-                      <h5 class="primary bold">Maryjane A Henning</h5>
+                      <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
                     </div>
                     <div class="date">
@@ -37,7 +37,7 @@
                   </div>
                   <div class="booking">
                     <div class="name">
-                      <h5 class="primary bold">Maryjane A Henning</h5>
+                      <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
                     </div>
                     <div class="date">

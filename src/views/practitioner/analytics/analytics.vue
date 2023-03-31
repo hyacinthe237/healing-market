@@ -10,7 +10,7 @@
 
                 <div class="stat">
                   <div class="circle">
-                    <img alt="" :src="money" width="25px" height="25px" />
+                    <img alt="" :src="money" width="25px" />
                   </div>
                   <div class="line"></div>
                   <div class="earning">
@@ -32,7 +32,7 @@
 
                 <div class="stat">
                   <div class="circle">
-                    <img alt="" :src="moneys" width="25px" height="25px" />
+                    <img alt="" :src="moneys" width="40px" />
                   </div>
                   <div class="line"></div>
                   <div class="earning">

@@ -27,13 +27,12 @@
 
 <script>
 import logo from '@/assets/img/healing/logo.svg'
-import background from '@/assets/img/background.png'
 
 export default {
     name: 'ForgotPassword',
 
     data: () => ({
-        logo, background
+        logo
     }),
 
     methods: {

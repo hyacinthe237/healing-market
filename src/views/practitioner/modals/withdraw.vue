@@ -3,7 +3,7 @@
         :id="'withdrawModal'"
         :title="'How much do you wish to withdraw From account ?'"
     >
-        <div class="">
+        <div class="" style="padding:0px 20px;">
             <form class="_form" @submit.prevent>
                 <div class="row">
                     <div class="col-sm-12">
@@ -15,23 +15,33 @@
                     
                     <div class="col-sm-12">
                         <h6>Select a payment method</h6>
-                        <div class="bouton">
-                            <div class="pointer" style="display:flex;flex-direction:row;align-items:center;">
-                                <input type="radio" name="paypal" id="paypal" style="width:25px;height:25px;margin-right:20px">
-                                <img :src="paypal" alt="PayPal" style="width:50px;height:50px;border-radius:50px;">                                
+                        <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;margin-top: 20px;">
+                            <div class="pointer" style="display:flex;flex-direction:row;align-items:center;margin-right: 20px;">
+                                <input type="radio" value="paypal" v-model="picked" name="payment_method" id="paypal" style="width:25px;height:25px;margin-right:10px">
+                                <img :src="paypal" alt="PayPal" style="width:70px;">                                
                             </div>
                             
                             <div class="pointer text-center" style="display:flex;flex-direction:row;align-items:center;">
-                                <input type="radio" name="paypal" id="bank" style="width:25px;height:25px;margin-right:20px">
-                                <img :src="bankdeposit" width="100px"  alt="Bank Deposit" style="width:50px;height:50px;border-radius:50px;border:1px solid rgba(0,0,0,0.1);" />
+                                <input type="radio" value="bank deposit" v-model="picked" name="payment_method" id="bank" style="width:25px;height:25px;margin-right:10px">
+                                <img :src="bankdeposit" width="100px"  alt="Bank Deposit" style="width:70px;" />
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group mt-20" v-if="picked == 'paypal'">
+                            <label for="amount">Paypal Email</label>
+                            <input type="text" name="paypal_email" v-model="ghost.paypal_email" placeholder="Enter your paypal email" class="form-control">
+                        </div>
+                        <div class="form-group mt-20" v-if="picked == 'bank deposit'">
+                            <label for="amount">Card Number</label>
+                            <input type="text" name="card_number" v-model="ghost.card_number" placeholder="Enter your card number" class="form-control">
                         </div>
                     </div>
                 </div>
                 
                 
-                <div class="bouton text-center mt-20">
-                    <button type="submit" class="btn btn-secondary pointer uppercase" @click="signin()">Next</button>
+                <div class="text-right mt-20">
+                    <button type="submit" class="btn btn-secondary pointer uppercase" @click="next()">Next</button>
                 </div>
 
                 <!-- <div class="link mt-20">Don't have an account? <span @click="signup()" class="primary pointer">Sign Up</span></div> -->
@@ -45,7 +55,7 @@ import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
 import config from '../../../services/config'
 import paypal from '@/assets/img/healing/paypal.png'
-import bankdeposit from '@/assets/img/healing/bank-deposit.png'
+import bankdeposit from '@/assets/img/healing/bank-deposit.jpg'
 export default {
     name: 'WithdrawModal',
 
@@ -56,21 +66,19 @@ export default {
             password: '',
             confirm_password: ''
         },
+        picked: '',
         paypal, bankdeposit
     }),
 
-    computed: {},
+    watch: {
+        picked (val) {
+            console.log(val)
+        }
+    },
 
     methods: {
-        paypaled () {
-            this.$emit('paypal')
-            setTimeout(() => {
-                $('#withdrawModal').modal('hide')
-            }, 150)
-        },
-
-        bankdeposited () {
-            this.$emit('bankdeposit')
+        next () {
+            this.$emit('nexted')
             setTimeout(() => {
                 $('#withdrawModal').modal('hide')
             }, 150)

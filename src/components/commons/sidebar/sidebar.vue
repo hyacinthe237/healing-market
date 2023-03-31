@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import logo from '@/assets/img/logo-nogada-foot.png'
-import config from '../../../services/config'
+import config from '@/services/config'
 
 export default {
     props: {
@@ -53,8 +52,7 @@ export default {
 
     data: () => ({
         role: 1,
-        sizecss: 0,
-        logo
+        sizecss: 0
     }),
 
     computed: {

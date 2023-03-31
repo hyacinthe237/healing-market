@@ -9,7 +9,11 @@
             </div>
             <div class="card-head mt-20">
                 <h5 class="nowrap">Hyacinthe ABANDA</h5>
-                <a href="" class="secondary pointer nowrap"><i class="feather icon-edit-2"></i></a>
+                <div class="elevatedbox">
+                    <div class="edit">
+                        <i class="feather icon-edit-2"></i>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-20">
@@ -38,7 +42,11 @@
         <div class="card">
             <div class="card-head">
                 <h5 class="nowrap">Profile description</h5>
-                <a href="" class="secondary pointer nowrap"><i class="feather icon-edit-2"></i></a>
+                <div class="elevatedbox">
+                    <div class="edit">
+                        <i class="feather icon-edit-2"></i>
+                    </div>
+                </div>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 

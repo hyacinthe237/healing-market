@@ -101,6 +101,29 @@
         justify-content: space-between;
         align-items: center;
 
+        .elevatedbox {
+          display: flex;
+          justify-content: flex-end;
+
+          .edit {
+            width:35px;
+            height:35px;
+            border-radius:35px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 8px 10px rgba(0,0,0,0.20);
+            cursor: pointer;
+  
+            i {
+              color: $secondary;
+              font-size: 15px;
+              font-weight: bold;
+            }
+          }
+        }
+
         a {
           text-decoration: none;
           &:hover {
@@ -121,18 +144,20 @@
 
       .profil {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         .available {
           display: flex;
           flex-direction: row;
           align-items: center;
+          margin-top: 20px;
+          font-size: 16px;
 
           i {
             margin-left: 10px;
-            font-size: 16px;
+            font-size: 25px;
 
             &.icon-toggle-right {
               color: $brand-success;
@@ -324,7 +349,9 @@
           padding: 0px 20px;
 
           i {
-            color: #ccc;
+            color: $primary;
+            cursor: pointer;
+            font-size: 18px;
           }
         }
       }

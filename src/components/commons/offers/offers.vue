@@ -1,6 +1,10 @@
 <template lang="html">
     <div class="blocks">
-        <OfferItem v-for="item in items" :key="item.id" :item="item" />
+        <OfferItem 
+            v-for="item in items" 
+            :key="item.id" 
+            :item="item"
+        />
     </div>
 </template>
   

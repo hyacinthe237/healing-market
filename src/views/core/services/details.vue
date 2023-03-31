@@ -145,7 +145,7 @@
                                 <div class="name">life coaching for empowerment</div>
                                 <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
                                 <div class="footer">
-                                    <div class="price">$111 - $150</div>
+                                    <div class="price">$111</div>
                                     <button class="btn btn-secondary">Book appointment</button>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                 <div class="name">life coaching for empowerment</div>
                                 <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
                                 <div class="footer">
-                                    <div class="price">$111 - $150</div>
+                                    <div class="price">$111</div>
                                     <button class="btn btn-secondary">Book appointment</button>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                 <div class="name">life coaching for empowerment</div>
                                 <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
                                 <div class="footer">
-                                    <div class="price">$111 - $150</div>
+                                    <div class="price">$111</div>
                                     <button class="btn btn-secondary">Book appointment</button>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                                 <div class="name">life coaching for empowerment</div>
                                 <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
                                 <div class="footer">
-                                    <div class="price">$111 - $150</div>
+                                    <div class="price">$111</div>
                                     <button class="btn btn-secondary">Book appointment</button>
                                 </div>
                             </div>

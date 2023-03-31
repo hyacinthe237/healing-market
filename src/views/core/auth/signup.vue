@@ -49,19 +49,21 @@
                     <div class="form-group">
                         <input type="text" name="url" v-model="ghost.url" placeholder="Website URL/Facebook or Instagram" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" @click="n('practitioner-dashboard')">Apply Now</button>
+                    <button type="submit" class="btn btn-primary btn-block" @click="openSuccessModal()">Apply Now</button>
                 </form>
             </div>
         </div>
         <div class="_loader" v-show="isLoading">
             <Spinners></Spinners>
         </div>
+        <successModal @good="gotoDashboard"></successModal>
     </section>
   </template>
   
   <script>
     import config from '@/services/config'
     import logo from '@/assets/img/healing/logo.svg'
+    import successModal from './modals/success'
   
   export default {
       name: 'PractitionerDetails',
@@ -70,7 +72,7 @@
         logo
       }),
   
-      components: { },
+      components: { successModal },
   
       computed: {
           user () {
@@ -83,10 +85,12 @@
       },
   
       methods: {
-          openPreviewModal (text) {
-              this.selectedText = text
-              this.showBtn = false
-              this.openModal({ id: 'previewModal' })
+          openSuccessModal () {
+            //   this.openModal({ id: 'successModal' })
+              this.$swal.success('SignUp Success', "Thanks for signing up with us an Email has been sent to you please Check  to complete your onboarding process.")
+          },
+          gotoDashboard () {
+              this.n('practitioner-dashboard')
           },
       },
   }

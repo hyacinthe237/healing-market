@@ -191,11 +191,13 @@
                       <div class="divider"></div>
                       <div class="d-box">
                         <div class="short-text">Lorem ipsum dolor sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
-                        <div class="button"><button type="submit" class="btn btn-secondary" @click="openSelectTimeModal()">Continue Booking</button></div>
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-primary" @click="openSignInModal()">Message practitioner</button>
+                        <button type="submit" class="btn btn-secondary" @click="openSelectTimeModal()">
+                            <i class="feather icon-bookmark"></i> <span>Booking</span></button>
+                        <button type="submit" class="btn btn-primary" @click="openSignInModal()">
+                            <i class="feather icon-message-square"></i> <span>Practitioner</span></button>
                     </div>
                 </div>
               </div>

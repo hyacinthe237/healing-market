@@ -259,7 +259,7 @@
             .droite {
                 .description {
                     background-color: white;
-                    border: #ccc solid 1px;
+                    border: white solid 1px;
                     border-radius: 10px;
                     width: 100%;
 
@@ -271,7 +271,7 @@
                     }
 
                     .divider {
-                        border-bottom: #ccc solid 1px;
+                        border-bottom: rgba(0,0,0,0.1) solid .5px;
                         width: 100%;
                     }
     
@@ -282,24 +282,14 @@
                             text-align: left;
                             font-size: 14px;
                         }
-    
-                        .button {
-                            display: flex;
-                            justify-content: center;
-
-                            button {
-                                border-radius: 5px;
-                                margin-top: 20px;
-                                width: auto;
-                            }
-                        }
                     }
                 }
 
                 .contact {
                     text-align: center;
                     display: flex;
-                    justify-content: center;
+                    flex-direction: row;
+                    justify-content: space-between;
                     padding: 10px 40px;
                     border-radius: 10px;
                     cursor: pointer;
@@ -307,6 +297,15 @@
                     button {
                         border-radius: 5px;
                         width: auto;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        i {
+                            padding-right: 10px;
+                            font-size: 16px;
+                        }
                     }
                 }
             }
@@ -580,7 +579,7 @@
                 .droite {
                     .description {
                         background-color: white;
-                        border: #ccc solid 1px;
+                        border: white solid 1px;
                         border-radius: 10px;
                         width: 100%;
     
@@ -592,7 +591,7 @@
                         }
     
                         .divider {
-                            border-bottom: #ccc solid 1px;
+                            border-bottom: rgba(0,0,0,0.1) solid .5px;
                             width: 100%;
                         }
         
@@ -603,25 +602,33 @@
                                 text-align: left;
                                 font-size: 14px;
                             }
-        
-                            button {
-                                border-radius: 5px;
-                                margin-top: 20px;
-                                width: auto;
-                            }
                         }
                     }
     
                     .contact {
                         text-align: center;
                         display: flex;
-                        justify-content: center;
-                        margin-bottom: 40px;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px 40px;
+                        border-radius: 10px;
                         cursor: pointer;
-
+                        margin-bottom: 40px;
+    
                         button {
                             border-radius: 5px;
                             width: auto;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+    
+                            i {
+                                padding-right: 0px;
+                                font-size: 16px;
+                            }
+
+                            span { display: none;}
                         }
                     }
                 }

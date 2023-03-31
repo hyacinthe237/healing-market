@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer">
+            <a class="nav-link pointer" @click="n('practitioner-messages')">
               <i class="feather icon-message-square"></i>
             </a>
           </li>

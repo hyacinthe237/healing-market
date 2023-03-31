@@ -44,6 +44,7 @@ import PopoverComponent from '@/components/commons/popover/popover'
 import MainModal from '@/components/commons/modals/main-modal'
 import PractitionerSideBar from '@/components/commons/practitioner/practitioner-sidebar'
 import PractitionerOffers from '@/components/commons/offers/offers'
+import Messages from '@/components/commons/messages/messages'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -85,6 +86,7 @@ Vue.component('popover-vue', PopoverComponent)
 Vue.component('main-modal', MainModal)
 Vue.component('Practitioner-SideBar', PractitionerSideBar)
 Vue.component('Practitioner-Offers', PractitionerOffers)
+Vue.component('messages-component', Messages)
 
 new Vue({
   router,

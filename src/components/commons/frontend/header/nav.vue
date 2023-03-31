@@ -48,7 +48,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link pointer">
-              <img :src="profil" alt="" style="width:45px; height:45px; border-radius:45px;">
+              <img :src="profil" alt="" style="width:40px; height:40px; border-radius:40px;margin-left:70px;">
             </a>
           </li>
         </ul>
@@ -65,8 +65,8 @@
         <ul class="navbar-nav" v-if="isClientDashboardPage || isClientBookingPage || isClientMessagesPage || isClientSettingsPage">
           <li class="nav-item">
             <a class="nav-link pointer">
-              <img :src="profil" alt="" style="width:45px; height:45px; border-radius:45px;margin-right:10px;">
-              Wellcome <span class="bold">Hyacinthe</span>
+              <img :src="profil" alt="" style="width:40px; height:40px; border-radius:40px;margin-right:10px;">
+              Welcome <span class="bold">Hyacinthe</span>
             </a>
           </li>
         </ul>

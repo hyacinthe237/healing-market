@@ -474,10 +474,10 @@
               }
             }
             &:nth-child(2) {
-              width: 25%;
+              min-width: 25%;
             }
             &:nth-last-child() {
-              width: 25%;
+              min-width: 25%;
             }
           }
         }

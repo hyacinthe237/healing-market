@@ -1,6 +1,6 @@
 <template lang="html">
   <section class="welcome-page">
-      <div class="profile-top pointer" @click="n('landing')">
+      <div class="profile-top pointer" :style="`background-image:url(${hero})`" @click="n('landing')">
           <div class="overlay"></div>
           <div class="profile-top-container">
               <div class="profile-photo"><img :src="logo" /></div>
@@ -27,12 +27,13 @@
 
 <script>
 import logo from '@/assets/img/healing/logo.svg'
+import hero from '@/assets/img/healing/hero.png'
 
 export default {
     name: 'ForgotPassword',
 
     data: () => ({
-        logo
+        logo,hero
     }),
 
     methods: {

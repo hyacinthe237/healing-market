@@ -4,7 +4,7 @@
             <div class="search">
             <div class="searchbar">
                 <i class="feather icon-search" aria-hidden="true"></i>
-                <input type="text" placeholder="Search..."></input>
+                <input type="text" placeholder="Search..." />
             </div>
             </div>
             <div class="discussions-list">

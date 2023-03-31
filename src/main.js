@@ -1,9 +1,6 @@
 window._ = require('lodash')
 window.moment = require('moment')
 window.$ = window.jQuery = require('jquery')
-window.PDFViewer = require('pdfjs')
-window.FS = require('fs')
-window.FileSaver = require('file-saver')
 
 
 import 'bootstrap'
@@ -14,12 +11,7 @@ import VueTranslate from 'vue-translate-plugin'
 import VueOffline from 'vue-offline'
 import VuePageTransition from 'vue-page-transition'
 import Multiselect from 'vue-multiselect'
-import RadialProgressBar from 'vue-radial-progress'
-import VueParticlesBg from "particles-bg-vue"
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
-import { Photoshop, Compact, Twitter } from 'vue-color'
-import VueTimepicker from 'vue2-timepicker'
-import { BootstrapVue,  } from 'bootstrap-vue'
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -40,7 +32,6 @@ import { french } from '@/assets/i18n'
 
 import Spinners from '@/components/commons/loaders/spinners'
 import VErrorComponent from '@/components/commons/error/v-error'
-import PopoverComponent from '@/components/commons/popover/popover'
 import MainModal from '@/components/commons/modals/main-modal'
 import PractitionerSideBar from '@/components/commons/practitioner/practitioner-sidebar'
 import PractitionerOffers from '@/components/commons/offers/offers'
@@ -68,21 +59,13 @@ Vue.use(VueTranslate)
 Vue.locales({ french })
 Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
-Vue.use(VueParticlesBg)
 Vue.use(VueScrollFixedNavbar)
-Vue.use(BootstrapVue)
 Vue.use(VeeValidate, { locale: 'en', dictionary: { en: messagesEn } })
 
 Vue.config.productionTip = false
-Vue.component('radial-progress-bar', RadialProgressBar)
 Vue.component('multiselect', Multiselect)
 Vue.component('Spinners', Spinners)
 Vue.component('v-error', VErrorComponent)
-Vue.component('photoshop-picker', Photoshop)
-Vue.component('compact-picker', Compact)
-Vue.component('twitter-picker', Twitter)
-Vue.component('vue-timepicker', VueTimepicker)
-Vue.component('popover-vue', PopoverComponent)
 Vue.component('main-modal', MainModal)
 Vue.component('Practitioner-SideBar', PractitionerSideBar)
 Vue.component('Practitioner-Offers', PractitionerOffers)

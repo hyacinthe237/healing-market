@@ -8,7 +8,7 @@
             <div class="dashboard">
               <h2>Recent Booking</h2>
               <div class="bookings">
-                  <div class="booking">
+                  <!-- <div class="booking">
                     <div class="name">
                       <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
@@ -43,7 +43,7 @@
                     <div class="date">
                       <i class="feather icon-calendar"></i> 22.03.2023
                     </div>
-                  </div>
+                  </div> -->
                   <div class="booking empty">
                     No booking for the moment
                   </div>

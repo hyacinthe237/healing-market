@@ -44,9 +44,9 @@
                       <i class="feather icon-calendar"></i> 22.03.2023
                     </div>
                   </div>
-                  <div class="booking empty">
+                  <!-- <div class="booking empty">
                     No booking for the moment
-                  </div>
+                  </div> -->
               </div>
             </div>
         </div>

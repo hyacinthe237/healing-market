@@ -198,9 +198,9 @@
                     </div>
                     <div class="contact mt-20">
                         <button type="submit" class="btn btn-secondary" @click="openSelectTimeModal()">
-                            <i class="feather icon-bookmark"></i> <span>Booking</span></button>
+                            <i class="feather icon-bookmark"></i> Booking now</button>
                         <button type="submit" class="btn btn-primary" @click="openSignInModal()">
-                            <i class="feather icon-message-square"></i> <span>Practitioner</span></button>
+                            <i class="feather icon-message-square"></i> Chat</button>
                     </div>
                 </div>
               </div>

@@ -141,7 +141,7 @@
                     <div class="divider-line"></div>
 
                     <div class="box-services mt-20">
-                        <div class="titre">Services</div>
+                        <div class="titre">Other services</div>
                         <div class="content">
                             <div class="image"></div>
                             <div class="text-box">

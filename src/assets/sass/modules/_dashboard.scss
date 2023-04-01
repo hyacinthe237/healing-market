@@ -432,10 +432,10 @@
             width: 50%;
           }
           &:nth-child(2) {
-            width: 25%;
+            min-width: 150px;
           }
           &:nth-last-child() {
-            width: 25%;
+            min-width: 150px;
           }
         }
       }
@@ -474,10 +474,10 @@
               }
             }
             &:nth-child(2) {
-              min-width: 25%;
+              min-width: 150px;
             }
             &:nth-last-child() {
-              min-width: 25%;
+              min-width: 150px;
             }
           }
         }

@@ -3,8 +3,10 @@
         <div class="card">
             <div class="profil">
                 <img :src="profil" alt="" style="width:75px; height:75px; border-radius:75px;margin-right:10px;">
-                <div class="available">
-                    Availability <i class="feather icon-toggle-right"></i>
+                <div class="available pointer" @click="setAvailibility()">
+                    Availability 
+                    <i class="feather icon-toggle-right" v-show="isVisible"></i>
+                    <i class="feather icon-toggle-left" v-show="!isVisible"></i>
                 </div>
             </div>
             <div class="card-head mt-20">
@@ -80,9 +82,7 @@
   export default {
     name: 'PractitionerSideBar',
       data: () => ({
-          payload: {},
-          shifts: [],
-          members: [],
+          isVisible: true,
           profil
       }),
   
@@ -117,6 +117,10 @@
             console.log('members', res.data)
           }
         },
+
+        setAvailibility () {
+            this.isVisible = !this.isVisible
+        }
       }
   }
   </script>

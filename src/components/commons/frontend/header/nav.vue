@@ -10,13 +10,13 @@
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto padding">
-          <li class="nav-item" v-if="isLandingPage">
+          <li class="nav-item" v-if="isLandingPage && !isConnected">
             <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item pointer" v-if="isPractitioner">
+          <li class="nav-item pointer" v-if="isTherapist">
             <a :class="['nav-link', isPractitionerDashboardPage ? 'active' : '']"  @click="n('practitioner-dashboard')">Dashboard</a>
           </li>
-          <li class="nav-item dropdown" v-if="isPractitioner">
+          <li class="nav-item dropdown" v-if="isTherapist">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               My business
             </a>
@@ -26,11 +26,11 @@
               <a class="dropdown-item pointer" @click="n('practitioner-offer-stat')">Offer stat</a>
             </div>
           </li>
-          <li class="nav-item pointer" v-if="isPractitioner">
+          <li class="nav-item pointer" v-if="isTherapist">
             <a :class="['nav-link', isPractitionerAnalyticsPage ? 'active' : '']" @click="n('practitioner-analytics')">Analytics</a>
           </li>
         </ul>
-        <ul class="navbar-nav" v-if="isPractitioner">
+        <ul class="navbar-nav" v-if="isTherapist">
           <li class="nav-item">
             <a class="nav-link pointer">
               <i class="feather icon-help-circle"></i>
@@ -53,7 +53,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav" v-if="isLandingPage">
+        <ul class="navbar-nav" v-if="isLandingPage && !isConnected">
           <li class="nav-item">
             <a class="nav-link pointer" @click="n('signin')">Sign in</a>
           </li>
@@ -62,7 +62,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav" v-if="isClientDashboardPage || isClientBookingPage || isClientMessagesPage || isClientSettingsPage">
+        <ul class="navbar-nav" v-if="isClient">
           <li class="nav-item">
             <a class="nav-link pointer">
               <img :src="profil" alt="" style="width:30px; height:30px; border-radius:30px;margin-right:10px;">
@@ -105,8 +105,12 @@ export default {
       return !_.isEmpty(this.user)
     },
 
+    isTherapist () {
+      return this.isConnected && this.user.is_therapist
+    },
+
     isClient () {
-      return this.role == 'client'
+      return  this.isConnected && this.user.is_client
     },
 
     isLandingPage () {

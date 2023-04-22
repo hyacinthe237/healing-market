@@ -36,6 +36,7 @@
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
+// import config from '../../../services/config'
 import logo from '@/assets/img/healing/logo.svg'
 import background from '@/assets/img/healing/hero.png'
 import pendingModal from './modals/pending'
@@ -80,6 +81,7 @@ export default {
                     this.isLoading = false
                     let data = response.data
                     AuthService.setUser(data)
+                    AuthService.setToken(data.key)
                     ApiService.setToken(data.key)
                     this.n('practitioner-dashboard')
                 }

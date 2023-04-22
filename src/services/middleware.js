@@ -6,6 +6,6 @@ export default {
     },
 
     auth (to, from, next) {
-        next(authenticator.check() ? true : '/signin')
+        next(authenticator.check() ? true : '/')
     }
 }

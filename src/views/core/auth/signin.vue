@@ -36,7 +36,6 @@
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
-import config from '../../../services/config'
 import logo from '@/assets/img/healing/logo.svg'
 import background from '@/assets/img/healing/hero.png'
 import pendingModal from './modals/pending'
@@ -69,29 +68,20 @@ export default {
             if (this.ghost.email !== '' && this.ghost.password !== '') {
                 this.isLoading = true
 
-                const response = await this.$api.post('/login/', this.ghost)
+                const response = await this.$api.post('/user-api/custom/login', this.ghost)
                     .catch(error => {
                         this.isLoading = false
                         console.log('error => ', error.response.data.error)
-                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.error))
+                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.message))
                     })
                 
                 
                 if (response) {
                     this.isLoading = false
                     let data = response.data
-                    if (!data.is_active) {
-                        setTimeout(() => {
-                            $('#pendingModal').modal('show')
-                        }, 150)
-                    }
-
-                    if (data.is_active) {
-                        AuthService.setUser(data.user)
-
-                        this.n('practitioner-dashboard')
-                    }
-                    
+                    AuthService.setUser(data)
+                    ApiService.setToken(data.key)
+                    this.n('practitioner-dashboard')
                 }
             }
             

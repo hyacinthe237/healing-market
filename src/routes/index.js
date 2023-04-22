@@ -30,21 +30,21 @@ export default new Router({
     routes: [
         { path: '/', component: CoreBody, name: 'landing' },
         { path: '/signin', component: AuthSignin, name: 'signin' },
-        { path: '/signup', component: SignUp, name: 'signup', beforeEnter: Guard.guest },
-        { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot', beforeEnter: Guard.guest },
+        { path: '/signup', component: SignUp, name: 'signup' },
+        { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot' },
         { path: '/practitioner/details', component: PractitionerDetails, name: 'practitioner-details' },
 
-        { path: '/client/dashboard', name: 'client-dashboard', component: ClientDashboard },
-        { path: '/client/booking', name: 'client-booking', component: ClientBooking },
-        { path: '/client/messages', name: 'client-messages', component: ClientMessages },
-        { path: '/client/settings', name: 'client-settings', component: ClientSettings },
+        { path: '/client/dashboard', name: 'client-dashboard', component: ClientDashboard, beforeEnter: Guard.auth },
+        { path: '/client/booking', name: 'client-booking', component: ClientBooking, beforeEnter: Guard.auth },
+        { path: '/client/messages', name: 'client-messages', component: ClientMessages, beforeEnter: Guard.auth },
+        { path: '/client/settings', name: 'client-settings', component: ClientSettings, beforeEnter: Guard.auth },
 
-        { path: '/practitioner/dashboard', name: 'practitioner-dashboard', component: PractitionerDashboard },
-        { path: '/practitioner/booking', name: 'practitioner-booking', component: PractitionerBooking },
-        { path: '/practitioner/messages', name: 'practitioner-messages', component: PractitionerMessages },
-        { path: '/practitioner/analytics', name: 'practitioner-analytics', component: PractitionerAnalytics },
-        { path: '/practitioner/wallet', name: 'practitioner-wallet', component: PractitionerWallet },
-        { path: '/practitioner/offer/stat', name: 'practitioner-offer-stat', component: PractitionerOfferStat },
+        { path: '/practitioner/dashboard', name: 'practitioner-dashboard', component: PractitionerDashboard, beforeEnter: Guard.auth },
+        { path: '/practitioner/booking', name: 'practitioner-booking', component: PractitionerBooking, beforeEnter: Guard.auth },
+        { path: '/practitioner/messages', name: 'practitioner-messages', component: PractitionerMessages, beforeEnter: Guard.auth },
+        { path: '/practitioner/analytics', name: 'practitioner-analytics', component: PractitionerAnalytics, beforeEnter: Guard.auth },
+        { path: '/practitioner/wallet', name: 'practitioner-wallet', component: PractitionerWallet, beforeEnter: Guard.auth },
+        { path: '/practitioner/offer/stat', name: 'practitioner-offer-stat', component: PractitionerOfferStat, beforeEnter: Guard.auth },
 
         { path: '*', component: NotFound }
     ]

@@ -77,9 +77,9 @@
                     <div class="form-group">
                         <input 
                             type="text" 
-                            name="website" 
-                            v-model="ghost.social_link" 
-                            placeholder="Your social link" 
+                            name="facebook" 
+                            v-model="ghost.facebok" 
+                            placeholder="Your facebook link" 
                             class="form-control"
                             v-validate="'required'"
                         >
@@ -131,7 +131,7 @@
             last_name: '',
             email: '',
             phone: '',
-            social_link: '',
+            facebook: '',
             password1: '',
             password2: '',
             is_client: false,

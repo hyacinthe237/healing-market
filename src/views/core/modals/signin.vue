@@ -6,7 +6,7 @@
         <div class="">
             <form class="_form" @submit.prevent>
                 <div class="form-group">
-                    <input type="text" name="username" v-model="ghost.username" placeholder="Username" class="form-control-modal">
+                    <input type="email" name="email" v-model="ghost.email" placeholder="Email" class="form-control-modal">
                 </div>
                 <div class="form-group mt-20">
                     <input type="password" name="password" v-model="ghost.password" placeholder="********" class="form-control-modal">
@@ -34,7 +34,7 @@ export default {
 
     data: () => ({
         ghost: {
-            username: '',
+            email: '',
             password: ''
         },
     }),

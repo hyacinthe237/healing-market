@@ -13,10 +13,10 @@
 
           <form class="mt-20 _form signup-form">
               <div class="form-group">
-                  <input type="text" name="email" placeholder="Email address" class="form-control">
+                  <input type="text" name="email" placeholder="Email address" class="form-control" v-model="ghost.email">
               </div>
               <div class="bouton">
-                <button type="submit" class="btn btn-primary mt-20 pointer" @click="signin()">Sign In</button>
+                <button type="submit" class="btn btn-primary mt-20 pointer" @click="send()">Send</button>
               </div>
           </form>
 
@@ -47,15 +47,15 @@ export default {
 
             this.isLoading = true
 
-            const response = await this.$api.post('/login', this.ghost)
+            const response = await this.$api.post('/rest-auth/password/reset/', this.ghost)
                 .catch(error => {
                     console.log('error => ', error)
                     this.$swal.error(this.$translate.text(error.response.data))
                 })
 
             if (response) {
-                console.log(response)
                 this.$swal.success(this.$translate.text('Please check your email box.'))
+                this.ghost.email = ''
             }
 
             this.isLoading = false

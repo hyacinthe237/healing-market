@@ -78,10 +78,30 @@
                         <input 
                             type="text" 
                             name="website" 
-                            v-model="ghost.website" 
-                            placeholder="Website URL/Facebook or Instagram" 
+                            v-model="ghost.social_link" 
+                            placeholder="Your social link" 
                             class="form-control"
                             v-validate="'required'"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            name="password1" 
+                            v-model="ghost.password1" 
+                            placeholder="Fill your password" 
+                            class="form-control"
+                            v-validate="'required'"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            name="password2" 
+                            v-model="ghost.password2" 
+                            placeholder="Confirm your password" 
+                            class="form-control"
+                            v-validate="'required|confirmed:password'"
                         >
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" @click="signup()">Apply Now</button>
@@ -91,13 +111,11 @@
         <div class="_loader" v-show="isLoading">
             <Spinners></Spinners>
         </div>
-        <successModal @good="gotoDashboard"></successModal>
+        <successModal></successModal>
     </section>
   </template>
   
   <script>
-    import ApiService from '@/services/api'
-    import AuthService from '@/services/auth'
     import config from '@/services/config'
     import logo from '@/assets/img/healing/logo.svg'
     import hero from '@/assets/img/healing/hero.png'
@@ -107,7 +125,18 @@
       name: 'PractitionerDetails',
   
       data: () => ({
-        logo, hero
+        logo, hero,
+        ghost: {
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone: '',
+            social_link: '',
+            password1: '',
+            password2: '',
+            is_client: false,
+            is_therapist: true
+        }
       }),
   
       components: { successModal },
@@ -121,16 +150,30 @@
               return !_.isEmpty(this.user)
           }
       },
+
+      mounted () {
+        this.resetGhost()
+      },
   
       methods: {
-          gotoDashboard () {
-              this.n('practitioner-dashboard')
+          resetGhost () {
+              this.ghost = { 
+                first_name: '', 
+                last_name: '', 
+                email: '', 
+                phone: '', 
+                social_link: '', 
+                password1: '',  
+                password2: '',
+                is_client: false,
+                is_therapist: true 
+            }
           },
 
           async signup () {
             this.isLoading = true
 
-            const response = await this.$api.post('user-api/therapists/', this.ghost)
+            const response = await this.$api.post('rest-auth/registration/', this.ghost)
                 .catch(error => {
                     this.isLoading = false
                     console.log('error => ', error.response.data.error)
@@ -140,88 +183,13 @@
 
             if (response) {
                 let data = response.data
-                console.log("sign up data", response.data)
-                this.$swal.success('SignUp Success', 
-                "Thanks for signing up with us. An email has been sent to you please check to complete your onboarding process."
-                )
+                this.isLoading = false
+                setTimeout(() => {
+                    $('#successModal').modal('show')
+                    window.eventBus.$emit('user-key', data.key)
+                }, 150)
+
             }
-        },
-
-        async getNewAccessToken () {
-            this.isLoading = false
-            let payload = {
-                'token': config.get('refresh_token'),
-            }
-            const response = await this.$api.refreshToken(payload)
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.error)
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    AuthService.setToken(data.refresh)
-                    ApiService.setToken(data.refresh)
-                    console.log('new access token', data)
-                }
-        },
-
-        async getNewRefreshToken (token) {
-            this.isLoading = false
-            const response = await this.$api.refreshToken({ 'refresh': token})
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.error)
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log(data.token)
-                }
-        },
-
-        async checkAccessToken (token) {
-            this.isLoading = false
-            let payload = { 'token': token }
-
-            const response = await this.$api.verifyToken(payload)
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.detail)
-                    if(error.response.data.code == 'token_not_valid') {
-                        this.getNewAccessToken()
-                    }
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log('check access token', data)
-                }
-        },
-
-        async checkRefreshToken (payload, token) {
-            this.isLoading = false
-            const response = await this.$api.verifyToken({ 'token': token })
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.detail)
-                    if(error.response.data.code == 'token_not_valid') {
-                        this.getNewRefreshToken(payload)
-                    }
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log('check refresh token', data)
-                }
         },
       },
   }

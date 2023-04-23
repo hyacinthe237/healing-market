@@ -11,14 +11,14 @@
             </div>
             <div class="card-head mt-20">
                 <h5 class="nowrap">Hyacinthe ABANDA</h5>
-                <div class="elevatedbox">
+                <div class="elevatedbox" @click="n('practitioner-settings')">
                     <div class="edit">
                         <i class="feather icon-edit-2"></i>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-20">
+            <div class="mt-20" @click="n('practitioner-settings')">
                 <button class="btn btn-outline-secondary btn-block">Edit profile</button>
             </div>
 

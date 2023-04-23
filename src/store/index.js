@@ -5,7 +5,7 @@ import UsersModule from './modules/users'
 import FoldersModule from './modules/folders'
 import FiltersModule from './modules/filters'
 import MetadataModule from './modules/metadatas'
-import ConnectorsModule from './modules/connectors'
+import TagsModule from './modules/tags'
 import SubscriptionsModule from './modules/subscriptions'
 import SettingsModule from './modules/settings'
 
@@ -68,7 +68,7 @@ export default new Vuex.Store({
         folders: FoldersModule,
         filters: FiltersModule,
         metadatas: MetadataModule,
-        connectors: ConnectorsModule,
+        tags: TagsModule,
         subscriptions: SubscriptionsModule,
         settings: SettingsModule,
     }

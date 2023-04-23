@@ -12,6 +12,7 @@ import VueOffline from 'vue-offline'
 import VuePageTransition from 'vue-page-transition'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
+import InputTag from 'vue-input-tag'
 
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -70,6 +71,7 @@ Vue.component('main-modal', MainModal)
 Vue.component('Practitioner-SideBar', PractitionerSideBar)
 Vue.component('Practitioner-Offers', PractitionerOffers)
 Vue.component('messages-component', Messages)
+Vue.component('input-tag', InputTag)
 
 new Vue({
   router,

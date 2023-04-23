@@ -55,7 +55,7 @@
   
       <Footer :isConnected="isConnected"></Footer>
     </div>
-  </template>
+</template>
   
   <script>
   import Navbar from '@/components/commons/frontend/header/nav'

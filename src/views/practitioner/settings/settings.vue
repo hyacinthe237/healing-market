@@ -133,6 +133,13 @@
 
               <div class="col-sm-12">
                 <div class="form-group mt-20">
+                  <label for="language">Language</label>
+                  <input-tag v-model="ghost.language" placeholder="Add a tag" class="form-control"></input-tag>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group mt-20">
                   <label for="description">Description</label>
                   <textarea name="description" id="description" cols="10" rows="5" v-model="ghost.description" placeholder="Description" class="form-control"></textarea>
                 </div>
@@ -196,13 +203,15 @@ export default {
     
     watch: { },
 
-    mounted () {},
+    mounted () {
+      this.getUser()
+    },
 
     methods: { 
-      async getDoashboard () {
+      async getUser () {
         this.startLoading()
 
-        const res = await this.$api.get(`/schedule-api/dashboard-event`)
+        const res = await this.$api.get(`/user-api/therapists/${this.user.therapist_id}/`)
         .catch(error => {
             this.stopLoading()
             this.$swal.error('Sorry', error.response.data.error_message)
@@ -210,38 +219,8 @@ export default {
 
         if (res) {
           this.stopLoading()
-          console.log('members', res.data)
-        }
-      },
-
-      async getMembers () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/manager-team-member`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('get members error', error.response.data.error_message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
-        }
-      },
-
-      async getEmployeeDoashboard () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/users/${this.user.id}/`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error_message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          this.payload = Object.assign({}, res.data)
-          this.shifts = res.data.shifts.slice(0,2)
+          console.log('data', res.data)
+          this.ghost = Object.assign({}, res.data)
         }
       },
     }

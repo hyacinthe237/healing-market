@@ -22,8 +22,6 @@
                     <input type="file" name="image" id="image" class="form-control-modal">
                 </div>
                 <button type="submit" class="btn btn-secondary uppercase">Save</button>
-
-                <!-- <div class="link mt-20">Have an account? <span @click="signin()" class="primary pointer">Sign In</span></div> -->
             </form>
         </div>
     </main-modal>
@@ -60,7 +58,7 @@ export default {
          * @return {void}
          */
         async signup () {
-            if (this.ghost.username == '' || this.ghost.password == '') {
+            if (this.ghost.title == '' || this.ghost.description == '') {
                 this.$swal.error('Validation warning', 'Username & Password inputs are mandatory')
             }
 

@@ -133,8 +133,15 @@
 
               <div class="col-sm-12">
                 <div class="form-group mt-20">
-                  <label for="language">Language</label>
-                  <input-tag v-model="ghost.language" placeholder="Add a tag" class="form-control"></input-tag>
+                  <label for="language">Languages</label>
+                  <input-tag v-model="ghost.languages" placeholder="Add a language" class="form-control"></input-tag>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group mt-20">
+                  <label for="language">Specialities</label>
+                  <input-tag v-model="ghost.specialities" placeholder="Add a speciality" class="form-control"></input-tag>
                 </div>
               </div>
 

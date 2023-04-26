@@ -6,10 +6,6 @@
     color: #495c80;
 }
 
-.vue-input-tag-wrapper {
-    height: 50px;
-}
-
 ._form {
     width: 100%;
 
@@ -213,6 +209,24 @@
             color: $brand-dark;
             font-size: 14px;
 
+            &.vue-input-tag-wrapper {
+                height: 50px;
+                padding:0px 10px;
+                font-size: 14px;
+            
+                &.vue-input-tag-wrapper--active {
+                    font-size: 14px;
+                }
+            
+                input {
+                    font-size: 14px; 
+                }
+            
+                input .new-tag {
+                    font-size: 14px;
+                }
+            }
+
             &.round {
                 border-radius: 40px;
                 background-color: rgba(0, 0, 0, 0.1);
@@ -383,6 +397,7 @@
         }
     }
 }
+
 @media (max-width: 560px) {
   ._form {
      width: 100%;

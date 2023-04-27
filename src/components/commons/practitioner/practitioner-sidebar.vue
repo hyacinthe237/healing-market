@@ -62,13 +62,45 @@
         <div class="card">
             <div class="card-head">
                 <h5 class="nowrap">Specialities</h5>
-                <a href="" class="secondary pointer nowrap">Add new</a>
+                <a class="secondary pointer nowrap" @click="addNewSpeciality()">Add new</a>
             </div>
-            <div class="skills mt-20">
-                <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">licensed mariage and family therapist</span></div>
-                <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">licensed alcohol drug courselor</span></div>
-                <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">access bars&rArr; practitioner</span></div>
-                <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span class="nowrap">accredited, certified advanced EFT practitioner</span></div>
+            <div class="skills mt-20" v-if="specialities.length>0">
+                <div class="skill" v-for="c in specialities" :key="c.id">
+                    <span class="nowrap">{{ c.label }}</span>
+                </div>
+            </div>
+            <div class="skills mt-20" v-else>
+                <div><span class="nowrap">No speciality found</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h5 class="nowrap">Categories</h5>
+                <a class="secondary pointer nowrap" @click="addNewCategory()">Add new</a>
+            </div>
+            <div class="skills mt-20" v-if="categories.length>0">
+                <div class="skill" v-for="c in categories" :key="c.id">
+                    <span class="nowrap">{{ c.label }}</span>
+                </div>
+            </div>
+            <div class="skills mt-20" v-else>
+                <div><span class="nowrap">No category found</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h5 class="nowrap">Tags</h5>
+                <a class="secondary pointer nowrap" @click="addNewTag()">Add new</a>
+            </div>
+            <div class="skills mt-20" v-if="tags.length>0">
+                <div class="pointer mr-3" v-for="tag in tags" :key="tag.id" @click="selectedTag(tag)">
+                    <span class="nowrap">{{ tag.tag }}</span>
+                </div>
+            </div>
+            <div class="skills mt-20" v-else>
+                <div><span class="nowrap">No tags found</span></div>
             </div>
         </div>
     </div>
@@ -85,6 +117,12 @@
           isVisible: true,
           profil
       }),
+
+      props: {
+        categories: { type: Array, default: () => [] },
+        specialities: { type: Array, default: () => [] },
+        tags: { type: Array, default: () => [] },
+      },
   
       components: {  },
   
@@ -100,26 +138,29 @@
       
       watch: { },
   
-      mounted () {},
-  
-      methods: { 
-        async getDoashboard () {
-          this.startLoading()
-  
-          const res = await this.$api.get(`/schedule-api/dashboard-event`)
-          .catch(error => {
-              this.stopLoading()
-              this.$swal.error('Sorry', error.response.data.error_message)
-          })
-  
-          if (res) {
-            this.stopLoading()
-            console.log('members', res.data)
-          }
-        },
+      mounted () {
 
+      },
+  
+      methods: {
         setAvailibility () {
             this.isVisible = !this.isVisible
+        },
+
+        addNewCategory () {
+            this.$emit('addCategory')
+        },
+
+        addNewSpeciality () {
+            this.$emit('addSpeciality')
+        },
+
+        addNewTag () {
+            this.$emit('addTag')
+        },
+
+        selectedTag (tag) {
+            this.$emit('selectedTag', tag)
         }
       }
   }

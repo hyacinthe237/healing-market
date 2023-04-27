@@ -4,7 +4,6 @@ export default {
         root_url: `${process.env.VUE_APP_ROOT_URL}` || 'https://healing-market.herokuapp.com/',
         base_url: `${process.env.VUE_APP_ROOT_URL}/` || 'https://healing-market.herokuapp.com/',
         google_api_key: process.env.VUE_APP_GOOGLE_API_KEY || 'no-google-api-key',
-        refresh_token: process.env.VUE_APP_REFRESH_TOKEN || 'healing_refresh_token',
         token: process.env.VUE_APP_TOKEN || 'healing_token',
         user: process.env.VUE_APP_USER || 'healing_user',
         app_key: process.env.VUE_APP_KEY || 'base64:qfqr3qV0NU2R3/4VX11vwREaPpQbKfzyxxYbWKTFZFE=',

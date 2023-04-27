@@ -6,18 +6,7 @@
       <Practitioner-SideBar></Practitioner-SideBar>
       <div class="droite">
         <div class="dashboard">
-          <!-- <div class="_title">
-              <div class="text">
-                <h4>Account Information</h4>
-                <p>Update your account information</p>
-              </div>
-              <div class="btn-actions">
-                <button class="btn btn-outline-secondary pointer">
-                  <i class="feather icon-edit"></i> Edit
-                </button>
-              </div>
-          </div> -->
-          <form class="_form mt-20">
+          <form class="_form mt-20 mb-20" @submit.prevent="saveProfile()">
             <h4 class="nowrap">Personnal Information</h4>
             <div class="row">
               <div class="col-sm-6">
@@ -75,28 +64,28 @@
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <!-- <div class="col-sm-3">
                 <div class="form-group mt-20">
                   <label for="location">Location</label>
                   <input type="text" name="location" v-model="ghost.location" placeholder="Location" class="form-control">
                 </div>
-              </div>
+              </div> -->
 
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <div class="form-group mt-20">
                   <label for="region">Region</label>
                   <input type="text" name="region" v-model="ghost.region" placeholder="Region" class="form-control">
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <div class="form-group mt-20">
                   <label for="city">City</label>
                   <input type="text" name="city" v-model="ghost.city" placeholder="City" class="form-control">
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <div class="form-group mt-20">
                   <label for="social_security">Social security</label>
                   <input type="text" name="social_security" v-model="ghost.social_security" placeholder="Social security" class="form-control">
@@ -124,7 +113,7 @@
                 </div>
               </div>
 
-              <div class="col-sm-12">
+              <!-- <div class="col-sm-12">
                 <div class="form-group mt-20">
                   <label for="tags">Tags</label>
                   <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control"></input-tag>
@@ -143,7 +132,7 @@
                   <label for="language">Specialities</label>
                   <input-tag v-model="ghost.specialities" placeholder="Add a speciality" class="form-control"></input-tag>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-sm-12">
                 <div class="form-group mt-20">
@@ -152,22 +141,40 @@
                 </div>
               </div>
 
-              <!-- <div class="col-sm-6">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-secondary mt-20">Update</button>
+              </div>
+            </div>
+          </form>
+
+          <hr>
+
+          <form class="_form mt-40" @submit="savePassword()">
+            <h4 class="nowrap">Modify password</h4>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group mt-20">
+                  <label for="password">Current Password</label>
+                  <input type="password" name="current_password" v-model="ghost.current_password" placeholder="******" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-sm-4">
                 <div class="form-group mt-20">
                   <label for="password">New Password</label>
                   <input type="password" name="password" v-model="ghost.password" placeholder="******" class="form-control">
                 </div>
               </div>
 
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group mt-20">
                   <label for="password">Confirm Password</label>
                   <input type="password" name="confirm_password" v-model="ghost.confirm_password" placeholder="******" class="form-control">
                 </div>
-              </div> -->
+              </div>
 
-              <div class="col-sm-6">
-                <button type="submit" class="btn btn-secondary mt-20">Update</button>
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-secondary mt-20 uppercase">modify</button>
               </div>
             </div>
           </form>
@@ -191,9 +198,36 @@ import _ from 'lodash'
 
 export default {
     data: () => ({
-        payload: {},
-        shifts: [],
-        members: [],
+        ghost: {
+          account_stripe_id:'',
+          address:'',
+          birthdate:'',
+          certificate:'',
+          city:'',
+          customer_stripe_id:'',
+          description:'',
+          email:'',
+          end_subscription: "not subscribed yet",
+          facebook:'',
+          instagram:'',
+          label:'',
+          logo:'',
+          phone:'',
+          rating:'',
+          region:'',
+          social_security:'',
+          state:'',
+          user:'',
+          user_id:'',
+          website:'',
+          zip_code:'',
+          reviews:[],
+          photos:[],
+          nb_reviews: '',
+          tags:[],
+          booking_fee:[],
+          categories:[],
+        }
     }),
 
     components: { Navbar, Footer },
@@ -221,13 +255,29 @@ export default {
         const res = await this.$api.get(`/user-api/therapists/${this.user.therapist_id}/`)
         .catch(error => {
             this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error_message)
+            this.$swal.error('Sorry', error.response.data.error.message)
         })
 
         if (res) {
           this.stopLoading()
-          console.log('data', res.data)
-          this.ghost = Object.assign({}, res.data)
+          console.log('data', res.data.properties)
+          this.ghost = res.data.properties
+        }
+      },
+
+      async saveProfile () {
+        this.startLoading()
+
+        const res = await this.$api.put(`/user-api/therapists/${this.user.therapist_id}/`, this.ghost)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('Sorry', error.response.data.error.message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.$swal.error('Personnal information', 'modify as well')
+          this.ghost = res.data.properties
         }
       },
     }

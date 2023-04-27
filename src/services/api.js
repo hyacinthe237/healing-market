@@ -9,7 +9,7 @@ import _ from 'lodash'*/
 axios.defaults.baseURL = config.get('base_url')
 
 if (localStorage.getItem(config.get('token')) !=  null){
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem(config.get('token'))
+    axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.getItem(config.get('token'))
 }
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -67,7 +67,7 @@ export default {
     },
 
     setToken (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        axios.defaults.headers.common['Authorization'] = `Token ${token}`
     },
 
     clearToken () {

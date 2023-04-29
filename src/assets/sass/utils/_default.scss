@@ -82,7 +82,7 @@ h5 { font-size: 1.1em }
     justify-content: center;
 }
 
-.nowrap { white-space: nowrap; }
+.nowrap { white-space: nowrap; text-overflow: ellipsis; }
 
 .bold { font-weight: bold }
 .mb-20 { margin-bottom: 20px; }

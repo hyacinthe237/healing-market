@@ -9,6 +9,7 @@
             @selectedTag="openEditTagModal"
             :categories="therapist_categories"
             :tags="therapist_tags"
+            :currentUser="currentUser"
         ></Practitioner-SideBar>
 
         <div class="droite">
@@ -48,194 +49,37 @@
       </div>
   
       <AddCategoryModal 
-        @added="saveCategory" 
+        @added="getCategories" 
         :categories="categories"
       ></AddCategoryModal>
 
       <AddTagModal @added="getTags"></AddTagModal>
       <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
 
-      <AddOfferModal @added="saveOffer"></AddOfferModal>
+      <AddOfferModal @added="getOffers" :categories="categories" :therapistId="therapistId"></AddOfferModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
   
   <script>
-  import Navbar from '@/components/commons/frontend/header/nav'
-  import Footer from '@/components/commons/frontend/footer/footer'
-  import config from '@/services/config'
-  import _ from 'lodash'
-  import profil from '@/assets/img/healing/profil-homme.png'
-  import AddOfferModal from '../modals/add-offer'
-  import AddCategoryModal from '../modals/categories/add'
-  import AddTagModal from '../modals/tags/add'
-  import EditTagModal from '../modals/tags/edit'
+  import TherapistMixins from '../mixins'
   
   export default {
+      
       data: () => ({
-          payload: {},
-          offers: [],
-          categories: [],
-          therapist_categories: [],
-          therapist_tags: [],
-          profil
+          
       }),
-  
-      components: { Navbar, Footer, AddOfferModal, AddCategoryModal, AddTagModal, EditTagModal },
-  
-      computed: {
-         user () {
-            return JSON.parse(localStorage.getItem(config.get('user')))
-         },
-  
-         isConnected () {
-              return !_.isEmpty(this.user)
-          }
-      },
+
+      mixins: [TherapistMixins],
       
       watch: { },
   
       mounted () {
-        this.getOffers()
-        this.getTherapistCategories()
-        this.getCategories()
-        this.getTags()
+        
       },
   
       methods: { 
-        async getOffers () {
-          this.startLoading()
-  
-          const res = await this.$api.get(`/market-api/therapists/offers`)
-          .catch(error => {
-              this.stopLoading()
-              this.$swal.error('Sorry', error.response.data.error_message)
-          })
-  
-          if (res) {
-            this.stopLoading()
-            console.log('offers', res.data)
-            this.offers = res.data
-          }
-        },
-
-        async saveOffer (data) {
-            this.isLoading = true
-            let formData = new FormData()
-            formData.append('title', data.title)
-            formData.append('description', data.description)
-            formData.append('price', data.price)
-            formData.append('therapist', this.user.therapist_id)
-            formData.append('image', data.image)
-
-            const response = await this.$api.post('/market-api/offers/', formData)
-                .catch(error => {
-                    this.isLoading = false
-                    console.log('error => ', error.response.data.error)
-                    this.$swal.error('Sorry', error.response.data.message)
-                })
-            
-            
-            if (response) {
-                this.isLoading = false
-                this.$swal.success('Success', 'New offer added')
-                this.getOffers()                  
-            }            
-        },
-
-        async saveCategory (data) {
-            this.isLoading = true
-
-            const response = await this.$api.post('/market-api/therapists/add-categories/', data)
-                .catch(error => {
-                    this.isLoading = false
-                    console.log('error => ', error.response.data.error)
-                    this.$swal.error('Sorry', error.response.data.error.message)
-                })
-            
-            
-            if (response) {
-                this.isLoading = false
-                this.$swal.success('Success', 'New category added')
-                this.getCategories()                  
-            }            
-        },
-
-        async getTags () {
-            this.isLoading = true
-
-            const response = await this.$api.get('/market-api/tag-providers/')
-                .catch(error => {
-                    this.isLoading = false
-                    console.log('error => ', error.response.data.error)
-                    this.$swal.error('Sorry', error.response.data.message)
-                })
-            
-            
-            if (response) {
-                this.isLoading = false
-                this.therapist_tags = response.data.results           
-            }            
-        },
-
-        async getTherapistCategories () {
-            this.isLoading = true
-
-            const response = await this.$api.get('/market-api/therapists/categories/')
-                .catch(error => {
-                    this.isLoading = false
-                    console.log('error => ', error.response.data.error)
-                    this.$swal.error('sorry', error.response.data.error.message)
-                })
-            
-            
-            if (response) {
-                this.isLoading = false
-                this.therapist_categories = response.data                  
-            }            
-        },
-
-        async getCategories () {
-            this.isLoading = true
-
-            const response = await this.$api.get('/market-api/categories/')
-                .catch(error => {
-                    this.isLoading = false
-                    console.log('error => ', error.response.data.error)
-                    this.$swal.error('sorry', error.response.data.error.message)
-                })
-            
-            
-            if (response) {
-                this.isLoading = false
-                this.categories = response.data.results                  
-            }            
-        },
-
-        openAddOfferModal () {
-            setTimeout(() => {
-                $('#addOfferModal').modal('show')
-            }, 150)
-        },
-
-        openAddCategoryModal () {
-            setTimeout(() => {
-                $('#addCategoryModal').modal('show')
-            }, 150)
-        },
-
-        openAddTagModal () {
-            setTimeout(() => {
-                $('#addTagModal').modal('show')
-            }, 150)
-        },
-
-        openEditTagModal (tag) {
-            this.payload = tag
-            setTimeout(() => {
-                $('#editTagModal').modal('show')
-            }, 150)
-        },
+        
       }
   }
   </script>

@@ -276,7 +276,7 @@ export default {
 
         if (res) {
           this.stopLoading()
-          this.$swal.error('Personnal information', 'modify as well')
+          this.$swal.success('Personnal information', 'modify as well')
           this.ghost = res.data.properties
         }
       },

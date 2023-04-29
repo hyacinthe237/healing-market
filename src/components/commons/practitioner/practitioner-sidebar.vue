@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="card-head mt-20">
-                <h5 class="nowrap">Hyacinthe ABANDA</h5>
+                <h5 class="nowrap">{{ name }}</h5>
                 <div class="elevatedbox" @click="n('practitioner-settings')">
                     <div class="edit">
                         <i class="feather icon-edit-2"></i>
@@ -25,14 +25,14 @@
             <div class="mt-20">
                 <div class="location">
                     <div class="icon nowrap">
-                        <i class="feather icon-map-pin"></i> Oakalnd, CA
+                        <i class="feather icon-map-pin"></i> {{ address }}
                     </div>
                 </div>
                 <div class="location">
                     <div class="icon nowrap">
                         <i class="feather icon-user-check"></i> Member since 
                     </div>
-                    <span class="nowrap">May 2023</span></div>
+                    <span class="nowrap">{{ created_at }}</span></div>
             </div>
 
             <div class="mt-20">
@@ -80,8 +80,8 @@
                 <a class="secondary pointer nowrap" @click="addNewCategory()">Add new</a>
             </div>
             <div class="skills mt-20" v-if="categories.length>0">
-                <div class="skill" v-for="c in categories" :key="c.id">
-                    <span class="nowrap">{{ c.label }}</span>
+                <div class="skill" v-for="(c, index) in categories" :key="index++">
+                    <span class="nowrap">{{ c }}</span>
                 </div>
             </div>
             <div class="skills mt-20" v-else>
@@ -110,6 +110,7 @@
   import config from '@/services/config'
   import _ from 'lodash'
   import profil from '@/assets/img/healing/profil-homme.png'
+  import moment from 'moment'
   
   export default {
     name: 'PractitionerSideBar',
@@ -122,6 +123,7 @@
         categories: { type: Array, default: () => [] },
         specialities: { type: Array, default: () => [] },
         tags: { type: Array, default: () => [] },
+        currentUser: { type: Object, default: () => {} }
       },
   
       components: {  },
@@ -131,9 +133,22 @@
             return JSON.parse(localStorage.getItem(config.get('user')))
          },
   
-         isConnected () {
+        isConnected () {
               return !_.isEmpty(this.user)
-          }
+        },
+
+        name () {
+            return this.currentUser.first_name || '...'
+        },
+
+        address () {
+            return this.currentUser.address || '...'
+        },
+
+        created_at () {
+            return moment(this.currentUser.created_at).fromNow() || '...'
+        },
+
       },
       
       watch: { },

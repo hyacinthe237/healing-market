@@ -4,98 +4,132 @@
         :title="'Modify an offer'"
     >
         <div class="">
-            <form class="_form" @submit.prevent="edit()">
+            <form class="_form" @submit.prevent="saveOffer()" v-show="!isLoading">
                 <div class="form-group">
                     <label for="title">Offer title</label>
                     <input type="text" name="title" v-model="ghost.title" placeholder="Offer title" class="form-control-modal">
                 </div>
+
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea name="description" id="description" v-model="ghost.description" cols="30" rows="5" class="form-control-modal"></textarea>
                 </div>
+
                 <div class="form-group">
                     <label for="price">Offer price</label>
                     <input type="number" name="price" v-model="ghost.price" placeholder="Offer price" class="form-control-modal">
                 </div>
+
+                <div class="form-group">
+                    <label for="category">Offer category</label>
+                    <select name="category" id="category" v-model="ghost.category" class="form-control-modal">
+                        <option value="">Select category</option>
+                        <option v-for="c in categories" :value="c.id" :key="c.id">{{ c.label }}</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="image">Upload offer image</label>
-                    <input type="file" name="image" id="image" class="form-control-modal">
+                    <input type="file" name="image" id="image" class="form-control-modal" @change="handleFile($event)">
                 </div>
-                <button type="submit" class="btn btn-secondary uppercase">Save</button>
 
-                <!-- <div class="link mt-20">Have an account? <span @click="signin()" class="primary pointer">Sign In</span></div> -->
+                <button type="submit" class="btn btn-secondary uppercase">Save</button>
             </form>
+            <div class="_loader" v-show="isLoading">
+                <Spinners></Spinners>
+            </div>
         </div>
     </main-modal>
 </template>
 
 <script>
-import ApiService from '@/services/api'
-import AuthService from '@/services/auth'
 export default {
-    name: 'AddOfferModal',
+    name: 'EditOfferModal',
 
     data: () => ({
         ghost: {
             title: '',
             description: '',
             price: '',
-            image: ''
+            category: '',
+            image: '',
         },
     }),
 
-    computed: {},
+    props: {
+        categories: { type: Array, default: () => [] },
+        offer: { type: Object, default:  () => {} },
+        therapistId: { type: String, default: '' },
+    },
+
+    watch: {
+        offer: {
+            immediate: true,
+            handler: function (val) {
+                if (val) {
+                    this.ghost = Object.assign({}, val)
+                }
+            }
+        }
+    },
 
     methods: {
-        edit () {
+        closer () {
             this.$emit('edited')
             setTimeout(() => {
                 $('#editOfferModal').modal('hide')
             }, 150)
         },
 
-        /**
-         * User signs in
-         * @return {void}
-         */
-        async signup () {
-            if (this.ghost.username == '' || this.ghost.password == '') {
-                this.$swal.error('Validation warning', 'Username & Password inputs are mandatory')
+        async saveOffer () {
+            if (this.ghost.title == '' || this.ghost.description == '' || this.ghost.price == '' || this.ghost.image == '') {
+                this.$swal.error('Validation warning', 'Inputs are mandatory')
             }
 
-            if (this.ghost.username !== '' && this.ghost.password !== '') {
+            if (this.ghost.title !== '' && this.ghost.description !== '' && this.ghost.price !== '' && this.ghost.image !== '') {
                 this.isLoading = true
-
-                const response = await this.$api.post('user-api/login/', this.ghost)
+                let formData = new FormData()
+                formData.append('title', this.ghost.title)
+                formData.append('description', this.ghost.description)
+                formData.append('price', this.ghost.price)
+                formData.append('category', this.ghost.category)
+                formData.append('therapist', this.therapistId)
+                formData.append('image', this.ghost.image)
+    
+                const response = await this.$api.put(`/market-api/offers/${this.offer.id}`, formData)
                     .catch(error => {
                         this.isLoading = false
                         console.log('error => ', error.response.data.error)
-                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.error))
+                        this.$swal.error('Sorry', error.response.data.message)
                     })
                 
                 
                 if (response) {
-                    let data = response.data
-                    AuthService.setUser(data.user)
-
-                    const res = await this.$api.apiToken(this.ghost)
-                    .catch(err => {
-                        this.isLoading = false
-                        console.log('token error', err.response.data)
-                    })
-                    if (res) {
-                        this.isLoading = false
-                        AuthService.setToken(res.data.access)
-                        ApiService.setToken(res.data.access)
-
-                        // Set Refresh token
-                        AuthService.setRefreshToken(res.data.refresh)
-                        this.n('dashboard')
-                    }
+                    this.isLoading = false
+                    this.$swal.success('Success', 'Offer edited as success')
+                    this.closer()                  
                 }
             }
-            
         },
+
+        /**
+         * User signs in
+         * @return {void}
+         */
+        handleFile (e) {
+            console.log(e)
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+
+            var reader = new FileReader()
+
+            reader.onloadend = function () {
+                $('.image').attr('src', reader.result)
+            }
+            reader.readAsDataURL(files[0])
+            this.ghost.image = files[0]
+        }
     }
 }
 </script>

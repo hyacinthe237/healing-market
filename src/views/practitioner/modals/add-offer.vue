@@ -58,7 +58,7 @@ export default {
 
     props: {
         categories: { type: Array, default: () => [] },
-        therapistId: { type: String, default: '' },
+        therapistId: { type: Number, default: 1 },
     },
 
     computed: {},

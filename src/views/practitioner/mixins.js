@@ -4,6 +4,8 @@ import config from '@/services/config'
 import _ from 'lodash'
 import profil from '@/assets/img/healing/profil-homme.png'
 import AddOfferModal from './modals/add-offer'
+import EditOfferModal from './modals/edit-offer'
+import PreviewOfferModal from './modals/preview-offer'
 import AddCategoryModal from './modals/categories/add'
 import AddTagModal from './modals/tags/add'
 import EditTagModal from './modals/tags/edit'
@@ -11,7 +13,7 @@ import EditTagModal from './modals/tags/edit'
 export default {
     data: () => ({
         profil,
-        therapistId: '',
+        therapistId: 1,
         currentUser: {},
         payload: {},
         offers: [],
@@ -20,7 +22,7 @@ export default {
         therapist_tags: [],
     }),
 
-    components: { Navbar, Footer, AddOfferModal, AddCategoryModal, AddTagModal, EditTagModal },
+    components: { Navbar, Footer, AddOfferModal, AddCategoryModal, AddTagModal, EditTagModal, EditOfferModal, PreviewOfferModal },
 
     computed: {
         user () {
@@ -167,5 +169,31 @@ export default {
                   $('#editTagModal').modal('show')
               }, 150)
           },
+
+          previewEvent (item) {
+                this.payload = item
+                setTimeout(() => {
+                    $('#previewOfferModal').modal('show')
+                }, 150)
+          },
+            
+            shareEvent (item) {
+                console.log('share', item)
+            },
+
+            editEvent (item) {
+                this.payload = item
+                setTimeout(() => {
+                    $('#editOfferModal').modal('show')
+                }, 150)
+            },
+
+            pauseEvent (item) {
+                console.log('pause', item)
+            },
+
+            statisticsEvent (item) {
+                console.log('statistics', item)
+            },
     }
 }

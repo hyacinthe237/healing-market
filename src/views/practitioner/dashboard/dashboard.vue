@@ -28,7 +28,14 @@
 
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
+                        <Practitioner-Offers 
+                            :items="offers"
+                            @previewEvent="previewEvent"
+                            @editEvent="editEvent"
+                            @pauseEvent="pauseEvent"
+                            @statisticsEvent="statisticsEvent"
+                            @shareEvent="shareEvent"
+                        ></Practitioner-Offers>
 
                         <div class="add-block mt-20" @click="openAddOfferModal()">
                             <i class="feather icon-plus-circle"></i>
@@ -57,6 +64,16 @@
       <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
 
       <AddOfferModal @added="getOffers" :categories="categories" :therapistId="therapistId"></AddOfferModal>
+      <EditOfferModal 
+        @edited="getOffers" 
+        :categories="categories" 
+        :therapistId="therapistId"
+        :offer="payload"
+      ></EditOfferModal>
+
+      <PreviewOfferModal 
+        :offer="payload"
+      ></PreviewOfferModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>

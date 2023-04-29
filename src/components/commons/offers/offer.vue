@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="block">
-        <div class="sharebox">
+        <div class="sharebox" @click="emitEvent('share')">
             <div class="share">
                 <i class="feather icon-share-2"></i>
             </div>

@@ -59,7 +59,7 @@ export default {
     props: {
         categories: { type: Array, default: () => [] },
         offer: { type: Object, default:  () => {} },
-        therapistId: { type: Number, default: 1 },
+        therapistId: { type: String, default: '' },
     },
 
     watch: {
@@ -68,7 +68,6 @@ export default {
             handler: function (val) {
                 if (val) {
                     this.ghost = Object.assign({}, val)
-                    this.ghost.category = this.categories.filter(c => c.label == val.category)[0].id
                 }
             }
         }
@@ -97,7 +96,7 @@ export default {
                 formData.append('therapist', this.therapistId)
                 formData.append('image', this.ghost.image)
     
-                const response = await this.$api.put(`/market-api/offers/${this.offer.id}/`, formData)
+                const response = await this.$api.put(`/market-api/offers/${this.offer.id}`, formData)
                     .catch(error => {
                         this.isLoading = false
                         console.log('error => ', error.response.data.error)

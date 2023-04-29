@@ -334,6 +334,13 @@
           color:#ccc;
           padding: 10px 20px;
           margin:0px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          overflow: hidden;
+          max-height: 4.8em;
+          line-height: 1.4em;
+          text-align: justify;
+          text-overflow: ellipsis;
         }
         
         .bg-img {

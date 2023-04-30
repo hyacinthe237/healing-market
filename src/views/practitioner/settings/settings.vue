@@ -3,7 +3,15 @@
     <Navbar></Navbar>
     <div class="practitioner-dashboard" v-show="!isLoading">
       
-      <Practitioner-SideBar></Practitioner-SideBar>
+      <Practitioner-SideBar
+        @addCategory="openAddCategoryModal"
+        @addTag="openAddTagModal"
+        @selectedTag="openEditTagModal"
+        :categories="therapist_categories"
+        :tags="therapist_tags"
+        :currentUser="currentUser"
+      ></Practitioner-SideBar>
+
       <div class="droite">
         <div class="dashboard">
           <form class="_form mt-20 mb-20" @submit.prevent="saveProfile()">
@@ -186,17 +194,23 @@
       <Spinners></Spinners>
     </div>
 
+    <AddCategoryModal 
+        @added="getCategories" 
+        :categories="categories"
+      ></AddCategoryModal>
+
+      <AddTagModal @added="getTags"></AddTagModal>
+      <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
+
     <Footer :isConnected="isConnected"></Footer>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/commons/frontend/header/nav'
-import Footer from '@/components/commons/frontend/footer/footer'
-import config from '@/services/config'
-import _ from 'lodash'
+import TherapistMixins from '../mixins'
 
 export default {
+    mixins: [TherapistMixins],
     data: () => ({
         ghost: {
           account_stripe_id:'',
@@ -229,42 +243,14 @@ export default {
           categories:[],
         }
     }),
-
-    components: { Navbar, Footer },
-
-    computed: {
-       user () {
-          return JSON.parse(localStorage.getItem(config.get('user')))
-       },
-
-       isConnected () {
-            return !_.isEmpty(this.user)
-        }
-    },
     
     watch: { },
 
     mounted () {
-      this.getUser()
+      
     },
 
-    methods: { 
-      async getUser () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/therapists/${this.user.therapist_id}/`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error.message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          console.log('data', res.data.properties)
-          this.ghost = res.data.properties
-        }
-      },
-
+    methods: {
       async saveProfile () {
         this.startLoading()
 

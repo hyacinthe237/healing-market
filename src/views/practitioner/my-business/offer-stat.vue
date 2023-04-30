@@ -3,7 +3,15 @@
       <Navbar></Navbar>
       <div class="practitioner-dashboard" v-show="!isLoading">
         
-        <Practitioner-SideBar></Practitioner-SideBar>
+        <Practitioner-SideBar
+            @addCategory="openAddCategoryModal"
+            @addTag="openAddTagModal"
+            @selectedTag="openEditTagModal"
+            :categories="therapist_categories"
+            :tags="therapist_tags"
+            :currentUser="currentUser"
+        ></Practitioner-SideBar>
+
         <div class="droite">
             <div>
                 <div class="_tabs mt-20">
@@ -20,7 +28,14 @@
 
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
-                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
+                        <Practitioner-Offers 
+                            :items="offers"
+                            @previewEvent="previewEvent"
+                            @editEvent="editEvent"
+                            @pauseEvent="confirmChangeStatus"
+                            @statisticsEvent="statisticsEvent"
+                            @shareEvent="shareEvent"
+                        ></Practitioner-Offers>
 
                         <div class="add-block mt-20" @click="openAddOfferModal()">
                             <i class="feather icon-plus-circle"></i>
@@ -29,7 +44,14 @@
                     </div>
 
                     <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
+                        <Practitioner-Offers 
+                          :items="pauseOffers"
+                          @previewEvent="previewEvent"
+                          @editEvent="editEvent"
+                          @pauseEvent="confirmChangeStatus"
+                          @statisticsEvent="statisticsEvent"
+                          @shareEvent="shareEvent"
+                        ></Practitioner-Offers>
                     </div>
                 </div>
             </div>
@@ -39,67 +61,43 @@
       <div class="_loader" v-show="isLoading">
         <Spinners></Spinners>
       </div>
-      
-      <AddOfferModal></AddOfferModal>
+  
+      <AddCategoryModal 
+        @added="getCategories" 
+        :categories="categories"
+      ></AddCategoryModal>
+
+      <AddTagModal @added="getTags"></AddTagModal>
+      <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
+
+      <AddOfferModal @added="getOffers" :categories="categories" :therapistId="therapistId"></AddOfferModal>
+      <EditOfferModal 
+        @edited="getOffers" 
+        :categories="categories" 
+        :therapistId="therapistId"
+        :offer="payload"
+      ></EditOfferModal>
+
+      <PreviewOfferModal 
+        :offer="payload"
+      ></PreviewOfferModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
   
   <script>
-  import Navbar from '@/components/commons/frontend/header/nav'
-  import Footer from '@/components/commons/frontend/footer/footer'
-  import config from '@/services/config'
-  import _ from 'lodash'
-  import profil from '@/assets/img/healing/profil-homme.png'
-  import AddOfferModal from '../modals/add-offer'
-  
+  import TherapistMixins from '../mixins'
   export default {
-      data: () => ({
-          payload: {},
-          offers: [
-            {id: 1, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
-            {id: 2, description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.', price: 75},
-          ],
-          profil
-      }),
+      data: () => ({ }),
   
-      components: { Navbar, Footer, AddOfferModal },
-  
-      computed: {
-         user () {
-            return JSON.parse(localStorage.getItem(config.get('user')))
-         },
-  
-         isConnected () {
-              return !_.isEmpty(this.user)
-          }
-      },
+      mixins: [TherapistMixins],
       
       watch: { },
   
       mounted () {},
   
       methods: { 
-        async getDoashboard () {
-          this.startLoading()
-  
-          const res = await this.$api.get(`/schedule-api/dashboard-event`)
-          .catch(error => {
-              this.stopLoading()
-              this.$swal.error('Sorry', error.response.data.error_message)
-          })
-  
-          if (res) {
-            this.stopLoading()
-            console.log('members', res.data)
-          }
-        },
-
-        openAddOfferModal () {
-            setTimeout(() => {
-                $('#addOfferModal').modal('show')
-            }, 150)
-        }
+        
       }
   }
   </script>

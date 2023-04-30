@@ -9,6 +9,7 @@ import PreviewOfferModal from './modals/preview-offer'
 import AddCategoryModal from './modals/categories/add'
 import AddTagModal from './modals/tags/add'
 import EditTagModal from './modals/tags/edit'
+import Swal from 'sweetalert2'
 
 export default {
     data: () => ({
@@ -17,6 +18,7 @@ export default {
         currentUser: {},
         payload: {},
         offers: [],
+        pauseOffers: [],
         categories: [],
         therapist_categories: [],
         therapist_tags: [],
@@ -72,7 +74,8 @@ export default {
             if (res) {
               this.stopLoading()
               console.log('offers', res.data)
-              this.offers = res.data
+              this.offers = res.data.filter(o => o.status == 'Active')
+              this.pauseOffers = res.data.filter(o => o.status !== 'Active')
             }
           },
   
@@ -188,12 +191,45 @@ export default {
                 }, 150)
             },
 
-            pauseEvent (item) {
-                console.log('pause', item)
+            async pauseEvent (item) {
+                this.isLoading = true
+  
+                const response = await this.$api.post(`/market-api/offers/${item.id}/change-status`)
+                    .catch(error => {
+                        this.isLoading = false
+                        console.log('error => ', error.response.data.error)
+                        this.$swal.error('Sorry', error.response.data.error.message)
+                    })
+                
+                
+                if (response) {
+                    this.isLoading = false
+                    let status = item.status == 'Active' ? 'Pause' : 'Active'
+                    this.$swal.success('Success', `The offer name's "${item.title}" status changed to "${status}"`)
+                    this.getOffers()                  
+                }
             },
 
             statisticsEvent (item) {
                 console.log('statistics', item)
+            },
+
+            confirmChangeStatus (item) {
+                let status = item.status == 'Active' ? 'Pause' : 'Active'
+                Swal.fire({
+                    // title: this.$translate.text('Are you sure ?'),
+                    text: this.$translate.text(`Are you sure you want to ${status} the offer?`),
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: this.$translate.text('No'),
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: this.$translate.text('Yes')
+                }).then((result) => {
+                    if (result.value) {
+                        this.pauseEvent(item)
+                    }
+                })
             },
     }
 }

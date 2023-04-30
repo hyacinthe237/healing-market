@@ -192,7 +192,8 @@ export default {
 
     data: () => ({
         selectedText: '',
-        post1, post2, post3, circle, bg, femme, homme, hero
+        post1, post2, post3, circle, bg, femme, homme, hero,
+        searching: false,
     }),
 
     components: {

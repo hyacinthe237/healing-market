@@ -32,7 +32,7 @@
                             :items="offers"
                             @previewEvent="previewEvent"
                             @editEvent="editEvent"
-                            @pauseEvent="pauseEvent"
+                            @pauseEvent="confirmChangeStatus"
                             @statisticsEvent="statisticsEvent"
                             @shareEvent="shareEvent"
                         ></Practitioner-Offers>
@@ -44,7 +44,14 @@
                     </div>
 
                     <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-                        <Practitioner-Offers :items="offers"></Practitioner-Offers>
+                      <Practitioner-Offers 
+                        :items="pauseOffers"
+                        @previewEvent="previewEvent"
+                        @editEvent="editEvent"
+                        @pauseEvent="confirmChangeStatus"
+                        @statisticsEvent="statisticsEvent"
+                        @shareEvent="shareEvent"
+                      ></Practitioner-Offers>
                     </div>
                 </div>
             </div>

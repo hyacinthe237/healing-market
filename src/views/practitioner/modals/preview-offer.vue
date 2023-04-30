@@ -52,7 +52,6 @@ export default {
 
     watch: {
         offer: {
-            immediate: true,
             handler: function (val) {
                 if (val) {
                     this.ghost = Object.assign({}, val)

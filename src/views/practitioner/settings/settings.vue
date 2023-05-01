@@ -7,6 +7,7 @@
         @addCategory="openAddCategoryModal"
         @addTag="openAddTagModal"
         @selectedTag="openEditTagModal"
+        @manageCalendar="manageCalendarModal"
         :categories="therapist_categories"
         :tags="therapist_tags"
         :currentUser="currentUser"
@@ -201,7 +202,7 @@
 
       <AddTagModal @added="getTags"></AddTagModal>
       <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
-
+      <AddAvailabilityModal @added="getAvailabilities"></AddAvailabilityModal>
     <Footer :isConnected="isConnected"></Footer>
   </div>
 </template>

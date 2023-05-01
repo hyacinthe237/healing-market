@@ -35,7 +35,7 @@
                     <span class="nowrap">{{ created_at }}</span></div>
             </div>
 
-            <div class="mt-20">
+            <div class="mt-20 pointer" @click="manageCalendar()">
                 <button class="btn btn-secondary btn-block">Manage calendar</button>
             </div>
 
@@ -176,6 +176,10 @@
 
         selectedTag (tag) {
             this.$emit('selectedTag', tag)
+        },
+
+        manageCalendar () {
+            this.$emit('manageCalendar')
         }
       }
   }

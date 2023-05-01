@@ -95,10 +95,21 @@ export default {
             }
         },
 
+        resetGhost () {
+            this.ghost = {
+                title: '',
+                description: '',
+                price: '',
+                category: '',
+                image: '',
+            }
+        },
+
         closer () {
             this.$emit('added')
             setTimeout(() => {
                 $('#addOfferModal').modal('hide')
+                this.resetGhost()
             }, 150)
         },
 

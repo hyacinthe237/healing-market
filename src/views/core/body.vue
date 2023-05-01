@@ -171,19 +171,7 @@
 </template>
 
 <script>
-import post1 from '@/assets/img/healing/post1.png'
-import post2 from '@/assets/img/healing/post2.png'
-import post3 from '@/assets/img/healing/post3.png'
-import bg from '@/assets/img/healing/bg.png'
-import circle from '@/assets/img/healing/image-circle.png'
-import femme from '@/assets/img/healing/profil-femme.png'
-import homme from '@/assets/img/healing/profil-homme.png'
-import hero from '@/assets/img/healing/hero.png'
-import Navbar from '@/components/commons/frontend/header/nav'
-import Footer from '@/components/commons/frontend/footer/footer'
-import config from '../../services/config'
 import BodyMixins from './mixins'
-import GetStartedModal from './modals/get-started'
 
 export default {
     name: 'CoreBody',
@@ -192,23 +180,8 @@ export default {
 
     data: () => ({
         selectedText: '',
-        post1, post2, post3, circle, bg, femme, homme, hero,
         searching: false,
     }),
-
-    components: {
-        Navbar, Footer, GetStartedModal
-    },
-
-    computed: {
-        user () {
-            return JSON.parse(localStorage.getItem(config.get('user')))
-        },
-
-        isConnected () {
-            return !_.isEmpty(this.user)
-        }
-    },
 
     methods: {
         openGetStartedModal () {

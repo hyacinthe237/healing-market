@@ -9,6 +9,7 @@ import PreviewOfferModal from './modals/preview-offer'
 import AddCategoryModal from './modals/categories/add'
 import AddTagModal from './modals/tags/add'
 import EditTagModal from './modals/tags/edit'
+import AddAvailabilityModal from './modals/add-availability'
 import Swal from 'sweetalert2'
 
 export default {
@@ -22,9 +23,10 @@ export default {
         categories: [],
         therapist_categories: [],
         therapist_tags: [],
+        availabilities: [],
     }),
 
-    components: { Navbar, Footer, AddOfferModal, AddCategoryModal, AddTagModal, EditTagModal, EditOfferModal, PreviewOfferModal },
+    components: { Navbar, Footer, AddOfferModal, AddCategoryModal, AddTagModal, EditTagModal, EditOfferModal, PreviewOfferModal, AddAvailabilityModal },
 
     computed: {
         user () {
@@ -41,6 +43,7 @@ export default {
         this.getUser()
         this.getCategories()
         this.getTags()
+        this.getAvailabilities()
     },
 
     methods: {
@@ -59,6 +62,21 @@ export default {
               this.therapistId = res.data.id
               this.currentUser = res.data.properties
               this.therapist_categories = res.data.properties.categories
+            }
+        },
+
+        async getAvailabilities () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/booking-api/availibilities/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.availabilities = res.data
             }
         },
 
@@ -188,6 +206,12 @@ export default {
                 this.payload = item
                 setTimeout(() => {
                     $('#editOfferModal').modal('show')
+                }, 150)
+            },
+
+            manageCalendarModal () {
+                setTimeout(() => {
+                    $('#addAvailabilityModal').modal('show')
                 }, 150)
             },
 

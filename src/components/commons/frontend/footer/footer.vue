@@ -28,7 +28,7 @@
                     <li>About us</li>
                 </ul>
             </div>
-            <div class="cardre other">
+            <div class="cardre other" v-show="!isConnected">
                 <button class="btn btn-primary"  @click="n('signup')">List your practice</button>
             </div>
         </div>

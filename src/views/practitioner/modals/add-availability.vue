@@ -126,7 +126,7 @@ export default {
 
         async save () {
             this.startLoading()
-            this.line.therapist = this.thrapistId
+            this.line.therapist = this.therapistId
 
             const response = await this.$api.post('/booking-api/availibilities/', this.line)
             .catch(error => {

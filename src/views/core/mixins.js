@@ -70,7 +70,7 @@ export default {
         async getOffers () {
             this.startLoading()
     
-            const res = await this.$api.get(`/market-api/offers/`)
+            const res = await this.$api.get(`/market-api/offers/all-no-token`)
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)

@@ -82,7 +82,10 @@
       <PreviewOfferModal 
         :offer="payload"
       ></PreviewOfferModal>
-      <AddAvailabilityModal @added="getAvailabilities"></AddAvailabilityModal>
+      <AddAvailabilityModal 
+        @added="getAvailabilities" 
+        :therapistId="therapistId"
+      ></AddAvailabilityModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>

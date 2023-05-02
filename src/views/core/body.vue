@@ -1,30 +1,32 @@
 <template lang="html">
   <div class="landing">
-    <Navbar></Navbar>
+    <Navbar v-show="!isLoading"></Navbar>
+    <div class="_loader" v-show="isLoading">
+        <Spinners></Spinners>
+    </div>
 
-    <section class="section-hero" :style="`background-image:url(${hero})`">
+    <section class="section-hero" :style="`background-image:url(${hero})`" v-show="!isLoading">
         <div class="container">
             <div class="content">
                 <h2>book your next</h2>
                 <h2>wellness practitioner</h2>
 
-                <form class="form-inline mt-20">
+                <form class="form-inline mt-20" @submit.prevent="searchTherapists()">
                     <div class="input-group">
                         <div class="icon"><i class="feather icon-search"></i></div>
-                        <input type="text" class="form-control" placeholder="Try Message or Back Pain" />
+                        <input type="text" name="query" v-model="query" class="form-control" placeholder="Try Message or Back Pain" />
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="feather icon-map-pin"></i></div>
                         <input 
-                            type="text" 
+                            type="number" 
                             class="form-control" 
-                            placeholder="Yaounde, Cameroun"
-                            name="address"
-                            v-model="ghost.address"
-                            v-validate="'required'"
+                            placeholder="Enter zipcode"
+                            name="zipcode"
+                            v-model="zipcode"
                         />
                     </div>
-                    <button class="btn btn-secondary">Search</button>
+                    <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
                 <div class="lists">
                     <div class="list">Message</div>
@@ -34,78 +36,40 @@
         </div>
     </section>
 
-    <div class="spacer"></div>
+    <div class="spacer" v-show="!isLoading"></div>
 
-    <section class="section-home">
+    <section class="section-home" v-show="!isLoading">
         <div class="container">
             <div class="section-header">
                 <h2>BOOK ONLINE HOLISTIC CARE</h2>
                 <div class="see-all bold">See all</div>
             </div>
             <div class="cares">
-                <div class="care pointer" @click="n('practitioner-details')">
+                <div 
+                    class="care pointer" 
+                    @click="openDetails(offer)"
+                    v-for="offer in offers"
+                    :key="offer.id"
+                >
                     <div class="image" :style="`background-image:url(${femme})`">
                         <div class="overlay"></div>
                     </div>
                     <div class="care-content">
-                        <h6>How to make your Own room perfume efficiently</h6>
+                        <h6>{{ offer.title }}</h6>
                         <div class="verified">4.6 (verified reviews)</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>{{ offer.description }}</p>
 
                         <div class="care-footer">
-                            <div class="price">$75.00</div>
+                            <div class="price">${{ offer.price }}</div>
                             <button class="btn btn-secondary">Book</button>
                         </div>
                     </div>
-                </div>
-                <div class="care pointer" @click="n('practitioner-details')">
-                    <div class="image" :style="`background-image:url(${homme})`">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="care-content">
-                        <h6>How to make your Own room perfume efficiently</h6>
-                        <div class="verified">4.6 (verified reviews)</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <div class="care-footer">
-                            <div class="price">$75.00</div>
-                            <button class="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="care pointer" @click="n('practitioner-details')">
-                    <div class="image" :style="`background-image:url(${femme})`">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="care-content">
-                        <h6>tips cleaning your big house for one person</h6>
-                        <div class="verified">4.6 (verified reviews)</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <div class="care-footer">
-                            <div class="price">$75.00</div>
-                            <button class="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="care pointer" @click="n('practitioner-details')">
-                    <div class="image" :style="`background-image:url(${homme})`">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="care-content">
-                        <h6>cleaning home fastly and perfect clean for perfect house</h6>
-                        <div class="verified">4.6 (verified reviews)</div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <div class="care-footer">
-                            <div class="price">$75.00</div>
-                            <button class="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-home">
+    <section class="section-home" v-show="!isLoading">
         <div class="container">
             <div class="bg-box pointer" :style="`background-image:url(${bg})`">
                 <h1>match with the perfect</h1>
@@ -115,7 +79,7 @@
         </div>
     </section>
 
-    <section class="section-home bg-gray">
+    <section class="section-home bg-gray" v-show="!isLoading">
         <div class="container">
             <div class="banner">
                 <div class="text">
@@ -131,7 +95,7 @@
         
     </section>
 
-    <section class="section-home">
+    <section class="section-home" v-show="!isLoading">
         <div class="container">
             <div class="section-header">
                 <h2>Read Our Blogs</h2>
@@ -166,7 +130,7 @@
     </section>
     
     <GetStartedModal></GetStartedModal>
-    <Footer :isConnected="isConnected"></Footer>
+    <Footer :isConnected="isConnected" v-show="!isLoading"></Footer>
   </div>
 </template>
 
@@ -181,12 +145,17 @@ export default {
     data: () => ({
         selectedText: '',
         searching: false,
+        seeAllOffers: false,
     }),
 
     methods: {
         openGetStartedModal () {
             this.openModal({ id: 'GetStartedModal' })
         },
+
+        openDetails (offer) {
+            this.$router.push({ name: 'practitioner-details', params: { id: offer.id } })
+        }
     },
 }
 </script>

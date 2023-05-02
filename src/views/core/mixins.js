@@ -33,7 +33,9 @@ export default {
 
         camera: 'camera',
         platform: 'browser',
-        offers: []
+        offers: [],
+        query: '',
+        zipcode: '',
     }),
 
     components: {
@@ -43,13 +45,7 @@ export default {
     mounted () {
         this.initGoogle()
         this.getOffers()
-        // const auth = this.$store.state.auth
-        // this.$set(this.ghost, 'organizer', `${auth.firstname} ${auth.lastname}`)
-
-        // document.addEventListener("deviceready", () => {
-        //     this.camera = navigator.camera
-        //     this.platform = window.device.platform
-        // }, false)
+        this.searchTherapists()
     },
 
     computed: {
@@ -71,6 +67,27 @@ export default {
             this.startLoading()
     
             const res = await this.$api.get(`/market-api/offers/all-no-token`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              console.log('offers', res.data)
+              this.offers = res.data.filter(o => o.status == 'Active')
+            }
+        },
+
+        async searchTherapists () {
+            this.startLoading()
+
+            const payload = {
+                query: this.query,
+                zipcode: this.zipcode
+            }
+    
+            const res = await this.$api.get(`/market-api/search/therapists/`, payload)
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)

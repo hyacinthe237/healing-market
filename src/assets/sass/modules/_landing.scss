@@ -294,6 +294,13 @@
                   color: $brand-teal;
                   text-align: left;
                   margin-top: -2px;
+                  word-wrap: break-word;
+                  overflow-wrap: break-word;
+                  overflow: hidden;
+                  max-height: 2.6em;
+                  line-height: 1.2em;
+                  text-align: justify;
+                  text-overflow: ellipsis;
                 }
 
                 .care-footer {

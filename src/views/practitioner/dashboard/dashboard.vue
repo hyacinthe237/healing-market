@@ -10,6 +10,7 @@
             @manageCalendar="manageCalendarModal"
             :categories="therapist_categories"
             :tags="therapist_tags"
+            :availabilities="availabilities"
             :currentUser="currentUser"
         ></Practitioner-SideBar>
 

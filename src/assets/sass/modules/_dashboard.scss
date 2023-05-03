@@ -90,6 +90,16 @@
       padding: 20px;
       margin-bottom: 20px;
 
+      table {
+        width: 100%;
+
+        tbody, thead {
+          tr {
+            max-height:20px;
+          }
+        }
+      }
+
       p {
         font-size: 12px;
         color: #ccc;

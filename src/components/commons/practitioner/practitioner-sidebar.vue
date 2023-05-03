@@ -61,6 +61,34 @@
 
         <div class="card">
             <div class="card-head">
+                <h5 class="nowrap">Availabilities</h5>
+            </div>
+            <table class="table table-striped mt-10" v-if="availabilities.length>0">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Started</th>
+                        <th>Ended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr 
+                        v-for="availability in availabilities"
+                        :key="availability.id"
+                    >
+                        <td>{{ availability.day_cut }}</td>
+                        <td>{{ availability.time_cut_start }}</td>
+                        <td>{{ availability.time_cut_end }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="skills mt-20" v-else>
+                <div><span class="nowrap">No availability found</span></div>
+            </div>
+        </div>
+
+        <!-- <div class="card">
+            <div class="card-head">
                 <h5 class="nowrap">Specialities</h5>
                 <a class="secondary pointer nowrap" @click="addNewSpeciality()">Add new</a>
             </div>
@@ -72,7 +100,7 @@
             <div class="skills mt-20" v-else>
                 <div><span class="nowrap">No speciality found</span></div>
             </div>
-        </div>
+        </div> -->
 
         <div class="card">
             <div class="card-head">
@@ -91,16 +119,17 @@
 
         <div class="card">
             <div class="card-head">
-                <h5 class="nowrap">Tags</h5>
+                <h5 class="nowrap">Specialities</h5>
                 <a class="secondary pointer nowrap" @click="addNewTag()">Add new</a>
             </div>
             <div class="skills mt-20" v-if="tags.length>0">
-                <div class="pointer mr-3" v-for="tag in tags" :key="tag.id" @click="selectedTag(tag)">
-                    <span class="nowrap">{{ tag.tag }}</span>
+                <div class="skill" v-for="c in tags" :key="c.id" @click="selectedTag(tag)">
+                    <div class="icon"><i class="feather icon-check"></i></div>
+                    <span class="nowrap">{{ c.tag }}</span>
                 </div>
             </div>
             <div class="skills mt-20" v-else>
-                <div><span class="nowrap">No tags found</span></div>
+                <div><span class="nowrap">No speciality found</span></div>
             </div>
         </div>
     </div>
@@ -122,6 +151,7 @@
       props: {
         categories: { type: Array, default: () => [] },
         specialities: { type: Array, default: () => [] },
+        availabilities: { type: Array, default: () => [] },
         tags: { type: Array, default: () => [] },
         currentUser: { type: Object, default: () => {} }
       },

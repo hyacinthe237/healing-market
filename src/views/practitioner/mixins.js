@@ -76,7 +76,7 @@ export default {
     
             if (res) {
               this.stopLoading()
-              this.availabilities = res.data
+              this.availabilities = res.data.results
             }
         },
 

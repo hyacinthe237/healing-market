@@ -1,19 +1,19 @@
 <template lang="html">
     <div class="services">
-      <Navbar></Navbar>
+      <Navbar  v-show="!isLoading"></Navbar>
   
-      <section class="header" :style="`background-image:url(${hero})`">
+      <section class="header" :style="`background-image:url(${hero})`" v-show="!isLoading">
           <div class="container">
               <div class="box">
-                  <h3>reiki session with chakra balancing</h3>
+                  <h3>{{ offer_title }}</h3>
               </div>
           </div>
       </section>
 
-      <section class="details">
+      <section class="details" v-show="!isLoading">
           <div class="container">
               <div class="details-box">
-                <div class="gauche">
+                <div class="gauche mr-5">
                     <div class="carrousel">
                       <VueSlickCarousel v-bind="settings1" id="carousel1">
                           <div class="content">
@@ -49,28 +49,28 @@
                       </VueSlickCarousel>
                     </div>
                     <div class="infos">
-                        <div class="name">Maryjane a henning</div>
-                        <div class="job">holistic weellness coach</div>
+                        <div class="name">{{ name }}</div>
+                        <div class="job">{{ label }}</div>
                         <div class="skills mt-20">
-                            <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span>licensed mariage and family therapist</span></div>
-                            <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span>licensed alcohol drug courselor</span></div>
-                            <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span>access bars&rArr; practitioner</span></div>
-                            <div class="skill"><div class="icon"><i class="feather icon-check"></i></div> <span>accredited, certified advanced EFT practitioner</span></div>
+                            <div class="skill" v-for="(tag, index) in tags" :key="index++">
+                                <div class="icon"><i class="feather icon-check"></i></div>
+                                <span class="nowrap">{{ tag }}</span>
+                            </div>
                         </div>
                         <div class="reviews mt-20">
                             <div class="icons">
                                 <star-rating 
                                     :increment="0.25"
                                     :max-rating="5"
-                                    :rating="4"
+                                    :rating="rating"
                                     inactive-color="#000"
                                     active-color="#FF6900"
                                     :star-size="20"
                                 ></star-rating>(verified reviews)
                             </div>
-                            <div class="location"><i class="feather icon-map-pin"></i> Oakalnd, CA</div>
+                            <div class="location"><i class="feather icon-map-pin"></i> {{ address }}</div>
                         </div>
-                        <div class="passion mt-20">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo cupiditate repellat fugit delectus adipisci eaque maiores iure doloribus. Architecto recusandae cum, magnam reiciendis adipisci natus vel voluptate veritatis? Assumenda, repudiandae.</div>
+                        <div class="passion mt-20">{{ litle_therapist_description }}</div>
                     </div>
                     <div class="reviews-carousel mt-20">
                         <div class="box-header">
@@ -142,46 +142,22 @@
 
                     <div class="box-services mt-20">
                         <div class="titre">Other services</div>
-                        <div class="content">
+                        <div 
+                            class="content"
+                            v-for="o in offers"
+                            :key="o.id"
+                        >
                             <div class="image"></div>
                             <div class="text-box">
-                                <div class="name">life coaching for empowerment</div>
-                                <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
-                                <div class="footer">
-                                    <div class="price">$111</div>
-                                    <button class="btn btn-secondary">Book appointment</button>
+                                <div class="name">{{ o.title }}</div>
+                                <div class="desc">
+                                    <span v-show="!moreOtherService">{{ truncateString(o.description, 200) }}</span>
+                                    <span v-show="moreOtherService">{{ o.description }}</span>
+                                    <span class="pointer primary bold" @click="moreOtherService = !moreOtherService">  
+                                        {{ moreOtherService ? 'Less text' : 'More text' }}</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="image"></div>
-                            <div class="text-box">
-                                <div class="name">life coaching for empowerment</div>
-                                <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
                                 <div class="footer">
-                                    <div class="price">$111</div>
-                                    <button class="btn btn-secondary">Book appointment</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="image"></div>
-                            <div class="text-box">
-                                <div class="name">life coaching for empowerment</div>
-                                <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
-                                <div class="footer">
-                                    <div class="price">$111</div>
-                                    <button class="btn btn-secondary">Book appointment</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="image"></div>
-                            <div class="text-box">
-                                <div class="name">life coaching for empowerment</div>
-                                <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus sint culpa consequuntur doloremque nihil perferendis, eveniet repellat ipsa itaque doloribus velit delectus expedita aliquid quidem officia praesentium, nostrum quis!</div>
-                                <div class="footer">
-                                    <div class="price">$111</div>
+                                    <div class="price">${{ o.price }}</div>
                                     <button class="btn btn-secondary">Book appointment</button>
                                 </div>
                             </div>
@@ -193,11 +169,15 @@
                       <div class="titre">Service Description</div>
                       <div class="divider"></div>
                       <div class="d-box">
-                        <div class="short-text">Lorem ipsum dolor sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
+                        <div class="short-text">
+                            <span v-show="!moreOfferDescription">{{ litle_offer_description }}</span>
+                            <span v-show="moreOfferDescription">{{ offer_description }}</span>
+                            <span class="pointer primary bold" @click="toggleOfferDescription">  {{ more_text_offer }}</span>
+                        </div>
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-secondary" @click="openSelectTimeModal()">
+                        <button type="submit" class="btn btn-secondary mr-5" @click="openSelectTimeModal()">
                             <i class="feather icon-bookmark"></i> Booking now</button>
                         <button type="submit" class="btn btn-primary" @click="openSignInModal()">
                             <i class="feather icon-message-square"></i> Chat</button>
@@ -206,6 +186,10 @@
               </div>
           </div>
       </section>
+
+      <div class="_loader" v-show="isLoading">
+        <Spinners></Spinners>
+      </div>
 
 
   
@@ -239,6 +223,9 @@
   
       data: () => ({
           selectedText: '',
+          therapist: {},
+          offer: {},
+          offers: [],
           femme, homme, hero,
           settings1: {
             "dots": false,
@@ -256,6 +243,9 @@
             "slidesToShow": 1,
             "slidesToScroll": 1
           },
+          moreTherapistDescription: false,
+          moreOfferDescription: false,
+          moreOtherService: false,
       }),
   
       components: {
@@ -269,10 +259,122 @@
   
           isConnected () {
               return !_.isEmpty(this.user)
-          }
+          },
+
+            more_text_offer () {
+                return this.moreOfferDescription ? 'Less text' : 'More text'
+            },
+
+            name () {
+                return this.therapist.first_name + ' ' + this.therapist.last_name || '...'
+            },
+
+            address () {
+                return this.therapist.address || ''
+            },
+
+            rating () {
+                return this.therapist.rating
+            },
+
+            tags () {
+                return this.therapist.tags || []
+            },
+
+            availibilities () {
+                return this.therapist.availibilities || []
+            },
+
+            therapist_description () {
+                return this.therapist.description || ''
+            },
+
+            litle_therapist_description () {
+                return this.truncateString(this.therapist_description, 100)
+            },
+
+            offer_description () {
+                return this.offer.description || ''
+            },
+
+            litle_offer_description () {
+                return this.truncateString(this.offer_description, 100)
+            },
+
+            offer_title () {
+                return this.offer.title || ''
+            },
+
+            label () {
+                return this.therapist.label || ''
+            },
+      },
+
+      mounted () {
+        this.getTherapist()
+        this.getOffers()
+        this.getOffer()
       },
   
       methods: {
+        toggleTherapistDescription () {
+            this.moreTherapistDescription = !this.moreTherapistDescription
+        },
+
+        toggleOfferDescription () {
+            this.moreOfferDescription = !this.moreOfferDescription
+        },
+
+        async getTherapist () {
+            this.startLoading()
+
+            let id = this.$router.history.current.params.id
+    
+            const res = await this.$api.get(`user-api/therapists/${id}/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.therapist = res.data.properties
+            }
+        },
+
+        async getOffers () {
+            this.startLoading()
+            let id = this.$router.history.current.params.id
+            let offerId = this.$router.history.current.params.offer
+    
+            const res = await this.$api.get(`/market-api/offers/all-no-token`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.offers = res.data.filter(o => o.therapist_id == id && o.status== 'Active' && o.id != offerId)
+            }
+        },
+
+        async getOffer () {
+            this.startLoading()
+            let offerId = this.$router.history.current.params.offer
+    
+            const res = await this.$api.get(`market-api/offers/${offerId}/detail`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.offer = res.data
+            }
+        },
+
         openPreviewModal (text) {
             this.selectedText = text
             this.showBtn = false

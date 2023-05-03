@@ -33,13 +33,13 @@ export default new Router({
         { path: '/signin', component: AuthSignin, name: 'signin' },
         { path: '/signup', component: SignUp, name: 'signup' },
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot' },
-        { path: '/offers/:id', component: PractitionerDetails, name: 'practitioner-details' },
 
         { path: '/client/dashboard', name: 'client-dashboard', component: ClientDashboard, beforeEnter: Guard.auth },
         { path: '/client/booking', name: 'client-booking', component: ClientBooking, beforeEnter: Guard.auth },
         { path: '/client/messages', name: 'client-messages', component: ClientMessages, beforeEnter: Guard.auth },
         { path: '/client/settings', name: 'client-settings', component: ClientSettings, beforeEnter: Guard.auth },
 
+        { path: '/practitioner/:id/:offer', component: PractitionerDetails, name: 'practitioner-details' },
         { path: '/practitioner/dashboard', name: 'practitioner-dashboard', component: PractitionerDashboard, beforeEnter: Guard.auth },
         { path: '/practitioner/booking', name: 'practitioner-booking', component: PractitionerBooking, beforeEnter: Guard.auth },
         { path: '/practitioner/messages', name: 'practitioner-messages', component: PractitionerMessages, beforeEnter: Guard.auth },

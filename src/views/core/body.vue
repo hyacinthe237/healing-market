@@ -154,7 +154,7 @@ export default {
         },
 
         openDetails (offer) {
-            this.$router.push({ name: 'practitioner-details', params: { id: offer.id } })
+            this.$router.push({ name: 'practitioner-details', params: { id: offer.therapist_id, offer: offer.id } })
         }
     },
 }

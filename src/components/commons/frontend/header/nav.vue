@@ -71,7 +71,7 @@
 
         <ul class="navbar-nav" v-if="isClient">
           <li class="nav-item">
-            <a class="nav-link pointer">
+            <a class="nav-link pointer" @click="n('client-settings')">
               <img :src="profil" alt="" style="width:30px; height:30px; border-radius:30px;margin-right:10px;">
               Welcome <span class="bold">Hyacinthe</span>
             </a>

@@ -153,7 +153,7 @@
                                 <div class="desc">
                                     <span v-show="!moreOtherService">{{ truncateString(o.description, 200) }}</span>
                                     <span v-show="moreOtherService">{{ o.description }}</span>
-                                    <span class="pointer primary bold" @click="moreOtherService = !moreOtherService">  
+                                    <span class="pointer primary bold" @click="moreOtherService = !moreOtherService"> 
                                         {{ moreOtherService ? 'Less text' : 'More text' }}</span>
                                 </div>
                                 <div class="footer">
@@ -177,9 +177,9 @@
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-secondary mr-5" @click="openSelectTimeModal()">
+                        <button type="submit" class="btn btn-secondary mr-5" @click="booknow()">
                             <i class="feather icon-bookmark"></i> Booking now</button>
-                        <button type="submit" class="btn btn-primary" @click="openSignInModal()">
+                        <button type="submit" class="btn btn-primary" @click="openchat()">
                             <i class="feather icon-message-square"></i> Chat</button>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
 
   
       <SignInModal @signup="openSignUpModal"></SignInModal>
-      <SignUpModal @signin="openSignInModal"></SignUpModal>
+      <SignUpModal @signup="getUser"></SignUpModal>
       <SelectTimeModal @continue="openCheckoutModal"></SelectTimeModal>
       <SuccessModal @open="opendash"></SuccessModal>
       <CheckoutModal @success="openSuccessModal"></CheckoutModal>
@@ -225,6 +225,7 @@
           selectedText: '',
           therapist: {},
           offer: {},
+          client: {},
           offers: [],
           femme, homme, hero,
           settings1: {
@@ -323,6 +324,43 @@
 
         toggleOfferDescription () {
             this.moreOfferDescription = !this.moreOfferDescription
+        },
+
+        booknow () {
+            if (this.isConnected) {
+                this.openSelectTimeModal()
+            }
+
+            if (!this.isConnected) {
+                this.openSignInModal()
+            }
+        },
+
+        openchat () {
+            if (this.isConnected) {
+                this.n('client-messages')
+            }
+
+            if (!this.isConnected) {
+                this.openSignInModal()
+            }
+        },
+
+        async getUser () {
+            this.startLoading()
+
+            let id = this.user.client_id
+    
+            const res = await this.$api.get(`/user-api/clients/${id}/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.client = res.data.properties
+            }
         },
 
         async getTherapist () {

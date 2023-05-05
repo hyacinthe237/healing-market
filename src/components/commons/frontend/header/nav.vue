@@ -10,8 +10,12 @@
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto padding">
-          <li class="nav-item" v-if="isLandingPage && !isConnected">
-            <a class="nav-link" href="#">Browse Services <span class="sr-only">(current)</span></a>
+          <li class="nav-item" v-if="isLandingPage">
+            <a class="nav-link pointer" @click="toggleMenus()">
+              Browse Services
+              <i class="feather icon-chevron-down" v-show="!showMenus"></i>
+              <i class="feather icon-chevron-up" v-show="showMenus"></i>
+            </a>
           </li>
           <li class="nav-item pointer" v-if="isTherapist">
             <a :class="['nav-link', isPractitionerDashboardPage ? 'active' : '']"  @click="n('practitioner-dashboard')">Dashboard</a>
@@ -95,10 +99,12 @@ export default {
   props: {
     role: {
       type: String, default: 'client'
-    }
+    },
+    categories: { type: Array, default: () => []  },
   },
   data: () => ({
-    logo, profil
+    logo, profil,
+    showMenus: false
   }),
 
   mounted () {
@@ -197,6 +203,11 @@ export default {
     signout () {
       this.$auth.logout()
     },
+
+    toggleMenus () {
+      this.showMenus = !this.showMenus
+      this.$emit('toggleMenus', this.showMenus)
+    }
   }
 }
 </script>

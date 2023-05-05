@@ -16,8 +16,10 @@ export default {
         post1, post2, post3, circle, bg, femme, homme, hero,
         offers: [],
         therapists: [],
+        categories: [],
         query: '',
         zipcode: '',
+        showMenus: false
     }),
 
     components: {
@@ -25,6 +27,7 @@ export default {
     },
 
     mounted () {
+        this.getCategories()
         this.getOffers()
         this.searchTherapists()
     },
@@ -44,6 +47,25 @@ export default {
     },
 
     methods: {
+        async getCategories () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/market-api/categories/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.categories = res.data
+            }
+        },
+
+        toggleMenus (value) {
+            this.showMenus = value
+        },
+
         async getOffers () {
             this.startLoading()
     

@@ -1,6 +1,12 @@
 <template lang="html">
   <div class="landing">
-    <Navbar v-show="!isLoading"></Navbar>
+    <Navbar v-show="!isLoading" :categories="categories" @toggleMenus="toggleMenus"></Navbar>
+    <div class="container" v-if="showMenus">
+        <div class="row mb-20">
+            <div class="col-sm-3 pointer black" v-for="category in categories" 
+            :key="category.id">{{ category.label }}</div>
+        </div>
+    </div>
     <div class="_loader" v-show="isLoading">
         <Spinners></Spinners>
     </div>

@@ -26,7 +26,7 @@ body {
     margin: 0;
     width: 100%;
     min-height: 100vh;
-    font-family: 'Montserrat Light', sans-serif;
+    font-family: 'Montserrat Regular', sans-serif;
     background-color: $body-bg;
     font-size: 18px;
     color: $titleColour;
@@ -128,6 +128,7 @@ h5 { font-size: 1.1em }
 .grey { color: $brand-grey }
 .teal { color: $brand-teal }
 .dark { color: $brand-dark }
+.black { color: black }
 .red { color: $brand-danger }
 .wise { color: $brand-wise }
 .primary { color: $brand-primary }

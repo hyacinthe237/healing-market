@@ -8,6 +8,7 @@ import CoreBody from '@/views/core/body'
 import SignUp from '@/views/core/auth/signup'
 import AuthSignin from '@/views/core/auth/signin'
 import AuthPasswordForgot from '@/views/core/auth/password-forgot'
+import Search from '@/views/core/search'
 
 import ClientDashboard from '@/views/client/dashboard/dashboard'
 import ClientBooking from '@/views/client/booking/booking'
@@ -33,6 +34,7 @@ export default new Router({
         { path: '/signin', component: AuthSignin, name: 'signin' },
         { path: '/signup', component: SignUp, name: 'signup' },
         { path: '/password-forgot', component: AuthPasswordForgot, name: 'password-forgot' },
+        { path: '/search', component: Search, name: 'search' },
 
         { path: '/client/dashboard', name: 'client-dashboard', component: ClientDashboard, beforeEnter: Guard.auth },
         { path: '/client/booking', name: 'client-booking', component: ClientBooking, beforeEnter: Guard.auth },

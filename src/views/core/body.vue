@@ -1,6 +1,13 @@
 <template lang="html">
   <div class="landing">
-    <Navbar v-show="!isLoading" :categories="categories" @toggleMenus="toggleMenus"></Navbar>
+    <Navbar 
+        v-show="!isLoading" 
+        :categories="categories" 
+        @search="searchTherapists"
+        :isSearching="searching"
+        @toggleMenus="toggleMenus"
+    ></Navbar>
+
     <div class="container" v-if="showMenus">
         <div class="row mb-20">
             <div class="col-sm-3 pointer black" v-for="category in categories" 
@@ -17,7 +24,7 @@
                 <h2>book your next</h2>
                 <h2>wellness practitioner</h2>
 
-                <form class="form-inline mt-20" @submit.prevent="searchTherapists()">
+                <form class="form-inline mt-20 _form" @submit.prevent="searchTherapists()">
                     <div class="input-group">
                         <div class="icon"><i class="feather icon-search"></i></div>
                         <input type="text" name="query" v-model="query" class="form-control" placeholder="Try Message or Back Pain" />
@@ -35,8 +42,8 @@
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
                 <div class="lists">
-                    <div class="list">Message</div>
-                    <div class="list">Browse Services</div>
+                    <div class="list" @click="selectItem(item.label)" v-for="item in lists" :key="item.id">{{ item.label }}</div>
+                    <div class="list">All</div>
                 </div>
             </div>
         </div>
@@ -67,7 +74,7 @@
 
                         <div class="care-footer">
                             <div class="price">${{ offer.price }}</div>
-                            <button class="btn btn-secondary">Book</button>
+                            <button class="btn btn-primary">Book</button>
                         </div>
                     </div>
                 </div>
@@ -150,7 +157,6 @@ export default {
 
     data: () => ({
         selectedText: '',
-        searching: false,
         seeAllOffers: false,
     }),
 

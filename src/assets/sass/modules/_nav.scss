@@ -17,21 +17,9 @@
   }
 
   .dropdown {
-    background-color: white;
-
-    &:hover .dropdown-menu {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      min-height: 300px;
-      width: 600px;
-    }
 
     .dropdown-menu {
       padding:0px;
-      display: none;
-      left: 0;
-      z-index: 1;
 
       .dropdown-item {
         font-size: 14px;

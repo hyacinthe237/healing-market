@@ -21,10 +21,20 @@ export default new Vuex.Store({
         directory: {},
         roles: [],
         breadcrumb: [],
-        toggleIcon: false
+        toggleIcon: false,
+        query: '',
+        zipcode: 0,
     },
 
     mutations: {
+        SET_QUERY (state, value) {
+            state.query = value
+        },
+
+        SET_ZIP_CODE (state, value) {
+            state.zipcode = value
+        },
+
         SET_BREADCRUMB (state, payload) {
             state.breadcrumb = payload
         },

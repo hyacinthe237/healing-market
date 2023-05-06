@@ -2,16 +2,16 @@
 <!-- Header Start -->
   <VueScrollFixedNavbar>      
     <nav class="navbar navbar-expand-lg navbar-default bg-default">
-      <div class="container">
+      <div class="container-fluid">
       <a class="navbar-brand pointer" @click="n('landing')"><img :src="logo" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="feather icon-align-justify"></span>
       </button>
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto padding">
+        <ul :class="['navbar-nav mr-auto', isSearchPage ? '' : 'padding']">
           <li class="nav-item" v-if="isLandingPage">
-            <a class="nav-link pointer" @click="toggleMenus()">
+            <a class="nav-link pointer nowrap" @click="toggleMenus()">
               Browse Services
               <i class="feather icon-chevron-down" v-show="!showMenus"></i>
               <i class="feather icon-chevron-up" v-show="showMenus"></i>
@@ -34,6 +34,23 @@
             <a :class="['nav-link', isPractitionerAnalyticsPage ? 'active' : '']" @click="n('practitioner-analytics')">Analytics</a>
           </li>
         </ul>
+        <form class="form-inline" @submit.prevent="emitSearch()" v-if="isSearchPage">
+          <div class="input-group">
+              <div class="icon"><i class="feather icon-search"></i></div>
+              <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try Message or Back Pain" />
+          </div>
+          <div class="input-group">
+              <div class="icon"><i class="feather icon-map-pin"></i></div>
+              <input 
+                  type="number" 
+                  class="form-control" 
+                  placeholder="Enter zipcode"
+                  name="zipcode"
+                  v-model="ghost.zipcode"
+              />
+          </div>
+          <button type="submit" class="btn btn-secondary">Search</button>
+      </form>
         <ul class="navbar-nav" v-if="isTherapist">
           <li class="nav-item">
             <a class="nav-link pointer">
@@ -66,18 +83,18 @@
 
         <ul class="navbar-nav" v-if="isLandingPage && !isConnected">
           <li class="nav-item">
-            <a class="nav-link pointer" @click="n('signin')">Sign in</a>
+            <a class="nav-link pointer nowrap" @click="n('signin')">Sign in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-primary pointer" @click="n('signup')">List your practice</a>
+            <a class="nav-link btn btn-primary pointer nowrap" @click="n('signup')">List your practice</a>
           </li>
         </ul>
 
         <ul class="navbar-nav" v-if="isClient">
           <li class="nav-item">
-            <a class="nav-link pointer" @click="n('client-settings')">
+            <a class="nav-link pointer nowrap" @click="n('client-settings')">
               <img :src="profil" alt="" style="width:30px; height:30px; border-radius:30px;margin-right:10px;">
-              Welcome <span class="bold">Hyacinthe</span>
+              Welcome <span class="bold">{{name}}</span>
             </a>
           </li>
         </ul>
@@ -85,6 +102,12 @@
       
       </div>
     </nav>
+    <div class="container bg-white" v-if="showMenus">
+      <div class="row mb-20">
+          <div class="col-sm-3 pointer black" v-for="category in categories" 
+          :key="category.id" @click="selectCat(category)">{{ category.label }}</div>
+      </div>
+  </div>
   </VueScrollFixedNavbar>
 </template>
 
@@ -97,17 +120,25 @@ import _ from 'lodash'
 
 export default {
   props: {
-    role: {
-      type: String, default: 'client'
-    },
+    isSearching: {  type: Boolean, default: false },
+    role: {  type: String, default: 'client' },
     categories: { type: Array, default: () => []  },
+    search: { type: Object, default: () => {}  },
   },
   data: () => ({
     logo, profil,
     showMenus: false
   }),
 
-  mounted () {
+  watch: {
+    search: {
+      immediate: true,
+      handler: function (val) {
+        if(val) {
+          this.ghost = Object.assign({}, val)
+        }
+      }
+    }
   },
 
   computed: {
@@ -119,6 +150,10 @@ export default {
       return !_.isEmpty(this.user)
     },
 
+    name () {
+      return this.user.first_name || '...'
+    },
+
     isTherapist () {
       return this.isConnected && this.user.is_therapist
     },
@@ -128,7 +163,13 @@ export default {
     },
 
     isLandingPage () {
-      return this.$route.name == 'landing' || this.$route.name == 'practitioner-details'
+      return this.$route.name == 'landing' 
+      || this.$route.name == 'practitioner-details'
+      || this.$route.name == 'search'
+    },
+
+    isSearchPage () {
+      return  this.$route.name == 'search'
     },
 
     isClientDashboardPage () {
@@ -204,9 +245,19 @@ export default {
       this.$auth.logout()
     },
 
+    emitSearch () {
+      this.$emit('search', this.ghost)
+    },
+
     toggleMenus () {
       this.showMenus = !this.showMenus
-      this.$emit('toggleMenus', this.showMenus)
+      // this.$emit('toggleMenus', this.showMenus)
+    },
+
+    selectCat (category) {
+      console.log('category', category)
+      this.ghost.query = category.label
+      this.emitSearch()
     }
   }
 }

@@ -17,9 +17,11 @@ export default {
         offers: [],
         therapists: [],
         categories: [],
+        lists: [],
         query: '',
         zipcode: '',
-        showMenus: false
+        showMenus: false,        
+        searching: false,
     }),
 
     components: {
@@ -29,16 +31,27 @@ export default {
     mounted () {
         this.getCategories()
         this.getOffers()
-        this.searchTherapists()
+        this.getTherapists()
     },
 
     computed: {
-        categories () {
-            return this.$store.state.lists['categories']
-        },
-
         user () {
             return JSON.parse(localStorage.getItem(config.get('user')))
+        },
+
+        search_query () {
+            return this.$store.state.query
+        },
+
+        search_zipcode () {
+            return this.$store.state.zipcode
+        },
+
+        searh_host () {
+            return {
+                query: this.search_query,
+                zipcode: this.search_zipcode
+            }
         },
 
         isConnected () {
@@ -59,6 +72,7 @@ export default {
             if (res) {
               this.stopLoading()
               this.categories = res.data
+              this.lists = res.data.slice(0, 5)
             }
         },
 
@@ -81,7 +95,15 @@ export default {
             }
         },
 
-        async searchTherapists () {
+        selectItem (label) {
+            let data = {
+                query: label,
+                zipcode: ''
+            }
+            this.searchTherapists(data)
+        },
+
+        async getTherapists () {
             this.startLoading()
 
             const payload = {
@@ -98,6 +120,41 @@ export default {
             if (res) {
               this.stopLoading()
               this.therapists = res.data.features
+            }
+        },
+
+        async searchTherapists (data = null) {
+            this.startLoading()
+
+            let payload = {}
+            if (data !== null) {
+                payload = {
+                    query: data.query,
+                    zipcode: data.zipcode
+                }
+                this.$store.commit('SET_QUERY', data.query)
+                this.$store.commit('SET_ZIP_CODE', data.zipcode)
+            }
+
+            if (data == null) {
+                payload = {
+                    query: this.query,
+                    zipcode: this.zipcode
+                }
+                this.$store.commit('SET_QUERY', this.query)
+                this.$store.commit('SET_ZIP_CODE', this.zipcode)
+            }
+    
+            const res = await this.$api.get(`/market-api/search/therapists/`, payload)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.therapists = res.data.features
+              this.n('search')
             }
         },
     }

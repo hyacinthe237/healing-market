@@ -21,9 +21,10 @@ export default new Vuex.Store({
         directory: {},
         roles: [],
         breadcrumb: [],
+        offers: [],
         toggleIcon: false,
         query: '',
-        zipcode: 0,
+        zipcode: '',
     },
 
     mutations: {
@@ -33,6 +34,10 @@ export default new Vuex.Store({
 
         SET_ZIP_CODE (state, value) {
             state.zipcode = value
+        },
+
+        SET_OFFERS (state, payload) {
+            state.offers = payload
         },
 
         SET_BREADCRUMB (state, payload) {

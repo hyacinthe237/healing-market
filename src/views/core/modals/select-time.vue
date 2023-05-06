@@ -5,13 +5,14 @@
     >
         <div class="main-container">
              <div class="select-date">
-                <Datepicker 
-                    :inline="true" 
+                <VueDatePicker
                     v-model="ghost.date"
-                ></Datepicker>
+                    format="YYYY-MM-DD"
+                    inline
+                />
              </div>
              <div class="content">
-                <div class="times">
+                <div class="times" v-show="ghost.date != ''">
                     <div
                         class="time" 
                         v-for="(time, index) in times" 
@@ -23,7 +24,7 @@
                 </div>
                 <div class="buttons mt-20">
                     <button class="btn btn-primary" @click="selected()">Continue</button>
-                    <button class="btn btn-outline-primary">Cancel</button>
+                    <button class="btn btn-outline-primary" @click="resetGhost()">Cancel</button>
                 </div>
              </div>
         </div>
@@ -31,7 +32,6 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker'
 export default {
     name: 'SelectTimeModal',
 
@@ -45,10 +45,6 @@ export default {
 
     mounted () {
        
-    },
-
-    components: {
-        Datepicker
     },
 
     methods: {
@@ -67,6 +63,13 @@ export default {
             this.closeAllModals()
             this.n('password-forgot')
         },
+
+        resetGhost () {
+            this.ghost = {
+                date: '',
+                time: ''
+            }
+        }
     }
 }
 </script>

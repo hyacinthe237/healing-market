@@ -26,7 +26,7 @@
                 </router-link>
             </li>
             <li>
-                <a href="" @click="signout()">
+                <a class="pointer" @click="confirmLogOut()">
                     <i class="ion-md-log-out"></i>
                     <span>{{ t('Sign out') }}</span>
                 </a>
@@ -37,6 +37,7 @@
 
 <script>
 import config from '@/services/config'
+import Swal from 'sweetalert2'
 
 export default {
     props: {
@@ -66,10 +67,26 @@ export default {
     },
 
     methods: {
+        confirmLogOut () {
+            Swal.fire({
+                // title: this.$translate.text('Are you sure ?'),
+                text: this.$translate.text("Are you sure you want to log out?"),
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: this.$translate.text('No'),
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: this.$translate.text('Yes')
+            }).then((result) => {
+                if (result.value) {
+                    this.signout()
+                }
+            })
+        },
+
         signout () {
             this.$auth.logout()
-            this.$store.commit('SET_TOGGLE_ICON', false)
-        }
+        },
     }
 }
 </script>

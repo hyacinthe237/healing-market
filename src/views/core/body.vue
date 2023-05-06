@@ -24,10 +24,10 @@
                 <h2>book your next</h2>
                 <h2>wellness practitioner</h2>
 
-                <form class="form-inline mt-20 _form" @submit.prevent="searchTherapists()">
+                <form class="form-inline mt-20 _form" @submit.prevent>
                     <div class="input-group">
                         <div class="icon"><i class="feather icon-search"></i></div>
-                        <input type="text" name="query" v-model="query" class="form-control" placeholder="Try Message or Back Pain" />
+                        <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try massage , backpain, etc" />
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="feather icon-map-pin"></i></div>
@@ -36,10 +36,10 @@
                             class="form-control" 
                             placeholder="Enter zipcode"
                             name="zipcode"
-                            v-model="zipcode"
+                            v-model="ghost.zipcode"
                         />
                     </div>
-                    <button type="submit" class="btn btn-secondary">Search</button>
+                    <button type="submit" class="btn btn-secondary" @click="searchTherapists()">Search</button>
                 </form>
                 <div class="lists">
                     <div class="list" @click="selectItem(item.label)" v-for="item in lists" :key="item.id">{{ item.label }}</div>
@@ -58,23 +58,27 @@
                 <div class="see-all bold">See all</div>
             </div>
             <div class="cares">
-                <div 
-                    class="care pointer" 
-                    @click="openDetails(offer)"
-                    v-for="offer in offers"
-                    :key="offer.id"
-                >
-                    <div class="image" :style="`background-image:url(${femme})`">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="care-content">
-                        <h6>{{ offer.title }}</h6>
-                        <div class="verified">4.6 (verified reviews)</div>
-                        <p>{{ offer.description }}</p>
+                <div class="row">
+                    <div 
+                        class="col-sm-3"
+                        @click="openDetails(offer)"
+                        v-for="offer in offers"
+                        :key="offer.id"
+                    >
+                        <div class="care pointer">
+                            <div class="image" :style="`background-image:url(${femme})`">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="care-content">
+                                <h6>{{ offer.title }}</h6>
+                                <div class="verified">4.6 (verified reviews)</div>
+                                <p>{{ offer.description }}</p>
 
-                        <div class="care-footer">
-                            <div class="price">${{ offer.price }}</div>
-                            <button class="btn btn-primary">Book</button>
+                                <div class="care-footer">
+                                    <div class="price">${{ offer.price }}</div>
+                                    <button class="btn btn-primary">Book</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

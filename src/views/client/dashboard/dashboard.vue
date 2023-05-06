@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <Navbar></Navbar>
+    <Navbar v-show="!isLoading"></Navbar>
     <div id="wrapper" v-show="!isLoading">
         <Sidebar :current="'dashboard'" />
 
@@ -8,7 +8,10 @@
             <div class="dashboard">
               <h2>Recent Booking</h2>
               <div class="bookings">
-                  <!-- <div class="booking">
+                <div class="booking empty" v-if="no_bookings">
+                  No booking for the moment
+                </div>
+                  <div class="booking" v-else>
                     <div class="name">
                       <div class="primary bold">Maryjane A Henning</div>
                       <div class="secondary">Holistic Weellness Coach</div>
@@ -16,36 +19,6 @@
                     <div class="date">
                       <i class="feather icon-calendar"></i> 22.03.2023
                     </div>
-                  </div>
-                  <div class="booking">
-                    <div class="name">
-                      <div class="primary bold">Maryjane A Henning</div>
-                      <div class="secondary">Holistic Weellness Coach</div>
-                    </div>
-                    <div class="date">
-                      <i class="feather icon-calendar"></i> 22.03.2023
-                    </div>
-                  </div>
-                  <div class="booking">
-                    <div class="name">
-                      <div class="primary bold">Maryjane A Henning</div>
-                      <div class="secondary">Holistic Weellness Coach</div>
-                    </div>
-                    <div class="date">
-                      <i class="feather icon-calendar"></i> 22.03.2023
-                    </div>
-                  </div>
-                  <div class="booking">
-                    <div class="name">
-                      <div class="primary bold">Maryjane A Henning</div>
-                      <div class="secondary">Holistic Weellness Coach</div>
-                    </div>
-                    <div class="date">
-                      <i class="feather icon-calendar"></i> 22.03.2023
-                    </div>
-                  </div> -->
-                  <div class="booking empty">
-                    No booking for the moment
                   </div>
               </div>
             </div>
@@ -70,7 +43,7 @@ export default {
     data: () => ({
         payload: {},
         shifts: [],
-        members: [],
+        bookings: [],
     }),
 
     components: { Navbar, Sidebar, Footer },
@@ -82,20 +55,23 @@ export default {
 
        isConnected () {
             return !_.isEmpty(this.user)
-        }
+        },
+      no_bookings () {
+        return this.bookings.length == 0
+      }
     },
     
     watch: { },
 
     mounted () {
-      
+      this.geBookings()
     },
 
     methods: { 
-      async getDoashboard () {
+      async geBookings () {
         this.startLoading()
 
-        const res = await this.$api.get(`/schedule-api/dashboard-event`)
+        const res = await this.$api.get(`/booking-api/clients/bookings`)
         .catch(error => {
             this.stopLoading()
             this.$swal.error('Sorry', error.response.data.error_message)
@@ -103,38 +79,7 @@ export default {
 
         if (res) {
           this.stopLoading()
-          console.log('members', res.data)
-        }
-      },
-
-      async getMembers () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/manager-team-member`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('get members error', error.response.data.error_message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
-        }
-      },
-
-      async getEmployeeDoashboard () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/users/${this.user.id}/`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error_message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          this.payload = Object.assign({}, res.data)
-          this.shifts = res.data.shifts.slice(0,2)
+          this.bookings = res.data.results
         }
       },
     }

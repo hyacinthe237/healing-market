@@ -18,8 +18,6 @@ export default {
         therapists: [],
         categories: [],
         lists: [],
-        query: '',
-        zipcode: '',
         showMenus: false,        
         searching: false,
     }),
@@ -30,7 +28,7 @@ export default {
 
     mounted () {
         this.getCategories()
-        this.getOffers()
+        // this.getOffers()
         this.getTherapists()
     },
 
@@ -111,7 +109,7 @@ export default {
                 zipcode: this.zipcode
             }
     
-            const res = await this.$api.get(`/market-api/search/therapists/`, payload)
+            const res = await this.$api.get(`/market-api/search/therapists/`, { params: payload })
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)
@@ -119,42 +117,41 @@ export default {
     
             if (res) {
               this.stopLoading()
-              this.therapists = res.data.features
+              this.offers = res.data.slice(0, 7)
             }
         },
 
         async searchTherapists (data = null) {
-            this.startLoading()
-
             let payload = {}
             if (data !== null) {
                 payload = {
                     query: data.query,
                     zipcode: data.zipcode
                 }
-                this.$store.commit('SET_QUERY', data.query)
-                this.$store.commit('SET_ZIP_CODE', data.zipcode)
+                this.$store.commit('SET_QUERY', payload.query)
+                this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             }
 
             if (data == null) {
                 payload = {
-                    query: this.query,
-                    zipcode: this.zipcode
+                    query: this.ghost.query,
+                    zipcode: this.ghost.zipcode
                 }
-                this.$store.commit('SET_QUERY', this.query)
-                this.$store.commit('SET_ZIP_CODE', this.zipcode)
+                this.$store.commit('SET_QUERY', payload.query)
+                this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             }
-    
-            const res = await this.$api.get(`/market-api/search/therapists/`, payload)
+
+            this.startLoading()
+            const res = await this.$api.get(`/market-api/search/therapists/`,  { params: payload })
             .catch(error => {
                 this.stopLoading()
-                this.$swal.error('Sorry', error.response.data.error_message)
+                this.$swal.error('Sorry', 'Please fill the ZIP code')
             })
     
             if (res) {
-              this.stopLoading()
-              this.therapists = res.data.features
-              this.n('search')
+            this.stopLoading()
+            this.offers = res.data.slice(0, 7)
+            this.n('search')
             }
         },
     }

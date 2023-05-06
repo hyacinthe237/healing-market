@@ -23,26 +23,24 @@
         <div class="container">
             <div class="section-header">
                 <h2>BOOK ONLINE HOLISTIC CARE</h2>
-                <div class="see-all bold">See all</div>
             </div>
-            <div class="cares">
+            <div class="row mt-20">
+                <!-- <div class="titre"> services</div> -->
                 <div 
-                    class="care pointer" 
-                    @click="openDetails(offer)"
-                    v-for="offer in offers"
-                    :key="offer.id"
+                    class="col-sm-12"
+                    v-for="o in offers"
+                    :key="o.id"
                 >
-                    <div class="image" :style="`background-image:url(${femme})`">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="care-content">
-                        <h6>{{ offer.title }}</h6>
-                        <div class="verified">4.6 (verified reviews)</div>
-                        <p>{{ offer.description }}</p>
-
-                        <div class="care-footer">
-                            <div class="price">${{ offer.price }}</div>
-                            <button class="btn btn-primary">Book</button>
+                    <div class="wrap">
+                        <div class="image"></div>
+                        <div class="text-wrap">
+                            <div class="name">{{ o.title }}</div>
+                            <div class="price">${{ o.price }}</div>
+                            <div class="desc">{{ truncateString(o.description, 300) }}</div>
+                            <div class="footer mt-10">
+                                <button class="btn btn-primary mr-5">View profile</button>
+                                <button class="btn btn-secondary">Book appointment</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,18 +76,29 @@ export default {
             this.$router.push({ name: 'practitioner-details', params: { id: offer.therapist_id, offer: offer.id } })
         },
 
-        async search (data) {
+        async search (data = null) {
             this.startLoading()
 
-            const payload = {
-                query: data.query,
-                zipcode: data.zipcode
+            let payload = {}
+            if (data !== null) {
+                payload = {
+                    query: data.query,
+                    zipcode: data.zipcode
+                }
+                this.$store.commit('SET_QUERY', data.query)
+                this.$store.commit('SET_ZIP_CODE', data.zipcode)
             }
 
-            this.$store.commit('SET_QUERY', data.query)
-            this.$store.commit('SET_ZIP_CODE', data.zipcode)
+            if (data == null) {
+                payload = {
+                    query: this.searh_host.query,
+                    zipcode: this.searh_host.zipcode
+                }
+                this.$store.commit('SET_QUERY', this.query)
+                this.$store.commit('SET_ZIP_CODE', this.zipcode)
+            }
     
-            const res = await this.$api.get(`/market-api/search/therapists/`, payload)
+            const res = await this.$api.get(`/market-api/search/therapists/`,  { params: payload })
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)
@@ -97,7 +106,7 @@ export default {
     
             if (res) {
               this.stopLoading()
-              this.therapists = res.data.features
+              this.offers = res.data
             }
         },
     },

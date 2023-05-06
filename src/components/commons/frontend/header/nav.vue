@@ -34,10 +34,10 @@
             <a :class="['nav-link', isPractitionerAnalyticsPage ? 'active' : '']" @click="n('practitioner-analytics')">Analytics</a>
           </li>
         </ul>
-        <form class="form-inline" @submit.prevent="emitSearch()" v-if="isSearchPage">
+        <form class="form-inline _form" @submit.prevent="emitSearch()" v-if="isSearchPage">
           <div class="input-group">
               <div class="icon"><i class="feather icon-search"></i></div>
-              <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try Message or Back Pain" />
+              <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try massage , backpain, etc" />
           </div>
           <div class="input-group">
               <div class="icon"><i class="feather icon-map-pin"></i></div>
@@ -50,7 +50,8 @@
               />
           </div>
           <button type="submit" class="btn btn-secondary">Search</button>
-      </form>
+        </form>
+        
         <ul class="navbar-nav" v-if="isTherapist">
           <li class="nav-item">
             <a class="nav-link pointer">

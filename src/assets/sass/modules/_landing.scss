@@ -50,6 +50,22 @@
       align-items: center;
       padding: 40px;
 
+      .wrap {
+          display: flex;
+          background: white;
+          padding: 1rem 1rem 1rem 1rem;
+          border-radius: 0.5rem;
+          box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+          margin-bottom: 2rem;
+
+          .image {
+            background: rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            height: 180px;
+            margin-right: 20px;
+          }
+      }
+
 
       &.bg-gray {
         background-color: #f2f2f2b6;
@@ -295,6 +311,7 @@
   display: flex;
   flex-flow: row;
   align-items: center;
+  justify-content: flex-start;
 
   button {
     border-radius: 5px;
@@ -322,8 +339,8 @@
     input{
       padding-left: 25px;
       height: 60px;
-      border-radius: 7px;
-      font-size: 18px;
+      border-radius: 10px;
+      font-size: 15px;
     }
   }
 }

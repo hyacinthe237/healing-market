@@ -13,19 +13,19 @@
                             <div class="bg-img"></div>
                             <div class="right-box">
                                 <div class="desc">
-                                    1 hour reiki session with Nathalia
+                                    1 hour to "{{ offer_title }}"
                                 </div>
                                 <div class="pract">
-                                    <span class="teal">Practitioner: </span> <span class="primary bold">Victor Ilome</span>
+                                    <span class="Black">Practitioner: </span> <span class="primary bold nowrap">{{ name }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="lines">
                             <div class="line nowrap">
-                                Date:  <span>25.03.2023</span>
+                                Date:  <span class="secondary">{{ payload.start_date | date }}</span>
                             </div>
                             <div class="line nowrap">
-                                Hour:  <span>7:30 am - 8:30 am</span>
+                                Hour:  <span class="secondary">{{ payload.start_time | amPm }}</span>
                             </div>
                         </div>
                     </div>
@@ -81,9 +81,14 @@
 <script>
 import ApiService from '@/services/api'
 import AuthService from '@/services/auth'
-import config from '../../../services/config'
 export default {
     name: 'CheckoutModal',
+
+    props: {
+        therapist: { type: Object, default: () => {} },
+        offer: { type: Object, default: () => {} },
+        payload: { type: Object, default: () => {} },
+    },
 
     data: () => ({
         ghost: {
@@ -94,7 +99,15 @@ export default {
         },
     }),
 
-    computed: {},
+    computed: {
+        name () {
+            return this.therapist.first_name + ' ' + this.therapist.last_name
+        },
+
+        offer_title () {
+            return this.offer.title
+        },
+    },
 
     methods: {
         success () {

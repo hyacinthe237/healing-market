@@ -59,7 +59,7 @@
             <p>English</p>
         </div>
 
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-head">
                 <h5 class="nowrap">Availabilities</h5>
             </div>
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <!-- <div class="card">
+        <div class="card">
             <div class="card-head">
                 <h5 class="nowrap">Specialities</h5>
                 <a class="secondary pointer nowrap" @click="addNewSpeciality()">Add new</a>

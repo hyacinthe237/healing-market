@@ -1,7 +1,7 @@
 <template lang="html">
     <main-modal 
         :id="'selectTimeModal'"
-        :title="'Select time'"
+        :title="'Select date and time'"
     >
         <div class="main-container">
              <div class="select-date">
@@ -10,16 +10,17 @@
                     :inline="true"
                 ></vue-datepicker>
              </div>
-             <div class="content">
-                <div class="times" v-show="ghost.date != ''">
-                    <div
-                        class="time" 
-                        v-for="(time, index) in times" 
-                        :key="index++" 
-                        @click="selectTime(time)"
-                    >
-                        {{ time }}
-                    </div>
+             <div class="content" v-show="showTime">
+                <h4>Select a time</h4>
+                <div class="times mt-10">
+                    <vue-datepicker
+                        v-model="ghost.time"
+                        :inline="true"
+                        :time-picker-options="timeOptions"
+                        :type="'time'"
+                        :format="'hh:mm'"
+                        :placeholder="'Select hour'"
+                    ></vue-datepicker>
                 </div>
                 <div class="buttons mt-20">
                     <button class="btn btn-primary" @click="selected()">Continue</button>
@@ -31,28 +32,84 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     name: 'SelectTimeModal',
 
+    props: {
+        therapist: { type: Object, default: () => {} },
+        offer: { type: Object, default: () => {} },
+        clientId: { type: Number, default: 0 },
+        therapistId: { type: Number, default: 0 },
+    },
+
     data: () => ({
         ghost: {
+            offer: '',
+            booker: '',
+            therapist: '',
+            start_date: '',
+            start_time: '',
             date: '',
             time: ''
         },
-        times: ['9:00 am', '10:00 am', '11:00 am', '12:00 am', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm'],
+        showTime: false,
+        timeOptions: {
+            start: '00:00', 
+            step:'00:59' , 
+            end: '23:30', 
+            format: 'HH:mm'
+        }
     }),
 
-    mounted () {
-       
+    watch: {
+       'ghost.date' (val) {
+            if (val) {
+                let day = moment(val).format('dddd')
+                this.ghost.start_date = moment(val).format('YYYY-MM-DD')
+                let filter = this.availibilities.filter(a => a.day_cut == day)[0]
+                let available = this.availibilities.map(a => a.day_cut)
+                if (filter) {
+                    this.timeOptions = {
+                        start: filter.time_cut_start, 
+                        step:'01:00' , 
+                        end: filter.time_cut_end, 
+                        format: 'HH:mm'
+                    }
+                    this.showTime = true
+                }
+                if (!filter) {
+                    this.resetGhost()
+                    this.$swal.error('Sorry', `The practitioner is not available on the selected day. The practitioner are available on ${available}`)
+                }
+            }
+       },
+       'ghost.time' (val) {
+            if (val) {
+                this.ghost.start_time = moment(val).format('HH:mm')
+            }
+       },
+    },
+
+    computed: {
+        availibilities () {
+            return this.therapist.availibilities || []
+        }
     },
 
     methods: {
         selectTime (time) {
-            this.ghost.time = time
+            this.ghost.start_time = time
         },
 
         selected () {
+            this.ghost.offer = this.offer.id
+            this.ghost.booker = this.clientId
+            this.ghost.therapist = this.therapistId
+            delete this.ghost.date
+            delete this.ghost.time
             this.$emit('continue', this.ghost)
+            this.resetGhost()
             setTimeout(() => {
                 $('#selectTimeModal').modal('hide')
             }, 150)
@@ -65,9 +122,13 @@ export default {
 
         resetGhost () {
             this.ghost = {
-                date: '',
-                time: ''
+                offer: this.offer.id,
+                booker: this.clientId,
+                therapist: this.therapistId,
+                start_date: '',
+                start_time: ''
             }
+            this.showTime = false
         }
     }
 }

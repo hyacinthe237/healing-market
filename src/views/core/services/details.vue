@@ -196,9 +196,24 @@
   
       <SignInModal @signup="openSignUpModal"></SignInModal>
       <SignUpModal @signup="getUser"></SignUpModal>
-      <SelectTimeModal @continue="openCheckoutModal"></SelectTimeModal>
-      <SuccessModal @open="opendash"></SuccessModal>
-      <CheckoutModal @success="openSuccessModal"></CheckoutModal>
+      <SelectTimeModal 
+        @continue="openCheckoutModal"
+        :offer="offer"
+        :therapist="therapist"
+        :clientId="clientId"
+        :therapistId="therapistId"
+      ></SelectTimeModal>
+      <SuccessModal 
+        @open="opendash"
+        :practitionerName="name"
+        :clientName="clientName"
+      ></SuccessModal>
+      <CheckoutModal 
+        @success="openSuccessModal"
+        :payload="payload"
+        :offer="offerSelected"
+        :therapist="therapistSelected"
+      ></CheckoutModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
   </template>
@@ -224,8 +239,12 @@
   
       data: () => ({
           selectedText: '',
+          therapistId: '',
           therapist: {},
+          therapistSelected: {},
+          payload: {},
           offer: {},
+          offerSelected: {},
           client: {},
           femme, homme, hero,
           settings1: {
@@ -257,6 +276,10 @@
           user () {
               return JSON.parse(localStorage.getItem(config.get('user')))
           },
+
+          clientId () {
+              return this.user.id
+          },
   
           isConnected () {
               return !_.isEmpty(this.user)
@@ -268,6 +291,10 @@
 
             name () {
                 return this.therapist.first_name + ' ' + this.therapist.last_name || '...'
+            },
+
+            clientName () {
+                return this.user.first_name + ' ' + this.user.last_name || this.user.email
             },
 
             address () {
@@ -413,6 +440,7 @@
             if (res) {
               this.stopLoading()
               this.therapist = res.data.properties
+              this.therapistId = res.data.id
             }
         },
 
@@ -462,7 +490,11 @@
             }, 150)
         },
 
-        openCheckoutModal () {
+        openCheckoutModal (data) {
+            console.log(data)
+            this.payload = data
+            this.therapistSelected = this.therapist
+            this.offerSelected = this.offer
             setTimeout(() => {
                 $('#checkoutModal').modal('show')
             }, 150)

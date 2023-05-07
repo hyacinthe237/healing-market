@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="reviews mt-20">
-                            <div class="icons">
+                            <div class="icons nowrap">
                                 <star-rating 
                                     :increment="0.25"
                                     :max-rating="5"
@@ -69,7 +69,7 @@
                                     @rating-selected="setRating"
                                 ></star-rating>(verified reviews)
                             </div>
-                            <div class="location"><i class="feather icon-map-pin"></i> {{ address }}</div>
+                            <div class="location nowrap"><i class="feather icon-map-pin"></i> {{ address }}</div>
                         </div>
                         <div class="passion mt-20">{{ litle_therapist_description }}</div>
                     </div>
@@ -227,7 +227,6 @@
           therapist: {},
           offer: {},
           client: {},
-          offers: [],
           femme, homme, hero,
           settings1: {
             "dots": false,
@@ -310,6 +309,10 @@
             label () {
                 return this.therapist.label || ''
             },
+
+            offers () {
+                return this.$store.state.offers
+            },
       },
 
       mounted () {
@@ -348,7 +351,6 @@
         },
 
         setRating (rating) {
-            console.log(rating, this.isConnected)
             if (this.isConnected) {
                 this.saveRating(rating)                
             }
@@ -427,7 +429,8 @@
     
             if (res) {
               this.stopLoading()
-              this.offers = res.data.filter(o => o.therapist_id == id && o.id != offerId)
+              let data = res.data.filter(o => o.therapist.id == id && o.id != offerId)
+              this.$store.commit('SET_OFFERS', data)
             }
         },
 

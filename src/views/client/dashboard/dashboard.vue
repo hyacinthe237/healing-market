@@ -79,7 +79,7 @@ export default {
 
         if (res) {
           this.stopLoading()
-          this.bookings = res.data.results
+          this.bookings = res.data
         }
       },
     }

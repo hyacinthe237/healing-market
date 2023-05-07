@@ -5,11 +5,10 @@
     >
         <div class="main-container">
              <div class="select-date">
-                <VueDatePicker
+                <vue-datepicker
                     v-model="ghost.date"
-                    format="YYYY-MM-DD"
-                    inline
-                />
+                    :inline="true"
+                ></vue-datepicker>
              </div>
              <div class="content">
                 <div class="times" v-show="ghost.date != ''">

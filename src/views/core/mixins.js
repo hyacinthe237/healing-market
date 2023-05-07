@@ -14,7 +14,6 @@ import GetStartedModal from './modals/get-started'
 export default {
     data: () => ({
         post1, post2, post3, circle, bg, femme, homme, hero,
-        offers: [],
         therapists: [],
         categories: [],
         lists: [],
@@ -43,6 +42,14 @@ export default {
 
         search_zipcode () {
             return this.$store.state.zipcode
+        },
+
+        offers () {
+            return this.$store.state.offers || []
+        },
+
+        no_offers () {
+            return this.offers.length == 0
         },
 
         searh_host () {
@@ -117,7 +124,7 @@ export default {
     
             if (res) {
               this.stopLoading()
-              this.offers = res.data.slice(0, 7)
+              this.$store.commit('SET_OFFERS', res.data.slice(0, 7))
             }
         },
 
@@ -128,8 +135,6 @@ export default {
                     query: data.query,
                     zipcode: data.zipcode
                 }
-                this.$store.commit('SET_QUERY', payload.query)
-                this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             }
 
             if (data == null) {
@@ -137,8 +142,6 @@ export default {
                     query: this.ghost.query,
                     zipcode: this.ghost.zipcode
                 }
-                this.$store.commit('SET_QUERY', payload.query)
-                this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             }
 
             this.startLoading()
@@ -150,7 +153,9 @@ export default {
     
             if (res) {
             this.stopLoading()
-            this.offers = res.data.slice(0, 7)
+            this.$store.commit('SET_OFFERS', res.data)
+            this.$store.commit('SET_QUERY', payload.query)
+            this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             this.n('search')
             }
         },

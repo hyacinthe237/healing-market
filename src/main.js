@@ -13,10 +13,10 @@ import VuePageTransition from 'vue-page-transition'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
 import InputTag from 'vue-input-tag'
-import VueDatePicker from '@mathieustan/vue-datepicker'
+import DatePicker from 'vue2-datepicker'
 
-import 'bootstrap/dist/css/bootstrap.css';
-import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'vue2-datepicker/index.css'
 
 
 import App from './App.vue'
@@ -58,9 +58,6 @@ Vue.locales({ french })
 Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
 Vue.use(VueScrollFixedNavbar)
-Vue.use(VueDatePicker, {
-  lang: 'en'
-})
 Vue.use(VeeValidate, { locale: 'en', dictionary: { en: messagesEn } })
 
 Vue.config.productionTip = false
@@ -72,6 +69,7 @@ Vue.component('Practitioner-SideBar', PractitionerSideBar)
 Vue.component('Practitioner-Offers', PractitionerOffers)
 Vue.component('messages-component', Messages)
 Vue.component('input-tag', InputTag)
+Vue.component('vue-datepicker', DatePicker)
 
 new Vue({
   router,

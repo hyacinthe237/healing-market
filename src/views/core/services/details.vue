@@ -66,6 +66,7 @@
                                     inactive-color="#000"
                                     active-color="#FF6900"
                                     :star-size="20"
+                                    @rating-selected="setRating"
                                 ></star-rating>(verified reviews)
                             </div>
                             <div class="location"><i class="feather icon-map-pin"></i> {{ address }}</div>
@@ -346,6 +347,39 @@
             }
         },
 
+        setRating (rating) {
+            console.log(rating, this.isConnected)
+            if (this.isConnected) {
+                this.saveRating(rating)                
+            }
+
+            if (!this.isConnected) {
+                this.$swal.error('Sorry', 'You need to sign in to your account first')
+            }
+        },
+
+        async saveRating (rating) {
+            this.startLoading()
+
+            let data = {
+                therapist: this.$router.history.current.params.id,
+                client: this.user.id,
+                value: rating
+            }
+    
+            const res = await this.$api.post(`/market-api/ratings/`, data)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.getTherapist()
+              this.$swal.success('Success', 'Your rating review are saved')
+            }
+        },
+
         async getUser () {
             this.startLoading()
 
@@ -393,7 +427,7 @@
     
             if (res) {
               this.stopLoading()
-              this.offers = res.data.filter(o => o.therapist_id == id && o.status== 'Active' && o.id != offerId)
+              this.offers = res.data.filter(o => o.therapist_id == id && o.id != offerId)
             }
         },
 

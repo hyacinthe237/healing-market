@@ -25,11 +25,12 @@
                 <h2>BOOK ONLINE HOLISTIC CARE</h2>
             </div>
             <div class="row mt-20">
-                <!-- <div class="titre"> services</div> -->
+                <div class="titre" v-if="no_offers">No offers found</div>
                 <div 
                     class="col-sm-12"
                     v-for="o in offers"
                     :key="o.id"
+                    v-else
                 >
                     <div class="wrap">
                         <div class="image"></div>
@@ -85,8 +86,6 @@ export default {
                     query: data.query,
                     zipcode: data.zipcode
                 }
-                this.$store.commit('SET_QUERY', data.query)
-                this.$store.commit('SET_ZIP_CODE', data.zipcode)
             }
 
             if (data == null) {
@@ -94,8 +93,6 @@ export default {
                     query: this.searh_host.query,
                     zipcode: this.searh_host.zipcode
                 }
-                this.$store.commit('SET_QUERY', this.query)
-                this.$store.commit('SET_ZIP_CODE', this.zipcode)
             }
     
             const res = await this.$api.get(`/market-api/search/therapists/`,  { params: payload })
@@ -106,7 +103,9 @@ export default {
     
             if (res) {
               this.stopLoading()
-              this.offers = res.data
+              this.$store.commit('SET_OFFERS', res.data)
+              this.$store.commit('SET_QUERY', payload.query)
+              this.$store.commit('SET_ZIP_CODE', payload.zipcode)
             }
         },
     },

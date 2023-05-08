@@ -155,7 +155,7 @@
                                     <span v-show="!moreOtherService">{{ truncateString(o.description, 200) }}</span>
                                     <span v-show="moreOtherService">{{ o.description }}</span>
                                     <span class="pointer primary bold" @click="moreOtherService = !moreOtherService"> 
-                                        {{ moreOtherService ? 'Less text' : 'More text' }}</span>
+                                        {{ moreOtherService ? 'Read less' : 'Read more' }}</span>
                                 </div>
                                 <div class="footer">
                                     <div class="price">${{ o.price }}</div>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="contact mt-20">
                         <button type="submit" class="btn btn-secondary mr-5" @click="booknow()">
-                            <i class="feather icon-bookmark"></i> Booking now</button>
+                            <i class="feather icon-bookmark"></i> Continue booking</button>
                         <button type="submit" class="btn btn-primary" @click="openchat()">
                             <i class="feather icon-message-square"></i> Chat</button>
                     </div>
@@ -286,7 +286,7 @@
           },
 
             more_text_offer () {
-                return this.moreOfferDescription ? 'Less text' : 'More text'
+                return this.moreOfferDescription ? 'Read less' : 'Read more'
             },
 
             name () {

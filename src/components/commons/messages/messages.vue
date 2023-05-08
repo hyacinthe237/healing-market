@@ -210,22 +210,39 @@
   
       components: { },
   
-      computed: {
-         user () {
+    computed: {
+        user () {
             return JSON.parse(localStorage.getItem(config.get('user')))
-         },
-  
-         isConnected () {
-              return !_.isEmpty(this.user)
-          }
-      },
+        },
+
+        isConnected () {
+            return !_.isEmpty(this.user)
+        },
+
+        last_message () {
+            return this.$store.state.chats.last_message
+        },
+        chat () {
+            return this.$store.state.chats.chat
+        },
+        chats () {
+            return this.$store.state.chats.chats
+        },
+        contacts () {
+            return this.$store.state.chats.contacts
+        },
+    },
       
       watch: { },
   
-      mounted () {},
+      mounted () {
+        this.getChats()
+        this.getLastMessage()
+        this.getContacts()
+      },
   
       methods: { 
-        async getChat () {
+        async getChats () {
             this.startLoading()
 
             const res = await this.$api.get(`/chat-api/`)
@@ -237,6 +254,51 @@
             if (res) {
             this.stopLoading()
             this.$store.commit('chats/SET_CHATS', res.data)
+            }
+        },
+
+        async getChat (id) {
+            this.startLoading()
+
+            const res = await this.$api.get(`/chat-api/${id}`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+
+            if (res) {
+            this.stopLoading()
+            this.$store.commit('chats/SET_CHAT', res.data)
+            }
+        },
+
+        async getLastMessage () {
+            this.startLoading()
+
+            const res = await this.$api.get(`/chat-api/last-message/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+
+            if (res) {
+            this.stopLoading()
+            this.$store.commit('chats/SET_LAST_MESSAGE', res.data)
+            }
+        },
+
+        async getContacts () {
+            this.startLoading()
+
+            const res = await this.$api.get(`/chat-api/contacts/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+
+            if (res) {
+            this.stopLoading()
+            this.$store.commit('chats/SET_CONTACTS', res.data)
             }
         },
       }

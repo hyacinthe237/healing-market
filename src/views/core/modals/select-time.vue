@@ -13,14 +13,11 @@
              <div class="content" v-show="showTime">
                 <h4>Select a time</h4>
                 <div class="times mt-10">
-                    <vue-datepicker
-                        v-model="ghost.time"
-                        :inline="true"
-                        :time-picker-options="timeOptions"
-                        :type="'time'"
-                        :format="'hh:mm'"
-                        :placeholder="'Select hour'"
-                    ></vue-datepicker>
+                    <div 
+                        class="time"
+                        v-for="(time, index) in tab_times"
+                        :key="index++"
+                    >{{ time | amPm }}</div>
                 </div>
                 <div class="buttons mt-20">
                     <button class="btn btn-primary" @click="selected()">Continue</button>
@@ -53,6 +50,7 @@ export default {
             date: '',
             time: ''
         },
+        tab_times: [],
         showTime: false,
         timeOptions: {
             start: '00:00', 
@@ -65,16 +63,16 @@ export default {
     watch: {
        'ghost.date' (val) {
             if (val) {
+                this.tab_times = []
                 let day = moment(val).format('dddd')
                 this.ghost.start_date = moment(val).format('YYYY-MM-DD')
                 let filter = this.availibilities.filter(a => a.day_cut == day)[0]
                 let available = this.availibilities.map(a => a.day_cut)
                 if (filter) {
-                    this.timeOptions = {
-                        start: filter.time_cut_start, 
-                        step:'01:00' , 
-                        end: filter.time_cut_end, 
-                        format: 'HH:mm'
+                    let start = filter.time_cut_start.split(':')
+                    let end = filter.time_cut_end.split(':')
+                    for(var i=start[0]; i<=end[0]; i++) {
+                        this.tab_times.push(i + ':00')
                     }
                     this.showTime = true
                 }

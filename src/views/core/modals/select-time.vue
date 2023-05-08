@@ -14,9 +14,10 @@
                 <h4>Select a time</h4>
                 <div class="times mt-10">
                     <div 
-                        class="time"
+                        :class="['time', ghost.start_time == time ? 'selected' : '']"
                         v-for="(time, index) in tab_times"
                         :key="index++"
+                        @click="selectedTime(time)"
                     >{{ time | amPm }}</div>
                 </div>
                 <div class="buttons mt-20">
@@ -47,17 +48,10 @@ export default {
             therapist: '',
             start_date: '',
             start_time: '',
-            date: '',
-            time: ''
+            date: ''
         },
         tab_times: [],
         showTime: false,
-        timeOptions: {
-            start: '00:00', 
-            step:'00:59' , 
-            end: '23:30', 
-            format: 'HH:mm'
-        }
     }),
 
     watch: {
@@ -82,11 +76,6 @@ export default {
                 }
             }
        },
-       'ghost.time' (val) {
-            if (val) {
-                this.ghost.start_time = moment(val).format('HH:mm')
-            }
-       },
     },
 
     computed: {
@@ -96,7 +85,7 @@ export default {
     },
 
     methods: {
-        selectTime (time) {
+        selectedTime (time) {
             this.ghost.start_time = time
         },
 
@@ -105,7 +94,6 @@ export default {
             this.ghost.booker = this.clientId
             this.ghost.therapist = this.therapistId
             delete this.ghost.date
-            delete this.ghost.time
             this.$emit('continue', this.ghost)
             this.resetGhost()
             setTimeout(() => {

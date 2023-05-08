@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="footer">
                                     <div class="price">${{ o.price }}</div>
-                                    <button class="btn btn-secondary">Book appointment</button>
+                                    <button class="btn btn-secondary" @click="selectedBook(offer)">Book appointment</button>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
   
       data: () => ({
           selectedText: '',
-          therapistId: '',
+          therapistId: 1,
           therapist: {},
           therapistSelected: {},
           payload: {},
@@ -278,7 +278,7 @@
           },
 
           clientId () {
-              return this.user.id
+              return this.isConnected ? this.user.id : 1
           },
   
           isConnected () {
@@ -294,7 +294,7 @@
             },
 
             clientName () {
-                return this.user.first_name + ' ' + this.user.last_name || this.user.email
+                return this.isConnected ? this.user.first_name + ' ' + this.user.last_name : ''
             },
 
             address () {
@@ -375,6 +375,11 @@
             if (!this.isConnected) {
                 this.openSignInModal()
             }
+        },
+
+        selectedBook (offer) {
+            this.offer = offer
+            this.booknow()
         },
 
         setRating (rating) {

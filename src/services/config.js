@@ -11,6 +11,8 @@ export default {
         pusher_app_key: process.env.VUE_APP_PUSHER_KEY || '2d0eda717660b1bb1f25',
         pusher_app_secret: process.env.VUE_APP_PUSHER_SECRET || '9918ad69408d3e16b03a',
         pusher_app_cluster: process.env.VUE_APP_PUSHER_CLUSTER || 'eu',
+        stripe_key: process.env.VUE_APP_STRIPE_KEY || 'pk_live_51KVhNNE4Hh3BjuasVFLe2FvSylGJgTknweKmQvfeqrI1ObQladfyM2t7A8fUqzmdyRJw9HWgVPOv2gwXVCQfP1b400Clx1yf9W',
+        stripe_account: process.env.VUE_APP_STRIPE_ACCOUNT || 'acct_1LTyiCAvIRwTcFP0',
     },
 
     get(key) {

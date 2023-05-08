@@ -39,8 +39,8 @@ export default {
     props: {
         therapist: { type: Object, default: () => {} },
         offer: { type: Object, default: () => {} },
-        clientId: { type: Number, default: 0 },
-        therapistId: { type: Number, default: 0 },
+        clientId: { type: Number, default: 1 },
+        therapistId: { type: Number, default: 1 },
     },
 
     data: () => ({

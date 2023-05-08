@@ -34,42 +34,10 @@
                         <h3>Payment</h3>
                         <div class="_head">
                             <div class="primary bold"><i class="feather icon-credit-card"></i> Credit Card</div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Provident in tempora a necessitatibus nihil 
-                                ipsam quos recusandae dicta cum doloribus.
-                            </p>
+                            <p>Your payment are processed securely through stripe secure payment gateway.</p>
                         </div>
                         <div class="mt-20">
-                            <form class="_form" @submit.prevent>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input type="text" name="card_name" v-model="ghost.card_name" placeholder="Card Name" class="form-control-modal">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input type="number" name="card_number" v-model="ghost.card_number" placeholder="Card Number" class="form-control-modal">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="number" name="expiry" v-model="ghost.expiry" placeholder="Expiry" class="form-control-modal">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="number" name="cvv" v-model="ghost.cvv" placeholder="CVV" class="form-control-modal">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 text-center">
-                                        <button type="submit" class="btn btn-secondary mt-20" @click="success()">Confirm booking</button>
-                                    </div>
-                                    
-                                </div>
-                            </form>
+                            <!-- <vue-stripe></vue-stripe> -->
                         </div>
                     </div>
                 </div>

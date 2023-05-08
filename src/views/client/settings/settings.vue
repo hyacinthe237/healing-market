@@ -6,7 +6,7 @@
 
         <div id="page-content-wrapper">
             <div class="dashboard">
-                <div class="_title">
+                <!-- <div class="_title">
                     <div class="text">
                       <h4>Account Information</h4>
                       <p>Update your account information</p>
@@ -16,20 +16,20 @@
                         <i class="feather icon-edit"></i> Edit
                       </button>
                     </div>
-                </div>
-                <form class="_form mt-20">
+                </div> -->
+                <form class="_form mt-20" @submit.prevent>
                   <h4 class="nowrap">Personnal Information</h4>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group mt-20">
                         <label for="firstname">First Name</label>
-                        <input type="text" name="firstname" v-model="ghost.firstname" placeholder="First Name" class="form-control">
+                        <input type="text" name="firstname" v-model="ghost.first_name" placeholder="First Name" class="form-control">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group mt-20">
                         <label for="lastname">Last Name</label>
-                        <input type="text" name="lastname" v-model="ghost.lastname" placeholder="Last Name" class="form-control">
+                        <input type="text" name="lastname" v-model="ghost.last_name" placeholder="Last Name" class="form-control">
                       </div>
                     </div>
 
@@ -55,6 +55,15 @@
                     </div>
 
                     <div class="col-sm-6">
+                      <button type="submit" class="btn btn-secondary mt-20" @click="saveProfile()">Update</button>
+                    </div>
+                  </div>
+                </form>
+
+                <form class="_form mt-40" @submit.prevent>
+                  <h4 class="nowrap">Modify password</h4>
+                  <div class="row">
+                    <div class="col-sm-6">
                       <div class="form-group mt-20">
                         <label for="password">New Password</label>
                         <input type="password" name="password" v-model="ghost.password" placeholder="******" class="form-control">
@@ -69,7 +78,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                      <button type="submit" class="btn btn-secondary mt-20">Update</button>
+                      <button type="submit" class="btn btn-secondary mt-20">Modify</button>
                     </div>
                   </div>
                 </form>
@@ -95,7 +104,7 @@ export default {
     data: () => ({
         payload: {},
         shifts: [],
-        members: [],
+        ghost: {}
     }),
 
     components: { Navbar, Sidebar, Footer },
@@ -112,52 +121,39 @@ export default {
     
     watch: { },
 
-    mounted () {},
+    mounted () {
+      this.getSetting()
+    },
 
     methods: { 
-      async getDoashboard () {
+      async saveProfile () {
         this.startLoading()
 
-        const res = await this.$api.get(`/schedule-api/dashboard-event`)
+        const res = await this.$api.put(`/user-api/clients/${this.user.id}/`, this.ghost)
         .catch(error => {
             this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error_message)
+            this.$swal.error('Sorry', error.response.data.error.message)
         })
 
         if (res) {
           this.stopLoading()
-          console.log('members', res.data)
+          this.$swal.success('Personnal information', 'modify as well')
+          this.ghost = res.data.properties
         }
       },
 
-      async getMembers () {
+      async getSetting () {
         this.startLoading()
 
-        const res = await this.$api.get(`/user-api/manager-team-member`)
+        const res = await this.$api.get(`/user-api/clients/${this.user.id}/`)
         .catch(error => {
             this.stopLoading()
-            this.$swal.error('get members error', error.response.data.error_message)
+            this.$swal.error('Sorry', error.response.data.error.message)
         })
 
         if (res) {
           this.stopLoading()
-          this.members = res.data.message.teamates.filter(m => m.id!== this.user.id)
-        }
-      },
-
-      async getEmployeeDoashboard () {
-        this.startLoading()
-
-        const res = await this.$api.get(`/user-api/users/${this.user.id}/`)
-        .catch(error => {
-            this.stopLoading()
-            this.$swal.error('Sorry', error.response.data.error_message)
-        })
-
-        if (res) {
-          this.stopLoading()
-          this.payload = Object.assign({}, res.data)
-          this.shifts = res.data.shifts.slice(0,2)
+          this.ghost = res.data
         }
       },
     }

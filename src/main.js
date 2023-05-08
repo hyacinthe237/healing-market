@@ -35,6 +35,7 @@ import MainModal from '@/components/commons/modals/main-modal'
 import PractitionerSideBar from '@/components/commons/practitioner/practitioner-sidebar'
 import PractitionerOffers from '@/components/commons/offers/offers'
 import Messages from '@/components/commons/messages/messages'
+import Stripe from '@/components/commons/stripe/stripe'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -70,6 +71,7 @@ Vue.component('Practitioner-Offers', PractitionerOffers)
 Vue.component('messages-component', Messages)
 Vue.component('input-tag', InputTag)
 Vue.component('vue-datepicker', DatePicker)
+Vue.component('vue-stripe', Stripe)
 
 new Vue({
   router,

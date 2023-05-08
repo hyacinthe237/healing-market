@@ -225,7 +225,20 @@
       mounted () {},
   
       methods: { 
-        
+        async getChat () {
+            this.startLoading()
+
+            const res = await this.$api.get(`/chat-api/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+
+            if (res) {
+            this.stopLoading()
+            this.$store.commit('chats/SET_CHATS', res.data)
+            }
+        },
       }
   }
   </script>

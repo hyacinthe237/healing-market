@@ -40,7 +40,7 @@
                             <div class="desc">{{ truncateString(o.description, 300) }}</div>
                             <div class="footer mt-10">
                                 <button class="btn btn-primary mr-5">View profile</button>
-                                <button class="btn btn-secondary">Book appointment</button>
+                                <button class="btn btn-secondary" @click="openDetails(o)">Book appointment</button>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ export default {
         },
 
         openDetails (offer) {
-            this.$router.push({ name: 'practitioner-details', params: { id: offer.therapist_id, offer: offer.id } })
+            this.$router.push({ name: 'practitioner-details', params: { id: offer.therapist.id, offer: offer.id } })
         },
 
         async search (data = null) {

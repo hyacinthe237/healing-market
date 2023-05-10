@@ -13,6 +13,7 @@ export default {
         pusher_app_cluster: process.env.VUE_APP_PUSHER_CLUSTER || 'eu',
         stripe_key: process.env.VUE_APP_STRIPE_KEY || 'pk_live_51KVhNNE4Hh3BjuasVFLe2FvSylGJgTknweKmQvfeqrI1ObQladfyM2t7A8fUqzmdyRJw9HWgVPOv2gwXVCQfP1b400Clx1yf9W',
         stripe_account: process.env.VUE_APP_STRIPE_ACCOUNT || 'acct_1IMgMoD0JaUAVNhk',
+        web_socket_root: process.env.VUE_APP_WEB_SOCKET_ROOT || 'wss://healing-market.herokuapp.com/ws/chatroom/',
     },
 
     get(key) {

@@ -5,69 +5,88 @@ export default {
     namespaced: true,
 
     state: {
-        user: {},
-        users: [],
-        user_actions: [],
-        more_actions: false,
+        client: {},
+        clients: [],
+        therapist: {},
+        therapists: [],
     },
 
     mutations: {
-        SET_USER (state, payload) {
-            state.user = payload
+        SET_CLIENT (state, payload) {
+            state.client = payload
         },
 
-        SET_USERS (state, payload) {
-            state.users = payload
+        SET_CLIENTS (state, payload) {
+            state.clients = payload
         },
 
-        SET_USER_ACTIONS (state, payload) {
-            state.user_actions = payload
+        SET_THERAPIST (state, payload) {
+            state.therapist = payload
         },
 
-        SET_MORE_ACTIONS (state, value) {
-            state.more_actions = value
+        SET_THERAPISTS (state, payload) {
+            state.therapists = payload
         },
     },
 
     actions: {
-        async getUsers ({ commit }) {
-            const response = await ApiService.get(`/api/accounts/list`)
+        async getClients ({ commit }) {
+            const response = await ApiService.get(`/user-api/clients/`)
                 .catch(error => console.log(error.response.data.errors))
 
-            commit('SET_USERS', response.data)
+            commit('SET_CLIENTS', response.data.results)
         },
 
-        async getUserActions ({ commit }, payload) {
-            const response = await ApiService.get(`/api/users/actions`,  { params: payload })
+        async getClient ({ commit }, id) {
+            const response = await ApiService.get(`/user-api/clients/${id}/`)
                 .catch(error => console.log(error.response.data.errors))
 
-            commit('SET_USER_ACTIONS', response.data.actions)
-            commit('SET_MORE_ACTIONS', response.data.more)
+            commit('SET_CLIENT', response.data)
         },
 
-        async getUser ({ commit }, id) {
-            const response = await ApiService.get(`api/accounts/${id}/update`)
-                .catch(error => console.log(error.response.data.errors))
+        async updateClient ({ state, commit }, client) {
+            let clients = state.clients.slice()
 
-            commit('SET_USER', response.data)
-        },
-
-        async updateUser ({ state, commit }, user) {
-            let users = state.users.slice()
-
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].id === user.id) {
-                    users[i] = user
+            for (var i = 0; i < clients.length; i++) {
+                if (clients[i].id === client.id) {
+                    clients[i] = client
                 }
             }
 
-            commit('SET_USERS', users)
+            commit('SET_CLIENTS', clients)
+        },
+
+        async getTherapists ({ commit }) {
+            const response = await ApiService.get(`/user-api/therapists/`)
+                .catch(error => console.log(error.response.data.errors))
+
+            commit('SET_CLIENTS', response.data.results)
+        },
+
+        async getTherapist ({ commit }, id) {
+            const response = await ApiService.get(`/user-api/therapists/${id}/`)
+                .catch(error => console.log(error.response.data.errors))
+
+            commit('SET_CLIENT', response.data)
+        },
+
+        async updateTherapist ({ state, commit }, therapist) {
+            let therapists = state.therapists.slice()
+
+            for (var i = 0; i < therapists.length; i++) {
+                if (therapists[i].id === therapist.id) {
+                    therapists[i] = therapist
+                }
+            }
+
+            commit('SET_THERAPISTS', therapists)
         },
     },
 
     getters: {
-        getUser: state => state.user,
-        getUsers: state => state.users,
-        getUserActions: state => state.user_actions,
+        getClient: state => state.client,
+        getClients: state => state.clients,
+        getTherapist: state => state.therapist,
+        getTherapists: state => state.therapists,
     }
 }

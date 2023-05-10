@@ -20,9 +20,9 @@
                         @click="selectedTime(time)"
                     >{{ time | amPm }}</div>
                 </div>
-                <div class="buttons mt-20">
-                    <button class="btn btn-primary" @click="selected()">Continue</button>
+                <div class="buttons mt-20">                    
                     <button class="btn btn-outline-primary" @click="resetGhost()">Cancel</button>
+                    <button class="btn btn-primary" @click="selected()">Continue</button>
                 </div>
              </div>
         </div>
@@ -57,7 +57,7 @@ export default {
     watch: {
        'ghost.date' (val) {
             if (val) {
-                this.tab_times = []
+                this.tab_times = new Array()
                 let day = moment(val).format('dddd')
                 this.ghost.start_date = moment(val).format('YYYY-MM-DD')
                 let filter = this.availibilities.filter(a => a.day_cut == day)[0]
@@ -112,9 +112,11 @@ export default {
                 booker: this.clientId,
                 therapist: this.therapistId,
                 start_date: '',
+                date: '',
                 start_time: ''
             }
             this.showTime = false
+            this.tab_times = new Array()
         }
     }
 }

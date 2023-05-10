@@ -31,14 +31,7 @@
                     </div>
     
                     <div class="payment-details">
-                        <h3>Payment</h3>
-                        <div class="_head">
-                            <div class="primary bold"><i class="feather icon-credit-card"></i> Credit Card</div>
-                            <p>Your payment are processed securely through stripe secure payment gateway.</p>
-                        </div>
-                        <div class="mt-20">
-                            <!-- <vue-stripe></vue-stripe> -->
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -65,6 +58,10 @@ export default {
             password: '',
             confirm_password: ''
         },
+        token: null,
+        cardNumber: null,
+        cardExpiry: null,
+        cardCvc: null,
     }),
 
     computed: {
@@ -77,13 +74,10 @@ export default {
         },
     },
 
+    mounted () {
+    },
+
     methods: {
-        success () {
-            this.$emit('success')
-            setTimeout(() => {
-                $('#checkoutModal').modal('hide')
-            }, 150)
-        },
 
         /**
          * User signs in

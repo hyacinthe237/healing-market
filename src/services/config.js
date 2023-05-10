@@ -12,7 +12,7 @@ export default {
         pusher_app_secret: process.env.VUE_APP_PUSHER_SECRET || '9918ad69408d3e16b03a',
         pusher_app_cluster: process.env.VUE_APP_PUSHER_CLUSTER || 'eu',
         stripe_key: process.env.VUE_APP_STRIPE_KEY || 'pk_live_51KVhNNE4Hh3BjuasVFLe2FvSylGJgTknweKmQvfeqrI1ObQladfyM2t7A8fUqzmdyRJw9HWgVPOv2gwXVCQfP1b400Clx1yf9W',
-        stripe_account: process.env.VUE_APP_STRIPE_ACCOUNT || 'acct_1LTyiCAvIRwTcFP0',
+        stripe_account: process.env.VUE_APP_STRIPE_ACCOUNT || 'acct_1IMgMoD0JaUAVNhk',
     },
 
     get(key) {

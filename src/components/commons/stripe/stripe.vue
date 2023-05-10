@@ -1,50 +1,33 @@
 <template>
-    <div>
-      <stripe-checkout
-        ref="checkoutRef"
-        mode="subscription"
-        :pk="publishableKey"
-        :line-items="lineItems"
-        :success-url="successURL"
-        :cancel-url="cancelURL"
-        @loading="v => loading = v"
-      />
-      <button @click="submit">Subscribe!</button>
-    </div>
-  </template>
-  
-  <script>
-  import { StripeCheckout } from '@vue-stripe/vue-stripe';
-  import config from '@/services/config'
-  export default {
-    name: 'StripeCheckout',
+  <div>
+    <stripe-checkout
+      ref="checkoutRef"
+      :pk="publishableKey"
+      :session-id="sessionId"
+    />
+    <button @click="submit">Checkout!</button>
+  </div>
+</template>
 
-    components: {
-      StripeCheckout,
+<script>
+import config from '@/services/config'
+import { StripeCheckout } from '@vue-stripe/vue-stripe';
+export default {
+  components: {
+    StripeCheckout,
+  },
+  data () {
+    this.publishableKey = config.get('stripe_key');
+    return {
+      loading: false,
+      sessionId: config.get('token'), // session id from backend
+    };
+  },
+  methods: {
+    submit () {
+      // You will be redirected to Stripe's secure checkout page
+      this.$refs.checkoutRef.redirectToCheckout();
     },
-
-    data: () => ({
-        loading: false,
-        lineItems: [
-          {
-            price: 'some-price-id', // The id of the recurring price you created in your Stripe dashboard
-            quantity: 1,
-          },
-        ],
-        successURL: 'your-success-url',
-        cancelURL: 'your-cancel-url',
-    }),
-
-    computed: {
-        publishableKey () {
-            return config.get('stripe_key')
-        }
-    },
-    methods: {
-      submit () {
-        // You will be redirected to Stripe's secure checkout page
-        this.$refs.checkoutRef.redirectToCheckout();
-      },
-    },
-  };
-  </script>
+  },
+};
+</script>

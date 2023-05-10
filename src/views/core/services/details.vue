@@ -297,6 +297,14 @@
                 return this.isConnected ? this.user.first_name + ' ' + this.user.last_name : ''
             },
 
+            clientEmail () {
+                return this.isConnected ? this.user.email : ''
+            },
+
+            therapistEmail () {
+                return this.therapist.email
+            },
+
             address () {
                 return this.therapist.address || ''
             },
@@ -369,7 +377,7 @@
 
         openchat () {
             if (this.isConnected) {
-                this.n('client-messages')
+                this.createChat()
             }
 
             if (!this.isConnected) {
@@ -389,6 +397,26 @@
 
             if (!this.isConnected) {
                 this.$swal.error('Sorry', 'You need to sign in to your account first')
+            }
+        },
+
+        async createChat () {
+            this.startLoading()
+
+            let data = {
+                name: `Chat ${this.clientEmail} for ${this.offer_title}`,
+                participants: new Array(this.clientEmail, this.therapistEmail)
+            }
+    
+            const res = await this.$api.post(`/chat-api/create-chat/`, data)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.detail)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.n('client-messages')
             }
         },
 

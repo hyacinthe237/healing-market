@@ -11,15 +11,20 @@
                 <div class="booking empty" v-if="no_bookings">
                   No booking for the moment
                 </div>
-                  <div class="booking" v-else>
-                    <div class="name">
-                      <div class="primary bold">Maryjane A Henning</div>
-                      <div class="secondary">Holistic Weellness Coach</div>
-                    </div>
-                    <div class="date">
-                      <i class="feather icon-calendar"></i> 22.03.2023
-                    </div>
-                  </div>
+                <div 
+                class="booking" 
+                v-else
+                v-for="booking in bookings"
+                :key="booking.id"
+              >
+                <div class="name">
+                  <div class="primary bold">{{ booking.therapist }}</div>
+                  <div class="secondary">{{ booking.therapist_email }}</div>
+                </div>
+                <div class="date">
+                  <i class="feather icon-calendar"></i> {{ booking.created_at | date }}
+                </div>
+              </div>
               </div>
             </div>
         </div>

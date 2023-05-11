@@ -22,16 +22,31 @@
                         </div>
                         <div class="lines">
                             <div class="line nowrap">
-                                Date:  <span class="secondary">{{ payload.start_date | date }}</span>
+                                Date:  <span class="secondary">{{ payload.start_date }}</span>
                             </div>
                             <div class="line nowrap">
-                                Hour:  <span class="secondary">{{ payload.start_time | amPm }}</span>
+                                Hour:  <span class="secondary">{{ payload.start_time }}</span>
                             </div>
                         </div>
                     </div>
     
                     <div class="payment-details">
-                        
+                        <h3>Payment</h3>
+                        <div class="_head">
+                            <div class="primary bold"><i class="feather icon-credit-card"></i> Credit Card</div>
+                            <p>Your payment are processed securely through stripe secure payment gateway.</p>
+                        </div>
+                        <div class="form-group mt-20" v-show="!isLoading">
+                            <stripe-element-payment
+                                ref="elementRef"
+                                :pk="pk"
+                                :elements-options="elementsOptions"
+                                :confirm-params="confirmParams"
+                            />
+                            <button class="btn btn-primary" @click="payer()">
+                                Confirm booking
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,8 +55,8 @@
 </template>
 
 <script>
-import ApiService from '@/services/api'
-import AuthService from '@/services/auth'
+import { StripeElementPayment } from '@vue-stripe/vue-stripe'
+import config from '@/services/config'
 export default {
     name: 'CheckoutModal',
 
@@ -49,6 +64,7 @@ export default {
         therapist: { type: Object, default: () => {} },
         offer: { type: Object, default: () => {} },
         payload: { type: Object, default: () => {} },
+        stripe: { type: Object, default: () => {} },
     },
 
     data: () => ({
@@ -58,11 +74,25 @@ export default {
             password: '',
             confirm_password: ''
         },
-        token: null,
-        cardNumber: null,
-        cardExpiry: null,
-        cardCvc: null,
+        elementsOptions: {},
+        confirmParams: {
+            return_url: '',
+        },
     }),
+
+    components: { StripeElementPayment },
+
+    watch: {
+        stripe: {
+            immediate: true,
+            handler: function (val) {
+                if (val) {
+                    this.elementsOptions.clientSecret = val.client_secret
+                    this.confirmParams.return_url = `${this.$config.get('front_url')}`
+                }
+            }
+        }
+    },
 
     computed: {
         name () {
@@ -72,54 +102,19 @@ export default {
         offer_title () {
             return this.offer.title
         },
+
+        pk () {
+            return config.get('stripe_key')
+        },
     },
 
     mounted () {
     },
 
     methods: {
-
-        /**
-         * User signs in
-         * @return {void}
-         */
-        async signup () {
-            if (this.ghost.username == '' || this.ghost.password == '') {
-                this.$swal.error('Validation warning', 'Username & Password inputs are mandatory')
-            }
-
-            if (this.ghost.username !== '' && this.ghost.password !== '') {
-                this.isLoading = true
-
-                const response = await this.$api.post('user-api/login/', this.ghost)
-                    .catch(error => {
-                        this.isLoading = false
-                        console.log('error => ', error.response.data.error)
-                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.error))
-                    })
-                
-                
-                if (response) {
-                    let data = response.data
-                    AuthService.setUser(data.user)
-
-                    const res = await this.$api.apiToken(this.ghost)
-                    .catch(err => {
-                        this.isLoading = false
-                        console.log('token error', err.response.data)
-                    })
-                    if (res) {
-                        this.isLoading = false
-                        AuthService.setToken(res.data.access)
-                        ApiService.setToken(res.data.access)
-
-                        // Set Refresh token
-                        AuthService.setRefreshToken(res.data.refresh)
-                        this.n('dashboard')
-                    }
-                }
-            }
-            
+        payer () {
+            this.startLoading()
+            this.$refs.paymentRef.submit();
         },
     }
 }

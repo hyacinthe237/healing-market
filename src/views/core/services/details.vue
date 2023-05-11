@@ -178,10 +178,10 @@
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-secondary mr-5" @click="booknow()">
-                            <i class="feather icon-bookmark"></i> Continue booking</button>
-                        <button type="submit" class="btn btn-primary" @click="openchat()">
-                            <i class="feather icon-message-square"></i> Chat</button>
+                        <button type="submit" class="btn btn-secondary mr-5 nowrap" @click="booknow()">
+                            <i class="feather icon-bookmark mr-1"></i> Continue booking</button>
+                        <button type="submit" class="btn btn-primary nowrap" @click="openchat()">
+                            <i class="feather icon-message-square mr-1"></i> Chat</button>
                     </div>
                 </div>
               </div>
@@ -197,7 +197,7 @@
       <SignInModal @signup="openSignUpModal"></SignInModal>
       <SignUpModal @signup="getUser"></SignUpModal>
       <SelectTimeModal 
-        @continue="openCheckoutModal"
+        @continue="createBooking"
         :offer="offer"
         :therapist="therapist"
         :clientId="clientId"
@@ -213,6 +213,7 @@
         :payload="payload"
         :offer="offerSelected"
         :therapist="therapistSelected"
+        :stripe="stripe"
       ></CheckoutModal>
       <Footer :isConnected="isConnected"></Footer>
     </div>
@@ -244,6 +245,7 @@
           therapistSelected: {},
           payload: {},
           offer: {},
+          stripe: {},
           offerSelected: {},
           client: {},
           femme, homme, hero,
@@ -397,6 +399,38 @@
 
             if (!this.isConnected) {
                 this.$swal.error('Sorry', 'You need to sign in to your account first')
+            }
+        },
+
+        async getBookingClientKey (data) {
+            this.startLoading()
+            let booking = JSON.parse(localStorage.getItem('booking'))
+            const res = await this.$api.post(`/booking-api/bookings/${booking.id}/pay`, data)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.detail)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.stripe = res.data
+              this.openCheckoutModal(booking)
+            }
+        },
+
+        async createBooking (data) {
+            this.startLoading()
+    
+            const res = await this.$api.post(`/booking-api/bookings/`, data)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.detail)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              localStorage.setItem('booking', JSON.stringify(res.data))
+              this.getBookingClientKey({payment_method: 'stripe'})
             }
         },
 

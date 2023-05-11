@@ -1,32 +1,41 @@
 <template>
   <div>
-    <stripe-checkout
-      ref="checkoutRef"
-      :pk="publishableKey"
-      :session-id="sessionId"
+    <stripe-element-card
+      ref="elementRef"
+      :pk="pk"
+      :testMode="true"
+      @token="tokenCreated"
     />
-    <button @click="submit">Checkout!</button>
+    <button @click="submit" class="btn btn-secondary mt-20 text-right">Confirm booking</button>
   </div>
 </template>
 
 <script>
 import config from '@/services/config'
-import { StripeCheckout } from '@vue-stripe/vue-stripe';
+import { StripeElementCard  } from '@vue-stripe/vue-stripe';
 export default {
   components: {
-    StripeCheckout,
+    StripeElementCard,
   },
-  data () {
-    this.publishableKey = config.get('stripe_key');
-    return {
-      loading: false,
-      sessionId: config.get('token'), // session id from backend
-    };
-  },
+  data: () => ({
+      pk: config.get('stripe_key'),
+      elementsOptions: {
+        appearance: {}, // appearance options
+      },
+      confirmParams: {
+        return_url: 'http://localhost:8080/success', // success url
+      },
+      token: null,
+  }),
   methods: {
     submit () {
-      // You will be redirected to Stripe's secure checkout page
-      this.$refs.checkoutRef.redirectToCheckout();
+      // this will trigger the process
+      this.$refs.elementRef.submit();
+    },
+    tokenCreated (token) {
+      console.log(token);
+      // handle the token
+      // send it to your server
     },
   },
 };

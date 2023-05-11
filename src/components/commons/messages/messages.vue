@@ -8,15 +8,20 @@
             </div>
             </div>
             <div class="discussions-list">
-                <div class="discussion message-active">
+                <div 
+                    class="discussion message-active"
+                    v-for="chat in chats"
+                    :key="chat.id"
+                    @click="selectChat(chat)"
+                >
                     <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
                     <!-- <div class="online"></div> -->
                     </div>
                     <div class="desc-contact">
-                        <p class="name">Megan Leib</p>
-                        <p class="message">9 pm at the bar if possible 😳</p>
+                        <p class="name nowrap">{{ chat.name }}</p>
+                        <p class="message">{{ chat.messages? chat.messages.slice(-1) : '' }}</p>
                     </div>
-                    <div class="timer">
+                    <div class="timer" v-if="chat.messages.length">
                         <span>14:00</span>
                         <div class="_notif mt-10">
                             <span>1</span>
@@ -31,7 +36,7 @@
                 <div class="gauche">
                     <div class="photo"></div>
                     <div class="text">
-                    <div class="name">{{ name }}</div>
+                    <div class="name">{{ selected.name }}</div>
                     <div class="on"><span></span> Online</div>
                     </div>
                 </div>
@@ -93,12 +98,15 @@
             <p class="time"> 15h09</p>
             </div>
             <div class="footer-chat">
-            <form class="_form" v-show="displaychat">
+            <form class="_form" v-show="displaychat" @submit.prevent="sendMessage()">
                 <div class="input-group">
-                <!-- <div class="icon">
-                    <i class="feather icon-paperclip" aria-hidden="true"></i>
-                </div> -->
-                <input type="text" class="form-control" placeholder="Type your message here"/>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="message" 
+                    v-model="ghost.message" 
+                    placeholder="Type your message here"
+                />
                 </div>
             </form>
             </div>
@@ -112,8 +120,10 @@
   
   export default {
       data: () => ({
-          payload: {},
+          selected: {},
+          ghost: { message: ''},
           displaychat: false,
+          connection: null,
       }),
   
       components: { },
@@ -151,6 +161,7 @@
         this.getChats()
         this.getLastMessage()
         this.getContacts()
+        this.displaychat = false
       },
   
       methods: { 
@@ -160,12 +171,12 @@
             const res = await this.$api.get(`/chat-api/`)
             .catch(error => {
                 this.stopLoading()
-                this.$swal.error('Sorry', error.response.data.error.message)
+                this.$swal.error('Sorry Chats', error.response.data.chat.messages)
             })
 
             if (res) {
             this.stopLoading()
-            this.$store.commit('chats/SET_CHATS', res.data)
+            this.$store.commit('chats/SET_CHATS', res.data.results)
             }
         },
 
@@ -175,7 +186,7 @@
             const res = await this.$api.get(`/chat-api/${id}`)
             .catch(error => {
                 this.stopLoading()
-                this.$swal.error('Sorry', error.response.data.error.message)
+                this.$swal.error('SorryChat ', error.response.data.detail)
             })
 
             if (res) {
@@ -190,7 +201,7 @@
             const res = await this.$api.get(`/chat-api/last-message/`)
             .catch(error => {
                 this.stopLoading()
-                this.$swal.error('Sorry', error.response.data.error.message)
+                this.$swal.error('Sorry Last Message', error.response.data.detail)
             })
 
             if (res) {
@@ -205,7 +216,7 @@
             const res = await this.$api.get(`/chat-api/contacts/`)
             .catch(error => {
                 this.stopLoading()
-                this.$swal.error('Sorry', error.response.data.error.message)
+                this.$swal.error('Sorry Contacts', error.response.data.etail)
             })
 
             if (res) {
@@ -213,7 +224,44 @@
             this.$store.commit('chats/SET_CONTACTS', res.data)
             }
         },
-      }
+
+        selectChat (chat) {
+            this.displaychat = true
+            this.selected = chat
+        },
+
+        sendMessage () {
+            if (this.ghost.message == '') {
+                this.$swal.error('Validation warning', 'Fill the message')
+            }
+            if (this.ghost.message !== '') {
+                const socket = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
+                let data = {
+                    command: 'new_message', 
+                    from: this.clientEmail,
+                    message: this.ghost.image,
+                    chatId: this.selected.id 
+                }
+                console.log(this.connection)
+                this.connection.send(data)
+            }
+        }
+      },
+
+    //   created () {
+    //     this.connection = new WebSocket(`${config.get('web_socket_root')}`)
+    //     console.log('Starting conncection to websocket server', this.connection)
+        
+    //     this.connection.onopen = function (event) {
+    //         console.log(event)
+    //         console.log('success')
+    //     }
+
+    //     this.connection.onmessage = function (event) {
+    //         console.log(event)
+    //         console.log('success')
+    //     }
+    //   }
   }
   </script>
   

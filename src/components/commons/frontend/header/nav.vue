@@ -251,6 +251,7 @@ export default {
     selectCat (category) {
       console.log('category', category)
       this.ghost.query = category.label
+      this.showMenus = !this.showMenus
       this.emitSearch()
     },
 

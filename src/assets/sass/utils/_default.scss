@@ -339,6 +339,22 @@ h5 { font-size: 1.1em }
     min-height: 100vh;
 }
 
+.empty {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 80vh;
+
+    i {
+        font-size: 100px;
+        color:$primary;
+    }
+
+    font-size: 72px;
+}
+
 .abanda-list {
     display: flex;
     flex-direction: column;

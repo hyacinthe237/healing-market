@@ -21,26 +21,26 @@
 
     <section class="section-home" v-show="!isLoading">
         <div class="container-fluid">
-            <div class="section-header">
+            <div class="section-header" v-if="!no_offers">
                 <h2>BOOK ONLINE HOLISTIC CARE</h2>
             </div>
             <div class="row mt-20">
-                <div class="titre" v-if="no_offers">No offers found</div>
+                <vue-empty v-if="no_offers" />
                 <div 
-                    class="col-sm-6"
+                    class="col-sm-12"
                     v-for="o in offers"
                     :key="o.id"
                     v-else
                 >
-                    <div class="wrap">
+                    <div class="wrap" @click="openDetails(o)">
                         <div class="image"></div>
                         <div class="text-wrap">
-                            <h4 class="mt-10">{{ o.title }}</h4>
+                            <h4 class="mt-10 nowrap">{{ o.title }}</h4>
                             <div class="price primary">${{ o.price }}</div>
                             <p class="desc">{{ truncateString(o.description, 100) }}</p>
                             <div class="footer mt-10">
                                 <button class="btn btn-primary mr-5 nowrap">View profile</button>
-                                <button class="btn btn-secondary nowrap" @click="openDetails(o)">Book</button>
+                                <button class="btn btn-secondary nowrap">Book</button>
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,9 @@
                             placeholder="First name" 
                             class="form-control"
                             v-validate="'required'"
+                            :data-vv-as="t('first name')"
                         >
+                        <v-error :name="'first_name'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
                         <input 
@@ -52,7 +54,9 @@
                             placeholder="Last name" 
                             class="form-control"
                             v-validate="'required'"
+                            :data-vv-as="t('last name')"
                         >
+                        <v-error :name="'last_name'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
                         <input 
@@ -63,6 +67,7 @@
                             class="form-control"
                             v-validate="'required'"
                         >
+                        <v-error :name="'email'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
                         <input 
@@ -73,15 +78,15 @@
                             class="form-control"
                             v-validate="'required'"
                         >
+                        <v-error :name="'phone'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
                         <input 
                             type="text" 
                             name="facebook" 
-                            v-model="ghost.facebok" 
+                            v-model="ghost.facebook" 
                             placeholder="Your facebook link" 
                             class="form-control"
-                            v-validate="'required'"
                         >
                     </div>
                     <div class="form-group">
@@ -92,7 +97,9 @@
                             placeholder="Fill your password" 
                             class="form-control"
                             v-validate="'required'"
+                            :data-vv-as="t('password')"
                         >
+                        <v-error :name="'password1'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
                         <input 
@@ -102,7 +109,9 @@
                             placeholder="Confirm your password" 
                             class="form-control"
                             v-validate="'required|confirmed:password'"
+                            :data-vv-as="t('password')"
                         >
+                        <v-error :name="'password2'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" @click="signup()">Apply Now</button>
                 </form>
@@ -171,6 +180,9 @@
           },
 
           async signup () {
+            const isValid = await this.$validator.validate()
+            if (!isValid) return false
+
             this.isLoading = true
 
             const response = await this.$api.post('rest-auth/registration/', this.ghost)

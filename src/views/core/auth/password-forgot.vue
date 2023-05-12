@@ -13,7 +13,12 @@
 
           <form class="mt-20 _form signup-form" @submit.prevent="send()">
               <div class="form-group">
-                  <input type="text" name="email" placeholder="Email address" class="form-control" v-model="ghost.email">
+                  <input 
+                    type="text" name="email" placeholder="Email address" class="form-control" 
+                    v-model="ghost.email"
+                    v-validate="'required'"
+                  >
+                  <v-error :name="'email'" :err="errors" :show="showErrors"></v-error>
               </div>
               <div class="bouton">
                 <button type="submit" class="btn btn-primary mt-20 pointer">Send</button>

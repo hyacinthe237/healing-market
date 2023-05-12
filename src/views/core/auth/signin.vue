@@ -13,10 +13,12 @@
 
           <form class="_form signup-form mt-20" @submit.prevent>
               <div class="form-group">
-                  <input type="email" name="email" v-model="ghost.email" placeholder="Email" class="form-control">
+                  <input type="email" name="email" v-model="ghost.email" placeholder="Email" class="form-control" v-validate="'required'">
+                  <v-error :name="'email'" :err="errors" :show="showErrors"></v-error>
               </div>
               <div class="form-group mt-20">
-                  <input type="password" name="password" v-model="ghost.password" placeholder="********" class="form-control">
+                  <input type="password" name="password" v-model="ghost.password" placeholder="********" class="form-control" v-validate="'required'">
+                  <v-error :name="'password'" :err="errors" :show="showErrors"></v-error>
               </div>
               <div class="forgot pointer" @click="n('password-forgot')">Password forgot ?</div>
               <div class="bouton">
@@ -62,29 +64,26 @@ export default {
          * @return {void}
          */
         async signin () {
-            if (this.ghost.email == '' || this.ghost.password == '') {
-                this.$swal.error('Validation warning', 'Email and password inputs are mandatory')
-            }
+            const isValid = await this.$validator.validate()
+            if (!isValid) return false
 
-            if (this.ghost.email !== '' && this.ghost.password !== '') {
-                this.isLoading = true
+            this.isLoading = true
 
-                const response = await this.$api.post('/user-api/custom/login', this.ghost)
-                    .catch(error => {
-                        this.isLoading = false
-                        console.log('error => ', error.response.data.error)
-                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.message))
-                    })
-                
-                
-                if (response) {
+            const response = await this.$api.post('/user-api/custom/login', this.ghost)
+                .catch(error => {
                     this.isLoading = false
-                    let data = response.data
-                    AuthService.setUser(data)
-                    AuthService.setToken(data.key)
-                    ApiService.setToken(data.key)
-                    this.n('practitioner-dashboard')
-                }
+                    console.log('error => ', error.response.data.error)
+                    this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.message))
+                })
+            
+            
+            if (response) {
+                this.isLoading = false
+                let data = response.data
+                AuthService.setUser(data)
+                AuthService.setToken(data.key)
+                ApiService.setToken(data.key)
+                this.n('practitioner-dashboard')
             }
             
         },

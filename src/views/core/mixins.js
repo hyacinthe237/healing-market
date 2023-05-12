@@ -77,7 +77,7 @@ export default {
             if (res) {
               this.stopLoading()
               this.categories = res.data
-              this.lists = res.data.slice(0, 5)
+              this.lists = res.data.slice(0, 7)
             }
         },
 

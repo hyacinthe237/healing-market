@@ -198,16 +198,12 @@
             border: 1px solid #fff;
         }
 
-        input[type="file"] {
-            
-        }
-
         .form-control {
             background-color: white;
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: none;
             color: $brand-dark;
-            font-size: 14px;
+            font-size: 24px;
 
             &.vue-input-tag-wrapper {
                 height: 50px;
@@ -336,40 +332,16 @@
             background-color: white;            
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: none;
-            color: $brand-dark;
-            font-size: 16px;
-            justify-content: flex-start;
-            padding-left: 30px;
-            margin-top: -10px;
+            color:  black;
+            font-size: 22px;
+            padding-left: 50px;
+            // text-align: center;
             border-radius: 10px;
-
-            &.no-border-right { border-right: none; }
-            &.no-border-left { border-left: none; }
-
-            &.dark { color: $brand-dark; }
-
-            &.form-control-lg { font-size: 14px; }
         }
-
-        // .icon {
-        //     width:30px;
-        //     height:30px;
-        //     border-radius: 30px;
-        //     display: flex;
-        //     justify-content: center;
-        //     align-items: center;
-        //     background-color: white;
-        //     z-index: 9;
-        //     margin-right: -35px;
-        //     margin-top: -25px
-
-        //     i {
-        //         font-size: 12px;
-        //     }
-        // }
 
         .input-group-append {
             margin-top: -10px;
+
             .input-group-text {
                 background-color: transparent;
                 color: $brand-dark;
@@ -377,8 +349,7 @@
                 justify-content: flex-end;
                 padding:0px;
                 margin:0px;
-
-                &.teal { color: $brand-teal; }
+                height: 60px
             }
         }
     }

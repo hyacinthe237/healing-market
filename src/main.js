@@ -36,6 +36,7 @@ import PractitionerSideBar from '@/components/commons/practitioner/practitioner-
 import PractitionerOffers from '@/components/commons/offers/offers'
 import Messages from '@/components/commons/messages/messages'
 import Stripe from '@/components/commons/stripe/stripe'
+import InlineForm from '@/components/commons/inline-form/inline-form'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -72,6 +73,7 @@ Vue.component('messages-component', Messages)
 Vue.component('input-tag', InputTag)
 Vue.component('vue-datepicker', DatePicker)
 Vue.component('vue-stripe', Stripe)
+Vue.component('vue-inline-form', InlineForm)
 
 new Vue({
   router,

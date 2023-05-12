@@ -5,8 +5,8 @@
 
   .section-hero {
     width: 100%;
-    min-height: 375px;
-    padding: 50px;
+    height: 375px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -16,6 +16,8 @@
     background-position: center;
 
     .content {
+      width: 100%;
+
       h2 {
         text-transform: uppercase;
         color: white;
@@ -25,17 +27,17 @@
         display: flex;
         flex-direction: row;
         margin-top: 20px;
+        overflow:scroll;
   
         .list {
           padding: 10px;
-          background-color: $brand-teal;
-          color: white;
-          border: white solid 2px;
+          background-color: white;
+          color: black;
+          border: black solid 1px;
           text-align: center;
           margin-right: 10px;
           border-radius: 50px;
-          font-weight: bold;
-          font-size: 12px;
+          font-size: 15px;
           cursor:pointer;
           white-space: nowrap;
         }
@@ -113,7 +115,6 @@
         }
 
         p {
-          font-size: 14px;
           min-width: 55%;
         }
 
@@ -127,7 +128,6 @@
       p {
           margin-top: 20px;
           color: black;
-          font-size: 18px;
           text-align: justify;
       }
 
@@ -191,10 +191,6 @@
                     text-transform: capitalize;
                     font-weight: bold;
                     font-size: 16px;
-                }
-
-                p {
-                  font-size: 14px;
                 }
               }
           }
@@ -269,7 +265,6 @@
                 }
 
                 p {
-                  font-size: 14px;
                   color: black;
                   text-align: left;
                   margin-top: -2px;
@@ -306,88 +301,6 @@
   }
 }
 
-/* Style the form - display items horizontally */
-.form-inline {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: flex-start;
-
-  button {
-    border-radius: 5px;
-    height: 60px;
-  }
-
-  .input-group {
-    margin-right: 10px;
-    
-
-    .icon {
-      z-index: 9;
-      position: relative;
-      margin-right: -22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      i{
-        color: $primary;
-        font-size: 18px;
-      }
-    }
-
-    input{
-      padding-left: 25px;
-      height: 60px;
-      border-radius: 10px;
-      font-size: 15px;
-    }
-  }
-}
-
-
-@media (max-width: 560px) {
-  /* Style the form - display items horizontally */
-  .form-inline {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-
-    button {
-      border-radius: 5px;
-      width: 100%;
-    }
-
-    .input-group {
-      margin-right: 5px;
-      margin-bottom: 20px;
-      display: flex;
-      flex-direction: row;
-      
-
-      .icon {
-        z-index: 9;
-        position: relative;
-        margin-bottom: -40px;
-        margin-left: 6px;
-
-        i{
-          color: $primary;
-          font-size: 16px;
-        }
-      }
-
-      input{
-        padding-left: 25px;
-        height: 40px;
-        border-radius: 7px;
-        font-size: 12px;
-        width: 300px;
-      }
-    }
-  }
-}
-
 @media (max-width: 560px) {
   .landing {
     width: 100%;
@@ -401,56 +314,19 @@
   
       .content {
     
-        /* Style the form - display items horizontally */
-        .form-inline {
-          display: flex;
-          flex-flow: row wrap;
-          align-items: center;
-  
-          button {
-            border-radius: 5px;
-            width: 100%;
-          }
-    
-          .input-group {
-            margin-right: 5px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: row;
-            
-    
-            .icon {
-              z-index: 9;
-              position: relative;
-              margin-bottom: -40px;
-              margin-left: 6px;
-  
-              i{
-                color: $primary;
-                font-size: 16px;
-              }
-            }
-    
-            input{
-              padding-left: 25px;
-              height: 40px;
-              border-radius: 7px;
-              font-size: 12px;
-              width: 300px;
-            }
-          }
-        }
-    
         .lists {
+          width: 100%;
           display: flex;
-          flex-direction: column;
-          margin-top: 20px;
+          flex-direction: row;
+          margin-top: 10px;
+          justify-content: center;
+          overflow-x:scroll;
     
           .list {
-            padding: 5px;
-            background-color: $brand-teal;
-            color: white;
-            border: white solid 2px;
+            padding: 8px;
+            background-color: white;
+            color: black;
+            border: black solid 1px;
             text-align: center;
             margin-right: 10px;
             border-radius: 50px;
@@ -515,7 +391,7 @@
         }
 
         p {
-          font-size: 14px;
+          font-size: 18px;
         }
 
         .img {
@@ -542,7 +418,7 @@
         .see-all {
             z-index: 9;
             color: $brand-presumi;
-            font-size: 14px;
+            font-size: 16px;
             cursor:pointer;
             white-space: nowrap;
         }
@@ -591,7 +467,7 @@
                 }
 
                 p {
-                  font-size: 14px;
+                  font-size: 16px;
                 }
               }
           }
@@ -651,8 +527,7 @@
               }
 
               p {
-                font-size: 14px;
-                color: $brand-teal;
+                font-size: 18px;
                 text-align: left;
                 margin-top: -2px;
               }
@@ -667,7 +542,7 @@
 
                 .price {
                   color: $brand-presumi;
-                  font-size: 16px;
+                  font-size: 22px;
                   font-weight: bold;
                 }
 

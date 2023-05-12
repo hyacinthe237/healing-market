@@ -19,28 +19,12 @@
     </div>
 
     <section class="section-hero" :style="`background-image:url(${hero})`" v-show="!isLoading">
-        <div class="container">
+        <div class="container-fluid">
             <div class="content">
                 <h2>book your next</h2>
-                <h2>wellness practitioner</h2>
+                <h2 class="mb-40">wellness practitioner</h2>
 
-                <form class="form-inline mt-20 _form" @submit.prevent>
-                    <div class="input-group">
-                        <div class="icon"><i class="feather icon-search"></i></div>
-                        <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try massage , backpain, etc" />
-                    </div>
-                    <div class="input-group">
-                        <div class="icon"><i class="feather icon-map-pin"></i></div>
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            placeholder="Enter zipcode"
-                            name="zipcode"
-                            v-model="ghost.zipcode"
-                        />
-                    </div>
-                    <button type="submit" class="btn btn-secondary" @click="searchTherapists()">Search</button>
-                </form>
+                <vue-inline-form @search="searchTherapists"></vue-inline-form>
                 <div class="lists">
                     <div class="list" @click="selectItem(item.label)" v-for="item in lists" :key="item.id">{{ item.label }}</div>
                     <div class="list">All</div>

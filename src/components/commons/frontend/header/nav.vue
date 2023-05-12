@@ -34,23 +34,11 @@
             <a :class="['nav-link', isPractitionerAnalyticsPage ? 'active' : '']" @click="n('practitioner-analytics')">Analytics</a>
           </li>
         </ul>
-        <form class="form-inline _form" @submit.prevent="emitSearch()" v-if="isSearchPage">
-          <div class="input-group">
-              <div class="icon"><i class="feather icon-search"></i></div>
-              <input type="text" name="query" v-model="ghost.query" class="form-control" placeholder="Try massage , backpain, etc" />
-          </div>
-          <div class="input-group">
-              <div class="icon"><i class="feather icon-map-pin"></i></div>
-              <input 
-                  type="number" 
-                  class="form-control" 
-                  placeholder="Enter zipcode"
-                  name="zipcode"
-                  v-model="ghost.zipcode"
-              />
-          </div>
-          <button type="submit" class="btn btn-secondary">Search</button>
-        </form>
+
+        <vue-inline-form 
+          @search="emitSearch" 
+          v-if="isSearchPage"
+        ></vue-inline-form>
         
         <ul class="navbar-nav" v-if="isTherapist">
           <li class="nav-item">
@@ -105,7 +93,7 @@
     </nav>
     <div class="container bg-white" v-if="showMenus">
       <div class="row mb-20">
-          <div class="col-sm-3 pointer black" v-for="category in categories" 
+          <div class="col-sm-3 pointer black" v-for="category in cats" 
           :key="category.id" @click="selectCat(category)">{{ category.label }}</div>
       </div>
   </div>
@@ -128,7 +116,8 @@ export default {
   },
   data: () => ({
     logo, profil,
-    showMenus: false
+    showMenus: false,
+    cats: []
   }),
 
   watch: {
@@ -224,6 +213,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.getCats()
+  },
+
   methods: {
     confirmLogOut () {
       Swal.fire({
@@ -259,7 +252,22 @@ export default {
       console.log('category', category)
       this.ghost.query = category.label
       this.emitSearch()
-    }
+    },
+
+    async getCats () {
+      this.startLoading()
+
+      const res = await this.$api.get(`/market-api/categories/`)
+      .catch(error => {
+          this.stopLoading()
+          this.$swal.error('Sorry', error.response.data.error_message)
+      })
+
+      if (res) {
+        this.stopLoading()
+        this.cats = res.data.reverse()
+      }
+    },
   }
 }
 </script>

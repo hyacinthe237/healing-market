@@ -29,8 +29,8 @@
                 </div>
 
                 <div class="form-group mt-20">
-                    <label for="tags">tags</label>
-                    <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control"></input-tag>
+                    <label for="tags">Tags</label>
+                    <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control-modal"></input-tag>
                 </div>
 
                 <div class="form-group">
@@ -58,7 +58,7 @@ export default {
             price: '',
             category: '',
             image: '',
-            tag: '',
+            tags: [],
         },
     }),
 
@@ -95,9 +95,30 @@ export default {
                 
                 if (response) {
                     this.isLoading = false
+                    let data = response.data
                     this.$swal.success('Success', 'New offer added')
-                    this.closer()                  
+                    this.saveTags(data.id)                  
                 }
+            }
+        },
+
+        async saveTags (id) {
+            this.isLoading = true
+            let payload = { tags: this.ghost.tags }
+
+            const response = await this.$api.post(`/market-api/offers/${id}/add-tags`, payload)
+                .catch(error => {
+                    this.isLoading = false
+                    console.log('error => ', error.response.data.error)
+                    this.$swal.error('Sorry', error.response.data.message)
+                })
+            
+            
+            if (response) {
+                this.isLoading = false
+                this.$swal.success('Success', 'New tags added to offer')
+                
+                this.closer()                  
             }
         },
 

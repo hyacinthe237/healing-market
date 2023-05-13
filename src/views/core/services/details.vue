@@ -297,7 +297,7 @@
             },
 
             clientName () {
-                return this.isConnected ? this.user.first_name + ' ' + this.user.last_name : ''
+                return this.isConnected ? this.user.email : ''
             },
 
             clientEmail () {

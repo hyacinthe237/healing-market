@@ -155,7 +155,10 @@ export default {
                 if (response) {
                     this.stopLoading()
                     this.$swal.error('Success', 'We are receive your booking checkout')
-                    console.log(response)
+                    setTimeout(() => {
+                        this.closeAllModals()
+                        this.$emit('success')
+                    }, 2000)
                 }
         },
     }

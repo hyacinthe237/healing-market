@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import ChatsModule from './modules/chats'
 import UsersModule from './modules/users'
+import TagsModule from './modules/tags'
 
 Vue.use(Vuex)
 
@@ -35,5 +36,6 @@ export default new Vuex.Store({
     modules: {
         chats: ChatsModule,
         users: UsersModule,
+        tags: TagsModule,
     }
 })

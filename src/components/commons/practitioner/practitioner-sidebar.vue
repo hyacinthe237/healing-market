@@ -54,9 +54,17 @@
 
             <div class="card-head mt-10">
                 <h5 class="nowrap">Language</h5>
-                <!-- <a href="" class="secondary pointer nowrap">Add new</a> -->
+                <a @click="addNewCategory()" class="secondary pointer nowrap">Add new</a>
             </div>
-            <p>English</p>
+            <div class="skills mt-20" v-if="languages.length>0">
+                <div class="skill" v-for="c in languages" :key="c.id">
+                    <div class="icon"><i class="feather icon-check"></i></div>
+                    <span class="nowrap">{{ c.name }}</span>
+                </div>
+            </div>
+            <div class="skills mt-20" v-else>
+                <div><span class="nowrap">No language found</span></div>
+            </div>
         </div>
 
         <div class="card">
@@ -120,6 +128,10 @@
 
         created_at () {
             return moment(this.currentUser.created_at).fromNow() || '...'
+        },
+
+        languages () {
+            return this.currentUser.languages || []
         },
 
       },

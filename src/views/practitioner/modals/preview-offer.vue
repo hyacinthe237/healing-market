@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="category">Offer category</label><br/>
-                    <label for="category">{{ ghost.category }}</label>
+                    <label for="category">{{ ghost.category.label }}</label>
                 </div>
             </form>
             <div class="_loader" v-show="isLoading">

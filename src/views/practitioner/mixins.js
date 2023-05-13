@@ -74,7 +74,7 @@ export default {
         async geBookings () {
             this.startLoading()
     
-            const res = await this.$api.get(`/booking-api/clients/bookings`)
+            const res = await this.$api.get(`/booking-api/therapists/bookings`)
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)
@@ -182,11 +182,12 @@ export default {
               
               if (response) {
                   this.isLoading = false
-                  this.categories = response.data.results                  
+                  this.categories = response.data                
               }            
           },
   
           openAddOfferModal () {
+              this.selectedcats = this.categories
               setTimeout(() => {
                   $('#addOfferModal').modal('show')
               }, 150)

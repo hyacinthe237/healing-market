@@ -65,14 +65,18 @@
       </div>
   
       <AddCategoryModal 
-        @added="getCategories" 
-        :categories="categories"
+        @added="getUser"         
+        :therapistId="therapistId"
       ></AddCategoryModal>
 
       <AddTagModal @added="getTags"></AddTagModal>
       <EditTagModal @edited="getTags" :tag="payload"></EditTagModal>
 
-      <AddOfferModal @added="getOffers" :categories="categories" :therapistId="therapistId"></AddOfferModal>
+      <AddOfferModal 
+        @added="getOffers" 
+        :categories="categories" 
+        :therapistId="therapistId"
+      ></AddOfferModal>
       <EditOfferModal 
         @edited="getOffers" 
         :categories="categories" 
@@ -95,22 +99,11 @@
   import TherapistMixins from '../mixins'
   
   export default {
-      
-      data: () => ({
-          
-      }),
-
       mixins: [TherapistMixins],
-      
-      watch: { },
-  
+
       mounted () {
-        
+        this.getCategories()
       },
-  
-      methods: { 
-        
-      }
   }
   </script>
   

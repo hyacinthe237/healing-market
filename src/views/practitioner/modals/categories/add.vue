@@ -1,24 +1,14 @@
 <template lang="html">
     <main-modal 
         :id="'addCategoryModal'"
-        :title="'Select your category'"
+        :title="'Fill your language'"
     >
         <div class="">
             <form class="_form" v-show="!isLoading" @submit.prevent="saveCategory()">
-                <!-- <div class="form-group">
-                    <label for="title">Category label</label>
-                    <input type="text" name="title" v-model="ghost.label" placeholder="Category label" class="form-control-modal">
-                </div>                 -->
-                <div class="form-group">
-                    <label for="category">Select your category</label>
-                    <select name="category[]" id="parentCategory" class="form-control-modal" v-model="ghost.category" multiple>
-                        <option v-for="c in categories" :value="c.id" :key="c.id">{{ c.label }}</option>
-                    </select>
+                <div class="form-group mt-20">
+                    <label for="tags">Language</label>
+                    <input-tag v-model="ghost.languages" placeholder="Add a language" class="form-control-modal"></input-tag>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" v-model="ghost.description" cols="30" rows="5" class="form-control-modal"></textarea>
-                </div> -->
                 <button type="submit" class="btn btn-secondary uppercase">Save</button>
             </form>
             <div class="_loader" v-show="isLoading">
@@ -33,12 +23,12 @@ export default {
     name: 'AddCategoryModal',
 
     props: {
-        categories: { type: Array, default: () => [] }
+        therapistId: { type: Number, default: 1 }
     },
 
     data: () => ({
         ghost: {
-            category: []
+            languages: []
         },
     }),
 
@@ -53,14 +43,14 @@ export default {
         },
 
         async saveCategory () {              
-            if (this.ghost.category == '') {
+            if (this.ghost.languages == '') {
                 this.$swal.error('Validation warning', 'Please select one category before saving')
             }
 
-            if (this.ghost.label !== '') {
+            if (this.ghost.languages !== '') {
                 this.isLoading = true
-
-                const response = await this.$api.post('/market-api/therapists/add-categories', this.ghost)
+                
+                const response = await this.$api.post(`/user-api/therapists/${this.therapistId}/add-languages`, this.ghost)
                     .catch(error => {
                         this.isLoading = false
                         console.log('error => ', error.response.data.error)
@@ -70,7 +60,7 @@ export default {
                 
                 if (response) {
                     this.isLoading = false
-                    this.$swal.success('Success', 'New category added')
+                    this.$swal.success('Success', 'New language added')
                     this.closer()                  
                 }
             }            

@@ -15,7 +15,7 @@
 
       <div class="droite">
         <div class="dashboard">
-          <form class="_form mt-20 mb-20" @submit.prevent="saveProfile()">
+          <form class="_form mt-20 mb-20" @submit.prevent>
             <h4 class="nowrap">Personnal Information</h4>
             <div class="row">
               <div class="col-sm-6">
@@ -151,7 +151,7 @@
               </div>
 
               <div class="col-sm-6">
-                <button type="submit" class="btn btn-secondary mt-20">Update</button>
+                <button type="submit" class="btn btn-secondary mt-20" @click="saveProfile()">Update</button>
               </div>
             </div>
           </form>

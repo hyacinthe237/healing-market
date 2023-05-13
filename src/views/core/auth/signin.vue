@@ -16,10 +16,37 @@
                   <input type="email" name="email" v-model="ghost.email" placeholder="Email" class="form-control" v-validate="'required'">
                   <v-error :name="'email'" :err="errors" :show="showErrors"></v-error>
               </div>
-              <div class="form-group mt-20">
-                  <input type="password" name="password" v-model="ghost.password" placeholder="********" class="form-control" v-validate="'required'">
-                  <v-error :name="'password'" :err="errors" :show="showErrors"></v-error>
-              </div>
+              <div class="form-group row-pass">
+                <input 
+                    v-if="showPassword"
+                    type="text" 
+                    name="password" 
+                    v-model="ghost.password" 
+                    placeholder="Password" 
+                    class="form-control"
+                    v-validate="'required'"
+                    :data-vv-as="t('password')"
+                >
+                <input 
+                    v-else
+                    type="password" 
+                    name="password" 
+                    v-model="ghost.password" 
+                    placeholder="Password" 
+                    class="form-control"
+                    v-validate="'required'"
+                    :data-vv-as="t('password')"
+                >
+                <div class="input-group-append" @click="togglePassword()">
+                    <span class="input-group-text" v-if="showPassword">
+                      <i class="feather icon-eye-off"></i>
+                    </span>
+                    <span class="input-group-text pointer" v-else>
+                      <i class="feather icon-eye"></i>
+                    </span>
+                </div>
+                <v-error :name="'password'" :err="errors" :show="showErrors"></v-error>
+            </div>
               <div class="forgot pointer" @click="n('password-forgot')">Password forgot ?</div>
               <div class="bouton">
                 <button type="submit" class="btn btn-primary mt-20 pointer" @click="signin()">Sign In</button>
@@ -51,7 +78,8 @@ export default {
             email: '',
             password: ''
         },
-        logo, background
+        logo, background,
+        showPassword: false,
     }),
 
     components: { pendingModal },
@@ -59,6 +87,9 @@ export default {
     computed: {},
 
     methods: {
+        togglePassword () {
+            this.showPassword = !this.showPassword
+          },
         /**
          * User signs in
          * @return {void}

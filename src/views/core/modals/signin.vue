@@ -9,8 +9,35 @@
                     <input type="email" name="email" v-model="ghost.email" placeholder="Email" class="form-control" v-validate="'required'">
                     <v-error :name="'email'" :err="errors" :show="showErrors"></v-error>
                 </div>
-                <div class="form-group mt-20">
-                    <input type="password" name="password" v-model="ghost.password" placeholder="********" class="form-control" v-validate="'required'">
+                <div class="form-group row-pass">
+                    <input 
+                        v-if="showPassword"
+                        type="text" 
+                        name="password" 
+                        v-model="ghost.password" 
+                        placeholder="Password" 
+                        class="form-control"
+                        v-validate="'required'"
+                        :data-vv-as="t('password')"
+                    >
+                    <input 
+                        v-else
+                        type="password" 
+                        name="password" 
+                        v-model="ghost.password" 
+                        placeholder="Password" 
+                        class="form-control"
+                        v-validate="'required'"
+                        :data-vv-as="t('password')"
+                    >
+                    <div class="input-group-append" @click="togglePassword()">
+                        <span class="input-group-text" v-if="showPassword">
+                          <i class="feather icon-eye-off"></i>
+                        </span>
+                        <span class="input-group-text pointer" v-else>
+                          <i class="feather icon-eye"></i>
+                        </span>
+                    </div>
                     <v-error :name="'password'" :err="errors" :show="showErrors"></v-error>
                 </div>
                 
@@ -39,11 +66,15 @@ export default {
             email: '',
             password: ''
         },
+        showPassword: false,
     }),
 
     computed: {},
 
     methods: {
+        togglePassword () {
+            this.showPassword = !this.showPassword
+        },
         /**
          * User signs in
          * @return {void}
@@ -62,18 +93,26 @@ export default {
             
             
             if (response) {
+                this.isLoading = false
                 let data = response.data
                 AuthService.setUser(data)
                 AuthService.setToken(data.key)
                 ApiService.setToken(data.key)
                 this.closeAllModals()
-                this.n('client-dashboard')
+                this.emitSignin()
             }
             
         },
 
         signup () {
             this.$emit('signup')
+            setTimeout(() => {
+                $('#signInModal').modal('hide')
+            }, 150)
+        },
+
+        emitSignin () {
+            this.$emit('signin')
             setTimeout(() => {
                 $('#signInModal').modal('hide')
             }, 150)

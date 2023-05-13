@@ -51,20 +51,50 @@
                     >
                     <v-error :name="'phone'" :err="errors" :show="showErrors"></v-error>
                 </div>
-                <div class="form-group">
+                <div class="form-group row-pass">
                     <input 
-                        type="password" 
+                        v-if="showPassword"
+                        type="text" 
                         name="password1" 
                         v-model="ghost.password1" 
-                        placeholder="Fill your password" 
+                        placeholder="Password" 
                         class="form-control"
                         v-validate="'required'"
                         :data-vv-as="t('password')"
                     >
+                    <input 
+                        v-else
+                        type="password" 
+                        name="password2" 
+                        v-model="ghost.password1" 
+                        placeholder="Password" 
+                        class="form-control"
+                        v-validate="'required'"
+                        :data-vv-as="t('password')"
+                    >
+                    <div class="input-group-append" @click="togglePassword()">
+                        <span class="input-group-text" v-if="showPassword">
+                          <i class="feather icon-eye-off"></i>
+                        </span>
+                        <span class="input-group-text pointer" v-else>
+                          <i class="feather icon-eye"></i>
+                        </span>
+                    </div>
                     <v-error :name="'password1'" :err="errors" :show="showErrors"></v-error>
                 </div>
                 <div class="form-group">
                     <input 
+                        v-if="showPassword"
+                        type="text" 
+                        name="password2" 
+                        v-model="ghost.password2" 
+                        placeholder="Confirm your password" 
+                        class="form-control"
+                        v-validate="'required|confirmed:password'"
+                        :data-vv-as="t('password')"
+                    >
+                    <input 
+                        v-else
                         type="password" 
                         name="password2" 
                         v-model="ghost.password2" 
@@ -73,8 +103,10 @@
                         v-validate="'required|confirmed:password'"
                         :data-vv-as="t('password')"
                     >
+
                     <v-error :name="'password2'" :err="errors" :show="showErrors"></v-error>
                 </div>
+                
                 <button type="submit" class="btn btn-secondary uppercase">Sign Up</button>
 
                 <div class="link mt-20">Have an account? <span @click="signin()" class="primary pointer">Sign In</span></div>
@@ -87,8 +119,6 @@
 </template>
 
 <script>
-import ApiService from '@/services/api'
-import AuthService from '@/services/auth'
 export default {
     name: 'SignUpModal',
 
@@ -102,7 +132,8 @@ export default {
             password2: '',
             is_client: true,
             is_therapist: false
-        },
+        },        
+        showPassword: false,
     }),
 
     computed: {},
@@ -111,6 +142,10 @@ export default {
         closer () {
             this.closeAllModals()
             this.$emit('signup')
+        },
+
+        togglePassword () {
+            this.showPassword = !this.showPassword
         },
 
         /**
@@ -131,11 +166,7 @@ export default {
                 })
             
             
-            if (response) {
-                let data = response.data
-                AuthService.setUser(data)
-                AuthService.setToken(data.key)
-                ApiService.setToken(data.key)
+            if (response.data) {
                 this.closer()
             }
             

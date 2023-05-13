@@ -50,7 +50,7 @@
     &.btn {
       color: white;
       border-radius: 5px;
-      max-width: 200px;
+      width: 200px;
     }
   }
 
@@ -65,5 +65,22 @@
 @media (max-width: 560px) {
   nav {
     margin:0;
+  }
+
+  .navbar-default {
+    background-color: white;
+  
+    .padding {padding-left: 0px;}
+
+    a {
+      font-size: 18px;
+  
+      &.btn {
+        color: white;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 18px;
+      }
+    }
   }
 }

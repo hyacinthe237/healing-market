@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="_checkout-modal modal animated fadeIn" id="checkoutModal">
-        <div class="_preview-dialog" role="document">
+        <div class="_preview-dialog" role="document" v-show="!isLoading">
             <div class="_preview-content">
                 <div class="close" @click="closeAllModals()">
                     <i class="feather icon-x"></i>
@@ -37,25 +37,33 @@
                             <p>Your payment are processed securely through stripe secure payment gateway.</p>
                         </div>
                         <div class="form-group mt-20" v-show="!isLoading">
-                            <stripe-element-payment
-                                ref="elementRef"
+                            <stripe-element-card
+                                ref="paymentRef"
                                 :pk="pk"
                                 :elements-options="elementsOptions"
                                 :confirm-params="confirmParams"
+                                :hidePostalCode="true"
+                                :testMode="true"
+                                @token="tokenCreated"
                             />
-                            <button class="btn btn-primary" @click="payer()">
-                                Confirm booking
-                            </button>
+                            <div class="mt-20 text-right">
+                                <button class="btn btn-primary" @click="payer()">
+                                    Confirm booking
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="_loader" v-show="isLoading">
+            <Spinners></Spinners>
+        </div>
     </div>
 </template>
 
 <script>
-import { StripeElementPayment } from '@vue-stripe/vue-stripe'
+import { StripeElementCard   } from '@vue-stripe/vue-stripe'
 import config from '@/services/config'
 export default {
     name: 'CheckoutModal',
@@ -80,7 +88,7 @@ export default {
         },
     }),
 
-    components: { StripeElementPayment },
+    components: { StripeElementCard  },
 
     watch: {
         stripe: {
@@ -88,7 +96,7 @@ export default {
             handler: function (val) {
                 if (val) {
                     this.elementsOptions.clientSecret = val.client_secret
-                    this.confirmParams.return_url = `${this.$config.get('front_url')}`
+                    this.confirmParams.return_url = `${this.$config.get('front_url')}checkout/success`
                 }
             }
         }
@@ -106,6 +114,10 @@ export default {
         pk () {
             return config.get('stripe_key')
         },
+
+        booking () {
+            return JSON.parse(localStorage.getItem('booking'))
+        },
     },
 
     mounted () {
@@ -113,8 +125,38 @@ export default {
 
     methods: {
         payer () {
-            this.startLoading()
             this.$refs.paymentRef.submit();
+        },
+
+        tokenCreated (token) {
+            console.log(token);
+            // handle the token
+            // send it to your server
+            let id = token.id
+            setTimeout(() => {
+                this.chargeBooking(id)
+            }, 3000)
+            
+        },
+
+        async chargeBooking (token) {
+            this.startLoading()
+            
+            let payload = {
+                'status': token,
+                'booking_id': this.booking.id
+            }
+            const response = await this.$api.post(`/booking-api/bookings/charge-confirm`, payload)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('Sorry', error.response.data.message)
+                })
+
+                if (response) {
+                    this.stopLoading()
+                    this.$swal.error('Success', 'We are receive your booking checkout')
+                    console.log(response)
+                }
         },
     }
 }

@@ -281,13 +281,14 @@
 
                 p {
                   color: black;
-                  text-align: left;
+                  // text-align: left;
                   margin-top: -2px;
                   word-wrap: break-word;
+                  word-spacing: -.2ch;
                   overflow-wrap: break-word;
                   overflow: hidden;
-                  max-height: 3.6em;
-                  line-height: 1.2em;
+                  max-height: 4em;
+                  line-height: 1em;
                   text-align: justify;
                   text-overflow: ellipsis;
                 }

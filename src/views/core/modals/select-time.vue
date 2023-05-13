@@ -3,7 +3,7 @@
         :id="'selectTimeModal'"
         :title="'Select date and time'"
     >
-        <div class="main-container">
+        <div class="main-container" v-show="!isLoading">
              <div class="select-date">
                 <vue-datepicker
                     v-model="ghost.date"
@@ -25,6 +25,9 @@
                     <button class="btn btn-primary" @click="selected()">Continue</button>
                 </div>
              </div>
+        </div>
+        <div class="_loader" v-show="isLoading">
+            <Spinners></Spinners>
         </div>
     </main-modal>
 </template>
@@ -89,16 +92,45 @@ export default {
             this.ghost.start_time = time
         },
 
-        selected () {
+        async selected () {
             this.ghost.offer = this.offer.id
             this.ghost.booker = this.clientId
             this.ghost.therapist = this.therapistId
             delete this.ghost.date
-            this.$emit('continue', this.ghost)
-            this.resetGhost()
-            setTimeout(() => {
-                $('#selectTimeModal').modal('hide')
-            }, 150)
+
+            this.startLoading()
+    
+            const res = await this.$api.post(`/booking-api/bookings/`, this.ghost)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+
+            if (res) {
+            this.stopLoading()
+            localStorage.setItem('booking', JSON.stringify(res.data))
+            this.getBookingClientKey({payment_method: 'stripe'})
+            }
+        },
+
+        async getBookingClientKey (data) {
+            this.startLoading()
+            let booking = JSON.parse(localStorage.getItem('booking'))
+            const res = await this.$api.post(`/booking-api/bookings/${booking.id}/pay`, data)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.detail)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.stripe = res.data
+              this.$emit('continue', booking)
+                this.resetGhost()
+                setTimeout(() => {
+                    $('#selectTimeModal').modal('hide')
+                }, 150)
+            }
         },
 
         gotoForgot () {

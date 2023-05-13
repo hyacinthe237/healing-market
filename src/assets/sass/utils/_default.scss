@@ -28,7 +28,7 @@ body {
     min-height: 100vh;
     font-family: "Times New Roman", Times, serif;
     background-color: $body-bg;
-    font-size: 18px;
+    font-size: 16px;
     color: $titleColour;
     font-weight: 300;
 }
@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-size: 20px;
+    font-size: 16px;
     color: $brand-darker;
     // padding: 20px;
 }
@@ -328,6 +328,29 @@ h5 { font-size: 1.1em }
         font-size: 1.2em;
         text-transform: capitalize;
     }
+
+    .empty {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 80vh;
+    
+        i {
+            font-size: 100px;
+            color:$primary;
+        }
+    
+        font-size: 32px;
+    }
+}
+
+.large-menu {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 ._loader {

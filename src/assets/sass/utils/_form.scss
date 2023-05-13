@@ -72,6 +72,20 @@
 
     .form-group {
         margin-bottom: 10px;
+
+        &.row-pass {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .input-group-append {
+                min-height: 50px;
+                background-color: transparent;
+                color: block;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
         .levels {
             display: flex;
             flex-direction: row;
@@ -99,7 +113,7 @@
             padding-left: 20px;
             padding-right: 20px;
             margin:0;
-            font-size: 24px;
+            font-size: 16px;
             min-height: 50px;
 
             &:focus {
@@ -203,7 +217,7 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: none;
             color: $brand-dark;
-            font-size: 24px;
+            font-size: 16px;
 
             &.vue-input-tag-wrapper {
                 height: 50px;
@@ -333,7 +347,7 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: none;
             color:  black;
-            font-size: 22px;
+            font-size: 16px;
             padding-left: 50px;
             // text-align: center;
             border-radius: 10px;

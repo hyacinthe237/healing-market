@@ -37,7 +37,7 @@
 
         <vue-inline-form 
           @search="emitSearch" 
-          v-if="isSearchPage"
+          v-if="isSearchPage && !showMenus"
         ></vue-inline-form>
         
         <ul class="navbar-nav" v-if="isTherapist">
@@ -70,7 +70,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav" v-if="isLandingPage && !isConnected">
+        <ul class="navbar-nav" v-if="isLandingPage && !isConnected && !showMenus">
           <li class="nav-item">
             <a class="nav-link pointer nowrap" @click="n('signin')">Sign in</a>
           </li>
@@ -91,12 +91,14 @@
       
       </div>
     </nav>
-    <div class="container bg-white" v-if="showMenus">
-      <div class="row mb-20">
-          <div class="col-sm-3 pointer black" v-for="category in cats" 
-          :key="category.id" @click="selectCat(category)">{{ category.label }}</div>
-      </div>
-  </div>
+    <div class="large-menu bg-white" v-if="showMenus">
+      <div class="container">
+        <div class="row mb-20">
+            <div class="col-sm-3 pointer black" v-for="category in cats" 
+            :key="category.id" @click="selectCat(category)">{{ category.label }}</div>
+        </div>
+    </div>
+    </div>    
   </VueScrollFixedNavbar>
 </template>
 

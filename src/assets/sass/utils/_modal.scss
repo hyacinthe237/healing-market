@@ -323,7 +323,7 @@
 }
 
 ._checkout-modal {
-
+    width: 640px;
     min-height: 100vh;
     overflow: auto;
     // background-color: rgba(74, 93, 125, 0.7);
@@ -873,7 +873,25 @@
     border: none;
 
     a.close {
-        i { font-size: 30px }
+        width: 30px;
+        height: 30px;
+        text-align: right;
+        color: $primary;
+        border-radius: 30px;
+        padding: 5px;
+        cursor: pointer;
+        margin-bottom: -70px;
+        margin-top: 10px;
+        margin-right: 10px;
+        z-index: 1px;
+        border: $primary solid 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+            font-size: 20px;
+        }
     }
 }
 

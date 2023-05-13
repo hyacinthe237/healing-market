@@ -178,7 +178,7 @@
                       </div>
                     </div>
                     <div class="contact mt-20">
-                        <button type="submit" class="btn btn-secondary mr-5 nowrap" @click="booknow()">
+                        <button type="submit" class="btn btn-secondary mr-3 nowrap" @click="booknow()">
                             <i class="feather icon-bookmark mr-1"></i> Continue booking</button>
                         <button type="submit" class="btn btn-primary nowrap" @click="openchat()">
                             <i class="feather icon-message-square mr-1"></i> Chat</button>
@@ -194,10 +194,10 @@
 
 
   
-      <SignInModal @signup="openSignUpModal"></SignInModal>
-      <SignUpModal @signup="getUser"></SignUpModal>
+      <SignInModal @signup="openSignUpModal" @signin="openSelectTimeModal"></SignInModal>
+      <SignUpModal @signup="openSelectTimeModal"></SignUpModal>
       <SelectTimeModal 
-        @continue="createBooking"
+        @continue="openCheckoutModal"
         :offer="offer"
         :therapist="therapist"
         :clientId="clientId"
@@ -234,6 +234,7 @@
     import SelectTimeModal from '../modals/select-time'
     import CheckoutModal from '../modals/checkout'
     import SuccessModal from '../modals/success'
+    import Swal from 'sweetalert2'
   
   export default {
       name: 'PractitionerDetails',
@@ -416,6 +417,33 @@
               this.stripe = res.data
               this.openCheckoutModal(booking)
             }
+        },
+
+        openSignSuccess () {
+            this.$swal.success('Hi', 'Welcome back in to our platform, continue your booking')
+            setTimeout(() => {
+                this.getTherapist()
+                this.getOffers()
+                this.getOffer()
+                this.getUser()
+            }, 5000)
+            
+        },
+
+        confirmLogOut () {
+            Swal.fire({
+                text: this.$translate.text("After success signup, please sign in to our platform and continue your booking"),
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: this.$translate.text('Not now !'),
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: this.$translate.text('Yes, i continue my booking')
+            }).then((result) => {
+                if (result.value) {
+                    this.booknow()
+                }
+            })
         },
 
         async createBooking (data) {

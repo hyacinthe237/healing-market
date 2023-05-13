@@ -4,6 +4,7 @@ import Guard from '@/services/middleware'
 
 import NotFound from '@/views/core/errors/notfound'
 import PractitionerDetails from '@/views/core/services/details'
+import SuccessCheckout from '@/views/core/services/success-checkout'
 import CoreBody from '@/views/core/body'
 import SignUp from '@/views/core/auth/signup'
 import AuthSignin from '@/views/core/auth/signin'
@@ -42,6 +43,7 @@ export default new Router({
         { path: '/client/settings', name: 'client-settings', component: ClientSettings, beforeEnter: Guard.auth },
 
         { path: '/practitioner/:id/:offer', component: PractitionerDetails, name: 'practitioner-details' },
+        { path: '/checkout/success', name: 'success', component: SuccessCheckout },
         { path: '/practitioner/dashboard', name: 'practitioner-dashboard', component: PractitionerDashboard, beforeEnter: Guard.auth },
         { path: '/practitioner/booking', name: 'practitioner-booking', component: PractitionerBooking, beforeEnter: Guard.auth },
         { path: '/practitioner/messages', name: 'practitioner-messages', component: PractitionerMessages, beforeEnter: Guard.auth },

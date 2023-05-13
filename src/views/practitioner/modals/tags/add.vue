@@ -1,13 +1,13 @@
 <template lang="html">
     <main-modal 
         :id="'addTagModal'"
-        :title="'Add your tag'"
+        :title="'Add your speciality'"
     >
         <div class="">
             <form class="_form" v-show="!isLoading" @submit.prevent="addTag()">
                 <div class="form-group">
-                    <label for="title">Tag name</label>
-                    <input type="text" name="tag" v-model="host.tag" placeholder="Tag name" class="form-control-modal">
+                    <label for="title">Speciality name</label>
+                    <input type="text" name="tag" v-model="host.tag" placeholder="Speciality name" class="form-control-modal">
                 </div>
                 <button type="submit" class="btn btn-secondary uppercase">Save</button>
             </form>
@@ -56,7 +56,7 @@ export default {
                 
                 if (response) {
                     this.isLoading = false
-                    this.$swal.success('Success', 'New tag added')
+                    this.$swal.success('Success', 'New speciality added')
                     this.closer()                
                 }
             }

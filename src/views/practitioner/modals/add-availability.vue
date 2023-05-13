@@ -5,6 +5,7 @@
     >
         <div class="">
             <form class="_form" @submit.prevent="save()" v-show="!isLoading">
+                <div class="row"></div>
                 <div class="form-group">
                     <label for="day_cut">Select a day</label>
                     <select name="day_cut" id="day" class="form-control" v-model="line.day_cut">

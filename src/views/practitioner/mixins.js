@@ -19,6 +19,7 @@ export default {
         currentUser: {},
         payload: {},
         offers: [],
+        bookings: [],
         pauseOffers: [],
         categories: [],
         therapist_categories: [],
@@ -35,6 +36,10 @@ export default {
  
         isConnected () {
             return !_.isEmpty(this.user)
+        },
+
+        no_bookings () {
+            return this.bookings.length == 0
         }
     },
 
@@ -44,6 +49,7 @@ export default {
         this.getCategories()
         this.getTags()
         this.getAvailabilities()
+        this.geBookings()
     },
 
     methods: {
@@ -58,12 +64,27 @@ export default {
     
             if (res) {
               this.stopLoading()
-              console.log('data', res.data.properties)
               this.therapistId = res.data.id
               this.currentUser = res.data.properties
+              this.ghost = res.data.properties
               this.therapist_categories = res.data.properties.categories
             }
         },
+
+        async geBookings () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/booking-api/clients/bookings`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.bookings = res.data
+            }
+          },
 
         async getAvailabilities () {
             this.startLoading()
@@ -91,7 +112,6 @@ export default {
     
             if (res) {
               this.stopLoading()
-              console.log('offers', res.data)
               this.offers = res.data.filter(o => o.status == 'Active')
               this.pauseOffers = res.data.filter(o => o.status !== 'Active')
             }

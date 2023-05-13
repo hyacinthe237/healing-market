@@ -11,11 +11,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" v-model="ghost.description" cols="30" rows="5" class="form-control-modal"></textarea>
-                </div>
-
-                <div class="form-group">
                     <label for="price">Offer price</label>
                     <input type="number" name="price" v-model="ghost.price" placeholder="Offer price" class="form-control-modal">
                 </div>
@@ -31,6 +26,16 @@
                 <div class="form-group">
                     <label for="image">Upload offer image</label>
                     <input type="file" name="image" id="image" class="form-control-modal" @change="handleFile($event)">
+                </div>
+
+                <div class="form-group mt-20">
+                    <label for="tags">tags</label>
+                    <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control"></input-tag>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" v-model="ghost.description" cols="30" rows="5" class="form-control-modal"></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-secondary uppercase">Save</button>

@@ -44,77 +44,19 @@
         <div class="card">
             <div class="card-head">
                 <h5 class="nowrap">Profile description</h5>
-                <div class="elevatedbox">
+                <div class="elevatedbox" @click="n('practitioner-settings')">
                     <div class="edit">
                         <i class="feather icon-edit-2"></i>
                     </div>
                 </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>{{ currentUser.description }}</p>
 
             <div class="card-head mt-10">
                 <h5 class="nowrap">Language</h5>
-                <a href="" class="secondary pointer nowrap">Add new</a>
+                <!-- <a href="" class="secondary pointer nowrap">Add new</a> -->
             </div>
             <p>English</p>
-        </div>
-
-        <!-- <div class="card">
-            <div class="card-head">
-                <h5 class="nowrap">Availabilities</h5>
-            </div>
-            <table class="table table-striped mt-10" v-if="availabilities.length>0">
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Started</th>
-                        <th>Ended</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr 
-                        v-for="availability in availabilities"
-                        :key="availability.id"
-                    >
-                        <td>{{ availability.day_cut }}</td>
-                        <td>{{ availability.time_cut_start }}</td>
-                        <td>{{ availability.time_cut_end }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="skills mt-20" v-else>
-                <div><span class="nowrap">No availability found</span></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-head">
-                <h5 class="nowrap">Specialities</h5>
-                <a class="secondary pointer nowrap" @click="addNewSpeciality()">Add new</a>
-            </div>
-            <div class="skills mt-20" v-if="specialities.length>0">
-                <div class="skill" v-for="c in specialities" :key="c.id">
-                    <span class="nowrap">{{ c.label }}</span>
-                </div>
-            </div>
-            <div class="skills mt-20" v-else>
-                <div><span class="nowrap">No speciality found</span></div>
-            </div>
-        </div> -->
-
-        <div class="card">
-            <div class="card-head">
-                <h5 class="nowrap">Categories</h5>
-                <a class="secondary pointer nowrap" @click="addNewCategory()">Add new</a>
-            </div>
-            <div class="skills mt-20" v-if="categories.length>0">
-                <div class="skill" v-for="(c, index) in categories" :key="index++">
-                    <span class="nowrap">{{ c }}</span>
-                </div>
-            </div>
-            <div class="skills mt-20" v-else>
-                <div><span class="nowrap">No category found</span></div>
-            </div>
         </div>
 
         <div class="card">
@@ -145,7 +87,8 @@
     name: 'PractitionerSideBar',
       data: () => ({
           isVisible: true,
-          profil
+          profil,
+          therapist_categories:[]
       }),
 
       props: {
@@ -210,7 +153,25 @@
 
         manageCalendar () {
             this.$emit('manageCalendar')
-        }
+        },
+
+        async getUser () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/user-api/therapists/${this.user.therapist_id}/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error.message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.therapistId = res.data.id
+              this.currentUser = res.data.properties
+              this.ghost = res.data.properties
+              this.therapist_categories = res.data.properties.categories
+            }
+        },
       }
   }
   </script>

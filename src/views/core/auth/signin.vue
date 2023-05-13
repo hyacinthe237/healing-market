@@ -110,11 +110,18 @@ export default {
             
             if (response) {
                 this.isLoading = false
-                let data = response.data
+                let data = response.data                
                 AuthService.setUser(data)
                 AuthService.setToken(data.key)
                 ApiService.setToken(data.key)
-                this.n('practitioner-dashboard')
+                
+                if (data.is_client) {
+                    this.n('client-dashboard')
+                }
+
+                if (data.is_therapist) {
+                    this.n('practitioner-dashboard')
+                }
             }
             
         },

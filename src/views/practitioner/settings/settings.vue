@@ -122,9 +122,9 @@
                 </div>
               </div>
 
-              <!-- <div class="col-sm-12">
+              <div class="col-sm-12">
                 <div class="form-group mt-20">
-                  <label for="tags">Tags</label>
+                  <label for="tags">Specialities</label>
                   <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control"></input-tag>
                 </div>
               </div>
@@ -136,10 +136,10 @@
                 </div>
               </div>
 
-              <div class="col-sm-12">
+              <!-- <div class="col-sm-12">
                 <div class="form-group mt-20">
                   <label for="language">Specialities</label>
-                  <input-tag v-model="ghost.specialities" placeholder="Add a speciality" class="form-control"></input-tag>
+                  <input-tag v-model="ghost.categories" placeholder="Add a speciality" class="form-control"></input-tag>
                 </div>
               </div> -->
 

@@ -1,13 +1,13 @@
 <template lang="html">
     <main-modal 
         :id="'editTagModal'"
-        :title="'Edit your tag'"
+        :title="'Edit your speciality'"
     >
         <div class="">
             <form class="_form" v-show="!isLoading" @submit.prevent="addTag()">
                 <div class="form-group">
-                    <label for="title">Tag name</label>
-                    <input type="text" name="tag" v-model="ghost.tag" placeholder="Tag name" class="form-control-modal">
+                    <label for="title">Speciality name</label>
+                    <input type="text" name="tag" v-model="ghost.tag" placeholder="Speciality name" class="form-control-modal">
                 </div>
                 <button type="submit" class="btn btn-secondary uppercase">Save</button>
             </form>

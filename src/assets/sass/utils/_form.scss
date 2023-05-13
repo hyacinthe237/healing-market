@@ -78,12 +78,25 @@
             flex-direction: row;
             align-items: center;
 
+            input {
+                border-right: 0px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
             .input-group-append {
                 min-height: 50px;
                 background-color: transparent;
                 color: block;
                 font-weight: bold;
                 cursor: pointer;
+
+                .input-group-text {
+                    background-color: transparent;
+                    border-left: 0px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
             }
         }
         .levels {
@@ -355,6 +368,7 @@
 
         .input-group-append {
             margin-top: -10px;
+            background-color: transparent;
 
             .input-group-text {
                 background-color: transparent;

@@ -580,6 +580,7 @@
         },
 
         openSelectTimeModal () {
+            window.eventBus.$emit('therapist', this.therapist)
             setTimeout(() => {
                 $('#selectTimeModal').modal('show')
             }, 150)

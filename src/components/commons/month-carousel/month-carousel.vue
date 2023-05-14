@@ -12,10 +12,7 @@ import moment from 'moment'
 export default {
     name: 'MonthCarousel',
 
-    props: {
-        isSearching: {  type: Boolean, default: false },
-        search: { type: Object, default: () => {}  },
-    },
+    props: {},
 
     data: () => ({
         currentMonth: moment().month()
@@ -31,7 +28,7 @@ export default {
         },
 
         toDayMonth () {
-            return this.months[this.currentMonth]
+            return this.months_array[this.currentMonth]
         }
     },
 

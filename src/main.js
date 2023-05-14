@@ -13,10 +13,9 @@ import VuePageTransition from 'vue-page-transition'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
 import InputTag from 'vue-input-tag'
-import DatePicker from 'vue2-datepicker'
+import DatePicker from 'vuejs-datepicker'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import 'vue2-datepicker/index.css'
 
 
 import App from './App.vue'

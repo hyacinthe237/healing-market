@@ -1,0 +1,74 @@
+<template lang="html">
+    <div class="dashboard">
+        <div class="bookings">
+            <div class="booking empty" v-if="no_bookings">
+                No booking for the moment
+            </div>
+            <div 
+                class="booking" 
+                v-else
+                v-for="booking in bookings"
+                :key="booking.id"
+            >
+                <div class="name">
+                    <div class="primary bold">{{ booking.therapist }}</div>
+                    <div class="secondary">{{ booking.therapist_email }}</div>
+                </div>
+                <div class="date">
+                    <i class="feather icon-calendar"></i> {{ booking.created_at | date }}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import config from '@/services/config'
+import _ from 'lodash'
+
+export default {
+    name: 'ClientBooking',
+
+    data: () => ({
+        payload: {},
+        bookings: [],
+    }),
+
+    computed: {
+       user () {
+          return JSON.parse(localStorage.getItem(config.get('user')))
+       },
+
+       isConnected () {
+            return !_.isEmpty(this.user)
+        },
+
+        no_bookings () {
+          return this.bookings.length == 0
+        }
+    },
+    
+    watch: { },
+
+    mounted () {
+      this.geBookings()
+    },
+
+    methods: { 
+      async geBookings () {
+        this.startLoading()
+
+        const res = await this.$api.get(`/booking-api/clients/bookings`)
+        .catch(error => {
+            this.stopLoading()
+            this.$swal.error('Sorry', error.response.data.error_message)
+        })
+
+        if (res) {
+          this.stopLoading()
+          this.bookings = res.data.filter(b=> b.status == 'VALIDATED')
+        }
+      },
+    }
+}
+</script>

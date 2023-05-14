@@ -67,7 +67,7 @@ import Swal from 'sweetalert2'
     },
 
     methods: { 
-      confirmLogOut (booking) {
+      confirmLogOut () {
         Swal.fire({
             text: this.$translate.text("Are you sure you want to validate this booking?"),
             type: 'warning',
@@ -78,12 +78,12 @@ import Swal from 'sweetalert2'
             confirmButtonText: this.$translate.text('Yes')
         }).then((result) => {
             if (result.value) {
-                this.validateBooking(booking)
+                this.validateBooking()
             }
         })
       },
 
-      async validateBooking (booking) {
+      async validateBooking () {
             this.startLoading()
     
             const res = await this.$api.get(`/booking-api/therapists/bookings`)

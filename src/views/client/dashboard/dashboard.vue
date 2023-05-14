@@ -84,7 +84,7 @@ export default {
 
         if (res) {
           this.stopLoading()
-          this.bookings = res.data
+          this.bookings = res.data.filter(b=> b.status == 'VALIDATED')
         }
       },
     }

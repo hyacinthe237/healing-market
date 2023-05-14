@@ -129,7 +129,7 @@
             this.startLoading()
 
             let payload = {
-                month: this.months[this.currentMonth]
+                month: this.months_array[this.currentMonth]
             }
     
             const res = await this.$api.get(`/user-api/group-transactions/`, { params: payload })

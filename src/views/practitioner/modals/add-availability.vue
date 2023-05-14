@@ -5,32 +5,46 @@
     >
         <div class="">
             <form class="_form" @submit.prevent="save()" v-show="!isLoading">
-                <div class="row"></div>
-                <div class="form-group">
-                    <label for="day_cut">Select a day</label>
-                    <select name="day_cut" id="day" class="form-control" v-model="line.day_cut">
-                        <option value="">Select a day</option>
-                        <option v-for="(day, index) in days" :value="day" :key="index++">{{ day }}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-6">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="day_cut">Select a day</label>
+                            <select name="day_cut" id="day" class="form-control-modal" v-model="line.day_cut">
+                                <option value="">Select a day</option>
+                                <option v-for="(day, index) in days" :value="day" :key="index++">{{ day }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="max_people">Max people</label>
+                            <input type="number" name="max_people" v-model="line.max_people" class="form-control-modal">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
                             <label for="time_cut_start">Select start time</label>
-                            <select name="time_cut_start" v-model="line.time_cut_start" class="form-control">
+                            <select name="time_cut_start" v-model="line.time_cut_start" class="form-control-modal">
                                 <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                             </select>
                         </div>
-                        <div class="col-6">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
                             <label for="time_cut_end">Select end time</label>
-                            <select name="time_cut_end" v-model="line.time_cut_end" class="form-control">
+                            <select name="time_cut_end" v-model="line.time_cut_end" class="form-control-modal">
                                 <option v-for="(h, index) in tab_hours" :value="h.value" :key="index++">{{ h.option }}</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-secondary uppercase">Save</button>
+                <div class="mt-20 text-right">
+                    <button type="submit" class="btn btn-secondary uppercase">Save</button>
+                </div>
               </form>
+              <div class="a-lists">
+
+              </div>
                 <div class="_loader" v-show="isLoading">
                     <Spinners></Spinners>
                 </div>
@@ -52,6 +66,7 @@ export default {
         line: {
             therapist: '',
             day_cut: '',
+            max_people: 1,
             time_cut_start: '9:00',
             time_cut_end: '17:00',
         },
@@ -106,6 +121,7 @@ export default {
             this.line = {
                 therapist: '',
                 day_cut: '',
+                max_people: 1,
                 time_cut_start: '9:00',
                 time_cut_end: '17:00',
             }

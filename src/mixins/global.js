@@ -10,7 +10,7 @@ export default {
         showErrors: true,
         breadcrumb: [],
         keywords: '',
-        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        months_array: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }),
 
     created () {

@@ -8,6 +8,7 @@
                 <vue-datepicker
                     v-model="ghost.date"
                     :inline="true"
+                    :highlighted="highlightedDays"
                 ></vue-datepicker>
              </div>
              <div class="content" v-show="showTime">
@@ -54,6 +55,11 @@ export default {
             date: ''
         },
         tab_times: [],
+        highlightedDays: {
+            days: [],
+            dates: [],
+        },
+        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
     }),
 
@@ -79,6 +85,20 @@ export default {
                 }
             }
        },
+    },
+
+    mounted () {
+        window.eventBus.$on('therapist', (data) => {
+            if (data) {
+                let tab = data.availibilities.map(a => a.day_cut)
+                for (var i = 0; i < tab.length; i++) {
+                    var index = this.days.indexOf(tab[i]);
+                    tab[i] = index;               
+                }
+                this.highlightedDays.days = tab
+                this.highlightedDays.dates.push(new Date())
+            }
+        })
     },
 
     computed: {

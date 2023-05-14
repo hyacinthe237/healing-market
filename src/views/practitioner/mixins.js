@@ -115,7 +115,7 @@ export default {
               this.offers = res.data.filter(o => o.status == 'Active')
               this.pauseOffers = res.data.filter(o => o.status !== 'Active')
             }
-          },
+        },
   
           async saveCategory (data) {
               this.isLoading = true

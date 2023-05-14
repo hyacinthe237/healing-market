@@ -9,6 +9,15 @@ Vue.filter('currency', function (value) {
     return '$' + value
 })
 
+Vue.filter('dat', function (value, formatted) {
+    if (value) {
+        if (formatted) {
+            return moment(String(value)).format(formatted)
+        }
+        return moment(String(value)).format('ddd. DD.MM.YYYY')
+    }
+})
+
 Vue.filter('date', function (value, formatted) {
     if (value) {
         if (formatted) {

@@ -702,7 +702,7 @@
 
               .date {
                 font-size: 12px;
-                color:#ccc;
+                color:$brand-teal;
               }
             }
 
@@ -715,6 +715,14 @@
                 color:black;
                 font-size: 20px;
                 padding: 0px 20px;
+              }
+
+              &.IN {
+                color: $brand-success;
+              }
+
+              &.OUT {
+                color: $brand-danger;
               }
             }
           }

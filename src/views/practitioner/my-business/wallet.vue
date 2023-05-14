@@ -22,7 +22,7 @@
                 <div class="balance">
                     <div class="label">Balance</div>
                     <div class="value">
-                        <h2>$ 100</h2>
+                        <h2>${{ balance }}</h2>
                         <i class="feather icon-credit-card"></i>
                     </div>
                 </div>
@@ -31,55 +31,21 @@
                     <h5>Recent activity</h5>
 
                     <div class="_head mt-10">
-                        <div class="month">
-                            <i class="feather icon-chevron-left"></i>
-                            <span>March</span>                            
-                            <i class="feather icon-chevron-right"></i>
-                        </div>
+                        <vue-month-carousel @searchMonth="getGroupTransactions"></vue-month-carousel>
                         <div class="search">
                             <input type="text" v-model="ghost.search" placeholder="Define your search">
                         </div>
                     </div>
 
-                    <div class="withdraws mt-10">
-
-                        <div class="withdraw">
+                    <div class="withdraws mt-10" v-for="(t, index) in transactions" :key="index++">
+                        <h4>{{ t.created_at | dat }}</h4>
+                        <div class="withdraw" v-for="item in t.items" :key="item.id">
                             <div class="id">
-                                <div class="name">Withdraw <span>B0c30000FD</span></div>
-                                <div class="date">Wen. 15.03.2023</div>
+                                <div class="name">Withdraw <span>{{ item.id }}</span></div>
+                                <div class="date">{{ item.created_at | dat }}</div>
                             </div>                            
-                            <div class="montant">
-                                <span class="bold secondary">$ 10</span>
-                                <i class="feather icon-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="withdraw">
-                            <div class="id">
-                                <div class="name">Withdraw <span>B0c30000FD</span></div>
-                                <div class="date">Wen. 15.03.2023</div>
-                            </div>                            
-                            <div class="montant">
-                                <span class="bold secondary">$ 10</span>
-                                <i class="feather icon-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="withdraw">
-                            <div class="id">
-                                <div class="name">Withdraw <span>B0c30000FD</span></div>
-                                <div class="date">Wen. 15.03.2023</div>
-                            </div>                            
-                            <div class="montant">
-                                <span class="bold secondary">$ 10</span>
-                                <i class="feather icon-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="withdraw">
-                            <div class="id">
-                                <div class="name">Withdraw <span>B0c30000FD</span></div>
-                                <div class="date">Wen. 15.03.2023</div>
-                            </div>                            
-                            <div class="montant">
-                                <span class="bold secondary">$ 10</span>
+                            <div :class="['montant', item.cash_flow]">
+                                <span class="bold">$ {{ parseAmount(item.amount) }}</span>
                                 <i class="feather icon-chevron-right"></i>
                             </div>
                         </div>
@@ -114,10 +80,13 @@
   <script>
   import WithdrawModal from '../modals/withdraw'
   import TherapistMixins from '../mixins'
+  import moment from 'moment'
   
   export default {
       data: () => ({
-          
+          balance: 0,
+          transactions: [],
+          currentMonth: moment().month(),
       }),
   
       components: { WithdrawModal },
@@ -126,13 +95,53 @@
       
       watch: { },
   
-      mounted () {},
+      mounted () {
+        this.getMyWallet()
+        this.getGroupTransactions()
+      },
   
       methods: { 
         openWithdrawModal () {
             setTimeout(() => {
                 $('#withdrawModal').modal('show')
             }, 150)
+        },
+        async getMyWallet () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/user-api/get-my-wallet`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.balance = Number.parseFloat(res.data.amount).toFixed(2)
+            }
+        },
+
+        parseAmount (amount) {
+           return Number.parseFloat(amount).toFixed(2)
+        },
+
+        async getGroupTransactions () {
+            this.startLoading()
+
+            let payload = {
+                month: this.months[this.currentMonth]
+            }
+    
+            const res = await this.$api.get(`/user-api/group-transactions/`, { params: payload })
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.transactions = res.data.results
+            }
         },
       }
   }

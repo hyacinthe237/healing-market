@@ -44,7 +44,7 @@ export default {
 
         async saveCategory () {              
             if (this.ghost.languages == '') {
-                this.$swal.error('Validation warning', 'Please select one category before saving')
+                this.$swal.error('Validation warning', 'Please fill at least one language before saving')
             }
 
             if (this.ghost.languages !== '') {

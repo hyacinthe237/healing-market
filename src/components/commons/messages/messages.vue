@@ -119,149 +119,151 @@
   import _ from 'lodash'
   
   export default {
-      data: () => ({
-          selected: {},
-          ghost: { message: ''},
-          displaychat: false,
-          connection: null,
-      }),
-  
-      components: { },
-  
-    computed: {
-        user () {
-            return JSON.parse(localStorage.getItem(config.get('user')))
+        data: () => ({
+            selected: {},
+            ghost: { message: ''},
+            displaychat: false,
+            connection: null,
+        }),
+
+        components: { },
+
+        computed: {
+            user () {
+                return JSON.parse(localStorage.getItem(config.get('user')))
+            },
+
+            name () {
+                return this.isConnected ? this.user.first_name || this.user.email : ''
+            },
+
+            isConnected () {
+                return !_.isEmpty(this.user)
+            },
+
+            last_message () {
+                return this.$store.state.chats.last_message
+            },
+            chat () {
+                return this.$store.state.chats.chat
+            },
+            chats () {
+                return this.$store.state.chats.chats
+            },
+            contacts () {
+                return this.$store.state.chats.contacts
+            },
         },
 
-        name () {
-            return this.isConnected ? this.user.first_name || this.user.email : ''
+        watch: { },
+
+        mounted () {
+            this.getChats()
+            this.getLastMessage()
+            this.getContacts()
+            this.displaychat = false
         },
 
-        isConnected () {
-            return !_.isEmpty(this.user)
-        },
+        methods: { 
+            async getChats () {
+                this.startLoading()
 
-        last_message () {
-            return this.$store.state.chats.last_message
-        },
-        chat () {
-            return this.$store.state.chats.chat
-        },
-        chats () {
-            return this.$store.state.chats.chats
-        },
-        contacts () {
-            return this.$store.state.chats.contacts
-        },
-    },
-      
-      watch: { },
-  
-      mounted () {
-        this.getChats()
-        this.getLastMessage()
-        this.getContacts()
-        this.displaychat = false
-      },
-  
-      methods: { 
-        async getChats () {
-            this.startLoading()
+                const res = await this.$api.get(`/chat-api/`)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('Sorry Chats', error.response.data.chat.messages)
+                })
 
-            const res = await this.$api.get(`/chat-api/`)
-            .catch(error => {
-                this.stopLoading()
-                this.$swal.error('Sorry Chats', error.response.data.chat.messages)
-            })
-
-            if (res) {
-            this.stopLoading()
-            this.$store.commit('chats/SET_CHATS', res.data.results)
-            }
-        },
-
-        async getChat (id) {
-            this.startLoading()
-
-            const res = await this.$api.get(`/chat-api/${id}`)
-            .catch(error => {
-                this.stopLoading()
-                this.$swal.error('SorryChat ', error.response.data.detail)
-            })
-
-            if (res) {
-            this.stopLoading()
-            this.$store.commit('chats/SET_CHAT', res.data)
-            }
-        },
-
-        async getLastMessage () {
-            this.startLoading()
-
-            const res = await this.$api.get(`/chat-api/last-message/`)
-            .catch(error => {
-                this.stopLoading()
-                this.$swal.error('Sorry Last Message', error.response.data.detail)
-            })
-
-            if (res) {
-            this.stopLoading()
-            this.$store.commit('chats/SET_LAST_MESSAGE', res.data)
-            }
-        },
-
-        async getContacts () {
-            this.startLoading()
-
-            const res = await this.$api.get(`/chat-api/contacts/`)
-            .catch(error => {
-                this.stopLoading()
-                this.$swal.error('Sorry Contacts', error.response.data.etail)
-            })
-
-            if (res) {
-            this.stopLoading()
-            this.$store.commit('chats/SET_CONTACTS', res.data)
-            }
-        },
-
-        selectChat (chat) {
-            this.displaychat = true
-            this.selected = chat
-        },
-
-        sendMessage () {
-            if (this.ghost.message == '') {
-                this.$swal.error('Validation warning', 'Fill the message')
-            }
-            if (this.ghost.message !== '') {
-                const socket = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
-                let data = {
-                    command: 'new_message', 
-                    from: this.clientEmail,
-                    message: this.ghost.image,
-                    chatId: this.selected.id 
+                if (res) {
+                    this.stopLoading()
+                    this.$store.commit('chats/SET_CHATS', res.data.results)
                 }
-                console.log(this.connection)
-                this.connection.send(data)
+            },
+
+            async getChat (id) {
+                this.startLoading()
+
+                const res = await this.$api.get(`/chat-api/${id}`)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('SorryChat ', error.response.data.detail)
+                })
+
+                if (res) {
+                    this.stopLoading()
+                    this.$store.commit('chats/SET_CHAT', res.data)
+                }
+            },
+
+            async getLastMessage () {
+                this.startLoading()
+
+                const res = await this.$api.get(`/chat-api/last-message/`)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('Sorry Last Message', error.response.data.detail)
+                })
+
+                if (res) {
+                    this.stopLoading()
+                    this.$store.commit('chats/SET_LAST_MESSAGE', res.data)
+                }
+            },
+
+            async getContacts () {
+                this.startLoading()
+
+                const res = await this.$api.get(`/chat-api/contacts/`)
+                .catch(error => {
+                    this.stopLoading()
+                    this.$swal.error('Sorry Contacts', error.response.data.etail)
+                })
+
+                if (res) {
+                    this.stopLoading()
+                    this.$store.commit('chats/SET_CONTACTS', res.data)
+                }
+            },
+
+            selectChat (chat) {
+                this.displaychat = true
+                this.selected = chat
+                this.connection = new WebSocket(`${config.get('web_socket_root')}${chat.name}`)
+            },
+
+            sendMessage () {
+                if (this.ghost.message == '') {
+                    this.$swal.error('Validation warning', 'Fill the message')
+                }
+                if (this.ghost.message !== '') {
+                    // const socket = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
+
+                    let data = {
+                    command: 'new_message', 
+                        from: this.clientEmail,
+                        message: this.ghost.image,
+                        chatId: this.selected.id 
+                    }
+                    console.log(this.connection)
+                    this.connection.send(data)
+                }
             }
+        },
+
+        created: function() {
+            console.log("Starting connection to WebSocket Server")
+            this.connection = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
+
+            this.connection.onmessage = function(event) {
+                console.log(event);
+            }
+
+            this.connection.onopen = function(event) {
+                console.log(event)
+                console.log("Successfully connected to the echo websocket server...")
+            }
+
         }
-      },
-
-    //   created () {
-    //     this.connection = new WebSocket(`${config.get('web_socket_root')}`)
-    //     console.log('Starting conncection to websocket server', this.connection)
-        
-    //     this.connection.onopen = function (event) {
-    //         console.log(event)
-    //         console.log('success')
-    //     }
-
-    //     this.connection.onmessage = function (event) {
-    //         console.log(event)
-    //         console.log('success')
-    //     }
-    //   }
   }
   </script>
   

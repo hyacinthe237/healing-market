@@ -9,7 +9,8 @@ export default {
         isOffline: false,
         showErrors: true,
         breadcrumb: [],
-        keywords: ''
+        keywords: '',
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }),
 
     created () {

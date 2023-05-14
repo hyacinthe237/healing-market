@@ -38,6 +38,7 @@ import Messages from '@/components/commons/messages/messages'
 import Stripe from '@/components/commons/stripe/stripe'
 import InlineForm from '@/components/commons/inline-form/inline-form'
 import Empty from '@/components/commons/empty/empty'
+import MonthCarousel from '@/components/commons/month-carousel/month-carousel'
 
 // eslint-disable-next-line
 import globalMixins from '@/mixins/global'
@@ -76,6 +77,7 @@ Vue.component('vue-datepicker', DatePicker)
 Vue.component('vue-stripe', Stripe)
 Vue.component('vue-inline-form', InlineForm)
 Vue.component('vue-empty', Empty)
+Vue.component('vue-month-carousel', MonthCarousel)
 
 new Vue({
   router,

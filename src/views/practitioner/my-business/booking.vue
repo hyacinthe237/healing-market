@@ -53,6 +53,7 @@
   
   <script>
   import TherapistMixins from '../mixins'
+import Swal from 'sweetalert2'
   
   export default {
       data: () => ({
@@ -66,7 +67,36 @@
     },
 
     methods: { 
-      
+      confirmLogOut (booking) {
+        Swal.fire({
+            text: this.$translate.text("Are you sure you want to validate this booking?"),
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: this.$translate.text('No'),
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.$translate.text('Yes')
+        }).then((result) => {
+            if (result.value) {
+                this.validateBooking(booking)
+            }
+        })
+      },
+
+      async validateBooking (booking) {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/booking-api/therapists/bookings`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.bookings = res.data
+            }
+          },
     }
   }
   </script>

@@ -29,8 +29,8 @@
                 </div>
 
                 <div class="form-group mt-20">
-                    <label for="tags">Tags</label>
-                    <input-tag v-model="ghost.tags" placeholder="Add a tag" class="form-control-modal"></input-tag>
+                    <label for="offer_tags">Tags</label>
+                    <input-tag v-model="ghost.offer_tags" placeholder="Add a tag" class="form-control-modal"></input-tag>
                 </div>
 
                 <div class="form-group">
@@ -58,7 +58,7 @@ export default {
             price: '',
             category: '',
             image: '',
-            tags: [],
+            offer_tags: [],
         },
     }),
 
@@ -77,6 +77,12 @@ export default {
 
             if (this.ghost.title !== '' && this.ghost.description !== '' && this.ghost.price !== '' && this.ghost.image !== '') {
                 this.isLoading = true
+                let tab = []
+                for(var i=0; i<=this.ghost.offer_tags.length; i++) {
+                    let obj = {label: this.ghost.offer_tags[i]}
+                    tab.push(obj)
+                }
+
                 let formData = new FormData()
                 formData.append('title', this.ghost.title)
                 formData.append('description', this.ghost.description)
@@ -84,6 +90,7 @@ export default {
                 formData.append('category', this.ghost.category)
                 formData.append('therapist', this.therapistId)
                 formData.append('image', this.ghost.image)
+                formData.append('offer_tags', tab)
     
                 const response = await this.$api.post('/market-api/offers/', formData)
                     .catch(error => {
@@ -95,9 +102,8 @@ export default {
                 
                 if (response) {
                     this.isLoading = false
-                    let data = response.data
                     this.$swal.success('Success', 'New offer added')
-                    this.saveTags(data.id)                  
+                    this.closer()                
                 }
             }
         },

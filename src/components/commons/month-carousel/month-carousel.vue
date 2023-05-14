@@ -36,14 +36,14 @@ export default {
         previous () {
             if(this.currentMonth>0) {
                 this.currentMonth -= 1
-                this.$emit('searchMonth', this.toDayMonth)
+                this.$emit('searchMonth', this.currentMonth)
             }
         },
 
         next () {
             if(this.currentMonth<11) {
                 this.currentMonth += 1
-                this.$emit('searchMonth', this.toDayMonth)
+                this.$emit('searchMonth', this.currentMonth)
             }
         },
     }

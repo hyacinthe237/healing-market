@@ -86,7 +86,7 @@
       data: () => ({
           balance: 0,
           transactions: [],
-          currentMonth: moment().month(),
+          currentMonth: moment().month()+1,
       }),
   
       components: { WithdrawModal },
@@ -125,13 +125,18 @@
            return Number.parseFloat(amount).toFixed(2)
         },
 
-        async getGroupTransactions () {
-            this.startLoading()
-
-            let payload = {
-                month: this.months_array[this.currentMonth]
+        async getGroupTransactions (month=null) {
+            var payload = {}
+            if (month == null) {
+                payload = { month: this.currentMonth }
             }
-    
+
+            if (month !== null) {
+                let i = month+1
+                payload = { month: i }
+            }
+
+            this.startLoading()    
             const res = await this.$api.get(`/user-api/group-transactions/`, { params: payload })
             .catch(error => {
                 this.stopLoading()

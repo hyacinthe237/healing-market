@@ -64,7 +64,7 @@
         <Spinners></Spinners>
       </div>
   
-      <WithdrawModal></WithdrawModal>
+      <WithdrawModal @nexted="getData"></WithdrawModal>
       <AddCategoryModal 
         @added="getCategories" 
         :categories="categories"
@@ -96,8 +96,7 @@
       watch: { },
   
       mounted () {
-        this.getMyWallet()
-        this.getGroupTransactions()
+        this.getData()
       },
   
       methods: { 
@@ -105,6 +104,10 @@
             setTimeout(() => {
                 $('#withdrawModal').modal('show')
             }, 150)
+        },
+        getData () {
+            this.getMyWallet()
+            this.getGroupTransactions()
         },
         async getMyWallet () {
             this.startLoading()
@@ -117,7 +120,7 @@
     
             if (res) {
               this.stopLoading()
-              this.balance = Number.parseFloat(res.data.amount).toFixed(2)
+              this.balance = Number.parseFloat(res.data.amount).toFixed(2) || 0
             }
         },
 
@@ -138,6 +141,30 @@
 
             this.startLoading()    
             const res = await this.$api.get(`/user-api/group-transactions/`, { params: payload })
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.transactions = res.data.results
+            }
+        },
+
+        async getMoneyRequests (month=null) {
+            var payload = {}
+            if (month == null) {
+                payload = { month: this.currentMonth }
+            }
+
+            if (month !== null) {
+                let i = month+1
+                payload = { month: i }
+            }
+
+            this.startLoading()    
+            const res = await this.$api.get(`/user-api/money-requests/`, { params: payload })
             .catch(error => {
                 this.stopLoading()
                 this.$swal.error('Sorry', error.response.data.error_message)

@@ -125,13 +125,11 @@ export default {
 
     methods: {
         payer () {
+            this.startLoading()
             this.$refs.paymentRef.submit();
         },
 
         tokenCreated (token) {
-            console.log(token);
-            // handle the token
-            // send it to your server
             let id = token.id
             setTimeout(() => {
                 this.chargeBooking(id)
@@ -154,7 +152,7 @@ export default {
 
                 if (response) {
                     this.stopLoading()
-                    this.$swal.error('Success', 'We are receive your booking checkout')
+                    this.$swal.success('Success', 'We are receive your booking checkout')
                     setTimeout(() => {
                         this.closeAllModals()
                         this.$emit('success')

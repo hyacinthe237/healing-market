@@ -97,18 +97,24 @@
             </div>
             <p class="time"> 15h09</p>
             </div>
-            <div class="footer-chat">
-            <form class="_form" v-show="displaychat" @submit.prevent="sendMessage()">
-                <div class="input-group">
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    name="message" 
-                    v-model="ghost.message" 
-                    placeholder="Type your message here"
-                />
-                </div>
-            </form>
+            <div class="footer-chat" v-show="displaychat">
+                <form class="_form">
+                    <div class="form-group row-pass">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="message" 
+                            v-model="ghost.message" 
+                            @keyup.enter="sendMessage"
+                            placeholder="Type your message here"
+                        />
+                        <div class="input-group-append pointer" @click="sendMessage()">
+                            <span class="input-group-text">
+                            <i class="feather icon-send"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </section>
     </div>
@@ -137,6 +143,10 @@
                 return this.isConnected ? this.user.first_name || this.user.email : ''
             },
 
+            userEmail () {
+               return this.user.email
+            },
+
             isConnected () {
                 return !_.isEmpty(this.user)
             },
@@ -162,6 +172,14 @@
             this.getLastMessage()
             this.getContacts()
             this.displaychat = false
+            window.eventBus.$on('chat', (data) => {
+            if (data) {
+                this.connection = new WebSocket(`${config.get('web_socket_root')}${data.id}`)
+                this.connection.onmessage = (event) => {
+                    console.log('Message reçu :', event.data)
+                };
+            }
+        })
         },
 
         methods: { 
@@ -228,42 +246,43 @@
             selectChat (chat) {
                 this.displaychat = true
                 this.selected = chat
-                this.connection = new WebSocket(`${config.get('web_socket_root')}${chat.name}`)
+                window.eventBus.$emit('chat', chat)
             },
 
             sendMessage () {
                 if (this.ghost.message == '') {
                     this.$swal.error('Validation warning', 'Fill the message')
-                }
-                if (this.ghost.message !== '') {
-                    // const socket = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
+                }                
+
+                if (this.connection.readyState === WebSocket.OPEN && this.ghost.message !== '') {
 
                     let data = {
-                    command: 'new_message', 
-                        from: this.clientEmail,
+                        command: 'new_message', 
+                        from: this.userEmail,
+                        message: this.ghost.message,
+                        chatId: this.selected.id 
+                    }
+                    this.connection.send(data)
+                    this.getChat(this.selected.id)
+                }
+            },
+
+            fecthMessages () {
+                if (this.ghost.message == '') {
+                    this.$swal.error('Validation warning', 'Fill the message')
+                }                
+
+                if (this.connection.readyState === WebSocket.OPEN && this.ghost.message !== '') {
+                    let data = {
+                        command: 'new_message', 
+                        from: this.connected.email,
                         message: this.ghost.image,
                         chatId: this.selected.id 
                     }
-                    console.log(this.connection)
                     this.connection.send(data)
                 }
-            }
+            },
         },
-
-        created: function() {
-            console.log("Starting connection to WebSocket Server")
-            this.connection = new WebSocket(`${config.get('web_socket_root')}${this.selected.name}`)
-
-            this.connection.onmessage = function(event) {
-                console.log(event);
-            }
-
-            this.connection.onopen = function(event) {
-                console.log(event)
-                console.log("Successfully connected to the echo websocket server...")
-            }
-
-        }
   }
   </script>
   

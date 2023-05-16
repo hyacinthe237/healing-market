@@ -4,16 +4,39 @@
         :title="'How much do you wish to withdraw From account ?'"
     >
         <div class="" style="padding:0px 20px;">
-            <form class="_form" @submit.prevent>
+            <form class="_form" @submit.prevent v-show="!isLoading">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="amount">Withdrawal amount</label>
-                            <input type="text" name="amount" v-model="ghost.amount" placeholder="$ 100" class="form-control">
+                            <input 
+                                type="text" 
+                                name="amount" 
+                                v-model="ghost.amount" 
+                                placeholder="$ 100" 
+                                class="form-control"
+                                v-validate="'required'"
+                            />
+                            <v-error :name="'amount'" :err="errors" :show="showErrors"></v-error>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="paypal_email">Paypal Email</label>
+                            <input 
+                                type="text" 
+                                name="paypal_email" 
+                                v-model="ghost.paypal_email" 
+                                placeholder="Paypal email" 
+                                class="form-control"
+                                v-validate="'required'"
+                                :data-vv-as="t('paypal email')"
+                            />
+                            <v-error :name="'paypal_email'" :err="errors" :show="showErrors"></v-error>
                         </div>
                     </div>
                     
-                    <div class="col-sm-12">
+                    <!-- <div class="col-sm-12">
                         <h6>Select a payment method</h6>
                         <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;margin-top: 20px;">
                             <div class="pointer" style="display:flex;flex-direction:row;align-items:center;margin-right: 20px;">
@@ -36,38 +59,34 @@
                             <label for="amount">Card Number</label>
                             <input type="text" name="card_number" v-model="ghost.card_number" placeholder="Enter your card number" class="form-control">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 
                 <div class="text-right mt-20">
-                    <button type="submit" class="btn btn-secondary pointer uppercase" @click="next()">Next</button>
+                    <button type="submit" class="btn btn-secondary pointer uppercase" @click="send()">Next</button>
                 </div>
 
                 <!-- <div class="link mt-20">Don't have an account? <span @click="signup()" class="primary pointer">Sign Up</span></div> -->
             </form>
+            <div class="_loader" v-show="isLoading">
+                <Spinners></Spinners>
+            </div>
         </div>
     </main-modal>
 </template>
 
 <script>
-import ApiService from '@/services/api'
-import AuthService from '@/services/auth'
-import config from '../../../services/config'
-import paypal from '@/assets/img/healing/paypal.png'
-import bankdeposit from '@/assets/img/healing/bank-deposit.jpg'
 export default {
     name: 'WithdrawModal',
 
     data: () => ({
         ghost: {
-            email: '',
-            phone: '',
-            password: '',
-            confirm_password: ''
+            amount: '',
+            paypal_email: '',
         },
         picked: '',
-        paypal, bankdeposit
+        // paypal, bankdeposit
     }),
 
     watch: {
@@ -88,121 +107,33 @@ export default {
          * User signs in
          * @return {void}
          */
-        async signup () {
-            if (this.ghost.username == '' || this.ghost.password == '') {
-                this.$swal.error('Validation warning', 'Username & Password inputs are mandatory')
-            }
+        async send () {
+            const isValid = await this.$validator.validate()
+            if (!isValid) return false
 
-            if (this.ghost.username !== '' && this.ghost.password !== '') {
-                this.isLoading = true
-
-                const response = await this.$api.post('user-api/login/', this.ghost)
-                    .catch(error => {
-                        this.isLoading = false
-                        console.log('error => ', error.response.data.error)
-                        this.$swal.error(this.$translate.text('Login error'), this.$translate.text(error.response.data.error))
-                    })
-                
-                
-                if (response) {
-                    let data = response.data
-                    AuthService.setUser(data.user)
-
-                    const res = await this.$api.apiToken(this.ghost)
-                    .catch(err => {
-                        this.isLoading = false
-                        console.log('token error', err.response.data)
-                    })
-                    if (res) {
-                        this.isLoading = false
-                        AuthService.setToken(res.data.access)
-                        ApiService.setToken(res.data.access)
-
-                        // Set Refresh token
-                        AuthService.setRefreshToken(res.data.refresh)
-                        this.n('dashboard')
-                    }
-                }
-            }
+            this.isLoading = true
+            const response = await this.$api.post('/user-api/money-requests/', this.ghost)
+                .catch(error => {
+                    this.isLoading = false
+                    console.log('error => ', error.response.data.error)
+                    this.$swal.error('Sorry', this.$translate.text(error.response.data.error_maessage))
+                })
             
-        },
-
-        async getNewAccessToken () {
-            this.isLoading = false
-            let payload = {
-                'token': config.get('refresh_token'),
+            
+            if (response) {
+                this.isLoading = false
+                this.$swal.success('Success', response.data.message)
+                this.resetGhost()
+                this.next()
             }
-            const response = await this.$api.refreshToken(payload)
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.error)
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    AuthService.setToken(data.refresh)
-                    ApiService.setToken(data.refresh)
-                    console.log('new access token', data)
-                }
         },
 
-        async getNewRefreshToken (token) {
-            this.isLoading = false
-            const response = await this.$api.refreshToken({ 'refresh': token})
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.error)
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log(data.token)
-                }
-        },
-
-        async checkAccessToken (token) {
-            this.isLoading = false
-            let payload = { 'token': token }
-
-            const response = await this.$api.verifyToken(payload)
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.detail)
-                    if(error.response.data.code == 'token_not_valid') {
-                        this.getNewAccessToken()
-                    }
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log('check access token', data)
-                }
-        },
-
-        async checkRefreshToken (payload, token) {
-            this.isLoading = false
-            const response = await this.$api.verifyToken({ 'token': token })
-                .catch(error => {
-                    this.isLoading = true
-                    console.log('error => ', error.response.data.detail)
-                    if(error.response.data.code == 'token_not_valid') {
-                        this.getNewRefreshToken(payload)
-                    }
-                })
-                
-                this.isLoading = false
-
-                if (response) {
-                    let data = response.data
-                    console.log('check refresh token', data)
-                }
-        },
+        resetGhost () {
+            this.ghost =  {
+                amount: '',
+                paypal_email: '',
+            }
+        }
     }
 }
 </script>

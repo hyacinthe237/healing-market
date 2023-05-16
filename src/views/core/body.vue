@@ -56,7 +56,7 @@
                             <div class="care-content">
                                 <h6>{{ offer.title }}</h6>
                                 <div class="verified">4.6 (verified reviews)</div>
-                                <p>{{ offer.description }}</p>
+                                <p>{{ truncateString(offer.description, 70) }}</p>
 
                                 <div class="care-footer">
                                     <div class="price">${{ offer.price }}</div>

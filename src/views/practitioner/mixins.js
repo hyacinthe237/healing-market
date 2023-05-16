@@ -239,7 +239,7 @@ export default {
             async pauseEvent (item) {
                 this.isLoading = true
   
-                const response = await this.$api.post(`/market-api/offers/${item.id}/change-status`)
+                const response = await this.$api.get(`/market-api/offers/${item.id}/change-status`)
                     .catch(error => {
                         this.isLoading = false
                         console.log('error => ', error.response.data.error)

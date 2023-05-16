@@ -323,7 +323,7 @@
 }
 
 ._checkout-modal {
-    width: 640px;
+    width: 100%;
     min-height: 100vh;
     overflow: auto;
     // background-color: rgba(74, 93, 125, 0.7);
@@ -438,10 +438,6 @@
                         .line {
                             padding: 10px 0px;
                             border-top: 1px solid rgba(0, 0, 0, 0.1);
-            
-                            span {
-                                color:black;
-                            }
                         }
             
                     }

@@ -32,20 +32,37 @@
 
                     <div class="_head mt-10">
                         <vue-month-carousel @searchMonth="getGroupTransactions"></vue-month-carousel>
-                        <div class="search">
+                        <div class="search mr-3">
                             <input type="text" v-model="ghost.search" placeholder="Define your search">
                         </div>
+                        <div class="btn btn-secondary" @click="toggleType()">{{ btnTest }}</div>
                     </div>
 
-                    <div class="withdraws mt-10" v-for="(t, index) in transactions" :key="index++">
+                    <div class="withdraws mt-10" v-for="(t, index) in transactions" :key="index++" v-show="showType">
                         <h4>{{ t.created_at | dat }}</h4>
                         <div class="withdraw" v-for="item in t.items" :key="item.id">
                             <div class="id">
-                                <div class="name">Withdraw <span>{{ item.id }}</span></div>
+                                <div class="name">Withdraw credited <span>{{ item.id }}</span></div>
                                 <div class="date">{{ item.created_at | dat }}</div>
                             </div>                            
                             <div :class="['montant', item.cash_flow]">
                                 <span class="bold">$ {{ parseAmount(item.amount) }}</span>
+                                <i class="feather icon-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="withdraws mt-10" v-show="!showType">
+                        <div class="withdraw" v-for="item in requests" :key="item.id">
+                            <div class="id">
+                                <div class="name">Withdraw debited <span>{{ item.id }}</span></div>
+                                <div class="date">
+                                    {{ item.created_at | dat }} | 
+                                    <span class="primary">Status: {{ item.status }}</span>
+                                </div>
+                                
+                            </div>                            
+                            <div class="montant OUT">
+                                <span class="bold">- $ {{ parseAmount(item.amount) }}</span>
                                 <i class="feather icon-chevron-right"></i>
                             </div>
                         </div>
@@ -88,13 +105,18 @@
           transactions: [],
           requests: [],
           currentMonth: moment().month()+1,
+          showType: true,
       }),
   
       components: { WithdrawModal },
   
       mixins: [TherapistMixins],
       
-      watch: { },
+      computed: {
+        btnTest () {
+            return this.showType ? 'Display Money Requests' : 'Display Booking transactions'
+        }
+      },
   
       mounted () {
         this.getData()
@@ -105,6 +127,10 @@
             setTimeout(() => {
                 $('#withdrawModal').modal('show')
             }, 150)
+        },
+
+        toggleType () {
+            this.showType = !this.showType
         },
         
         getData () {

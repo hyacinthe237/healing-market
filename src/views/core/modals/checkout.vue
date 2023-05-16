@@ -8,8 +8,8 @@
 
                 <div class="checkout-container">
                     <div class="booking-details">
-                        <h3>Your about booking</h3>
-                        <div class="_head">
+                        <h4 class="nowrap">Your about booking</h4>
+                        <div class="_head mt-10">
                             <div class="bg-img"></div>
                             <div class="right-box">
                                 <div class="desc">
@@ -22,17 +22,17 @@
                         </div>
                         <div class="lines">
                             <div class="line nowrap">
-                                Date:  <span class="secondary">{{ payload.start_date }}</span>
+                               Booking date:  <span class="primary">{{ payload.start_date }}</span>
                             </div>
                             <div class="line nowrap">
-                                Hour:  <span class="secondary">{{ payload.start_time }}</span>
+                                Booking time:  <span class="primary">{{ payload.start_time }}</span>
                             </div>
                         </div>
                     </div>
     
                     <div class="payment-details">
-                        <h3>Payment</h3>
-                        <div class="_head">
+                        <h4>Payment</h4>
+                        <div class="_head mt-10">
                             <div class="primary bold"><i class="feather icon-credit-card"></i> Credit Card</div>
                             <p>Your payment are processed securely through stripe secure payment gateway.</p>
                         </div>

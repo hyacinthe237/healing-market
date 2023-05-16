@@ -58,6 +58,7 @@ export default {
         highlightedDays: {
             days: [],
             dates: [],
+            custom: ''
         },
         days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
@@ -97,6 +98,7 @@ export default {
                 }
                 this.highlightedDays.days = tab
                 this.highlightedDays.dates.push(new Date())
+                this.highlightedDays.custom = 'ff964d'
             }
         })
     },

@@ -86,6 +86,7 @@
       data: () => ({
           balance: 0,
           transactions: [],
+          requests: [],
           currentMonth: moment().month()+1,
       }),
   
@@ -105,10 +106,13 @@
                 $('#withdrawModal').modal('show')
             }, 150)
         },
+        
         getData () {
             this.getMyWallet()
             this.getGroupTransactions()
+            this.getMoneyRequests()
         },
+
         async getMyWallet () {
             this.startLoading()
     
@@ -172,7 +176,7 @@
     
             if (res) {
               this.stopLoading()
-              this.transactions = res.data.results
+              this.requests = res.data.results
             }
         },
       }

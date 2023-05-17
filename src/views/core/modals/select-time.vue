@@ -9,6 +9,7 @@
                     v-model="ghost.date"
                     :inline="true"
                     :highlighted="highlightedDays"
+                    :disabled-dates="disablePastDates"
                 ></vue-datepicker>
              </div>
              <div class="content" v-show="showTime">
@@ -16,7 +17,7 @@
                 <div class="times mt-10">
                     <div 
                         :class="['time', ghost.start_time == time ? 'selected' : '']"
-                        v-for="(time, index) in tab_times"
+                        v-for="(time, index) in start_times"
                         :key="index++"
                         @click="selectedTime(time)"
                     >{{ time | amPm }}</div>
@@ -60,8 +61,14 @@ export default {
             dates: [],
             custom: ''
         },
+        disablePastDates: {
+            dates: [],
+            ranges: [ { from: '', to: '' } ]
+        },
         days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
+        startOfMonth: moment().startOf('month').format('YYYY-MM-DD'),
+        today: moment().format('YYYY-MM-DD')
     }),
 
     watch: {
@@ -80,10 +87,12 @@ export default {
                     }
                     this.showTime = true
                 }
+
                 if (!filter) {
                     this.resetGhost()
-                    this.$swal.error('Sorry', `The practitioner is not available on the selected day. The practitioner are available on ${available}`)
+                    this.$swal.error('Warning', `The practitioner are only available on ${available}`)
                 }
+
             }
        },
     },
@@ -98,7 +107,14 @@ export default {
                 }
                 this.highlightedDays.days = tab
                 this.highlightedDays.dates.push(new Date())
-                this.highlightedDays.custom = 'ff964d'
+                this.highlightedDays.custom = 'ff964d'                
+                this.disablePastDates.dates = this.start_dates
+
+                if (moment(this.today).isAfter(this.startOfMonth)) {
+                    this.disablePastDates.ranges.from = new Date(this.startOfMonth)
+                    let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')
+                    this.disablePastDates.ranges.to = new Date(yesterday)
+                }
             }
         })
     },
@@ -106,12 +122,42 @@ export default {
     computed: {
         availibilities () {
             return this.therapist.availibilities || []
-        }
+        },
+
+        bookings () {
+            return this.therapist.bookings || []
+        },
+
+        start_dates () {
+            let tab = this.bookings.map(d => d.start_date)
+            for(var i=0; i<tab.length; i++) {
+                tab[i] = new Date(tab[i])
+            }
+            return tab
+        },
+
+        start_times () {
+            let tab = this.bookings.map(d => d.start_time)
+            const uniqueArr = [...new Set(tab)]            
+            for(var i=0; i<uniqueArr.length; i++) {
+                let end = uniqueArr[i].split(':')
+                uniqueArr[i] = end[0] + ':00'
+            }
+
+            let arr = [...uniqueArr, ...this.tab_times]
+            const uniqueTab = [...new Set(arr)]
+            return uniqueTab
+        },
     },
 
     methods: {
         selectedTime (time) {
             this.ghost.start_time = time
+        },
+
+        disableDates (date) {
+            const today = new Date()
+            return date < today
         },
 
         async selected () {

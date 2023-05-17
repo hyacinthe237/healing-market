@@ -31,7 +31,7 @@
                     <h5>Recent activity</h5>
 
                     <div class="_head mt-10">
-                        <vue-month-carousel @searchMonth="getGroupTransactions"></vue-month-carousel>
+                        <vue-month-carousel @searchMonth="getData"></vue-month-carousel>
                         <div class="search mr-3">
                             <input type="text" v-model="ghost.search" placeholder="Define your search">
                         </div>
@@ -133,10 +133,19 @@
             this.showType = !this.showType
         },
         
-        getData () {
+        getData (month=null) {
+            var payload = {}
+            if (month == null) {
+                payload = { month: this.currentMonth }
+            }
+
+            if (month !== null) {
+                let i = month+1
+                payload = { month: i }
+            }
             this.getMyWallet()
-            this.getGroupTransactions()
-            this.getMoneyRequests()
+            this.getGroupTransactions(payload)
+            this.getMoneyRequests(payload)
         },
 
         async getMyWallet () {
@@ -158,17 +167,7 @@
            return Number.parseFloat(amount).toFixed(2)
         },
 
-        async getGroupTransactions (month=null) {
-            var payload = {}
-            if (month == null) {
-                payload = { month: this.currentMonth }
-            }
-
-            if (month !== null) {
-                let i = month+1
-                payload = { month: i }
-            }
-
+        async getGroupTransactions (payload) {
             this.startLoading()    
             const res = await this.$api.get(`/user-api/group-transactions/`, { params: payload })
             .catch(error => {
@@ -182,17 +181,7 @@
             }
         },
 
-        async getMoneyRequests (month=null) {
-            var payload = {}
-            if (month == null) {
-                payload = { month: this.currentMonth }
-            }
-
-            if (month !== null) {
-                let i = month+1
-                payload = { month: i }
-            }
-
+        async getMoneyRequests (payload) {
             this.startLoading()    
             const res = await this.$api.get(`/user-api/money-requests/`, { params: payload })
             .catch(error => {

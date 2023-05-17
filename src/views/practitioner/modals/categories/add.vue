@@ -43,26 +43,20 @@ export default {
         },
 
         async saveCategory () {              
-            if (this.ghost.languages == '') {
-                this.$swal.error('Validation warning', 'Please fill at least one language before saving')
-            }
-
-            if (this.ghost.languages !== '') {
-                this.isLoading = true
+            this.isLoading = true
                 
-                const response = await this.$api.post(`/user-api/therapists/${this.therapistId}/add-languages`, this.ghost)
-                    .catch(error => {
-                        this.isLoading = false
-                        console.log('error => ', error.response.data.error)
-                        this.$swal.error('Sorry', error.response.data.error.message)
-                    })
-                
-                
-                if (response) {
+            const response = await this.$api.post(`/user-api/therapists/${this.therapistId}/add-languages`, this.ghost)
+                .catch(error => {
                     this.isLoading = false
-                    this.$swal.success('Success', 'New language added')
-                    this.closer()                  
-                }
+                    console.log('error => ', error.response.data.error)
+                    this.$swal.error('Sorry', error.response.data.error.message)
+                })
+            
+            
+            if (response) {
+                this.isLoading = false
+                this.$swal.success('Success', 'New language added')
+                this.closer()                  
             }            
         },
     }

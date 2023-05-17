@@ -23,7 +23,7 @@
                   <div class="line"></div>
                   <div class="earning">
                     <div class="nowrap">Earning to date</div>
-                    <h3 class="amount">$ 0</h3>
+                    <h3 class="amount">$ {{ analytics.total_earnings }}</h3>
                   </div>
                 </div>
 
@@ -34,7 +34,7 @@
                   <div class="line"></div>
                   <div class="earning">
                     <div class="nowrap">Total booking</div>
-                    <h3 class="amount">$ 0</h3>
+                    <h3 class="amount">$ {{ analytics.total_outings }}</h3>
                   </div>
                 </div>
 
@@ -45,13 +45,13 @@
                   <div class="line"></div>
                   <div class="earning">
                     <div class="nowrap">Earning of the month</div>
-                    <h3 class="amount">$ 0</h3>
+                    <h3 class="amount">$ {{ analytics.total_earnings_current_month }}</h3>
                   </div>
                 </div>
 
             </div>
 
-            <div class="lists">
+            <!-- <div class="lists">
                 <div class="head-list">
                     <div class="th">Active offers</div>
                     <div class="th">Clicks</div>
@@ -76,7 +76,7 @@
                         <div class="td"><h3>2</h3></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
           
       </div>
@@ -103,17 +103,33 @@
   
   export default {
       data: () => ({
-          money, moneys
+          money, moneys,
+          analytics: {},
       }),
 
       mixins: [TherapistMixins],
       
       watch: { },
   
-      mounted () {},
+      mounted () {
+        this.getMyAnalytics()
+      },
   
       methods: { 
-        
+        async getMyAnalytics () {
+            this.startLoading()
+    
+            const res = await this.$api.get(`/user-api/analytics/`)
+            .catch(error => {
+                this.stopLoading()
+                this.$swal.error('Sorry', error.response.data.error_message)
+            })
+    
+            if (res) {
+              this.stopLoading()
+              this.analytics = res.data
+            }
+        },
       }
   }
   </script>

@@ -36,6 +36,12 @@ export default {
             return true
         },
 
+        getFirstAndLastDayOfMonth(year, month) {
+            const firstDay = new Date(year, month, 1).getDate();
+            const lastDay = new Date(year, month + 1, 0).getDate();
+            return { firstDay, lastDay }
+        },
+
         startLoading () {
             this.isLoading = true
         },

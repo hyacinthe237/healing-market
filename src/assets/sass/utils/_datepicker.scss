@@ -33,6 +33,7 @@
             &.disabled {
                 background: transparent;
                 color: $brand-teal;
+                cursor:not-allowed;
             }
         }
     }

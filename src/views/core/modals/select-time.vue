@@ -63,7 +63,8 @@ export default {
         },
         disablePastDates: {
             dates: [],
-            ranges: [ { from: '', to: '' } ]
+            days: [],
+            ranges: []
         },
         days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
@@ -103,16 +104,18 @@ export default {
                 let tab = data.availibilities.map(a => a.day_cut)
                 for (var i = 0; i < tab.length; i++) {
                     var index = this.days.indexOf(tab[i]);
-                    tab[i] = index;               
+                    tab[i] = index;
                 }
+
                 this.highlightedDays.days = tab
                 this.highlightedDays.dates.push(new Date())            
                 this.disablePastDates.dates = this.start_dates
+                // this.disablePastDates.days = copyTab
 
                 if (moment(this.today).isAfter(this.startOfMonth)) {
-                    this.disablePastDates.ranges.from = new Date(this.startOfMonth)
                     let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')
-                    this.disablePastDates.ranges.to = new Date(yesterday)
+                    let dt = { from: new Date(this.startOfMonth), to: new Date(yesterday) }
+                    this.disablePastDates.ranges.push(dt)
                 }
             }
         })

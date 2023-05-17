@@ -215,7 +215,7 @@
         :therapist="therapistSelected"
         :stripe="stripe"
       ></CheckoutModal>
-      <Footer :isConnected="isConnected"></Footer>
+      <Footer :isConnected="isConnected" v-show="!isLoading"></Footer>
     </div>
   </template>
   

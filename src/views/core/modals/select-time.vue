@@ -106,8 +106,7 @@ export default {
                     tab[i] = index;               
                 }
                 this.highlightedDays.days = tab
-                this.highlightedDays.dates.push(new Date())
-                this.highlightedDays.custom = 'ff964d'                
+                this.highlightedDays.dates.push(new Date())            
                 this.disablePastDates.dates = this.start_dates
 
                 if (moment(this.today).isAfter(this.startOfMonth)) {

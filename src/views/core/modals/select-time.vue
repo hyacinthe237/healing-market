@@ -69,7 +69,8 @@ export default {
         days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
         startOfMonth: moment().startOf('month').format('YYYY-MM-DD'),
-        today: moment().format('YYYY-MM-DD')
+        today: moment().format('YYYY-MM-DD'),
+        currentTime: moment().format('HH')
     }),
 
     watch: {
@@ -84,7 +85,9 @@ export default {
                     let start = filter.time_cut_start.split(':')
                     let end = filter.time_cut_end.split(':')
                     for(var i=start[0]; i<=end[0]; i++) {
-                        this.tab_times.push(i + ':00')
+                        if (i>this.currentTime && i<=end[0]) {
+                            this.tab_times.push(i + ':00')
+                        }                        
                     }
                     this.showTime = true
                 }
@@ -110,13 +113,14 @@ export default {
                 this.highlightedDays.days = tab
                 this.highlightedDays.dates.push(new Date())            
                 this.disablePastDates.dates = this.start_dates
-                // this.disablePastDates.days = copyTab
 
                 if (moment(this.today).isAfter(this.startOfMonth)) {
                     let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')
                     let dt = { from: new Date(this.startOfMonth), to: new Date(yesterday) }
                     this.disablePastDates.ranges.push(dt)
                 }
+
+                console.log('currentTime', this.currentTime)
             }
         })
     },

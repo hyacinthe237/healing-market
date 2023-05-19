@@ -69,6 +69,7 @@ export default {
         days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         showTime: false,
         startOfMonth: moment().startOf('month').format('YYYY-MM-DD'),
+        endOfMonth: moment().endOf('month').format('YYYY-MM-DD'),
         today: moment().format('YYYY-MM-DD'),
         currentTime: moment().format('HH')
     }),
@@ -110,9 +111,22 @@ export default {
                     tab[i] = index;
                 }
 
+                for (var j = 0; j < this.days.length; j++) {
+                    var ind = this.days.indexOf(this.days[j]);
+                    this.days[j] = ind;
+                }
+
+                for (var k = 0; k < tab.length; k++) {
+                    var inde = this.days.indexOf(tab[k]);
+                    if (inde > -1) {
+                        this.days = this.days.filter(d => d != inde)
+                    }
+                }
+
                 this.highlightedDays.days = tab
                 this.highlightedDays.dates.push(new Date())            
                 this.disablePastDates.dates = this.start_dates
+                this.disablePastDates.days = this.days
 
                 if (moment(this.today).isAfter(this.startOfMonth)) {
                     let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')

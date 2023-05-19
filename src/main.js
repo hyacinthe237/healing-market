@@ -14,6 +14,7 @@ import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar"
 import InputTag from 'vue-input-tag'
 import DatePicker from 'vuejs-datepicker'
+// import VueGoogleApi from 'vue-google-api'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -62,6 +63,10 @@ Vue.mixin(globalMixins)
 Vue.use(VuePageTransition)
 Vue.use(VueScrollFixedNavbar)
 Vue.use(VeeValidate, { locale: 'en', dictionary: { en: messagesEn } })
+// Vue.use(VueGoogleApi, {
+//   clientId: config.get('client_api_key'),
+//   scope: 'https://www.googleapis.com/auth/calendar',
+// })
 
 Vue.config.productionTip = false
 Vue.component('multiselect', Multiselect)

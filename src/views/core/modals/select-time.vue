@@ -119,8 +119,6 @@ export default {
                     let dt = { from: new Date(this.startOfMonth), to: new Date(yesterday) }
                     this.disablePastDates.ranges.push(dt)
                 }
-
-                console.log('currentTime', this.currentTime)
             }
         })
     },

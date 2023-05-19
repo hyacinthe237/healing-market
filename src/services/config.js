@@ -5,6 +5,7 @@ export default {
         base_url: `${process.env.VUE_APP_ROOT_URL}/` || 'https://healing-market.herokuapp.com/',        
         front_url: `${process.env.VUE_APP_FRONT_SERVER}/` || `https://healing-market.netlify.app`,
         google_api_key: process.env.VUE_APP_GOOGLE_API_KEY || 'no-google-api-key',
+        client_api_key: process.env.VUE_APP_GOOGLE_CLIENT_ID || 'no-client-api-key',
         token: process.env.VUE_APP_TOKEN || 'healing_token',
         user: process.env.VUE_APP_USER || 'healing_user',
         app_key: process.env.VUE_APP_KEY || 'base64:qfqr3qV0NU2R3/4VX11vwREaPpQbKfzyxxYbWKTFZFE=',

@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="footer">
                                     <div class="price">${{ o.price }}</div>
-                                    <button class="btn btn-secondary" @click="selectedBook(offer)">Book appointment</button>
+                                    <button class="btn btn-secondary" @click="openDetails(offer.id)">Book appointment</button>
                                 </div>
                             </div>
                         </div>
@@ -402,6 +402,12 @@
                 this.$swal.error('Sorry', 'You need to sign in to your account first')
             }
         },
+
+        openDetails (offerId) {
+            let practitionerId = this.$router.history.current.params.id
+            let route = this.$router.resolve({ name: 'practitioner-details', params: { id: practitionerId, offer: offerId } })
+            window.open(route.href, '_blank')
+       },
 
         async getBookingClientKey (data) {
             this.startLoading()

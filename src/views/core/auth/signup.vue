@@ -90,25 +90,15 @@
                         >
                     </div>
                     <div class="form-group row-pass">
-                        <input 
-                            v-if="showPassword"
-                            type="text" 
+                        <input
+                            :type="Type" 
                             name="password1" 
                             v-model="ghost.password1" 
                             placeholder="Password" 
                             class="form-control"
                             v-validate="'required'"
                             :data-vv-as="t('password')"
-                        >
-                        <input 
-                            v-else
-                            type="password" 
-                            name="password2" 
-                            v-model="ghost.password1" 
-                            placeholder="Password" 
-                            class="form-control"
-                            v-validate="'required'"
-                            :data-vv-as="t('password')"
+                            ref="password"
                         >
                         <div class="input-group-append" @click="togglePassword()">
                             <span class="input-group-text" v-if="showPassword">
@@ -121,9 +111,8 @@
                         <v-error :name="'password1'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <div class="form-group">
-                        <input 
-                            v-if="showPassword"
-                            type="text" 
+                        <input
+                            :type="Type" 
                             name="password2" 
                             v-model="ghost.password2" 
                             placeholder="Confirm your password" 
@@ -131,17 +120,6 @@
                             v-validate="'required|confirmed:password'"
                             :data-vv-as="t('password')"
                         >
-                        <input 
-                            v-else
-                            type="password" 
-                            name="password2" 
-                            v-model="ghost.password2" 
-                            placeholder="Confirm your password" 
-                            class="form-control"
-                            v-validate="'required|confirmed:password'"
-                            :data-vv-as="t('password')"
-                        >
-
                         <v-error :name="'password2'" :err="errors" :show="showErrors"></v-error>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" @click="signup()">Apply Now</button>
@@ -178,6 +156,7 @@
             is_therapist: true
         },
         showPassword: false,
+        Type: 'password'
       }),
   
       components: { successModal },
@@ -213,6 +192,11 @@
 
           togglePassword () {
             this.showPassword = !this.showPassword
+            if(this.Type === 'password') {
+                this.Type = 'text'
+            } else {
+                this.Type = 'password'
+            }
           },
 
           async signup () {

@@ -65,6 +65,7 @@
 <script>
 import { StripeElementCard   } from '@vue-stripe/vue-stripe'
 import config from '@/services/config'
+
 export default {
     name: 'CheckoutModal',
 
@@ -122,23 +123,7 @@ export default {
         },
     },
 
-    mounted () {
-        // // window.eventBus.$on('calendar', (data) => {
-        //     if (data) {
-        //         this.$gapi.load('client:auth2', () => {
-        //             this.$gapi.client.init({
-        //                 apiKey: config.get('google_api_key'),
-        //                 clientId: config.get('client_api_key'),
-        //                 discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-        //                 scope: 'https://www.googleapis.com/auth/calendar',
-        //             }).then(() => {
-        //                 this.auth = this.$gapi.auth2.getAuthInstance();
-        //                 this.calendar = this.$gapi.client.calendar;
-        //             });
-        //         });
-        //     }
-        // })
-    },
+    mounted () {},
 
     methods: {
         payer () {
@@ -151,34 +136,6 @@ export default {
             setTimeout(() => {
                 this.chargeBooking(id)
             }, 3000)
-            
-        },
-
-        bookAppointment () {
-            const event = {
-                summary: `Appointment with ${this.doctor}`,
-                location: '123 Main St., Anytown USA',
-                start: {
-                    dateTime: `${this.date}T${this.time}:00-07:00`,
-                    timeZone: 'America/Los_Angeles',
-                },
-                end: {
-                    dateTime: `${this.date}T${this.time}:00-07:00`,
-                    timeZone: 'America/Los_Angeles',
-                },
-                attendees: [
-                    {email: 'patient@example.com'},
-                ],
-            }
-
-            this.calendar.events.insert({
-                calendarId: 'primary',
-                resource: event,
-            }).then(response => {
-                console.log(`Event created: ${response.data.htmlLink}`);
-            }).catch(error => {
-                console.error(error);
-            });
         },
 
         async chargeBooking (token) {

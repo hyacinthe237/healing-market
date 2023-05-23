@@ -489,3 +489,30 @@ h5 { font-size: 1.1em }
         }
     }
 }
+
+._times {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .time {
+        text-align: center;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.916);
+        color: $secondary;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 10px;
+        width:25%;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover, &.selected {
+            background-color: $secondary;
+            color: white;
+        }
+    }
+}

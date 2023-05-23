@@ -35,7 +35,7 @@
                     <span class="nowrap">{{ created_at }}</span></div>
             </div>
 
-            <div class="mt-20 pointer" @click="manageCalendar()">
+            <div class="mt-20 pointer" @click="n('practitioner-manage-calendar')">
                 <button class="btn btn-secondary btn-block">Manage calendar</button>
             </div>
 

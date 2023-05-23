@@ -254,7 +254,7 @@
                     this.$swal.error('Validation warning', 'Fill the message')
                 }                
 
-                if (this.connection.readyState === WebSocket.OPEN && this.ghost.message !== '') {
+                if (this.ghost.message !== '') {
 
                     let data = {
                         command: 'new_message', 

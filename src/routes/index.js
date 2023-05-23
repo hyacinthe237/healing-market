@@ -24,6 +24,7 @@ import PractitionerOfferStat from '@/views/practitioner/my-business/offer-stat'
 import PractitionerMessages from '@/views/practitioner/messages/messages'
 import PractitionerAnalytics from '@/views/practitioner/analytics/analytics'
 import PractitionerSettings from '@/views/practitioner/settings/settings'
+import PractitionerManageCalendar from '@/views/practitioner/manage/calendar'
 
 Vue.use(Router)
 
@@ -51,6 +52,7 @@ export default new Router({
         { path: '/practitioner/wallet', name: 'practitioner-wallet', component: PractitionerWallet, beforeEnter: Guard.auth },
         { path: '/practitioner/offer/stat', name: 'practitioner-offer-stat', component: PractitionerOfferStat, beforeEnter: Guard.auth },
         { path: '/practitioner/settings', name: 'practitioner-settings', component: PractitionerSettings, beforeEnter: Guard.auth },
+        { path: '/practitioner/manage/calendar', name: 'practitioner-manage-calendar', component: PractitionerManageCalendar, beforeEnter: Guard.auth },
 
         { path: '*', component: NotFound }
     ]
